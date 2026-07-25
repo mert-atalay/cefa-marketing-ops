@@ -4,7 +4,8 @@
 **Status:** Definitive implementation blueprint
 **Google Cloud project:** `marketing-api-488017`
 **Scope:** Parent, Franchise Canada, Franchise USA, website measurement,
-marketing intelligence, CRM outcome activation, and approved audience use
+marketing intelligence, CRM outcome activation, email/lifecycle engagement,
+and approved audience use
 **Strategic anchor:** [CEFA BigQuery Marketing Intelligence Blueprint](./2026-06-12-bq-marketing-intelligence-blueprint.md)
 **Program control:** [CEFA Measurement And Activation Program Register](../../00-governance/measurement-and-activation-program-register-2026-07-23.md)
 
@@ -19,8 +20,8 @@ CEFA will build one coordinated measurement and activation platform using:
   predictive analysis, and controlled audience delivery;
 - existing browser GTM containers for browser interaction capture;
 - existing Gravity Forms, School Manager, KinderTales, GreenRope,
-  GAConnector, and Synuma/SiteZeus paths within their documented ownership
-  boundaries.
+  Mailchimp, GAConnector, and Synuma/SiteZeus paths within their documented
+  ownership boundaries.
 
 The platform is not restricted to Google Cloud free tiers. Technical fit,
 business value, reliability, data quality, privacy, and maintainability decide
@@ -49,6 +50,8 @@ When this blueprint is complete, CEFA will be able to answer:
    approved high-quality audience seeds?
 7. Where should CEFA recommend more or less marketing investment based on
    demand, outcome quality, and capacity?
+8. Which Mailchimp or GreenRope email journeys contributed to a website
+   return, inquiry, tour, or other approved outcome?
 
 The target executive statement becomes:
 
@@ -73,6 +76,7 @@ The read-only inventory on 2026-07-25 found:
 | Current monitor | Overall `PASS`; school `pass`; franchise `partial`; lifecycle `pending`; predictive `promoted_partial`; zero issues and four warnings |
 | Parent event foundation | Form 4 identity and canonical attribution exist; website and KinderTales paths remain active |
 | Parent CRM activation | Restricted ledger, capture, binder, poller, dispatcher, diagnostics, Google actions, and Meta test events exist; production sending remains disabled |
+| Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
 | Stape | Business plan approved and available; production server containers and first-party routing are not yet recorded |
 
@@ -134,7 +138,8 @@ The following current-state concerns shape this blueprint:
 | WordPress tracking | Stable event identity, canonical attribution, form-safe hidden fields | Marketing warehouse orchestration |
 | Gravity Forms | Saved submission record | Final CRM outcome |
 | School Manager/KinderTales | Parent operational inquiry and admissions delivery | Marketing attribution authority |
-| GreenRope | Approved parent CRM lifecycle evidence | Final KinderTales enrollment truth |
+| GreenRope | Approved parent CRM lifecycle plus GreenRope email/journey delivery evidence | Final KinderTales enrollment truth |
+| Mailchimp | Mailchimp campaign/journey delivery, subscription, and engagement evidence | CRM lifecycle, inquiry, or enrollment truth |
 | GAConnector/Synuma | Current franchise attribution compatibility and franchise business delivery | Parent tracking |
 | Cloud Run | API extraction, webhook handling, specialized processing, offline dispatch | Stable SQL transformation ownership |
 | Cloud Tasks | Explicit endpoint delivery, rate control, retry, and task-level deduplication | General event fan-out |
@@ -164,6 +169,7 @@ flowchart TB
         SM["School Manager"]
         KT["KinderTales"]
         GR["GreenRope"]
+        MC["Mailchimp"]
         SYN["GAConnector and Synuma/SiteZeus"]
         FORMS --> SM --> KT
         FORMS --> GR
@@ -190,6 +196,7 @@ flowchart TB
         OBS["Cloud Monitoring, Logging, governance and run ledger"]
         STAPE --> INGRESS
         GR --> EXTRACT
+        MC --> EXTRACT
         SYN --> EXTRACT
         GA4 --> EXTRACT
         GADS --> EXTRACT
@@ -390,6 +397,8 @@ when dependencies and readers are known.
 - `dim_content_page`
 - `dim_creative_asset`
 - `dim_marketing_intervention`
+- `dim_marketing_message`
+- `dim_marketing_journey`
 - `dim_capacity_period`
 
 ### Canonical facts
@@ -401,6 +410,9 @@ when dependencies and readers are known.
 - `fct_parent_touchpoint`
 - `fct_parent_journey_event`
 - `fct_parent_journey_latest`
+- `fct_email_delivery_event`
+- `fct_email_engagement_event`
+- `fct_marketing_journey_membership_event`
 - `fct_crm_lifecycle_event`
 - `fct_crm_lifecycle_latest`
 - `fct_paid_campaign_daily`
@@ -456,11 +468,20 @@ copy of the full operational parent record.
 The identity model uses different keys for different jobs:
 
 - `cefa_event_id` identifies one website, form, CRM, or activation event.
-- `parent_key` identifies one adult lead after a deterministic form or CRM
-  match.
+- `parent_key` identifies one adult contact after a deterministic form or CRM
+  match. It does not identify a whole family, child, or inquiry.
 - `household_key` connects approved members or inquiries only when the
   operational source supplies a stable household relationship. CEFA must not
   infer a household from an address, child record, or fuzzy similarity.
+- `dependent_key` is an optional restricted HMAC key for one child only when
+  an operational system supplies a stable child identifier. It is not derived
+  from a child name, birth date, address, or fuzzy comparison, and it is not
+  exposed to normal marketing marts.
+- `inquiry_key` identifies one legitimate saved inquiry. A repeat inquiry by
+  the same parent remains a separate inquiry rather than being erased by
+  parent- or household-level deduplication.
+- `opportunity_key` identifies one source CRM opportunity and links it to its
+  originating inquiry only when the source relationship is deterministic.
 - browser, device, GA, and platform click identifiers remain pseudonymous
   touchpoint evidence. They link to a parent only when a later deterministic
   event establishes the relationship.
@@ -478,8 +499,12 @@ The logical restricted contracts are:
 
 - `identity_parent_bridge`: HMAC parent and approved household keys, source
   reference keys, first/last observed timestamps, key version, and status;
-- `identity_event_link`: deterministic `cefa_event_id` to parent/household
-  relationships with source, method, and confidence;
+- `identity_household_membership_bridge`: adult-to-household and optional
+  dependent-to-household relationships supplied by an approved operational
+  source, without names or child attributes;
+- `identity_event_link`: deterministic `cefa_event_id`, inquiry, opportunity,
+  parent, household, and optional dependent relationships with source, method,
+  and confidence;
 - `identity_platform_match_evidence`: identifier availability, capture time,
   age, consent/eligibility state, and destination eligibility without exposing
   raw identifiers to dashboards.
@@ -506,6 +531,89 @@ cross-device browsing can still remove pre-inquiry evidence. Cross-device
 unification begins only after an approved deterministic identity event, and
 the warehouse must report attribution confidence rather than inventing a
 match.
+
+The model must preserve CEFA's real family and inquiry cardinality:
+
+- one household may contain multiple adult contacts and multiple children;
+- one parent may submit multiple valid inquiries over time;
+- one inquiry may express interest in more than one school or create multiple
+  downstream school opportunities;
+- promoted school, selected school, opportunity school, and eventual
+  operational school remain separate fields;
+- technical duplicates are collapsed by stable event/form identity, but
+  legitimate repeat inquiries are not;
+- lead reporting always states its grain as inquiry, unique adult contact, or
+  household rather than using those counts interchangeably;
+- CRM-stage platform deduplication remains one accepted conversion per
+  `inquiry_key + canonical_stage`, so two legitimate child or inquiry journeys
+  in one household are not accidentally collapsed;
+- when one inquiry creates several school opportunities, the stage is sent
+  once per inquiry and stage unless CEFA later approves a distinct
+  school-specific conversion contract.
+
+Normal marketing marts may contain approved non-identifying demand attributes
+such as program interest, age band, requested start window, promoted school,
+and selected school. Exact child birth dates, names, notes, and direct child
+identifiers remain outside those marts.
+
+### Email and lifecycle engagement contract
+
+Mailchimp and GreenRope email/customer-journey evidence will be integrated as
+the next omnichannel layer after the core identity and event contracts are
+stable.
+
+The initial integration is read-only:
+
+- use Cloud Run source jobs for Mailchimp Marketing API and GreenRope API
+  extraction;
+- start Mailchimp reads with audience/campaign metadata, reports, member
+  activity feeds, webhook state, and available automation-flow/customer-journey
+  metadata;
+- start GreenRope reads with the governed equivalents of
+  `GetCRMActivitiesEmailsRequest`, `GetAllCRMActivitiesEmailsRequest`,
+  `GetJourneysRequest`, and `GetAllJourneysRequest` after their fields,
+  timestamps, pagination, and identity semantics are verified;
+- use a verified HTTPS Mailchimp webhook for subscribe, unsubscribe, cleaned,
+  and approved profile-change events where the account supports it;
+- store API credentials and webhook signing material in Secret Manager;
+- tokenize raw contact identity at ingress and prevent email addresses, names,
+  IP addresses, message bodies, and contact payloads from entering normal
+  BigQuery tables or logs;
+- map provider contact IDs to `parent_key` only through the restricted identity
+  bridge;
+- use Mailchimp subscriber hashes only transiently when its API requires them.
+  A provider's unsalted email-derived hash is not a CEFA identity key and does
+  not belong in normal marketing facts;
+- attach engagement to `inquiry_key`, school, or lifecycle stage only when an
+  explicit source relationship exists;
+- use explicit `school_uuid`, school tag, merge field, or governed campaign
+  mapping. Campaign-name guessing is not a production school key;
+- normalize provider events into sent, delivered, bounced, clicked,
+  unsubscribed, complained, journey-entered, journey-step, and conversion
+  evidence;
+- retain opens only as low-confidence diagnostics. They are not intent,
+  qualification, or optimization truth because privacy prefetch and bot
+  behavior can inflate them;
+- keep Mailchimp and GreenRope as the send/journey systems of record. BigQuery
+  is the cross-channel measurement and decision layer, not the email sender;
+- make no audience, tag, profile, journey, automation, or campaign writes in
+  the read-only phase.
+
+The resulting Parent timeline can show:
+
+```text
+paid or organic touchpoint
+  -> website inquiry for child/program need A
+  -> GreenRope response journey
+  -> email click and website return
+  -> inquiry for child/program need B or another school
+  -> tour or approved lifecycle outcome
+```
+
+Later activation may send approved lifecycle events to Mailchimp, synchronize
+subscription/suppression state, or trigger an approved journey. Each write
+contract requires its own eligibility, idempotency, monitoring, rollback, and
+business-owner approval.
 
 ## 9. Dataform Production Model
 
@@ -611,6 +719,18 @@ Use Pub/Sub only when one validated event needs multiple independent consumers.
 - paid, organic, local, direct, referral, and partnership contribution;
 - attribution confidence and known gaps.
 
+### Parent journey and email view
+
+- inquiry, adult-contact, and household counts shown as separate grains;
+- multi-child, repeat-inquiry, and multi-school movement without double
+  counting;
+- Mailchimp and GreenRope sends, delivery, bounces, clicks, unsubscribes, and
+  journey progression;
+- website return, inquiry, tour, and approved outcome after email engagement;
+- school/program relevance and communication frequency;
+- email opens labelled low-confidence and excluded from primary engagement or
+  outcome scoring.
+
 ### Agency and test view
 
 - one neutral business conversion definition;
@@ -650,6 +770,8 @@ Activation is promoted in stages.
 - create school/market audiences only where the business purpose and
   eligibility permit;
 - create high-quality seed audiences from meaningful CRM outcomes;
+- use email clicks and approved lifecycle state to improve re-engagement while
+  respecting provider subscription and destination eligibility;
 - keep audience membership and delivery audited.
 
 ### Stage 2: Outcome optimization
@@ -916,7 +1038,38 @@ re-engagement, and quality audience seeds.
 **Exit:** Audiences are reproducible from an activation-safe contract and can
 be stopped without affecting source data or conversions.
 
-### Phase 6: Predictive And Optimization Intelligence, Week 12+
+### Phase 6: Parent Email And Lifecycle Omnichannel, Weeks 12-16
+
+**Outcome:** CEFA can measure how Mailchimp and GreenRope communication
+contributes to website returns, inquiries, tours, and approved outcomes without
+creating a second contact database.
+
+- inventory Mailchimp audiences, campaigns, reports, merge fields, tags,
+  segments, webhooks, journeys/automation flows, and source ownership;
+- inventory GreenRope email activities, journeys, contact/journey membership,
+  source IDs, and available timestamps;
+- define the adult, household, dependent, inquiry, opportunity, message, and
+  journey keys and relationship assertions;
+- build restricted tokenization and provider-contact identity bridges;
+- add read-only Cloud Run API extraction and signed Mailchimp webhook ingress;
+- map schools through explicit canonical identifiers rather than campaign-name
+  inference;
+- build Dataform email delivery, engagement, journey membership, and
+  cross-channel outcome facts;
+- report send, delivery, bounce, click, unsubscribe, return-visit, inquiry, and
+  lifecycle results;
+- classify opens as low-confidence diagnostics;
+- run in read-only shadow with no Mailchimp or GreenRope profile, audience,
+  journey, or campaign writes;
+- propose later lifecycle events and activation contracts only after source
+  reconciliation and business review.
+
+**Exit:** Provider totals reconcile, contact identity is tokenized, legitimate
+multi-child and repeat-inquiry journeys remain distinct, school mapping is
+deterministic, and email activity appears in the Parent journey without raw
+PII or outbound writes.
+
+### Phase 7: Predictive And Optimization Intelligence, Week 16+
 
 **Outcome:** CEFA receives evaluated recommendations about demand, lead
 quality, capacity, creative, local visibility, and budget allocation.
@@ -945,6 +1098,7 @@ remain advisory until CEFA explicitly promotes an action.
 | Event ledger | One traceable conversion journey | Event-ID coverage and zero duplicates |
 | CRM activation | Platform visibility into meaningful outcomes | Exact identity and accepted-ID diagnostics |
 | School intelligence | Marketing and outcome truth by school | School mapping and source reconciliation |
+| Parent identity and email | Multi-child, repeat-inquiry, multi-school, and email journey visibility | Deterministic entity links, provider reconciliation, and no raw PII |
 | Audience activation | Better targeting with suppression and quality seeds | Activation-safe contract and delivery audit |
 | Predictive intelligence | Better recommendations, not automatic guesses | Backtest, confidence, drift, owner approval |
 | Operations | Faster detection and recovery | SLO dashboard, alerts, runbook, rollback test |
@@ -966,10 +1120,15 @@ The next implementation sprint requires:
 8. GreenRope `cefa_event_id` and `cefa_form_entry_id`.
 9. Controlled Parent, Franchise Canada, and Franchise USA test-submission
    procedures that exclude tests from business reporting.
+10. Mailchimp API/account owner and a read-only audience/campaign inventory
+    for the later email/lifecycle phase.
+11. GreenRope email activity and customer-journey API field/timestamp
+    inventory for the later email/lifecycle phase.
 
 Missing GreenRope fields block Parent CRM outcome activation, but they do not
 block Stape, Dataform, source-control, monitoring, or warehouse
-productionization.
+productionization. Mailchimp and GreenRope email inputs do not block the
+earlier website, Stape, CRM outcome, or warehouse phases.
 
 ## 19. Immediate First Sprint
 
@@ -1021,6 +1180,11 @@ The total program is complete when:
 14. Omnichannel reporting exposes source, assist, selected-school, lifecycle,
     and attribution-confidence evidence without claiming anonymous or
     cross-device identity that CEFA cannot prove.
+15. Adult contacts, households, children, inquiries, opportunities, and
+    schools retain their real one-to-many relationships without collapsing
+    legitimate repeat inquiries.
+16. Mailchimp and GreenRope email/journey facts reconcile to provider totals,
+    join through restricted identity, and expose no raw contact or child PII.
 
 ## 21. Explicit Non-Goals
 
@@ -1032,6 +1196,11 @@ The total program is complete when:
 - sending duplicate browser and server conversion names without deduplication;
 - uploading historical CRM current state as new conversions;
 - treating platform-reported conversions as final business truth;
+- treating email opens as reliable intent or qualification;
+- merging Mailchimp and GreenRope contacts through names, raw email fields, or
+  fuzzy identity;
+- turning BigQuery into the operational email sender or customer-journey
+  editor;
 - making CRM-stage conversions primary immediately;
 - enabling every Google Cloud API without a defined workload;
 - deleting current datasets or compatibility objects during foundation work;
@@ -1048,6 +1217,10 @@ The total program is complete when:
 - [BigQuery computation practices](https://cloud.google.com/bigquery/docs/best-practices-performance-compute)
 - [BigQuery row-level security](https://cloud.google.com/bigquery/docs/row-level-security-intro)
 - [BigQuery column-level security](https://cloud.google.com/bigquery/docs/column-level-security)
+- [BigQuery composable Customer 360 and activation pattern](https://cloud.google.com/blog/products/data-analytics/hightouch-composable-cdp-built-on-bigquery)
+- [Mailchimp Marketing API quick start](https://mailchimp.com/developer/marketing/guides/quick-start/)
+- [Mailchimp audience webhook synchronization](https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/)
+- [Mailchimp Apple Mail Privacy Protection guidance](https://mailchimp.com/help/apple-privacy-faq/)
 - [Stape multi-domain server GTM](https://stape.io/blog/server-side-gtm-with-multiple-domains)
 - [Stape custom-domain options](https://stape.io/helpdesk/documentation/add-custom-domain-in-stape)
 - [Stape same-origin and Cookie Keeper guidance](https://stape.io/news/a-new-way-to-set-up-a-custom-domain-in-server-gtm)

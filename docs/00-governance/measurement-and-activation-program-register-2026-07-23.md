@@ -59,7 +59,8 @@ or production gate changes.
 | BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; the work is not constrained to free tiers or blocked by a cost-approval gate | Productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
 | Dataform | `Active guarded` | Additive QA foundation exists; Cloud Run remains the production orchestrator | Parallel compile/assertion proof, then incremental promotion |
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
-| Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus six delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
+| Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
+| Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
 
 ## Immediate Waiting List
 
@@ -129,6 +130,13 @@ GreenRope prospective lifecycle
   -> restricted BigQuery lifecycle ledger and outbox
   -> Google secondary CRM-stage conversions
   -> Meta CRM-stage server events
+
+Mailchimp campaigns/journeys + GreenRope email/customer journeys
+  -> read-only API extraction and signed webhooks
+  -> restricted contact tokenization and identity bridge
+  -> no-PII delivery, engagement and journey facts
+  -> Parent omnichannel reporting
+  -> later separately approved email/audience activation
 
 Franchise Canada and USA
   -> existing website/GTM/GAConnector/Synuma production flow
@@ -254,6 +262,11 @@ All approved source facts
   and a CEFA-owned handoff.
 - Bounded retention and partitioning, especially for click IDs and restricted
   activation data.
+- A deterministic identity model that preserves separate adult contacts,
+  households, children, inquiries, CRM opportunities, and school interests
+  without copying raw parent or child PII into marketing tables.
+- Read-only Mailchimp and GreenRope email/journey contracts before any
+  audience, profile, tag, automation, or journey write is considered.
 - No duplicate warehouse, disconnected Google Cloud project, parallel school
   registry, or vendor-only source repository.
 
@@ -282,6 +295,8 @@ All approved source facts
 | 8 | Dataform productionization | `Active guarded` | Stable transforms and assertions proven in parallel |
 | 9 | Cloud monitoring, queue and runbook hardening | `Pending` | Alerts, retries, dead letters, capacity visibility and rollback pass |
 | 10 | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
+| 11 | Parent multi-entity identity model | `Approved` | Multi-child, repeat-inquiry, multi-school and opportunity relationships pass deterministic-link and counting assertions |
+| 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
 
 ## Change Control
 
@@ -293,8 +308,8 @@ Update this register when:
 - a Stape domain, container, power-up, or production route changes;
 - a Cloud Run, Dataform, Scheduler, Pub/Sub, Cloud Tasks, Secret Manager, or
   BigQuery production contract changes;
-- a parent, franchise, KinderTales, GreenRope, GAConnector, or Synuma ownership
-  boundary changes;
+- a parent, franchise, KinderTales, GreenRope, Mailchimp, GAConnector, or
+  Synuma ownership boundary changes;
 - a commercial term or delivery scope is confirmed.
 
 Never put passwords, tokens, cookie values, raw identifiers, parent/child PII,
