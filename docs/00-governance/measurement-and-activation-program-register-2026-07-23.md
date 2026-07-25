@@ -300,7 +300,7 @@ All approved source facts
 | 10 | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | 11 | Parent multi-entity identity model | `Approved` | Multi-child, repeat-inquiry, multi-school and opportunity relationships pass deterministic-link and counting assertions |
 | 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
-| 13 | WordPress/KinderTales/GreenRope handoff hardening | `Approved; vendor inputs pending` | Server-side IDs, idempotent handoff, returned source-ID writeback and unchanged current conversions pass |
+| 13 | WordPress/KinderTales/GreenRope handoff hardening | `Code deployed disabled; vendor inputs pending` | School Manager 1.0.22 no-send QA passed; activate only after metadata acceptance and GreenRope mapping are confirmed |
 
 ## Change Control
 
@@ -328,6 +328,8 @@ or private payloads in this register.
 - [Parent Form 4 and KinderTales boundary](../10-conversion-tracking/parent-form4-kindertales-attribution-boundary-2026-07-10.md)
 - [Parent omnichannel vendor API request](../10-conversion-tracking/parent-omnichannel-vendor-api-request-2026-07-25.md)
 - [Parent Form 4 omnichannel WordPress handoff](../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md)
+- [KinderTales and GreenRope identity/webhook vendor email](../10-conversion-tracking/kindertales-greenrope-identity-webhook-email-2026-07-25.md)
+- [Parent KinderTales identity WordPress rollout](../10-conversion-tracking/parent-kindertales-identity-wordpress-rollout-2026-07-25.md)
 - [Parent canonical writeback observation](../10-conversion-tracking/parent-paid-writeback-production-observation-2026-07-10.md)
 - [Franchise GAConnector shadow rollout](../10-conversion-tracking/franchise-gaconnector-shadow-rollout-2026-07-20.md)
 - [Full conversion-tracking assessment](../10-conversion-tracking/full-conversion-tracking-assessment-and-execution-plan-2026-07-09.md)

@@ -622,7 +622,11 @@ The implementation details and copy-ready vendor requests are governed by:
 - [Parent omnichannel vendor API
   request](../../10-conversion-tracking/parent-omnichannel-vendor-api-request-2026-07-25.md);
 - [Parent Form 4 omnichannel WordPress handoff
-  plan](../../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md).
+  plan](../../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md);
+- [KinderTales and GreenRope identity/webhook vendor
+  email](../../10-conversion-tracking/kindertales-greenrope-identity-webhook-email-2026-07-25.md);
+- [Parent KinderTales identity WordPress
+  rollout](../../10-conversion-tracking/parent-kindertales-identity-wordpress-rollout-2026-07-25.md).
 
 The immediate external blocker remains the two exact GreenRope opportunity
 fields and confirmation of whether the known KinderTales inquiry path creates
@@ -644,6 +648,12 @@ address, phone, email, and parent name without a configured feed opt-in
 condition. Preserve the live feed until a controlled backup/review, but do not
 extend it as the omnichannel identity layer. Minimize it before future
 Mailchimp journey activation.
+
+School Manager `1.0.22` is deployed to staging and production with the
+KinderTales identity metadata flag absent. No-send QA proved that disabled
+mode preserves the existing payload and that enabled-in-memory mode adds only
+the three governed identity keys. Production activation remains blocked on
+the vendor metadata and GreenRope mapping confirmation.
 
 ## 9. Dataform Production Model
 

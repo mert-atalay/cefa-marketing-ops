@@ -268,6 +268,15 @@ business-delivery owner.
 11. Add email/journey ingestion read-only.
 12. Consider outbound email/audience writes only under a separate approval.
 
+### Current rollout status
+
+School Manager `1.0.22` was deployed to staging and production on 2026-07-25
+with the identity metadata feature flag absent. Disabled and
+enabled-in-memory no-send tests passed without creating an entry or contacting
+KinderTales. The implementation remains inactive until the vendor confirms
+the metadata and GreenRope mapping contract. See
+[Parent KinderTales identity WordPress rollout](./parent-kindertales-identity-wordpress-rollout-2026-07-25.md).
+
 ## Acceptance Tests
 
 - Form `4` field `32` behavior is unchanged.
