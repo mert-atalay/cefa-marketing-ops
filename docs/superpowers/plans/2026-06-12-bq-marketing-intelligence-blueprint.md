@@ -6,7 +6,13 @@
 
 **Architecture:** Supabase remains the operational CRM and parent/admissions system. BigQuery remains the marketing intelligence, measurement, semantic, predictive, and activation-prep warehouse. Existing dashboard contracts in `mart_cefa_growth_dashboard` stay stable while new sources enter as additive, QA-labeled contracts.
 
-**Tech Stack:** BigQuery, Cloud Run, Cloud Scheduler, BigQuery Data Transfer Service, Dataform, Cloud Monitoring, Secret Manager, Cloud Storage, Pub/Sub or Cloud Tasks where needed, Dataplex/Knowledge Catalog, BigQuery ML, Gemini in BigQuery, Vertex AI only after BQ-native options are insufficient, Supabase safe exports, Hightouch for approved reverse ETL, GA4, Google Ads, Meta, GSC, GBP, DataForSEO, Gravity Forms, CRM lifecycle facts.
+**Tech Stack:** BigQuery, BigQuery Data Transfer Service, Dataform, BigQuery
+ML, Gemini in BigQuery, Cloud Run and Cloud Run jobs, Cloud Functions where
+useful, Cloud Scheduler, Pub/Sub, Cloud Tasks, Eventarc, Workflows, Cloud
+Monitoring and Logging, Secret Manager, Cloud Storage, Dataplex/metadata
+governance, Vertex AI when BQ-native options are insufficient, Supabase safe
+exports, Hightouch for approved reverse ETL, GA4, Google Ads, Meta, GSC, GBP,
+DataForSEO, Gravity Forms, and CRM lifecycle facts.
 
 **Status:** Locked roadmap as of 2026-06-12. Future BQ, marketing intelligence, prediction, semantic layer, Hightouch, and Supabase bridge work should use this as the strategic roadmap unless Mert explicitly approves a replacement.
 
@@ -19,6 +25,14 @@ acceptance gates, and ordered build board are registered in
 This is an extension of the roadmap, not permission to create a second
 warehouse, replace current conversions without parity, or place KinderTales or
 Synuma delivery behind sGTM.
+
+**Capacity addendum, 2026-07-24:** CEFA confirmed that the Stape Business plan
+is available and that this roadmap may use the full relevant Google Cloud and
+BigQuery capability set. Implementation is not restricted to free tiers and a
+new cloud workload does not need cost-only approval when it serves an approved
+roadmap outcome. Billing visibility remains informational; data quality,
+security, privacy, identity, platform eligibility, QA, and rollback controls
+remain mandatory. See the program register for the operational decision.
 
 ---
 
@@ -78,7 +92,8 @@ The phrase "dual truth" should be used carefully. CEFA should not have two confl
 - [x] Expand the contract registry for dashboard, intelligence, predictive, activation, and blocked/candidate contracts.
 - [ ] Add or standardize fields: `data_through_date`, `last_loaded_at`, `source_systems`, `source_status`, `qa_status`, `dashboard_safe`, `predictive_safe`, `reconciliation_status`, `known_limitations`, `serving_contract_version`.
 - [x] Create or formalize the metric registry for business CPL, paid leads, qualified leads, tours, enrollments, source quality, capacity opportunity, attribution confidence, creative fatigue, and AI visibility.
-- [ ] Add Cloud Monitoring alerts for stale source dates, failed Cloud Run jobs, failed QA, and query/storage guardrail warnings.
+- [ ] Add Cloud Monitoring alerts for stale source dates, failed Cloud Run
+  jobs, failed QA, quota pressure, abnormal usage, and unexpected volume.
 - [ ] Keep Hightouch, Supabase, Vercel, and AI readers restricted to approved contracts.
 
 Progress note, 2026-06-12: Day 0 governance/source dictionary implemented in `marketing-api-488017.cefa_governance` and documented in [Governance source dictionary, 2026-06-12](../../20-bigquery/governance-source-dictionary-2026-06-12.md). The remaining Phase 1 work is field standardization on source contracts, monitoring alerts, and consumer access enforcement.
@@ -120,8 +135,8 @@ business truth.
   deduplication, and no KinderTales or Synuma regression.
 - [ ] Enable Business power-ups only when an approved requirement and QA
   record exist.
-- [ ] Export container configuration, access inventory, monitoring, cost
-  guardrails, and rollback runbook before production promotion.
+- [ ] Export container configuration, access inventory, monitoring,
+  request-capacity alerts, and rollback runbook before production promotion.
 
 ## Phase 3 - Native Source Gap Closure
 
@@ -199,8 +214,9 @@ Progress note, 2026-07-23: an additive Dataform QA foundation exists, while
 Cloud Run remains the production orchestrator. The approved Google Cloud
 development scope must reuse `marketing-api-488017`, keep API extraction and
 activation in Cloud Run, migrate only stable SQL, and supply Git-linked
-releases, assertions, monitoring, least-privilege IAM, cost controls, and
-rollback documentation.
+releases, assertions, monitoring, least-privilege IAM, quota/capacity
+visibility, and rollback documentation. Free-tier limits and cost-only
+approval are not promotion gates.
 
 ## Phase 10 - MMM And Incrementality Readiness
 
@@ -258,15 +274,23 @@ No current dashboard metrics should change from this plan by default.
 
 The dashboard agent can safely continue consuming current `mart_cefa_growth_dashboard` contracts. New views should be consumed only when they are explicitly marked `dashboard_safe = true`, have passing QA, and have a handoff note that names the changed contract and expected UI behavior.
 
-## Cost And Safety Guardrails
+## Capacity, Reliability, And Safety Controls
 
 - Register approved vendor/license costs and renewal terms in the measurement
-  program register; reconcile the Stape Business license with any separate
-  sGTM implementation charge.
-- Prefer daily aggregates and bounded feature tables over unlimited raw expansion.
-- Keep raw event retention and partitioning rules explicit before high-volume sources are added.
-- Run BQ usage guardrails after every major source addition.
-- Add Cloud Vision, Gemini, Vertex AI, and MMM workloads only after source tables are stable and the expected monthly cost is approved.
+  program register for operational visibility, not as an implementation gate.
+- The Stape Business license and any separate sGTM implementation charge
+  should still be reconciled for clean ownership and renewal records.
+- Do not constrain approved work to Google Cloud or BigQuery free tiers.
+- Choose event grain, refresh frequency, storage, compute, and managed services
+  from the business SLA, data quality requirement, and technical fit.
+- Keep raw event retention, partitioning, clustering, lineage, and deletion
+  rules explicit before high-volume sources are added.
+- Monitor BigQuery and Google Cloud usage for quota pressure, abnormal growth,
+  failed delivery, and architecture regressions. Monitoring is informational
+  unless reliability, security, or data quality is at risk.
+- Add Cloud Vision, Gemini, Vertex AI, and MMM workloads after source tables
+  and use-case acceptance criteria are stable; expected monthly cost is not a
+  separate prerequisite.
 - Keep all write-capable actions behind human approval.
 
 ## Non-Goals

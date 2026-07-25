@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-23
+**Register date:** 2026-07-24
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -56,9 +56,9 @@ or production gate changes.
 | Parent CRM offline conversions | `Active guarded` | Restricted BigQuery, capture, binder, poller, dispatcher, diagnostics, three Google actions, and three Meta test events are built; production sending is disabled | GreenRope fields, controlled identity test, eligibility decision, production activation |
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
-| BigQuery and Google Cloud foundation | `Active guarded` | BigQuery, Cloud Run, Scheduler, Secret Manager, restricted activation storage, source loaders, and monitoring patterns exist | Productionize Dataform, reconciliation assertions, alerts, queues, and runbooks |
+| BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; the work is not constrained to free tiers or blocked by a cost-approval gate | Productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
 | Dataform | `Active guarded` | Additive QA foundation exists; Cloud Run remains the production orchestrator | Parallel compile/assertion proof, then incremental promotion |
-| Stape Business sGTM | `Approved` | CEFA approved Business tier as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Provision CEFA-owned account/container access, domain design, build and shadow QA |
+| Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
 
 ## Immediate Waiting List
 
@@ -69,9 +69,8 @@ or production gate changes.
 | Controlled parent inquiry | CEFA measurement owner | Proves Gravity Forms, GreenRope, KinderTales, and existing conversions agree | Enable eligible prospective lifecycle processing |
 | Per-record platform eligibility decision | CEFA | Runtime currently fails closed when eligibility is unknown | Enable platform dispatch only for approved records |
 | Meta live custom-event registration | Meta, triggered by first legitimate eligible outcome | Test Events do not currently expose the event type to reporting custom-conversion creation | Create three reporting-only custom conversions |
-| Stape Business workspace and administrative access | CEFA/vendor | Required to create and own server containers, logs, domains, and rollback | Begin sGTM build in non-disruptive shadow mode |
+| Stape Business workspace and administrative access verification | CEFA/vendor | The Business subscription exists; the implementation still needs confirmed CEFA-owned workspace, container, billing and recovery access | Begin sGTM build in non-disruptive shadow mode |
 | DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection | Validate endpoint, cookies, routing, and rollback |
-| Cloud/data delivery statement of work | CEFA/vendor | Prevents rebuilding existing infrastructure or creating an isolated warehouse | Start bounded Dataform/Cloud hardening work |
 | Franchise shadow evidence and Synuma review | CEFA measurement owner | GAConnector must not be replaced on sparse or delivery-uncertain evidence | Approve, extend, or reject franchise cutover |
 
 ## Approved Tooling And Commercial Register
@@ -82,14 +81,34 @@ renewals.
 
 | Item | Approved reference | Intended use | Registration status |
 |---|---:|---|---|
-| BigQuery + Dataform + Cloud Run/Scheduler + Pub/Sub/Cloud Tasks + Secret Manager development | `$3,377` quoted line | Complete and harden CEFA's existing marketing data and intelligence foundation | Approved scope; statement of work and delivery ownership still need confirmation |
-| Stape Business | `$83/month`, billed `$1,000/year`, up to `5M` requests in supplied plan image | Managed sGTM hosting, multi-domain capability, 10-day logs, monitoring, first-party routing and server-side destination delivery | Approved tier; provisioning and implementation pending |
+| BigQuery + Google Cloud data and activation development | `$3,377` quoted line | Complete and harden CEFA's existing marketing data and intelligence foundation using the relevant Google Cloud capability set | Approved and available; not restricted to free tiers and not subject to a separate cost-approval gate |
+| Stape Business | `$83/month`, billed `$1,000/year`, up to `5M` requests in supplied plan image | Managed sGTM hosting, multi-domain capability, 10-day logs, monitoring, first-party routing and server-side destination delivery | Business plan available; CEFA administrative access verification and implementation pending |
 | Separate server-side GTM quoted line | `$1,370` quoted line | Implementation and/or managed service associated with Stape/sGTM | Commercial contents must be reconciled with the `$1,000/year` Stape license to prevent duplicate billing |
 
 The approved Stape Business features are capabilities, not automatic
 production permissions. Custom Loader, Cookie Keeper, Enricher, File Proxy,
 request delay, scheduled requests, and IP blocking must each be enabled only
 when they serve an approved tracking requirement and pass QA.
+
+## Capacity And Cost Decision
+
+**Decision date:** 2026-07-24
+
+- CEFA has the Stape Business plan. Procurement of a Stape tier is no longer a
+  blocker; access verification, first-party domains, container configuration,
+  parity, deduplication, and rollback remain required.
+- Google Cloud and BigQuery implementation is not constrained to free tiers,
+  free quotas, or the smallest possible service footprint.
+- A new Google Cloud service, paid BigQuery feature, larger runtime, increased
+  query volume, or higher-frequency schedule does not require a separate
+  cost-only approval when it directly supports this approved measurement,
+  intelligence, reliability, or activation program.
+- Billing dashboards and anomaly alerts remain informational operational
+  controls. They must not silently throttle, skip, sample, or disable required
+  tracking and data-quality workloads merely to preserve a free allowance.
+- This approval does not permit an unrelated second warehouse, uncontrolled
+  duplication, raw-PII expansion, autonomous campaign changes, or bypassing
+  QA, security, privacy, destination, and rollback gates.
 
 ## Target Architecture
 
@@ -186,35 +205,47 @@ All approved source facts
 - No KinderTales or Synuma delivery regression.
 - No prohibited PII appears in Stape logs, BigQuery, Cloud Logging, GTM debug
   exports, or documentation.
-- Monitoring, access inventory, configuration export, change log, cost alert,
-  and rollback runbook exist.
+- Monitoring, access inventory, configuration export, change log,
+  request-capacity alert, and rollback runbook exist.
 
 ## BigQuery And Google Cloud Development Contract
 
 ### Keep and extend
 
 - Reuse project `marketing-api-488017`.
+- Use the full relevant Google Cloud capability set when it improves
+  correctness, durability, observability, delivery, analysis, or maintainability.
+  Approved examples include BigQuery, BigQuery Data Transfer Service, Dataform,
+  BigQuery ML, Gemini in BigQuery, Cloud Run, Cloud Run jobs, Cloud Functions,
+  Scheduler, Pub/Sub, Cloud Tasks, Eventarc, Workflows, Cloud Storage, Secret
+  Manager, Cloud Logging/Monitoring, Dataplex/metadata governance, and Vertex
+  AI when BQ-native functions are insufficient.
 - Keep BigQuery as marketing measurement and intelligence truth.
 - Keep Cloud Run for API extraction, webhooks, custom processing, offline
   activation, and backward-compatible refresh entrypoints.
 - Move stable BigQuery SQL transformations into Dataform incrementally.
 - Keep Secret Manager as the credential boundary.
-- Use Cloud Scheduler for bounded schedules.
+- Use Cloud Scheduler for explicit, observable schedules at the frequency
+  required by the source and business SLA.
 - Use Pub/Sub or Cloud Tasks only where asynchronous delivery, retries,
-  fan-out, or dead-letter handling is required. Do not add both by default.
+  fan-out, or dead-letter handling is required. Choose the service by delivery
+  semantics, not by free-tier availability.
+- Use Workflows, Eventarc, or Cloud Functions when they remove material
+  orchestration or event-routing complexity; do not force every workload into
+  Cloud Run.
 - Preserve existing dashboard-safe contracts until promoted replacements
   reconcile.
 
 ### Required deliverables
 
 - Source and transformation inventory with owner, schedule, service account,
-  destination, freshness expectation, retry policy, and cost class.
+  destination, freshness expectation, retry policy, and volume class.
 - Dataform repository/release/workflow configuration tied to Git.
 - Assertions for freshness, uniqueness, row counts, null safety, spend
   reconciliation, lead reconciliation, stage deduplication, and dashboard
   compatibility.
 - Cloud Monitoring alerts for failed jobs, stale sources, failed assertions,
-  delivery failures, and budget/query guardrails.
+  delivery failures, quota pressure, abnormal usage, and unexpected volume.
 - Idempotent queues and dead-letter visibility for webhook or activation work
   that requires retries.
 - Least-privilege IAM and secret-level access.
@@ -230,7 +261,8 @@ All approved source facts
 - Dataform compiles and all critical assertions pass in parallel.
 - Source totals reconcile with the existing production pipeline.
 - Dashboard outputs remain unchanged unless an approved contract changes.
-- Cloud costs and request volume remain within approved guardrails.
+- Service health, quotas, request volume, freshness, and failure rates are
+  observable and do not silently drop required data.
 - Runtime identities can access only their required datasets, jobs, queues,
   and secrets.
 - Every production service has monitoring, failure ownership, and rollback.
@@ -243,11 +275,11 @@ All approved source facts
 | 2 | Create GreenRope identity fields | `Pending` | Both fields visible through API |
 | 3 | Parent controlled identity test | `Blocked` by item 2 | Exact Form `4`/GreenRope match; KinderTales succeeds; existing conversions fire once |
 | 4 | Parent CRM offline production activation | `Blocked` by items 2-3 and eligibility | Eligible prospective outcomes accepted; baseline uploads and duplicates remain zero |
-| 5 | Stape Business provisioning and architecture inventory | `Approved` | CEFA ownership, access, domains, routing map, baseline export |
+| 5 | Stape Business access verification and architecture inventory | `Approved` | CEFA ownership, access, domains, routing map, baseline export |
 | 6 | Stape shadow implementation | `Pending` | Browser/server parity and no destination cross-talk |
 | 7 | Stape conversion promotion by property | `Pending` | Once-only conversions, deduplication and CRM continuity pass |
 | 8 | Dataform productionization | `Active guarded` | Stable transforms and assertions proven in parallel |
-| 9 | Cloud monitoring, queue and runbook hardening | `Pending` | Alerts, retries, dead letters, cost controls and rollback pass |
+| 9 | Cloud monitoring, queue and runbook hardening | `Pending` | Alerts, retries, dead letters, capacity visibility and rollback pass |
 | 10 | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 
 ## Change Control
