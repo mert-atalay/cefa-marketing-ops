@@ -3,6 +3,11 @@
 **Requested:** 2026-07-23
 **Scope:** Parent-school opportunities only
 
+The immediate two-field request below remains the blocking requirement for
+Parent CRM offline activation. The expanded GreenRope email/journey and
+KinderTales identity/lifecycle requirements are in
+[CEFA Parent Omnichannel Vendor API Request](./parent-omnichannel-vendor-api-request-2026-07-25.md).
+
 Please create these two GreenRope **opportunity custom fields** as Short Text
 fields:
 

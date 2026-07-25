@@ -68,12 +68,15 @@ or production gate changes.
 |---|---|---|---|
 | GreenRope opportunity field `cefa_event_id` | GreenRope account owner/admin or vendor | Stores the exact Form `4` event identity on the opportunity | Binder write/read-back test |
 | GreenRope opportunity field `cefa_form_entry_id` | GreenRope account owner/admin or vendor | Confirms the matched Gravity Forms entry | Controlled end-to-end identity test |
+| Current GreenRope opportunity-creation owner | GreenRope vendor/integration owner | CEFA must add identity to the existing creation path rather than create a duplicate writer | Map both exact IDs at opportunity creation or approve the idempotent CEFA worker |
 | Controlled parent inquiry | CEFA measurement owner | Proves Gravity Forms, GreenRope, KinderTales, and existing conversions agree | Enable eligible prospective lifecycle processing |
 | Per-record platform eligibility decision | CEFA | Runtime currently fails closed when eligibility is unknown | Enable platform dispatch only for approved records |
 | Meta live custom-event registration | Meta, triggered by first legitimate eligible outcome | Test Events do not currently expose the event type to reporting custom-conversion creation | Create three reporting-only custom conversions |
 | Stape Business workspace and administrative access verification | CEFA/vendor | The Business subscription exists; the implementation still needs confirmed CEFA-owned workspace, container, billing and recovery access | Begin sGTM build in non-disruptive shadow mode |
 | DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection | Validate endpoint, cookies, routing, and rollback |
 | Franchise shadow evidence and Synuma review | CEFA measurement owner | GAConnector must not be replaced on sparse or delivery-uncertain evidence | Approve, extend, or reject franchise cutover |
+| KinderTales identity/lifecycle API contract | KinderTales/School Manager owner | Stable inquiry, adult, household, child, school, program, and lifecycle IDs are needed for the later multi-child omnichannel model | Build restricted HMAC relationships without raw child PII |
+| Form 4 Mailchimp feed minimization | CEFA marketing/website owner | Current active feed maps exact child DOB, address, phone, email, and parent name and shows no configured feed opt-in condition | Back up, confirm purpose/eligibility, minimize fields, then add read-only API/webhook journey ingestion |
 
 ## Approved Tooling And Commercial Register
 
@@ -297,6 +300,7 @@ All approved source facts
 | 10 | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | 11 | Parent multi-entity identity model | `Approved` | Multi-child, repeat-inquiry, multi-school and opportunity relationships pass deterministic-link and counting assertions |
 | 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
+| 13 | WordPress/KinderTales/GreenRope handoff hardening | `Approved; vendor inputs pending` | Server-side IDs, idempotent handoff, returned source-ID writeback and unchanged current conversions pass |
 
 ## Change Control
 
@@ -322,6 +326,8 @@ or private payloads in this register.
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)
 - [Parent CRM offline-conversion implementation report](../10-conversion-tracking/parent-crm-offline-conversion-implementation-report.md)
 - [Parent Form 4 and KinderTales boundary](../10-conversion-tracking/parent-form4-kindertales-attribution-boundary-2026-07-10.md)
+- [Parent omnichannel vendor API request](../10-conversion-tracking/parent-omnichannel-vendor-api-request-2026-07-25.md)
+- [Parent Form 4 omnichannel WordPress handoff](../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md)
 - [Parent canonical writeback observation](../10-conversion-tracking/parent-paid-writeback-production-observation-2026-07-10.md)
 - [Franchise GAConnector shadow rollout](../10-conversion-tracking/franchise-gaconnector-shadow-rollout-2026-07-20.md)
 - [Full conversion-tracking assessment](../10-conversion-tracking/full-conversion-tracking-assessment-and-execution-plan-2026-07-09.md)

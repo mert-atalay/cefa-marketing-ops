@@ -615,6 +615,36 @@ subscription/suppression state, or trigger an approved journey. Each write
 contract requires its own eligibility, idempotency, monitoring, rollback, and
 business-owner approval.
 
+### Vendor and WordPress implementation handoff
+
+The implementation details and copy-ready vendor requests are governed by:
+
+- [Parent omnichannel vendor API
+  request](../../10-conversion-tracking/parent-omnichannel-vendor-api-request-2026-07-25.md);
+- [Parent Form 4 omnichannel WordPress handoff
+  plan](../../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md).
+
+The immediate external blocker remains the two exact GreenRope opportunity
+fields and identification of the current opportunity-creation owner. The
+KinderTales household/child identity export and Mailchimp/GreenRope email
+journey APIs are horizon inputs and do not block the website, Stape, Dataform,
+or current inquiry-conversion phases.
+
+WordPress must prefer server-side Gravity Forms entry metadata and a versioned
+handoff envelope over additional browser hidden fields. `cefa_form_entry_id`
+is created only after the entry saves; CRM, household, and child source IDs
+must remain server-side. CEFA School Manager may add confirmed identity keys to
+the existing KinderTales metadata only after KinderTales approves that API
+contract.
+
+The 2026-07-25 read-only Form 4 inventory found that field IDs through `56`
+are already occupied. No new numeric field ID is reserved in this plan. The
+same inventory found an active Mailchimp feed mapping exact child birth date,
+address, phone, email, and parent name without a configured feed opt-in
+condition. Preserve the live feed until a controlled backup/review, but do not
+extend it as the omnichannel identity layer. Minimize it before future
+Mailchimp journey activation.
+
 ## 9. Dataform Production Model
 
 Create one Git-connected Dataform repository with:
@@ -639,7 +669,8 @@ Initial migration groups:
 5. paid campaign and deep-detail reconciliation;
 6. parent and franchise dashboard serving materializations;
 7. CRM lifecycle and activation eligibility;
-8. predictive features and model evaluation.
+8. predictive features and model evaluation;
+9. email delivery, engagement, journey, and cross-channel outcome facts.
 
 Every Dataform action must record:
 
@@ -1046,6 +1077,8 @@ creating a second contact database.
 
 - inventory Mailchimp audiences, campaigns, reports, merge fields, tags,
   segments, webhooks, journeys/automation flows, and source ownership;
+- export and review the active Form 4 Mailchimp feed, including its exact child
+  birth date/address/phone mapping and recipient-eligibility behavior;
 - inventory GreenRope email activities, journeys, contact/journey membership,
   source IDs, and available timestamps;
 - define the adult, household, dependent, inquiry, opportunity, message, and
@@ -1124,6 +1157,9 @@ The next implementation sprint requires:
     for the later email/lifecycle phase.
 11. GreenRope email activity and customer-journey API field/timestamp
     inventory for the later email/lifecycle phase.
+12. KinderTales/School Manager confirmation of accepted identity metadata,
+    returned source IDs, and a safe household/child/lifecycle API or export for
+    the later omnichannel phase.
 
 Missing GreenRope fields block Parent CRM outcome activation, but they do not
 block Stape, Dataform, source-control, monitoring, or warehouse
@@ -1185,6 +1221,8 @@ The total program is complete when:
     legitimate repeat inquiries.
 16. Mailchimp and GreenRope email/journey facts reconcile to provider totals,
     join through restricted identity, and expose no raw contact or child PII.
+17. The active Form 4 Mailchimp feed has a documented purpose and minimized
+    field contract before it is used for omnichannel journey activation.
 
 ## 21. Explicit Non-Goals
 
