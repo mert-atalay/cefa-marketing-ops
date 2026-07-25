@@ -68,7 +68,7 @@ or production gate changes.
 |---|---|---|---|
 | GreenRope opportunity field `cefa_event_id` | GreenRope account owner/admin or vendor | Stores the exact Form `4` event identity on the opportunity | Binder write/read-back test |
 | GreenRope opportunity field `cefa_form_entry_id` | GreenRope account owner/admin or vendor | Confirms the matched Gravity Forms entry | Controlled end-to-end identity test |
-| Current GreenRope opportunity-creation owner | GreenRope vendor/integration owner | CEFA must add identity to the existing creation path rather than create a duplicate writer | Map both exact IDs at opportunity creation or approve the idempotent CEFA worker |
+| KinderTales-to-GreenRope opportunity path | KinderTales/GreenRope vendor | CEFA knows WordPress creates the KinderTales inquiry but must confirm whether that request also creates the GreenRope opportunity | Map both exact IDs through the existing vendor path or approve the idempotent CEFA worker |
 | Controlled parent inquiry | CEFA measurement owner | Proves Gravity Forms, GreenRope, KinderTales, and existing conversions agree | Enable eligible prospective lifecycle processing |
 | Per-record platform eligibility decision | CEFA | Runtime currently fails closed when eligibility is unknown | Enable platform dispatch only for approved records |
 | Meta live custom-event registration | Meta, triggered by first legitimate eligible outcome | Test Events do not currently expose the event type to reporting custom-conversion creation | Create three reporting-only custom conversions |

@@ -18,6 +18,26 @@ addresses, raw phone numbers, exact child birth dates, addresses, notes, and
 message bodies are not required in the marketing warehouse. Source identifiers
 will be converted to restricted HMAC keys before analytics use.
 
+## Current Confirmed CEFA Flow
+
+CEFA already knows that WordPress creates the operational inquiry:
+
+```text
+Gravity Forms Form 4
+  -> CEFA School Manager
+  -> KinderTales public CRM inquiry API
+```
+
+That payload already carries parent/child operational details, school,
+program, days, referral, and Form 4 attribution fields `35-46`. It does not
+currently carry `cefa_event_id`, `cefa_form_entry_id`, or the attribution
+schema version.
+
+The unconfirmed step is whether the KinderTales inquiry automatically creates
+or updates the corresponding GreenRope contact/opportunity. CEFA is therefore
+asking the same vendor to document the full KinderTales-to-GreenRope handoff,
+not to rediscover the known WordPress integration.
+
 ## GreenRope Request To Send Now
 
 Please create these two GreenRope **opportunity custom fields** as Short Text:
@@ -33,10 +53,10 @@ Requirements:
 - do not attach assignment, stage, journey, email, or workflow behavior to
   the fields;
 - confirm the field dictionary/API names after creation;
-- identify which current integration creates CEFA Parent opportunities;
-- update that existing creation path, or provide the correct supported
-  create/update endpoint, so both values are saved on the opportunity at
-  creation time;
+- confirm whether the KinderTales inquiry API creates or updates the GreenRope
+  contact/opportunity directly or through an asynchronous vendor sync;
+- map both values through that existing path, or provide the correct supported
+  GreenRope create/update endpoint if no such sync exists;
 - return or expose the stable GreenRope `contact_id` and `opportunity_id`;
 - confirm that retries with the same `cefa_event_id` will update or resolve the
   same opportunity instead of creating a duplicate.
@@ -115,6 +135,51 @@ GreenRope is not required to become CEFA's household or final enrollment
 authority. If it does not have a reliable household/child relationship, CEFA
 will use School Manager/KinderTales for that layer.
 
+## Consolidated Technical Questions For The Vendor
+
+CEFA may send this as one list when KinderTales and GreenRope are supported by
+the same vendor:
+
+1. Does the current KinderTales inquiry API request create or update a
+   GreenRope contact and opportunity?
+2. If yes, is that operation synchronous or asynchronous, and which service or
+   integration owns it?
+3. If no, what currently creates the GreenRope parent opportunity?
+4. Can the KinderTales inquiry `metaData` accept `cefa_event_id`,
+   `cefa_form_entry_id`, and `cefa_attribution_schema_version` without
+   changing routing or workflows?
+5. Can those exact values be copied to GreenRope opportunity fields during
+   opportunity creation?
+6. Please create GreenRope Short Text opportunity fields named exactly
+   `cefa_event_id` and `cefa_form_entry_id`. What are their API field names?
+7. Does the KinderTales response return stable inquiry, parent, household,
+   child, school, and program IDs? If not, can they be looked up later by
+   `cefa_event_id`?
+8. Can the same response or lookup return the related GreenRope `contact_id`
+   and `opportunity_id`?
+9. How does the integration prevent duplicate KinderTales inquiries,
+   GreenRope contacts, and GreenRope opportunities when CEFA retries the same
+   `cefa_event_id`?
+10. Can one parent/contact retain separate inquiries or opportunities for
+    multiple children, schools, programs, and requested start periods?
+11. Which system is authoritative for parent, household, child, inquiry,
+    opportunity, school, program, tour, waitlist, and enrollment identity?
+12. Which timestamp represents inquiry creation and each lifecycle transition,
+    and are timestamps returned in UTC?
+13. Which APIs, incremental exports, or signed webhooks expose inquiry,
+    contacted, tour scheduled, tour completed, waitlisted, enrolled, and
+    closed/lost events?
+14. Which GreenRope APIs expose phases, phase paths, CRM email activity,
+    journeys, journey membership, delivery, click, bounce, unsubscribe, and
+    complaint events?
+15. What authentication, pagination, rate limits, incremental cursor or
+    `modified_since` behavior, retry rules, webhook signatures, and test
+    environment are supported?
+16. How are contact merges, household changes, opportunity merges,
+    reassignment, corrections, and deletions represented?
+17. Can CEFA receive only stable IDs, relationship edges, statuses, and
+    timestamps for analytics, without exporting raw parent or child PII?
+
 ## KinderTales And School Manager Request
 
 ### Immediate metadata confirmation
@@ -181,10 +246,10 @@ inquiries and GreenRope lifecycle reporting.
 
 Please create two Short Text opportunity fields named exactly
 `cefa_event_id` and `cefa_form_entry_id`, expose them through the opportunity
-API for read/write, and confirm which current integration creates CEFA Parent
-opportunities. We need that creation path to save Form 4 field `32.4` as
-`cefa_event_id` and the saved Gravity Forms entry ID as
-`cefa_form_entry_id`.
+API for read/write, and confirm whether the current KinderTales inquiry API
+creates or updates the related GreenRope contact/opportunity. We need that
+existing path to save Form 4 field `32.4` as `cefa_event_id` and the saved
+Gravity Forms entry ID as `cefa_form_entry_id`.
 
 Please also provide the current API documentation and field dictionaries for
 contacts, opportunities, phases, phase paths, CRM email activities, journeys,
@@ -238,7 +303,7 @@ Thank you.
 The vendor portion is ready when:
 
 1. GreenRope fields are visible through the API.
-2. The current opportunity-creation owner and mapping are known.
+2. The KinderTales-to-GreenRope opportunity path and mapping are known.
 3. One controlled Form 4 inquiry has matching event and entry IDs in
    GreenRope.
 4. The same controlled inquiry still reaches KinderTales.

@@ -625,10 +625,10 @@ The implementation details and copy-ready vendor requests are governed by:
   plan](../../10-conversion-tracking/parent-form4-omnichannel-wordpress-handoff-plan-2026-07-25.md).
 
 The immediate external blocker remains the two exact GreenRope opportunity
-fields and identification of the current opportunity-creation owner. The
-KinderTales household/child identity export and Mailchimp/GreenRope email
-journey APIs are horizon inputs and do not block the website, Stape, Dataform,
-or current inquiry-conversion phases.
+fields and confirmation of whether the known KinderTales inquiry path creates
+the GreenRope opportunity. The KinderTales household/child identity export and
+Mailchimp/GreenRope email journey APIs are horizon inputs and do not block the
+website, Stape, Dataform, or current inquiry-conversion phases.
 
 WordPress must prefer server-side Gravity Forms entry metadata and a versioned
 handoff envelope over additional browser hidden fields. `cefa_form_entry_id`

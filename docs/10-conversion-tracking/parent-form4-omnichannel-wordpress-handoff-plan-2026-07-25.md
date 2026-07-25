@@ -39,6 +39,11 @@ Verified against production Form `4` on 2026-07-25:
 - no GreenRope writer exists in CEFA Conversion Tracking or CEFA School
   Manager according to the current repository/live-plugin review.
 
+The known WordPress path creates the KinderTales inquiry. The current evidence
+does not show whether KinderTales then creates the GreenRope opportunity
+through an internal or vendor-managed synchronization. The two exact CEFA
+identity values are not currently included in the KinderTales payload.
+
 Do not assume that `57` or any later numeric ID is available. Export the live
 form immediately before an approved form revision, create fields through
 Gravity Forms, and then register the actual assigned IDs.
@@ -151,8 +156,9 @@ After KinderTales confirms the metadata contract:
 
 ### GreenRope
 
-Do not add a second opportunity-creation writer until the owner of the current
-GreenRope creation path is identified.
+Do not add a second opportunity-creation writer until the vendor confirms
+whether the existing KinderTales inquiry path already creates the GreenRope
+opportunity.
 
 Preferred order:
 
@@ -247,7 +253,7 @@ business-delivery owner.
 1. Export Form 4, active feeds, CEFA School Manager, and CEFA Conversion
    Tracking baselines.
 2. Receive GreenRope and KinderTales API answers.
-3. Confirm the current GreenRope opportunity-creation owner.
+3. Confirm the KinderTales-to-GreenRope opportunity-creation path.
 4. Create destination fields and mapping in non-production/test mode.
 5. Implement the server handoff and entry metadata behind a disabled flag.
 6. Run PHP/unit tests for envelope validation, sanitization, idempotency, and
