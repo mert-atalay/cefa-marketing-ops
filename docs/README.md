@@ -1,12 +1,13 @@
 # CEFA Marketing Measurement Docs
 
-Last updated: 2026-07-24
+Last updated: 2026-07-25
 
 This directory is the governed documentation layer for the CEFA marketing measurement repo. It supports parallel work by conversion tracking, BigQuery, SEO, naming convention, and paid-media agents without forcing every topic into one document.
 
 ## Start Here
 
 - [Measurement and activation program register](./00-governance/measurement-and-activation-program-register-2026-07-23.md): current live state, available Stape Business plan, approved non-free-tier-constrained Google Cloud scope, external dependencies, build sequence, and production gates.
+- [Google Cloud and Stape measurement platform blueprint](./superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md): definitive implementation architecture, business outcomes, service responsibilities, data contracts, sGTM rollout, activation stages, and definition of done.
 - [Governance](./00-governance/README.md): repo rules, source-of-truth order, agent responsibilities, contribution workflow.
 - [Repository map](./00-governance/repo-map.md): where each type of update belongs.
 - [Source-of-truth rules](./00-governance/source-of-truth-rules.md): how to resolve conflicts between live systems, repo docs, local CEFA sources, and external best practices.

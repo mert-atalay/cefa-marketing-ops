@@ -4,7 +4,15 @@
 
 **Goal:** Evolve CEFA BigQuery from reliable dashboard reporting into a governed marketing intelligence engine for school, franchise, local/AEO, creative, predictive, and approved activation use cases.
 
-**Architecture:** Supabase remains the operational CRM and parent/admissions system. BigQuery remains the marketing intelligence, measurement, semantic, predictive, and activation-prep warehouse. Existing dashboard contracts in `mart_cefa_growth_dashboard` stay stable while new sources enter as additive, QA-labeled contracts.
+**Architecture:** School Manager and KinderTales remain the operational Parent
+inquiry/admissions delivery system. GreenRope is the approved Parent lifecycle
+source for the current offline-conversion project. Synuma/SiteZeus remains the
+Franchise Canada and Franchise USA CRM/business-delivery system. Supabase is a
+future safe integration/serving bridge where approved, not the current
+operational source of truth. BigQuery remains the marketing intelligence,
+measurement, semantic, predictive, and activation-prep warehouse. Existing
+dashboard contracts in `mart_cefa_growth_dashboard` stay stable while new
+sources enter as additive, QA-labeled contracts.
 
 **Tech Stack:** BigQuery, BigQuery Data Transfer Service, Dataform, BigQuery
 ML, Gemini in BigQuery, Cloud Run and Cloud Run jobs, Cloud Functions where
@@ -34,6 +42,13 @@ roadmap outcome. Billing visibility remains informational; data quality,
 security, privacy, identity, platform eligibility, QA, and rollback controls
 remain mandatory. See the program register for the operational decision.
 
+**Definitive implementation blueprint, 2026-07-25:** The coordinated Google
+Cloud, BigQuery, Dataform, Stape sGTM, offline-activation, visibility, and
+targeting implementation is specified in
+[CEFA Google Cloud And Stape Measurement Platform Blueprint](./2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
+This document remains the locked strategic roadmap; the newer blueprint owns
+implementation architecture, sequencing, acceptance, and definition of done.
+
 ---
 
 ## Final Position
@@ -49,11 +64,17 @@ The right CEFA path is:
 - never copy raw parent/child PII into BigQuery semantic marts
 - never let predictive or activation outputs change campaigns, budgets, CRM records, review replies, or public content without approval
 
-The phrase "dual truth" should be used carefully. CEFA should not have two conflicting truths for the same metric. The split is:
+The phrase "dual truth" should be used carefully. CEFA should not have two
+conflicting truths for the same metric. The split is:
 
-- Supabase owns operational parent/admissions truth
-- BigQuery owns marketing measurement and intelligence truth
-- shared safe lifecycle facts connect the two systems
+- School Manager/KinderTales owns operational Parent inquiry and admissions
+  delivery truth;
+- GreenRope owns the approved Parent CRM lifecycle evidence used by the
+  offline-conversion project;
+- Synuma/SiteZeus owns Franchise operational CRM/business-delivery truth;
+- BigQuery owns marketing measurement and intelligence truth;
+- approved safe lifecycle facts connect these systems without making
+  Supabase, Stape, or BigQuery the operational CRM.
 
 ## What I Accept From The New Blueprint
 
@@ -96,7 +117,11 @@ The phrase "dual truth" should be used carefully. CEFA should not have two confl
   jobs, failed QA, quota pressure, abnormal usage, and unexpected volume.
 - [ ] Keep Hightouch, Supabase, Vercel, and AI readers restricted to approved contracts.
 
-Progress note, 2026-06-12: Day 0 governance/source dictionary implemented in `marketing-api-488017.cefa_governance` and documented in [Governance source dictionary, 2026-06-12](../../20-bigquery/governance-source-dictionary-2026-06-12.md). The remaining Phase 1 work is field standardization on source contracts, monitoring alerts, and consumer access enforcement.
+Progress note, 2026-06-12: Day 0 governance/source dictionary implemented in
+`marketing-api-488017.cefa_governance` and reflected in the
+[governance data taxonomy](../../00-governance/data-taxonomy.md). The remaining
+Phase 1 work is field standardization on source contracts, monitoring alerts,
+and consumer access enforcement.
 
 ## Phase 2 - Form 4 First-Party Event Foundation
 

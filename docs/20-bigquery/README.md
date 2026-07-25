@@ -25,6 +25,7 @@ This folder is for CEFA warehouse, reporting, and data-contract work connected t
 ## Current Files
 
 - [Measurement and activation program register, 2026-07-23](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
+- [Google Cloud and Stape measurement platform blueprint, 2026-07-25](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 - [Locked BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Warehouse current state, QA, freshness, and free-tier usage, 2026-05-03](./warehouse-current-state-2026-05-03.md)
 - [Dashboard source layer, GreenRope, and rule registry, 2026-05-03](./dashboard-source-layer-greenrope-and-rule-registry-2026-05-03.md)

@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-24
+**Register date:** 2026-07-25
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -59,6 +59,7 @@ or production gate changes.
 | BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; the work is not constrained to free tiers or blocked by a cost-approval gate | Productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
 | Dataform | `Active guarded` | Additive QA foundation exists; Cloud Run remains the production orchestrator | Parallel compile/assertion proof, then incremental promotion |
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
+| Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus six delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
 
 ## Immediate Waiting List
 
@@ -301,6 +302,7 @@ or private payloads in this register.
 
 ## Authoritative Detail
 
+- [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)
 - [Parent CRM offline-conversion implementation report](../10-conversion-tracking/parent-crm-offline-conversion-implementation-report.md)
