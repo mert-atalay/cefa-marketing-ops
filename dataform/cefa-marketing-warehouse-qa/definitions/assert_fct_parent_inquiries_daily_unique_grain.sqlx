@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "parent", "uniqueness"]
+}
+
+SELECT
+  inquiry_date,
+  location_code,
+  referral_source
+FROM `marketing-api-488017.mart_marketing.fct_parent_inquiries_daily`
+GROUP BY inquiry_date, location_code, referral_source
+HAVING COUNT(*) > 1

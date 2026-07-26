@@ -21,6 +21,9 @@ class BinderRunResult:
     field_contract_ready: bool
     write_enabled: bool
     inbox_rows: int
+    processed_rows: int
+    deferred_rows: int
+    processed_groups: int
     matched: int
     awaiting_fields: int
     confirmed: int
@@ -34,6 +37,9 @@ class BinderRunResult:
             "field_contract_ready": self.field_contract_ready,
             "write_enabled": self.write_enabled,
             "inbox_rows": self.inbox_rows,
+            "processed_rows": self.processed_rows,
+            "deferred_rows": self.deferred_rows,
+            "processed_groups": self.processed_groups,
             "matched": self.matched,
             "awaiting_fields": self.awaiting_fields,
             "confirmed": self.confirmed,
@@ -75,15 +81,27 @@ def run_identity_binder(
     hmac_secret: bytes,
     write_enabled: bool,
     limit: int = 500,
+    max_groups: int = 5,
 ) -> BinderRunResult:
+    if not 1 <= max_groups <= 100:
+        raise ValueError("max_groups must be between 1 and 100")
     rows = store.pending_identities(limit=limit)
+    allowed_groups: set[str] = set()
+    selected_rows: list[Mapping[str, Any]] = []
+    for row in rows:
+        group_id = str(row.get("greenrope_group_id") or "")
+        if group_id not in allowed_groups:
+            if len(allowed_groups) >= max_groups:
+                continue
+            allowed_groups.add(group_id)
+        selected_rows.append(row)
     field_readiness = evaluate_required_fields(
         field.normalized_label for field in client.opportunity_fields()
     )
     group_ids = sorted(
         {
             str(row.get("greenrope_group_id") or "")
-            for row in rows
+            for row in selected_rows
             if row.get("greenrope_group_id")
         }
     )
@@ -116,7 +134,7 @@ def run_identity_binder(
         "retryable_failures": 0,
     }
     now = datetime.now(timezone.utc)
-    for identity in rows:
+    for identity in selected_rows:
         group_id = str(identity.get("greenrope_group_id") or "")
         if group_id not in by_group:
             store.record_match_state(
@@ -232,6 +250,9 @@ def run_identity_binder(
         field_contract_ready=field_readiness.status == "ready",
         write_enabled=write_enabled,
         inbox_rows=len(rows),
+        processed_rows=len(selected_rows),
+        deferred_rows=len(rows) - len(selected_rows),
+        processed_groups=len(group_ids),
         matched=counts["matched"],
         awaiting_fields=counts["awaiting_fields"],
         confirmed=counts["confirmed"],

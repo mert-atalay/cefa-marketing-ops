@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["foundation_qa", "governance", "capacity"]
+}
+
+SELECT budget_key
+FROM `marketing-api-488017.cefa_governance.cloud_platform_budget_registry`
+GROUP BY budget_key
+HAVING COUNT(*) != 1

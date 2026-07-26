@@ -1,0 +1,14 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "meta", "reconciliation"]
+}
+
+SELECT *
+FROM `marketing-api-488017.mart_cefa_growth_dashboard.dashboard_paid_deep_detail_reconciliation_qa_latest`
+WHERE platform = "meta_ads"
+  AND (
+    reconciliation_status != "pass"
+    OR NOT spend_dashboard_safe
+    OR NOT conversion_dashboard_safe
+    OR NOT performance_dashboard_safe
+  )

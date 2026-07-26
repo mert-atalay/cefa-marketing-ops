@@ -1,0 +1,13 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "paid_media", "uniqueness"]
+}
+
+SELECT
+  report_date,
+  account_id,
+  campaign_name,
+  ad_group_name
+FROM `marketing-api-488017.mart_marketing.fct_paid_media_daily`
+GROUP BY report_date, account_id, campaign_name, ad_group_name
+HAVING COUNT(*) > 1

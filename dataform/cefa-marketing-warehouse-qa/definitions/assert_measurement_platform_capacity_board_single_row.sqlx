@@ -1,0 +1,10 @@
+config {
+  type: "assertion",
+  tags: ["foundation_qa", "capacity"]
+}
+
+SELECT
+  "unexpected_capacity_board_row_count" AS issue,
+  COUNT(*) AS row_count
+FROM `marketing-api-488017.cefa_ops.vw_measurement_platform_capacity_board`
+HAVING COUNT(*) != 1

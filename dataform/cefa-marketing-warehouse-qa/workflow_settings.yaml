@@ -1,0 +1,5 @@
+defaultProject: marketing-api-488017
+defaultDataset: mart_marketing
+defaultLocation: US
+defaultAssertionDataset: dataform_assertions
+dataformCoreVersion: 3.0.0

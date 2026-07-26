@@ -1,0 +1,11 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "school", "uniqueness"]
+}
+
+SELECT
+  activity_date,
+  canonical_location_id
+FROM `marketing-api-488017.mart_marketing.fct_location_marketing_daily`
+GROUP BY activity_date, canonical_location_id
+HAVING COUNT(*) > 1

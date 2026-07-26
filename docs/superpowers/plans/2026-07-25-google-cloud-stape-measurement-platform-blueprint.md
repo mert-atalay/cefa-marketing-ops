@@ -68,11 +68,12 @@ The read-only inventory on 2026-07-25 found:
 |---|---|
 | Google Cloud project | Existing production project `marketing-api-488017` |
 | BigQuery | 30 datasets listed, all in the `US` multi-region |
-| Warehouse scale | 1,069 tables/views across currently populated datasets, including 272 GA4 export tables |
-| Cloud Run | 11 jobs and 4 services visible |
-| Cloud Scheduler | 9 schedules in `us-central1`; 6 enabled and 3 paused |
+| Warehouse scale | 1,074 durable BigQuery objects: 715 base tables and 359 views; durable logical storage is `6.198 GiB` |
+| Cloud Run | 11 jobs and 3 services visible |
+| Cloud Scheduler | 9 schedules in `us-central1`; 5 enabled and 4 paused after the GreenRope identity binder containment |
 | Native transfers | Google Ads and Meta transfers plus three BigQuery scheduled-query backstops |
-| Dataform | API enabled, repository established, and 12 assertion views visible |
+| Dataform | API enabled; 15 assertion definitions are in Git; a non-production workspace compiles 15 actions with zero errors; both existing and foundation tagged proof runs succeeded; no release/workflow schedule exists |
+| Capacity board | Budget registry plus query, storage, and Stape planning-proxy views are live in `cefa_governance` and `cefa_ops` |
 | Current monitor | Overall `PASS`; school `pass`; franchise `partial`; lifecycle `pending`; predictive `promoted_partial`; zero issues and four warnings |
 | Parent event foundation | Form 4 identity and canonical attribution exist; website and KinderTales paths remain active |
 | Parent CRM activation | Restricted ledger, capture, binder, poller, dispatcher, diagnostics, Google actions, and Meta test events exist; production sending remains disabled |
@@ -86,11 +87,17 @@ The following current-state concerns shape this blueprint:
   scheduled queries, and an early Dataform QA layer;
 - the clean public GitHub branch does not contain all production warehouse
   runtime visible in the operational checkout;
+- the Dataform assertion foundation is now source-controlled and proven
+  manually, but Git remote, dedicated runtime identity, releases, workflow
+  schedules, and stable-transform parity are still pending;
 - source-specific datasets and compatibility marts have grown to more than
   1,000 objects without one enforced lifecycle and ownership system;
 - a shared runtime identity is used across several unrelated workloads;
 - multiple identity-bridge services exist across regions and require traffic
   and ownership review before consolidation;
+- the GreenRope identity binder entered a no-value retry storm while candidates
+  were unavailable; its schedule is paused, capture remains active, and
+  progressive backoff/group limits are source-complete pending image deployment;
 - Workflows, Cloud Tasks, and Cloud Functions are not currently enabled;
   Pub/Sub is enabled but was not inventory-readable by the current restricted
   audit identity;
@@ -100,6 +107,19 @@ The following current-state concerns shape this blueprint:
   cross-platform server-delivery baseline;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
+
+### Capacity checkpoint, 2026-07-25
+
+- July BigQuery analysis through July 25 was `1.5472 TiB` billed, an indicative
+  `$3.42 USD` after a fully available first `1 TiB` monthly allowance.
+- Durable logical storage was `6.198 GiB`.
+- Parent GA4 export rows used as a Stape planning proxy were `186,882` through
+  July 24, or `3.74%` of the Stape Business `5M` monthly allowance.
+- The approved Google Cloud line has substantial capacity headroom. Reliability,
+  source ownership, Dataform productionization, and Stape access are the
+  constraints, not current infrastructure spend.
+- The durable measurement source is
+  [Google Cloud and Stape capacity baseline](../../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md).
 
 ## 4. Non-Negotiable Boundaries
 
@@ -895,6 +915,15 @@ and destination permissions.
 - `quarantine_reason_daily`
 - `service_slo_daily`
 - `deployment_registry`
+- `cloud_platform_budget_registry`
+
+Current additive capacity surfaces:
+
+- `cefa_ops.vw_bigquery_usage_monthly`
+- `cefa_ops.vw_bigquery_storage_current`
+- `cefa_ops.vw_stape_parent_capacity_proxy_monthly`
+- `cefa_ops.vw_measurement_platform_capacity_board`
+- `cefa_ops.vw_parent_identity_binder_health`
 
 ### Required alerts
 

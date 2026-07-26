@@ -19,11 +19,11 @@ class Field:
 
 class FakeStore:
     def __init__(self, row: dict[str, object]) -> None:
-        self.row = row
+        self.rows = [row]
         self.states: list[dict[str, object]] = []
 
     def pending_identities(self, *, limit: int = 500) -> list[dict[str, object]]:
-        return [self.row]
+        return self.rows[:limit]
 
     def record_match_state(self, **kwargs: object) -> bool:
         self.states.append(dict(kwargs))
@@ -178,6 +178,27 @@ class IdentityBinderTests(unittest.TestCase):
             "greenrope_identity_conflict",
             store.states[0]["bridge_status"],
         )
+
+    def test_group_cap_defers_rows_without_attempting_them(self) -> None:
+        first = identity()
+        second = {**identity(), "form4_event_id": "cefa-parent-event-8018"}
+        second["greenrope_group_id"] = "59"
+        store = FakeStore(first)
+        store.rows.append(second)
+
+        result = run_identity_binder(
+            store=store,
+            client=FakeClient([], opportunity()),
+            hmac_secret=SECRET,
+            write_enabled=False,
+            max_groups=1,
+        )
+
+        self.assertEqual(2, result.inbox_rows)
+        self.assertEqual(1, result.processed_rows)
+        self.assertEqual(1, result.deferred_rows)
+        self.assertEqual(1, result.processed_groups)
+        self.assertEqual(1, len(store.states))
 
 
 if __name__ == "__main__":

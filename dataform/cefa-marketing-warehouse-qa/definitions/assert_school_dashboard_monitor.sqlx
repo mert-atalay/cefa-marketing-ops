@@ -1,0 +1,8 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "school", "dashboard"]
+}
+
+SELECT *
+FROM `marketing-api-488017.mart_cefa_growth_dashboard.dashboard_bq_monitor_latest`
+WHERE school_dashboard_status != "pass"

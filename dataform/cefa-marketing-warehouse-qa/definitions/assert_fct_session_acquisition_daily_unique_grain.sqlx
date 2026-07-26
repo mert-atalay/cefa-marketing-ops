@@ -1,0 +1,13 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "ga4", "uniqueness"]
+}
+
+SELECT
+  activity_date,
+  source,
+  medium,
+  campaign_name
+FROM `marketing-api-488017.mart_marketing.fct_session_acquisition_daily`
+GROUP BY activity_date, source, medium, campaign_name
+HAVING COUNT(*) > 1

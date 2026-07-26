@@ -57,6 +57,20 @@ class IdentityStoreTests(unittest.TestCase):
         )
         self.assertNotIn("bridge_status = IF(", client.query_text)
 
+    def test_pending_identity_query_uses_progressive_retry_backoff(self) -> None:
+        client = _Client()
+        store = ParentIdentityBigQueryStore(client)
+
+        store.pending_identities(limit=500)
+
+        self.assertIn("INTERVAL 15 MINUTE", client.query_text)
+        self.assertIn("INTERVAL 6 HOUR", client.query_text)
+        self.assertIn("INTERVAL 24 HOUR", client.query_text)
+        self.assertIn(
+            "IF(bridge_status = 'captured', 0, 1)",
+            client.query_text,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

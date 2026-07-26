@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "gsc", "reconciliation"]
+}
+
+SELECT *
+FROM `marketing-api-488017.mart_cefa_growth_dashboard.dashboard_parent_gsc_reconciliation_qa_latest`
+WHERE reconciliation_status != "pass"
+   OR NOT dashboard_safe
+   OR row_delta != 0
+   OR click_delta != 0
+   OR impression_delta != 0

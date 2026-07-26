@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "master_data"]
+}
+
+SELECT *
+FROM `marketing-api-488017.staging_marketing.dim_school_location`
+WHERE canonical_location_id IS NULL
+   OR TRIM(canonical_location_id) = ""

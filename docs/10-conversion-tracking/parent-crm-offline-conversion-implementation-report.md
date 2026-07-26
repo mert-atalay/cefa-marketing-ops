@@ -68,9 +68,11 @@ changed.
 | Form 4 capture schedule | `cefa-parent-form4-identity-capture-5m`; every five minutes; enabled |
 | Capture scheduler smoke test | Manual execution `cefa-parent-form4-identity-capture-swfwf` completed successfully; automatic execution created at `2026-07-23 21:05 UTC` |
 | Identity binder job | `cefa-parent-greenrope-identity-binder` |
-| Identity binder schedule | `cefa-parent-greenrope-identity-binder-15m`; minutes 2, 17, 32, and 47; enabled |
+| Identity binder schedule | `cefa-parent-greenrope-identity-binder-15m`; minutes 2, 17, 32, and 47; paused on 2026-07-25 after repeated no-value timeouts |
 | Identity binder write mode | `PARENT_GREENROPE_IDENTITY_WRITE_ENABLED=false` |
 | Binder scheduler smoke test | Scheduled execution `cefa-parent-greenrope-identity-binder-brpl2` completed successfully; two delayed candidates remained retryable; zero writes |
+| Binder containment | 208 captured identities; 201 retryable because no GreenRope candidate was available; zero opportunity matches/readbacks; some rows exceeded 200 attempts; recent runs repeatedly reached the 1,200-second timeout |
+| Binder hardening | Progressive retry cooldowns and a five-group-per-run cap pass focused tests; image deployment awaits renewed human Google Cloud authentication; schedule remains paused |
 | Poller job | `cefa-parent-crm-lifecycle-refresh` |
 | Poller schedule | `cefa-parent-crm-lifecycle-refresh-15m`; provisioned and paused until identity read-back |
 | Dispatcher job | `cefa-parent-offline-conversion-dispatch` |
@@ -100,7 +102,7 @@ changed.
 | Prospective live capture | Six Form 4 identities captured as of `2026-07-23 21:32 UTC`; zero raw PII stored | Active |
 | Delayed CRM creation | A Form 4 entry without a GreenRope candidate remains `retryable_failure`, not permanently quarantined | Implemented |
 | Capture overlap safety | Re-reading the one-hour Form 4 overlap preserves binder status and reason instead of resetting rows to `captured` | Implemented and regression-tested |
-| Identity binder | Deterministic same-school, same-email-HMAC, 24-hour matcher with unique-best safeguards | Enabled read-only; GreenRope writes disabled |
+| Identity binder | Deterministic same-school, same-email-HMAC, 24-hour matcher with unique-best safeguards | Read-only schedule paused after retry containment; GreenRope writes remain disabled |
 | Historical matcher audit | 490 of 500 recent Form 4 entries resolved deterministically; 10 remained safely unmatched | 98% resolution; audit only |
 | Form handoff | Feed `4` is `CEFA Dashboard Parent Inquiry Handoff` to `cefa-brain.vercel.app` | Existing |
 | KinderTales | School Manager independently performs KinderTales business delivery | Existing and out of activation path |

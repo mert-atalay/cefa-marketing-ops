@@ -1,0 +1,11 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "franchise", "uniqueness"]
+}
+
+SELECT
+  snapshot_date,
+  stage_name
+FROM `marketing-api-488017.mart_marketing.fct_franchise_pipeline_daily`
+GROUP BY snapshot_date, stage_name
+HAVING COUNT(*) > 1

@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["existing_qa", "capacity"]
+}
+
+SELECT *
+FROM `marketing-api-488017.cefa_ops.vw_measurement_platform_capacity_board`
+WHERE bigquery_tib_billed_mtd >= 40
+   OR durable_logical_gib >= 500

@@ -1,0 +1,8 @@
+config {
+  type: "assertion",
+  tags: ["foundation_qa", "stape", "capacity"]
+}
+
+SELECT *
+FROM `marketing-api-488017.cefa_ops.vw_stape_parent_capacity_proxy_monthly`
+WHERE proxy_allowance_utilization_pct >= 80

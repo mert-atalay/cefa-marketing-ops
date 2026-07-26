@@ -135,13 +135,46 @@ class ParentIdentityBigQueryStore:
           quarantine_reason, attempt_count, created_at, updated_at
         FROM `{IDENTITY_INBOX_TABLE}`
         WHERE greenrope_readback_confirmed = FALSE
-          AND bridge_status IN (
-            'captured',
-            'matched',
-            'awaiting_greenrope_fields',
-            'retryable_failure'
+          AND (
+            bridge_status = 'captured'
+            OR (
+              bridge_status = 'retryable_failure'
+              AND (
+                last_attempt_at IS NULL
+                OR (
+                  attempt_count < 4
+                  AND last_attempt_at <= TIMESTAMP_SUB(
+                    CURRENT_TIMESTAMP(), INTERVAL 15 MINUTE
+                  )
+                )
+                OR (
+                  attempt_count BETWEEN 4 AND 11
+                  AND last_attempt_at <= TIMESTAMP_SUB(
+                    CURRENT_TIMESTAMP(), INTERVAL 6 HOUR
+                  )
+                )
+                OR (
+                  attempt_count >= 12
+                  AND last_attempt_at <= TIMESTAMP_SUB(
+                    CURRENT_TIMESTAMP(), INTERVAL 24 HOUR
+                  )
+                )
+              )
+            )
+            OR (
+              bridge_status IN ('matched', 'awaiting_greenrope_fields')
+              AND (
+                last_attempt_at IS NULL
+                OR last_attempt_at <= TIMESTAMP_SUB(
+                  CURRENT_TIMESTAMP(), INTERVAL 24 HOUR
+                )
+              )
+            )
           )
-        ORDER BY submitted_at ASC
+        ORDER BY
+          IF(bridge_status = 'captured', 0, 1),
+          COALESCE(last_attempt_at, submitted_at) ASC,
+          submitted_at ASC
         LIMIT @limit
         """
         job_config = bigquery.QueryJobConfig(

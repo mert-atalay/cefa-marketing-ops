@@ -47,6 +47,9 @@ def main() -> None:
             == "true"
         ),
         limit=int(os.environ.get("PARENT_IDENTITY_BINDER_LIMIT") or "500"),
+        max_groups=int(
+            os.environ.get("PARENT_IDENTITY_BINDER_MAX_GROUPS") or "5"
+        ),
     )
     print(json.dumps(result.to_dict(), sort_keys=True))
 

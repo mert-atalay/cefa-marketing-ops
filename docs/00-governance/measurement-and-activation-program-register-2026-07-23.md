@@ -53,11 +53,11 @@ or production gate changes.
 | Parent website attribution | `Verified` | CEFA Conversion Tracking `0.6.3` and the canonical Form `4` writeback improve fields `35-46`; School Manager and KinderTales remain unchanged | Continue production monitoring |
 | Parent website conversions | `Verified` | `school_inquiry_submit` continues to feed the existing GA4, Google Ads, and Meta inquiry destinations | Preserve once-only firing during sGTM work |
 | Franchise attribution replacement | `Active guarded` | CEFA attribution and ledger run in shadow beside GAConnector on Canada Forms `1/2` and USA Forms `1/2`; no legacy field or Synuma payload cutover | Complete evidence window, resolve delivery alerts, approve field mapping and rollback |
-| Parent CRM offline conversions | `Active guarded` | Restricted BigQuery, capture, binder, poller, dispatcher, diagnostics, three Google actions, and three Meta test events are built; production sending is disabled | GreenRope fields, controlled identity test, eligibility decision, production activation |
+| Parent CRM offline conversions | `Active guarded` | Restricted BigQuery, capture, binder, poller, dispatcher, diagnostics, three Google actions, and three Meta test events are built; production sending is disabled; the capture schedule remains active while the no-value GreenRope binder retry loop is paused | Deploy binder backoff/group cap, then wait for GreenRope fields, controlled identity test, eligibility decision, and production activation |
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
-| BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; the work is not constrained to free tiers or blocked by a cost-approval gate | Productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
-| Dataform | `Active guarded` | Additive QA foundation exists; Cloud Run remains the production orchestrator | Parallel compile/assertion proof, then incremental promotion |
+| BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; quoted budgets and live capacity views are registered, and current volume is comfortably inside the approved envelope | Connect Cloud Billing export, productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
+| Dataform | `Active guarded` | Git now contains 15 assertion definitions; non-production workspace compilation produced 15 actions with zero errors, and both `foundation_qa` and `existing_qa` tagged proof runs succeeded; Cloud Run remains the production orchestrator | Connect CEFA-controlled Git, define runtime identity and dev/staging/prod releases, then run parallel parity before promotion |
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
@@ -114,6 +114,19 @@ when they serve an approved tracking requirement and pass QA.
 - This approval does not permit an unrelated second warehouse, uncontrolled
   duplication, raw-PII expansion, autonomous campaign changes, or bypassing
   QA, security, privacy, destination, and rollback gates.
+
+### Measured capacity, 2026-07-25
+
+- Durable BigQuery storage: `6.198 GiB`.
+- July BigQuery analysis through July 25: `1.5472 TiB` billed and an indicative
+  `$3.42 USD` after a fully available first `1 TiB` monthly allowance.
+- Parent GA4 event-row proxy through July 24: `186,882`, or `3.74%` of the
+  Stape Business `5M` monthly request allowance.
+- The approved platform envelope is sufficient with substantial headroom.
+  Current delivery risk is operational ownership and integration readiness,
+  not raw infrastructure capacity.
+- Capacity source of truth:
+  [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md).
 
 ## Target Architecture
 
@@ -295,8 +308,8 @@ All approved source facts
 | 5 | Stape Business access verification and architecture inventory | `Approved` | CEFA ownership, access, domains, routing map, baseline export |
 | 6 | Stape shadow implementation | `Pending` | Browser/server parity and no destination cross-talk |
 | 7 | Stape conversion promotion by property | `Pending` | Once-only conversions, deduplication and CRM continuity pass |
-| 8 | Dataform productionization | `Active guarded` | Stable transforms and assertions proven in parallel |
-| 9 | Cloud monitoring, queue and runbook hardening | `Pending` | Alerts, retries, dead letters, capacity visibility and rollback pass |
+| 8 | Dataform productionization | `Active guarded` | Fifteen assertions compile and pass manually; Git connection, runtime identity, release/workflow configs and transform parity remain |
+| 9 | Cloud monitoring, queue and runbook hardening | `Active guarded` | Capacity board is live; alerts, retries, dead letters, Cloud Billing export and rollback still must pass |
 | 10 | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | 11 | Parent multi-entity identity model | `Approved` | Multi-child, repeat-inquiry, multi-school and opportunity relationships pass deterministic-link and counting assertions |
 | 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
@@ -322,6 +335,8 @@ or private payloads in this register.
 ## Authoritative Detail
 
 - [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+- [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
+- [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)
 - [Parent CRM offline-conversion implementation report](../10-conversion-tracking/parent-crm-offline-conversion-implementation-report.md)
