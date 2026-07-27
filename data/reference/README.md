@@ -11,6 +11,18 @@ This folder is for small, reviewable, machine-readable reference data used by th
 
 ## Current Files
 
+- [marketing-operations-context.json](./marketing-operations-context.json)
+  - Status: `Active governed`
+  - Scope: machine-readable routing for the CEFA Marketing Operations Hub,
+    including canonical documents, business domains, system IDs, integration
+    IDs, open-gap IDs and what-if scenario IDs.
+  - Use: load this first when an agent or tool needs structured context, then
+    open the linked Markdown contract for human detail.
+  - Guardrail: this is a routing manifest, not live-system evidence and not
+    production-write authority.
+  - Validation: run
+    `node tools/validate-marketing-operations-context.js`; CI runs the same
+    contract.
 - [cefa-meta-active-object-inventory-2026-04-05-to-2026-05-04.csv](./cefa-meta-active-object-inventory-2026-04-05-to-2026-05-04.csv)
   - Status: `Verified` for live Meta object IDs, current names, delivery window, spend, impressions, and clicks read through the repo-local CEFA Meta CLI.
   - Status: `Partial` for proposed NC2 names and keys because some ad-level values are inferred from incomplete visible names.

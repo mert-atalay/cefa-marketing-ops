@@ -62,8 +62,12 @@ This hub has three responsibilities:
 - Non-secret schemas, reference contracts, tests and QA packages that make the
   measurement platform reproducible.
 
-Start with the [measurement platform handover](docs/00-governance/measurement-platform-handover-2026-07-27.md),
-then the [measurement and activation program register](docs/00-governance/measurement-and-activation-program-register-2026-07-23.md).
+Start with the
+[marketing operations context layer](docs/00-governance/marketing-operations-context-layer.md),
+then the
+[measurement platform handover](docs/00-governance/measurement-platform-handover-2026-07-27.md)
+and
+[measurement and activation program register](docs/00-governance/measurement-and-activation-program-register-2026-07-23.md).
 Use [docs/README.md](docs/README.md) and
 [docs/00-governance/README.md](docs/00-governance/README.md) for routing.
 New work should go to the narrowest correct folder:
@@ -74,6 +78,9 @@ New work should go to the narrowest correct folder:
 - [Naming convention](docs/40-naming-convention/README.md): Meta naming, creative filenames, UTM conventions, and n8n naming guardrails.
 - [Paid media](docs/50-paid-media/README.md): ad account setup, launch QA, optimization notes, and platform conversion action status.
 - [Master data](docs/60-master-data/README.md): schools, programs, locations, CRM/system crosswalks, and canonical reference tables.
+- [Growth operations](docs/70-growth-operations/README.md): system
+  integrations, dependencies, gaps, risks, what-if responses and cross-channel
+  handoffs.
 - [Machine-readable reference data](data/reference/README.md): CSV/JSON/YAML reference files that support the docs.
 
 Keep runtime plugin changes and documentation-only changes separate when practical. Do not mix live platform decisions, SEO notes, naming rules, or school ID crosswalks into plugin code comments.

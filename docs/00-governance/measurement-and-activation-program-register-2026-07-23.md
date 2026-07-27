@@ -62,6 +62,7 @@ or production gate changes.
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
 | Public/private source control | `Blocked operational risk` | This GitHub repository is public while material private warehouse/runtime work remains local or deployed from historical artifacts | Create CEFA-controlled private runtime repository and migrate reproducible non-secret runtime without exposing credentials or PII |
+| Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `35` systems, `36` integration IDs, `26` open-gap IDs and `26` what-if scenarios | Keep all four surfaces synchronized with narrow implementation evidence |
 
 ## Immediate Waiting List
 
@@ -317,6 +318,7 @@ All approved source facts
 | 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
 | 13 | WordPress/KinderTales/GreenRope handoff hardening | `Code deployed disabled; vendor inputs pending` | School Manager 1.0.22 no-send QA passed; activate only after metadata acceptance and GreenRope mapping are confirmed |
 | 14 | CEFA private runtime source consolidation | `Blocked operational risk` | Private repository contains reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source with no secrets committed |
+| 15 | Marketing operations context maintenance | `Verified` | Every material source, integration, gap or failure-response change is reflected in the context layer and machine-readable manifest |
 
 ## Change Control
 
@@ -328,6 +330,7 @@ Update this register when:
 - a Stape domain, container, power-up, or production route changes;
 - a Cloud Run, Dataform, Scheduler, Pub/Sub, Cloud Tasks, Secret Manager, or
   BigQuery production contract changes;
+- a system integration, known gap, risk severity or what-if response changes;
 - a parent, franchise, KinderTales, GreenRope, Mailchimp, GAConnector, or
   Synuma ownership boundary changes;
 - a commercial term or delivery scope is confirmed.

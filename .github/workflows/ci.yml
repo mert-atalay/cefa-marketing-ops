@@ -67,3 +67,6 @@ jobs:
 
       - name: Parent attribution browser contracts
         run: node tests/js/parent-attribution-test.js
+
+      - name: Marketing operations context contract
+        run: node tools/validate-marketing-operations-context.js

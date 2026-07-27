@@ -4,7 +4,10 @@ Last updated: 2026-07-27
 
 ## Purpose
 
-This repo is the shared GitHub home for CEFA marketing measurement implementation and documentation. It should let multiple agents work in parallel without overwriting each other or mixing unrelated workstreams.
+This repo is the shared public GitHub context layer for CEFA marketing
+operations implementation and documentation. It should let multiple agents
+work in parallel without overwriting each other or mixing unrelated
+workstreams.
 
 ## Top-Level Areas
 
@@ -24,6 +27,7 @@ This repo is the shared GitHub home for CEFA marketing measurement implementatio
 | `docs/40-naming-convention/` | Meta naming convention, creative taxonomy, UTM naming | Naming convention agent |
 | `docs/50-paid-media/` | Paid-media execution, Ads/Meta action status, launch QA | Paid-media agent |
 | `docs/60-master-data/` | Schools, programs, CRM/system crosswalks, canonical tables | Shared master-data owner |
+| `docs/70-growth-operations/` | Cross-system integrations, dependencies, risks, scenarios and operating handoffs | Marketing operations owner |
 | `docs/_templates/` | Reusable templates for future docs | All agents |
 | `data/reference/` | Machine-readable reference data | Shared, with owner noted per file |
 | `dist/` | Local release ZIPs/build output | Release task only |
@@ -56,6 +60,7 @@ New documents should go into the numbered workstream folders. Existing documents
 | Meta naming, creative file naming, NC1, UTM naming | `docs/40-naming-convention/` |
 | Ads account structure, optimization, platform launch QA | `docs/50-paid-media/` |
 | School/program/location CRM crosswalks | `docs/60-master-data/` |
+| Cross-system integration, dependency, incident or what-if response | `docs/70-growth-operations/` |
 
 ## Do Not Mix
 

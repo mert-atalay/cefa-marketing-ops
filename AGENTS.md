@@ -25,11 +25,20 @@ Keep those responsibilities separate.
 - `docs/40-naming-convention/`: CEFA Meta naming convention, creative filenames, UTM conventions, n8n naming guardrails.
 - `docs/50-paid-media/`: ad account structure, launch QA, optimization notes, platform conversion action status, budget-safety references.
 - `docs/60-master-data/`: schools, programs, locations, CRM/system crosswalks, canonical reference tables.
+- `docs/70-growth-operations/`: cross-system integrations, dependencies,
+  gaps, risks, scenarios, RACI and operating cadence.
 - `docs/00-governance/`: source-of-truth rules, agent responsibilities, repo map, and contribution workflow.
 
 ## Agent Rules
 
-- Start at `docs/00-governance/measurement-platform-handover-2026-07-27.md`.
+- Start at
+  `docs/00-governance/marketing-operations-context-layer.md`.
+- Read
+  `docs/70-growth-operations/system-and-integration-register.md` and
+  `docs/70-growth-operations/gap-risk-and-scenario-register.md` when a task
+  crosses systems or workstreams.
+- Continue to
+  `docs/00-governance/measurement-platform-handover-2026-07-27.md`.
 - Use `docs/00-governance/measurement-and-activation-program-register-2026-07-23.md`
   for current status, blockers, and sequencing.
 - Use `docs/superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md`
@@ -42,7 +51,8 @@ Keep those responsibilities separate.
 - Keep parent `cefa.ca`, franchise Canada `franchise.cefa.ca`, and franchise USA `www.franchisecefa.com` separate unless the document is explicitly cross-property.
 - Parent `cefa.ca` Form `4` is delivered to KinderTales by CEFA School Manager and uses attribution fields `35-46`. Synuma/SiteZeus is franchise-only; never describe it as the parent CRM path.
 - For conversion tracking, `school_uuid` is the parent school join key unless a future verified source changes that.
-- Do not promote assumptions into verified sections. Use `Verified`, `Partial`, `Pending`, or `Open question`.
+- Do not promote assumptions into verified sections. Use the status vocabulary
+  in `docs/00-governance/source-of-truth-rules.md`.
 - If a file is mainly a source index or handoff for another agent, say that directly in the file.
 - This repository is public. Never commit credentials, raw CRM/form/platform
   payloads, PII, browser sessions, private exports, or CEFA-only production

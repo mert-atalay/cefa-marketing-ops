@@ -1,0 +1,588 @@
+{
+  "schema_version": "1.0.0",
+  "as_of": "2026-07-27",
+  "path_base": "repository_root",
+  "repository": {
+    "name": "mert-atalay/cefa-marketing-ops",
+    "visibility": "public",
+    "default_branch": "main",
+    "private_runtime_repository_status": "blocked"
+  },
+  "canonical_docs": {
+    "context_layer": "docs/00-governance/marketing-operations-context-layer.md",
+    "handover": "docs/00-governance/measurement-platform-handover-2026-07-27.md",
+    "program_register": "docs/00-governance/measurement-and-activation-program-register-2026-07-23.md",
+    "source_rules": "docs/00-governance/source-of-truth-rules.md",
+    "data_taxonomy": "docs/00-governance/data-taxonomy.md",
+    "integration_register": "docs/70-growth-operations/system-and-integration-register.md",
+    "gap_scenario_register": "docs/70-growth-operations/gap-risk-and-scenario-register.md"
+  },
+  "status_vocabulary": [
+    "Verified",
+    "Active guarded",
+    "Approved",
+    "Partial",
+    "Pending",
+    "Blocked",
+    "Open question",
+    "Reference only"
+  ],
+  "business_domains": [
+    {
+      "id": "parent_enrollment",
+      "business_truth": "Gravity Forms Form 4 plus KinderTales delivery evidence",
+      "canonical_school_key": "school_uuid"
+    },
+    {
+      "id": "parent_lifecycle",
+      "business_truth": "Prospective GreenRope transition after exact Form 4 identity",
+      "final_enrollment_truth": "KinderTales or approved operational enrollment source"
+    },
+    {
+      "id": "franchise_canada",
+      "business_truth": "Gravity Forms Form 1 or 2 plus Synuma/SiteZeus delivery"
+    },
+    {
+      "id": "franchise_usa",
+      "business_truth": "USA Gravity Forms Form 1 or 2 plus Synuma/SiteZeus delivery"
+    },
+    {
+      "id": "paid_media",
+      "business_truth": "Platform object IDs and live delivery, reconciled to business outcomes"
+    },
+    {
+      "id": "organic_local",
+      "business_truth": "Search Console, website, GBP/Yelp and canonical page/school mappings"
+    },
+    {
+      "id": "marketing_intelligence",
+      "business_truth": "Certified BigQuery serving contracts with source and freshness labels"
+    }
+  ],
+  "systems": [
+    {
+      "id": "SYS-WP-PARENT",
+      "name": "Parent WordPress",
+      "role": "Parent acquisition site and Form 4 runtime",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-WP-FCA",
+      "name": "Franchise Canada WordPress",
+      "role": "Canada franchise forms and website events",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-WP-FUS",
+      "name": "Franchise USA WordPress",
+      "role": "USA franchise forms and website events",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-GF",
+      "name": "Gravity Forms",
+      "role": "Saved form evidence",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-SM",
+      "name": "CEFA School Manager",
+      "role": "Parent school/program/day behavior and KinderTales delivery",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-KT",
+      "name": "KinderTales",
+      "role": "Parent business destination and operational lifecycle",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-GR",
+      "name": "GreenRope",
+      "role": "Parent CRM lifecycle and email context",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-SY",
+      "name": "Synuma/SiteZeus",
+      "role": "Franchise business delivery",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-CT",
+      "name": "CEFA Conversion Tracking",
+      "role": "Event identity, neutral events and attribution",
+      "status": "Active guarded"
+    },
+    {
+      "id": "SYS-GAC",
+      "name": "GAConnector",
+      "role": "Current franchise attribution owner",
+      "status": "Active guarded"
+    },
+    {
+      "id": "SYS-GTM",
+      "name": "Web GTM",
+      "role": "Property-specific browser destination routing",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-STAPE",
+      "name": "Stape Business",
+      "role": "Planned server-side GTM transport",
+      "status": "Approved"
+    },
+    {
+      "id": "SYS-GA4",
+      "name": "GA4",
+      "role": "Web behavior and event analytics",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-GADS",
+      "name": "Google Ads",
+      "role": "Paid delivery and optimization",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-META",
+      "name": "Meta",
+      "role": "Paid delivery and optimization",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-BQ",
+      "name": "BigQuery",
+      "role": "Reconciliation, marts, serving and activation ledger",
+      "status": "Active guarded"
+    },
+    {
+      "id": "SYS-DF",
+      "name": "Dataform",
+      "role": "SQL dependency graph and assertions",
+      "status": "Active guarded"
+    },
+    {
+      "id": "SYS-CRUN",
+      "name": "Google Cloud runtime",
+      "role": "Extraction, webhooks, polling and dispatch",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-SMTR",
+      "name": "Supermetrics",
+      "role": "Supporting reporting extracts",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-LOOKER",
+      "name": "Looker Studio",
+      "role": "Reader-facing dashboards",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-GSC",
+      "name": "Google Search Console",
+      "role": "Organic search performance",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-DFS",
+      "name": "DataForSEO",
+      "role": "Keyword and SERP research",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-GBP",
+      "name": "Google Business Profile",
+      "role": "Local listing visibility and traffic",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-YELP",
+      "name": "Yelp",
+      "role": "Local listing visibility and traffic",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-MC",
+      "name": "Mailchimp",
+      "role": "Email audience and journey activity",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-ZOHO",
+      "name": "Gravity Forms Zoho CRM surface",
+      "role": "Possible parent CRM feed",
+      "status": "Open question"
+    },
+    {
+      "id": "SYS-BUDGET",
+      "name": "OneDrive/SharePoint budget workbook",
+      "role": "Approved budget plan",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-V21",
+      "name": "Paid-media v21 Google Sheet",
+      "role": "Naming, copy, creative and build planning",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-N8N",
+      "name": "n8n",
+      "role": "Future validation, export and audit automation",
+      "status": "Pending"
+    },
+    {
+      "id": "SYS-ASSET",
+      "name": "SharePoint/Drive creative sources",
+      "role": "Creative files, versions, approvals and usage rights",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-PARTNER",
+      "name": "Partner and merchant placements",
+      "role": "Offer and referral traffic",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-SOCIAL",
+      "name": "Organic social publishing and analytics",
+      "role": "Organic social content and referral traffic",
+      "status": "Open question"
+    },
+    {
+      "id": "SYS-CALENDAR",
+      "name": "Campaign brief, calendar and postmortem register",
+      "role": "Cross-channel plan, ownership, hypothesis and learning history",
+      "status": "Pending"
+    },
+    {
+      "id": "SYS-GITHUB-PUB",
+      "name": "cefa-marketing-ops",
+      "role": "Public context, plugin and safe QA source",
+      "status": "Verified"
+    },
+    {
+      "id": "SYS-GITHUB-PRIV",
+      "name": "Planned CEFA private runtime repository",
+      "role": "Deployable Cloud, Stape and Dataform source",
+      "status": "Blocked"
+    }
+  ],
+  "integration_groups": {
+    "parent": [
+      "INT-P-001",
+      "INT-P-002",
+      "INT-P-003",
+      "INT-P-004",
+      "INT-P-005",
+      "INT-P-006",
+      "INT-P-007",
+      "INT-P-008",
+      "INT-P-009",
+      "INT-P-010",
+      "INT-P-011",
+      "INT-P-012"
+    ],
+    "franchise": [
+      "INT-F-001",
+      "INT-F-002",
+      "INT-F-003",
+      "INT-F-004",
+      "INT-F-005",
+      "INT-F-006"
+    ],
+    "data_reporting_activation": [
+      "INT-D-001",
+      "INT-D-002",
+      "INT-D-003",
+      "INT-D-004",
+      "INT-D-005",
+      "INT-D-006",
+      "INT-D-007"
+    ],
+    "seo_local_campaign_ops": [
+      "INT-S-001",
+      "INT-S-002",
+      "INT-S-003",
+      "INT-O-001",
+      "INT-O-002",
+      "INT-O-003",
+      "INT-O-004",
+      "INT-O-005",
+      "INT-O-006",
+      "INT-O-007",
+      "INT-O-008"
+    ]
+  },
+  "open_gaps": [
+    {
+      "id": "GAP-001",
+      "severity": "High",
+      "status": "Blocked",
+      "summary": "CEFA private runtime repository does not exist"
+    },
+    {
+      "id": "GAP-002",
+      "severity": "High",
+      "status": "Blocked",
+      "status_detail": "external_dependency",
+      "summary": "GreenRope exact Form 4 identity fields are not confirmed"
+    },
+    {
+      "id": "GAP-003",
+      "severity": "High",
+      "status": "Open question",
+      "summary": "KinderTales-to-GreenRope opportunity path is not confirmed"
+    },
+    {
+      "id": "GAP-004",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Stape production containers and shadow routing are not built"
+    },
+    {
+      "id": "GAP-005",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Dataform production Git and release configuration are incomplete"
+    },
+    {
+      "id": "GAP-006",
+      "severity": "High",
+      "status": "Active guarded",
+      "summary": "Franchise GAConnector replacement remains below cutover gate"
+    },
+    {
+      "id": "GAP-007",
+      "severity": "High",
+      "status": "Partial",
+      "status_detail": "active_alert",
+      "summary": "Recent USA Form 1 entries lack Synuma lead IDs"
+    },
+    {
+      "id": "GAP-008",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Parent Mailchimp Form 4 feed needs purpose and mapping review"
+    },
+    {
+      "id": "GAP-009",
+      "severity": "Medium",
+      "status": "Open question",
+      "summary": "Parent Zoho and webhook feed ownership is unknown"
+    },
+    {
+      "id": "GAP-010",
+      "severity": "High",
+      "status": "Partial",
+      "summary": "School, program, CRM and listing crosswalks are incomplete"
+    },
+    {
+      "id": "GAP-011",
+      "severity": "High",
+      "status": "Partial",
+      "summary": "Paid reporting connector freshness is stale"
+    },
+    {
+      "id": "GAP-012",
+      "severity": "Medium",
+      "status": "Partial",
+      "summary": "Search Console and DataForSEO evidence need refresh"
+    },
+    {
+      "id": "GAP-013",
+      "severity": "Medium",
+      "status": "Pending",
+      "status_detail": "approval_required",
+      "summary": "NC2 and GADS1 are not promoted and inventories are dated"
+    },
+    {
+      "id": "GAP-014",
+      "severity": "Low",
+      "status": "Pending",
+      "summary": "n8n validation and export workflow is not operational"
+    },
+    {
+      "id": "GAP-015",
+      "severity": "Medium",
+      "status": "Pending",
+      "status_detail": "later_phase",
+      "summary": "Source-confirmed household and dependent identity is unavailable"
+    },
+    {
+      "id": "GAP-016",
+      "severity": "High",
+      "status": "Partial",
+      "summary": "Cloud monitoring, dead-letter handling and runbooks are incomplete"
+    },
+    {
+      "id": "GAP-017",
+      "severity": "Medium",
+      "status": "Pending",
+      "summary": "Growth operations RACI and recurring operating calendar are incomplete"
+    },
+    {
+      "id": "GAP-018",
+      "severity": "Medium",
+      "status": "Partial",
+      "summary": "Dashboard grain, source and freshness labels are inconsistent"
+    },
+    {
+      "id": "GAP-019",
+      "severity": "Medium",
+      "status": "Partial",
+      "summary": "Creative asset ownership, version, approval and rights evidence is not centralized"
+    },
+    {
+      "id": "GAP-020",
+      "severity": "Medium",
+      "status": "Pending",
+      "summary": "Partner, merchant-page and offer inventory is not centralized"
+    },
+    {
+      "id": "GAP-021",
+      "severity": "Medium",
+      "status": "Open question",
+      "summary": "Organic social content calendar and attribution contract are not documented"
+    },
+    {
+      "id": "GAP-022",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Agency and vendor access ownership, offboarding and escalation SLAs are incomplete"
+    },
+    {
+      "id": "GAP-023",
+      "severity": "Medium",
+      "status": "Pending",
+      "summary": "Campaign experiment and postmortem history is not centrally governed"
+    },
+    {
+      "id": "GAP-024",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Budget-plan-to-platform reconciliation lacks one approved cadence"
+    },
+    {
+      "id": "GAP-025",
+      "severity": "Medium",
+      "status": "Partial",
+      "summary": "The complete marketing KPI glossary and target ownership are incomplete"
+    },
+    {
+      "id": "GAP-026",
+      "severity": "Medium",
+      "status": "Pending",
+      "summary": "Brand and content approval rules outside paid-ad copy are not centralized"
+    }
+  ],
+  "scenario_routes": [
+    {
+      "id": "SCN-001",
+      "trigger": "Platform conversions exceed saved inquiries"
+    },
+    {
+      "id": "SCN-002",
+      "trigger": "Saved inquiries exist but platforms report no conversions"
+    },
+    {
+      "id": "SCN-003",
+      "trigger": "UTMs are missing"
+    },
+    {
+      "id": "SCN-004",
+      "trigger": "Safari, ad blocking or browser loss is suspected"
+    },
+    {
+      "id": "SCN-005",
+      "trigger": "Promoted school differs from selected school"
+    },
+    {
+      "id": "SCN-006",
+      "trigger": "Campaign targets the wrong region, age or URL"
+    },
+    {
+      "id": "SCN-007",
+      "trigger": "Franchise lead has no Synuma ID"
+    },
+    {
+      "id": "SCN-008",
+      "trigger": "CRM rejects an inactive sales owner"
+    },
+    {
+      "id": "SCN-009",
+      "trigger": "GAConnector and CEFA attribution disagree"
+    },
+    {
+      "id": "SCN-010",
+      "trigger": "Stape browser and server copies duplicate conversions"
+    },
+    {
+      "id": "SCN-011",
+      "trigger": "Offline CRM conversions duplicate or map the wrong stage"
+    },
+    {
+      "id": "SCN-012",
+      "trigger": "A data source or dashboard is stale"
+    },
+    {
+      "id": "SCN-013",
+      "trigger": "Two systems disagree"
+    },
+    {
+      "id": "SCN-014",
+      "trigger": "Multiple children, schools or opportunities share a parent"
+    },
+    {
+      "id": "SCN-015",
+      "trigger": "Agency-test conversion does not appear"
+    },
+    {
+      "id": "SCN-016",
+      "trigger": "Visible ad copy violates the CEFA Early Years rule"
+    },
+    {
+      "id": "SCN-017",
+      "trigger": "PII or a credential appears in the public repository"
+    },
+    {
+      "id": "SCN-018",
+      "trigger": "Private runtime source is unavailable"
+    },
+    {
+      "id": "SCN-019",
+      "trigger": "Partner URL or offer is wrong, expired or untagged"
+    },
+    {
+      "id": "SCN-020",
+      "trigger": "Creative asset version or approval is unclear"
+    },
+    {
+      "id": "SCN-021",
+      "trigger": "Agency or vendor access changes"
+    },
+    {
+      "id": "SCN-022",
+      "trigger": "Budget workbook and platform budget disagree"
+    },
+    {
+      "id": "SCN-023",
+      "trigger": "Mailchimp and GreenRope journeys overlap"
+    },
+    {
+      "id": "SCN-024",
+      "trigger": "Organic social or partner traffic cannot be attributed"
+    },
+    {
+      "id": "SCN-025",
+      "trigger": "KPI definitions conflict"
+    },
+    {
+      "id": "SCN-026",
+      "trigger": "Campaign experiment audiences or signals contaminate each other"
+    }
+  ]
+}

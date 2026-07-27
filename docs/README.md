@@ -1,4 +1,4 @@
-# CEFA Marketing Measurement Docs
+# CEFA Marketing Operations Docs
 
 Last updated: 2026-07-27
 
@@ -10,9 +10,12 @@ one document.
 
 ## Start Here
 
+- [Marketing operations context layer](./00-governance/marketing-operations-context-layer.md):
+  first read for business domains, systems, authority, identity, activation
+  rules, current blanks and decision routing.
 - [Measurement platform handover](./00-governance/measurement-platform-handover-2026-07-27.md):
-  first read for system ownership, current flows, plugins, data identity,
-  BigQuery/Stape architecture, gaps, and continuation steps.
+  detailed ownership, current flows, plugins, data identity, BigQuery/Stape
+  architecture, gaps, and continuation steps.
 - [Measurement and activation program register](./00-governance/measurement-and-activation-program-register-2026-07-23.md): current live state, available Stape Business plan, approved non-free-tier-constrained Google Cloud scope, external dependencies, build sequence, and production gates.
 - [Google Cloud and Stape measurement platform blueprint](./superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md): definitive implementation architecture, business outcomes, service responsibilities, data contracts, sGTM rollout, activation stages, and definition of done.
 - [Governance](./00-governance/README.md): repo rules, source-of-truth order, agent responsibilities, contribution workflow.
@@ -33,6 +36,7 @@ one document.
 | [40-naming-convention](./40-naming-convention/README.md) | Naming convention | Meta/Google naming, creative filenames, UTM rules, n8n naming guardrails |
 | [50-paid-media](./50-paid-media/README.md) | Paid media | Platform launch QA, conversion action usage, optimization notes, account-level status |
 | [60-master-data](./60-master-data/README.md) | Master data | School, program, location, CRM, GBP, and marketing-platform crosswalks |
+| [70-growth-operations](./70-growth-operations/README.md) | Marketing operations | Cross-system integrations, dependencies, gaps, risks, scenarios and handoffs |
 
 ## Historical Docs
 

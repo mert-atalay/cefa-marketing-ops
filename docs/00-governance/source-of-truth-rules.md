@@ -9,9 +9,10 @@ Use this order when sources conflict:
 
 1. Verified live systems and current read-back evidence.
 2. Runtime code and the current narrow implementation contract.
-3. [Measurement platform handover](./measurement-platform-handover-2026-07-27.md)
+3. [Marketing operations context layer](./marketing-operations-context-layer.md),
+   [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
    and [program register](./measurement-and-activation-program-register-2026-07-23.md)
-   for cross-workstream ownership, status, blockers, and sequencing.
+   for cross-workstream routing, ownership, status, blockers, and sequencing.
 4. [Google Cloud and Stape implementation blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
 5. [Locked BigQuery strategic blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md).
 6. Dated implementation reports and historical phase documents.
@@ -118,7 +119,10 @@ Cloud/Stape blueprint.
    destination, production gate, or sequence changed.
 4. Update the data taxonomy if a source, identifier, event, or data-layer
    relationship changed.
-5. Update this file only when the authority order or stable operating rules
+5. Update the integration register if a system connection changed.
+6. Update the gap/scenario register if a gap, risk or failure response changed.
+7. Update `data/reference/marketing-operations-context.json`.
+8. Update this file only when the authority order or stable operating rules
    change.
-6. Update the handover when a new owner would otherwise misunderstand the
-   system.
+9. Update the context layer or handover when a new owner would otherwise
+   misunderstand the business or system map.

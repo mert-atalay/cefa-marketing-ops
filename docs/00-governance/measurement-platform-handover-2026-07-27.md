@@ -8,9 +8,11 @@
 
 ## Purpose
 
-This is the first document a new CEFA employee, agency, vendor, developer, or
-AI agent should read before changing conversion tracking, paid-media naming,
-Google Cloud, BigQuery, Stape, WordPress tracking, or CRM activation.
+This is the detailed handover a new CEFA employee, agency, vendor, developer,
+or AI agent should read after the
+[marketing operations context layer](./marketing-operations-context-layer.md)
+and before changing conversion tracking, paid-media naming, Google Cloud,
+BigQuery, Stape, WordPress tracking, or CRM activation.
 
 It explains:
 
@@ -27,19 +29,22 @@ remain authoritative for their own workstreams.
 
 ## Read These In Order
 
-1. This handover.
-2. [Measurement and activation program register](./measurement-and-activation-program-register-2026-07-23.md)
+1. [Marketing operations context layer](./marketing-operations-context-layer.md).
+2. This handover.
+3. [System and integration register](../70-growth-operations/system-and-integration-register.md)
+   and [gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md).
+4. [Measurement and activation program register](./measurement-and-activation-program-register-2026-07-23.md)
    for current status, blockers, sequencing, and production gates.
-3. [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+5. [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
    for the definitive target architecture and implementation phases.
-4. [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
+6. [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
    for the locked strategic warehouse, semantic, predictive, and activation
    direction.
-5. [Data taxonomy and source map](./data-taxonomy.md) for systems, identifiers,
+7. [Data taxonomy and source map](./data-taxonomy.md) for systems, identifiers,
    event ownership, and question-to-source routing.
-6. [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
+8. [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
    before creating or changing campaigns, UTMs, copy, or object names.
-7. The narrow implementation file linked from the relevant workstream README.
+9. The narrow implementation file linked from the relevant workstream README.
 
 ## Source-Of-Truth Hierarchy
 
@@ -47,7 +52,8 @@ When sources disagree, use this order:
 
 1. Verified live system evidence.
 2. Runtime code and current narrow implementation contract.
-3. This handover and the program register for cross-workstream status.
+3. The context layer, this handover and the program register for
+   cross-workstream routing and status.
 4. The July 25 Cloud/Stape blueprint for implementation architecture.
 5. The June 12 BigQuery blueprint for strategic direction.
 6. Dated implementation reports and historical phase documents.
@@ -382,12 +388,16 @@ Before changing a live system:
 8. Update the narrow implementation doc.
 9. Update the program register if status, ownership, blocker or sequencing
    changed.
-10. Update this handover only when the cross-workstream operating model
-    changes.
+10. Update the integration and gap/scenario registers when applicable.
+11. Update the machine-readable context manifest.
+12. Update the context layer or this handover only when the cross-workstream
+    operating model changes.
 
 ## Handover Completion Checklist
 
 - [ ] New owner can identify the business truth for each event.
+- [ ] New owner can load the context manifest and locate each system,
+      integration, gap and what-if scenario by stable ID.
 - [ ] New owner can explain the Parent and Franchise delivery paths.
 - [ ] New owner can locate all current event and naming contracts.
 - [ ] New owner understands the public/private repository boundary.

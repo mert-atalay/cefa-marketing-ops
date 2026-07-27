@@ -38,7 +38,8 @@ Use the current authority order from
 
 1. Verified live systems and read-back evidence.
 2. Runtime code and narrow current implementation contracts.
-3. [Measurement platform handover](./measurement-platform-handover-2026-07-27.md)
+3. [Marketing operations context layer](./marketing-operations-context-layer.md),
+   [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
    and [program register](./measurement-and-activation-program-register-2026-07-23.md).
 4. July 25 Cloud/Stape implementation blueprint.
 5. June 12 locked BigQuery strategic blueprint.
@@ -191,20 +192,24 @@ Use the current authority order from
 
 ## Current Cross-Workstream Gaps
 
+This table is a compact taxonomy summary. The canonical IDs, severities,
+completion evidence and failure responses are in the
+[gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md).
+
 | Gap | Status | Primary owner | Notes |
 |---|---|---|---|
 | CEFA private cloud runtime repository | `Blocked` | Cloud/data engineering | Required so production runtime is not dependent on untracked local files or old images. |
-| GreenRope exact Form 4 identity fields | `Blocked external` | GreenRope/KinderTales vendor | Required for eligible parent CRM outcome activation. |
+| GreenRope exact Form 4 identity fields | `Blocked` | GreenRope/KinderTales vendor | External dependency required for eligible parent CRM outcome activation. |
 | Stape ownership, domains and shadow implementation | `Pending` | Measurement engineering | Business plan exists; production routing is not active. |
 | Dataform production Git/releases/workflows | `Pending` | BigQuery/data | QA package exists; production transformation migration remains. |
-| USA Franchise Synuma lead-ID gaps | `Alert` | Franchise delivery owner | Only 4/7 USA Form 1 entries had Synuma IDs through 2026-07-26. |
+| USA Franchise Synuma lead-ID gaps | `Partial` | Franchise delivery owner | Active alert: only 4/7 USA Form 1 entries had Synuma IDs through 2026-07-26. |
 | Franchise GAConnector parity and cutover | `Active guarded` | Conversion tracking | Coverage and paid parity remain below gate. |
 | School/program/source crosswalk reconciliation | `Partial` | Master data | Preserve `school_uuid` and do not join on labels alone. |
 | Platform object rename approvals | `Pending` | Naming + paid media | NC2/GADS1 are planning surfaces, not live rename approval. |
 | Fresh Meta/Google import template validation | `Pending` | Naming + paid media | Required before real bulk uploads from v21 sheet. |
 | n8n phase-1 validation/export/audit workflow | `Pending` | Naming + automation | Allowed first phase only; no live activation/budget/optimization writes. |
 | Mailchimp Form 4 feed minimization | `Pending` | Website/marketing owner | Review purpose, eligibility and sensitive mapped fields before omnichannel expansion. |
-| KinderTales household/child identity source | `Pending later phase` | KinderTales/School Manager | Needed for deterministic multi-child journeys without raw PII in marts. |
+| KinderTales household/child identity source | `Pending` | KinderTales/School Manager | Later-phase source needed for deterministic multi-child journeys without raw PII in marts. |
 
 ## Owning Workstream Summary
 
@@ -217,6 +222,7 @@ Use the current authority order from
 | Naming convention | Campaign/ad/ad set/ad group naming, creative filenames, UTM conventions, v21 build control | [docs/40-naming-convention](../40-naming-convention/README.md) |
 | Paid media | Platform source availability, conversion action usage, launch QA, budget/bidding guardrails | [docs/50-paid-media](../50-paid-media/README.md) |
 | Master data | Schools, programs, location IDs, CRM/system crosswalks, reference data | [docs/60-master-data](../60-master-data/README.md) |
+| Growth operations | Cross-system integrations, dependencies, gaps, risks, scenarios and handoffs | [docs/70-growth-operations](../70-growth-operations/README.md) |
 
 ## Maintenance Rule
 
@@ -225,5 +231,8 @@ When adding or changing a source:
 1. Update the narrow owning workstream doc first.
 2. Add or update machine-readable reference data in `data/reference/` only when it is reusable and non-secret.
 3. Update this file if the source belongs in the cross-workstream taxonomy.
-4. Update [README.md](./README.md) if the governance navigation changes.
-5. Keep status labels explicit; do not mark assumptions as verified.
+4. Update the integration and gap/scenario registers when the source changes a
+   connection, dependency, risk or response.
+5. Update `data/reference/marketing-operations-context.json`.
+6. Update [README.md](./README.md) if the governance navigation changes.
+7. Keep status labels explicit; do not mark assumptions as verified.

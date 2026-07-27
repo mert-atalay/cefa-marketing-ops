@@ -4,12 +4,15 @@ Last updated: 2026-07-27
 
 ## Before Adding A File
 
-1. Read [repo-map.md](./repo-map.md).
-2. Read the [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
-   when the change crosses workstreams.
-3. Choose the narrowest workstream folder.
-4. Check whether a workstream README already links the relevant current file.
-5. If the update affects live tracking, platform configuration, or
+1. Read the
+   [marketing operations context layer](./marketing-operations-context-layer.md).
+2. Read [repo-map.md](./repo-map.md).
+3. Read the [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
+   and [growth operations register](../70-growth-operations/README.md) when the
+   change crosses workstreams.
+4. Choose the narrowest workstream folder.
+5. Check whether a workstream README already links the relevant current file.
+6. If the update affects live tracking, platform configuration, or
    source-of-truth data, verify the current state first.
 
 ## File Naming

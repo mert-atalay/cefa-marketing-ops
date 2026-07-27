@@ -6,6 +6,9 @@ Start here when adding a new document, routing work to another agent, or decidin
 
 ## Files
 
+- [marketing-operations-context-layer.md](./marketing-operations-context-layer.md):
+  canonical first read for business domains, systems, authority, identifiers,
+  activation rules, known blanks and decision routing.
 - [measurement-platform-handover-2026-07-27.md](./measurement-platform-handover-2026-07-27.md):
   one-document handover covering ownership, live flows, identifiers, plugins,
   BigQuery/Stape structure, naming, blockers, roadmap, and the public/private
@@ -17,6 +20,8 @@ Start here when adding a new document, routing work to another agent, or decidin
 - [repo-map.md](./repo-map.md): folder map, workstream boundaries, and where each agent should write.
 - [source-of-truth-rules.md](./source-of-truth-rules.md): authority order and verification rules.
 - [data-taxonomy.md](./data-taxonomy.md): cross-workstream map of CEFA data sources, stable IDs, naming keys, conversion events, warehouse surfaces, and owning docs.
+- [Growth operations register](../70-growth-operations/README.md): system
+  integrations, gaps, risks, what-if scenarios and cross-workstream ownership.
 - [repository-structure-audit-2026-06-03.md](./repository-structure-audit-2026-06-03.md): current repo/branch structure audit, collision risks, and branch consolidation recommendation.
 - [codex-machine-migration-checklist-2026-06-04.md](./codex-machine-migration-checklist-2026-06-04.md): non-secret checklist for carrying Codex config, memory, MCPs, plugins, local workspaces, and auth surfaces to a new Mac.
 - [agent-responsibilities.md](./agent-responsibilities.md): agent/workstream ownership boundaries.
