@@ -35,16 +35,18 @@ remain authoritative for their own workstreams.
    and [gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md).
 4. [Measurement and activation program register](./measurement-and-activation-program-register-2026-07-23.md)
    for current status, blockers, sequencing, and production gates.
-5. [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+5. [Marketing and BI alignment final decision](../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md)
+   for the Supabase/BigQuery boundary and parallel execution gates.
+6. [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
    for the definitive target architecture and implementation phases.
-6. [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
+7. [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
    for the locked strategic warehouse, semantic, predictive, and activation
    direction.
-7. [Data taxonomy and source map](./data-taxonomy.md) for systems, identifiers,
+8. [Data taxonomy and source map](./data-taxonomy.md) for systems, identifiers,
    event ownership, and question-to-source routing.
-8. [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
+9. [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
    before creating or changing campaigns, UTMs, copy, or object names.
-9. The narrow implementation file linked from the relevant workstream README.
+10. The narrow implementation file linked from the relevant workstream README.
 
 ## Source-Of-Truth Hierarchy
 
@@ -54,10 +56,12 @@ When sources disagree, use this order:
 2. Runtime code and current narrow implementation contract.
 3. The context layer, this handover and the program register for
    cross-workstream routing and status.
-4. The July 25 Cloud/Stape blueprint for implementation architecture.
-5. The June 12 BigQuery blueprint for strategic direction.
-6. Dated implementation reports and historical phase documents.
-7. Private CEFA source evidence and external platform guidance.
+4. The July 27 marketing/BI alignment decision for the Supabase boundary and
+   parallel activation gates.
+5. The July 25 Cloud/Stape blueprint for implementation architecture.
+6. The June 12 BigQuery blueprint for strategic direction.
+7. Dated implementation reports and historical phase documents.
+8. Private CEFA source evidence and external platform guidance.
 
 Never use an old screenshot, mutable campaign name, dashboard label, or local
 scratch file as final truth when a stable ID or verified live source exists.
@@ -334,6 +338,8 @@ Strict copy rule:
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
 | Stape | Access, containers, domains, shadow QA and rollback | `Approved, pending build` |
+| BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
+| Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |
 | Monitoring | Billing export, alerts, dead letters and complete runbooks | `Partial` |
 | Franchise attribution | Coverage/parity below cutover gates | `Active guarded` |
@@ -345,24 +351,39 @@ Strict copy rule:
 
 ## Roadmap
 
-### Now
+### Continuous protection
 
-1. Preserve website, KinderTales, Synuma, GTM, GA4, Google and Meta continuity.
-2. Create the CEFA private cloud runtime repository.
-3. Verify Stape ownership, entitlement, domains and recovery access.
-4. Complete source/service-account/schedule/secret inventory.
-5. Connect Dataform to CEFA-controlled Git and establish environments.
-6. Obtain GreenRope identity fields and run the controlled parent test.
-7. Investigate the USA Synuma delivery gaps before any GAConnector cutover.
+Preserve website, KinderTales, Synuma, GTM, GA4, Google, Meta, dashboard, and
+current conversion continuity throughout both tracks.
 
-### Next
+### Track A: Parent outcomes
 
-1. Build Parent Stape shadow routing.
-2. Promote GA4 server routing after reconciliation.
-3. Add Google and Meta server conversion routes with exact deduplication.
-4. Activate eligible prospective CRM outcomes as secondary conversions.
-5. Add production alerts, queues, dead-letter visibility and runbooks.
-6. Extend Stape to Franchise Canada and USA one property at a time.
+1. Obtain GreenRope identity fields and run the controlled Parent test.
+2. Resolve per-record eligibility and activate eligible secondary CRM outcomes
+   after baseline, deduplication, diagnostics, and kill-switch gates pass.
+3. Inspect BI Supabase read-only and agree the shared metric dictionary.
+4. Approve the versioned Parent outcome contract and proof-of-concept record.
+5. Reconcile before any one-sender source-authority switch.
+
+Track A does not wait for Stape.
+
+### Track B: Website measurement
+
+1. Verify Stape ownership, entitlement, domains and recovery access.
+2. Build Parent Stape shadow routing with consent-state plumbing.
+3. Promote GA4, Google, and Meta routes only after parity and exact
+   deduplication.
+4. Extend Stape to Franchise Canada and USA one property at a time.
+
+Track B does not inherit production authorization from Track A.
+
+### Shared spine
+
+1. Create the CEFA private cloud runtime repository.
+2. Complete source/service-account/schedule/secret inventory.
+3. Connect Dataform to CEFA-controlled Git and establish environments.
+4. Add production alerts, queues, dead-letter visibility and runbooks.
+5. Investigate USA Synuma delivery gaps before any GAConnector cutover.
 
 ### Later
 
@@ -371,8 +392,9 @@ Strict copy rule:
 3. Mailchimp and GreenRope email/journey ingestion.
 4. Multi-child and repeat-inquiry journey analysis.
 5. Predictive demand, capacity, creative and budget recommendations.
-6. Outcome optimization only after volume, identity and business-definition
-   gates pass.
+6. Phone-attribution discovery and controlled matched-market incrementality.
+7. Value-based outcome optimization only from verified final enrollment truth
+   after volume, identity, economics, reconciliation, and bidding gates pass.
 
 ## Change Procedure
 

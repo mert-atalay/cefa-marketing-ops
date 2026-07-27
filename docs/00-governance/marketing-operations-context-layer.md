@@ -53,6 +53,8 @@ The hub covers:
 - Google Ads, Meta and supporting paid-media operations;
 - GA4, GTM and planned Stape server-side tagging;
 - BigQuery, Dataform, Cloud Run and reporting contracts;
+- the BI-owned Python, Supabase, Power BI and Lovable business-reporting
+  context and its planned marketing interfaces;
 - SEO, local SEO, Search Console and DataForSEO;
 - organic social, partner/merchant placements and campaign offers;
 - creative asset sourcing, approvals and build handoffs;
@@ -93,7 +95,8 @@ runtime, or authority to change spend and production systems without approval.
 | Advertising | Google Ads and Meta | Platform delivery, spend and optimization; IDs are stable object handles |
 | Server tagging | Stape Business | Approved additive transport; production containers and shadow QA remain pending |
 | Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII |
-| Reporting | BigQuery serving views, Looker Studio, Supermetrics | Show source, grain and freshness; do not silently substitute stale data |
+| BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; exact schema and pipeline remain pending read-only verification |
+| Reporting | BigQuery serving views, Looker Studio, Supermetrics, Power BI, Lovable | Show source, grain and freshness; do not silently substitute stale data |
 | Email/journeys | Mailchimp and GreenRope email activity | Later omnichannel evidence; provider feeds and eligibility still need review |
 | SEO/local | Search Console, DataForSEO, GBP, Yelp, WordPress | Organic/local evidence and URL governance |
 | Planning/control | OneDrive/SharePoint budget workbook, v21 Google Sheet, n8n planning | Budget workbook is canonical; automation remains validation/export-first |
@@ -110,6 +113,8 @@ flowchart LR
     KT["School Manager and KinderTales"]
     SY["Synuma / SiteZeus"]
     GR["GreenRope lifecycle"]
+    SUPA["BI Supabase business data"]
+    BI["Power BI and Lovable"]
     W["Neutral web events and event identity"]
     T["Web GTM and planned Stape sGTM"]
     D["GA4, Google Ads and Meta destinations"]
@@ -121,6 +126,8 @@ flowchart LR
     P --> KT
     F --> SY
     KT -. "relationship pending confirmation" .-> GR
+    KT -. "reported BI pipeline" .-> SUPA
+    GR -. "reported BI pipeline" .-> SUPA
     P --> W
     F --> W
     W --> T
@@ -131,6 +138,9 @@ flowchart LR
     KT --> B
     SY --> B
     GR --> B
+    SUPA -. "minimum outcome contract pending" .-> B
+    B -. "certified marketing summaries pending" .-> SUPA
+    SUPA -. "reported serving" .-> BI
     B --> R
 ```
 
@@ -143,6 +153,7 @@ Dashed lines are not verified production contracts.
 | Did a parent inquiry happen? | Saved Form 4 entry and KinderTales delivery status | `school_inquiry_submit`, GA4, Google, Meta, BigQuery | Platform conversion count |
 | Which parent school was selected? | Form 4 `school_uuid` / Field `32.1` | School dimension and event payload | Campaign name, school label or slug |
 | Did a parent enroll? | KinderTales/approved operational enrollment source | GreenRope CRM context and warehouse reconciliation | GreenRope `closed won` by itself |
+| What is the consolidated Parent business-data layer? | BI Supabase, as reported internally | KinderTales/GreenRope source lineage and read-only schema/pipeline verification | An unverified table or dashboard total |
 | Did a franchise inquiry happen? | Saved franchise form entry and Synuma/SiteZeus delivery | Neutral event, GA4, Google, Meta, BigQuery | Platform lead count |
 | Which ad delivered traffic/spend? | Platform object ID and platform delivery | Click IDs, UTMs, naming keys and warehouse rows | Mutable display name |
 | What was the approved budget? | OneDrive/SharePoint budget workbook | Governed read-only mirror | Current spend or platform daily budget |
@@ -234,7 +245,12 @@ These are intentional visible gaps, not facts to infer:
 - an organic social/content calendar and attribution contract;
 - an agency/vendor access, ownership and escalation register;
 - a campaign experiment and postmortem registry;
-- a complete marketing KPI glossary covering business and platform metrics.
+- a complete marketing KPI glossary covering business and platform metrics;
+- verified BI Supabase record grain, exact identifiers, stage history, final
+  enrollment lineage, original timestamps, freshness, corrections, and
+  source-to-dashboard pipeline behavior;
+- a versioned Supabase-to-BigQuery Parent outcome contract and
+  BigQuery-to-Supabase/Power BI certified marketing-summary contract.
 
 Do not fill a blank with a plausible story. Route it to the
 [gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md).

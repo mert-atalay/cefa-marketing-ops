@@ -68,6 +68,9 @@ then the
 [measurement platform handover](docs/00-governance/measurement-platform-handover-2026-07-27.md)
 and
 [measurement and activation program register](docs/00-governance/measurement-and-activation-program-register-2026-07-23.md).
+For the approved Supabase/BigQuery boundary, parallel execution tracks, and BI
+meeting position, read the
+[marketing and BI alignment final decision](docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
 Use [docs/README.md](docs/README.md) and
 [docs/00-governance/README.md](docs/00-governance/README.md) for routing.
 New work should go to the narrowest correct folder:

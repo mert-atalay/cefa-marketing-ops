@@ -13,11 +13,12 @@ Use this order when sources conflict:
    [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
    and [program register](./measurement-and-activation-program-register-2026-07-23.md)
    for cross-workstream routing, ownership, status, blockers, and sequencing.
-4. [Google Cloud and Stape implementation blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
-5. [Locked BigQuery strategic blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md).
-6. Dated implementation reports and historical phase documents.
-7. Private CEFA source evidence explicitly cited by a current document.
-8. External platform guidance and best practices.
+4. [Marketing and BI alignment final decision](../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
+5. [Google Cloud and Stape implementation blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
+6. [Locked BigQuery strategic blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md).
+7. Dated implementation reports and historical phase documents.
+8. Private CEFA source evidence explicitly cited by a current document.
+9. External platform guidance and best practices.
 
 If evidence is not current, mark it `Partial`, `Pending`, `Blocked`, or
 `Open question`. Do not upgrade an assumption to `Verified`.
@@ -32,6 +33,8 @@ The June and July plans are complementary:
   Dataform, Stape, identity, activation, security, and phased delivery.
 - Program register: current operational truth for what is live, approved,
   blocked, pending, or next.
+- July 27 alignment decision: approved Supabase/BigQuery boundary, parallel
+  execution tracks, independent activation gates, and meeting position.
 
 The program register may update current state without rewriting the strategic
 or architectural plans. A replacement strategy requires explicit CEFA
@@ -59,6 +62,9 @@ approval.
 | NC2 and GADS1 remain planning candidates | Paid-media naming standard |
 | Visible parent/enrollment copy uses CEFA Early Years language | Paid-media naming standard |
 | BigQuery is not a second CRM and normal marts contain no raw parent/child PII | Cloud/Stape blueprint |
+| Supabase is the reported Parent consolidated business-data layer; technical use remains pending verification | Marketing/BI alignment decision |
+| GreenRope CRM activation and Stape promotion have independent gates | Marketing/BI alignment decision and program register |
+| Consent-state plumbing is in Stape scope; CMP procurement remains deferred | Marketing/BI alignment decision |
 | Existing dashboard contracts change only after reconciliation and approval | BigQuery strategic blueprint |
 
 ## Business Truth Versus Reporting
@@ -70,6 +76,8 @@ approval.
 | Which school was selected? | Form 4 `school_uuid` / Field `32.1` | `dim_school`, event payload |
 | Which ad object delivered traffic? | Platform object ID and valid click/UTM evidence | Naming key and warehouse joins |
 | Did a CRM stage happen? | Prospective GreenRope transition after baseline | Lifecycle ledger and platform delivery |
+| What consolidates Parent business outcomes for BI? | BI Supabase after source lineage and record contract are verified | KinderTales/GreenRope and BI pipeline evidence |
+| What may BigQuery receive from Supabase? | Minimum verified record-level outcomes | Versioned interface, shared dictionary and source reconciliation |
 | What should a dashboard show? | Certified BigQuery serving contract | Source freshness, reconciliation and governance |
 
 Platform conversion counts are not business truth by themselves.

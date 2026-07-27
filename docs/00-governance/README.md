@@ -16,7 +16,8 @@ Start here when adding a new document, routing work to another agent, or decidin
 - [repository-rename-2026-07-27.md](./repository-rename-2026-07-27.md): why
   the GitHub hub is named `cefa-marketing-ops`, what changed, and which
   component names remain unchanged.
-- [measurement-and-activation-program-register-2026-07-23.md](./measurement-and-activation-program-register-2026-07-23.md): cross-workstream status, approved tooling, blockers, build sequence, and production gates for conversion tracking, Stape sGTM, BigQuery/Dataform, and offline activation.
+- [measurement-and-activation-program-register-2026-07-23.md](./measurement-and-activation-program-register-2026-07-23.md): cross-workstream status, approved tooling, blockers, parallel build lanes, and production gates for conversion tracking, Stape sGTM, BigQuery/Dataform, and offline activation.
+- [Marketing and BI alignment final decision](../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md): approved Supabase/BigQuery boundary, independent Track A/Track B promotion gates, meeting outcomes, and send-ready stakeholder email.
 - [repo-map.md](./repo-map.md): folder map, workstream boundaries, and where each agent should write.
 - [source-of-truth-rules.md](./source-of-truth-rules.md): authority order and verification rules.
 - [data-taxonomy.md](./data-taxonomy.md): cross-workstream map of CEFA data sources, stable IDs, naming keys, conversion events, warehouse surfaces, and owning docs.

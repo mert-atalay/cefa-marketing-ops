@@ -16,8 +16,9 @@ one document.
 - [Measurement platform handover](./00-governance/measurement-platform-handover-2026-07-27.md):
   detailed ownership, current flows, plugins, data identity, BigQuery/Stape
   architecture, gaps, and continuation steps.
-- [Measurement and activation program register](./00-governance/measurement-and-activation-program-register-2026-07-23.md): current live state, available Stape Business plan, approved non-free-tier-constrained Google Cloud scope, external dependencies, build sequence, and production gates.
+- [Measurement and activation program register](./00-governance/measurement-and-activation-program-register-2026-07-23.md): current live state, available Stape Business plan, approved non-free-tier-constrained Google Cloud scope, external dependencies, parallel build lanes, and production gates.
 - [Google Cloud and Stape measurement platform blueprint](./superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md): definitive implementation architecture, business outcomes, service responsibilities, data contracts, sGTM rollout, activation stages, and definition of done.
+- [Marketing and BI alignment final decision](./70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md): approved Supabase/BigQuery boundary, parallel execution tracks, independent activation gates, consent decision, meeting outcomes, and final stakeholder email.
 - [Governance](./00-governance/README.md): repo rules, source-of-truth order, agent responsibilities, contribution workflow.
 - [Repository map](./00-governance/repo-map.md): where each type of update belongs.
 - [Source-of-truth rules](./00-governance/source-of-truth-rules.md): how to resolve conflicts between live systems, repo docs, local CEFA sources, and external best practices.
