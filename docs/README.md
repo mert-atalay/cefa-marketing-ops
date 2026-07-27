@@ -2,7 +2,11 @@
 
 Last updated: 2026-07-27
 
-This directory is the governed documentation layer for the CEFA marketing measurement repo. It supports parallel work by conversion tracking, BigQuery, SEO, naming convention, and paid-media agents without forcing every topic into one document.
+This directory is the governed documentation layer for the CEFA Marketing
+Operations Hub. It supports parallel work across conversion tracking,
+BigQuery/Google Cloud, Stape/sGTM, SEO, naming conventions, paid media, master
+data, CRM/offline activation, and reporting without forcing every topic into
+one document.
 
 ## Start Here
 

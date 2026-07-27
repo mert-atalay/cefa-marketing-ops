@@ -14,17 +14,17 @@ Status: `Verified`
 
 | Item | Value |
 |---|---|
-| GitHub repo | `mert-atalay/conversion_tracking` |
-| URL | `https://github.com/mert-atalay/conversion_tracking` |
+| GitHub repo | `mert-atalay/cefa-marketing-ops` |
+| URL | `https://github.com/mert-atalay/cefa-marketing-ops` |
 | Canonical branch | `main` |
-| Local path on old Mac | `/Users/matthewbison/Desktop/cefa-nexus/conversion_tracking` |
+| Historical local path on old Mac | `/Users/matthewbison/Desktop/cefa-nexus/conversion_tracking` |
 | Snapshot tag | `cefa-measurement-docs-2026-06-03` |
 
 On the new Mac, clone or pull this repo first:
 
 ```bash
-git clone https://github.com/mert-atalay/conversion_tracking.git
-cd conversion_tracking
+git clone https://github.com/mert-atalay/cefa-marketing-ops.git
+cd cefa-marketing-ops
 git checkout main
 ```
 
@@ -224,7 +224,7 @@ These are the main workspaces Codex has used for CEFA work:
 
 | Workspace | Role |
 |---|---|
-| `/Users/matthewbison/Desktop/cefa-nexus/conversion_tracking` | Canonical GitHub repo for CEFA measurement/tracking docs and plugin |
+| `/Users/matthewbison/Desktop/cefa-nexus/conversion_tracking` | Historical local checkout for the repository now named `cefa-marketing-ops`; the local folder name may remain unchanged |
 | `/Users/matthewbison/Desktop/cefa-nexus/CEFA` | CEFA NEXUS agents, paid-media tools, Meta CLI, MCP helpers, artifacts |
 | `/Users/matthewbison/Desktop/agentic-brain` | Reporting, dashboard, Supermetrics/BQ reconciliation work |
 | `/Users/matthewbison/Desktop/Nova` | WordPress/Nova tooling |
@@ -233,7 +233,10 @@ These are the main workspaces Codex has used for CEFA work:
 | `/Users/matthewbison/Desktop/CEFA Store` | Shopify work |
 | `/Users/matthewbison/Desktop/web design` | Agency/design work |
 
-For CEFA naming/conversion tracking specifically, the GitHub repo is now enough for the canonical docs, but the local CEFA NEXUS workspace still contains useful agents, skills, artifacts, and CLIs.
+For CEFA marketing operations governance, the GitHub hub is the canonical
+public source. The local CEFA NEXUS workspace still contains private agents,
+skills, artifacts, CLIs and source evidence that do not belong in the public
+repository.
 
 ## New Mac Verification Commands
 

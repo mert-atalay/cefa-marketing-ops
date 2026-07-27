@@ -8,7 +8,7 @@
  * Author: CEFA
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI: https://github.com/mert-atalay/conversion_tracking
+ * Update URI: https://github.com/mert-atalay/cefa-marketing-ops
  * Text Domain: cefa-conversion-tracking
  *
  * @package CEFA_Conversion_Tracking

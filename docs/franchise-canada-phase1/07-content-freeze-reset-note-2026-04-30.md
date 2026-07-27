@@ -28,7 +28,7 @@ Packaged ZIP:
 
 Pull request:
 
-- `https://github.com/mert-atalay/conversion_tracking/pull/1`
+- `https://github.com/mert-atalay/cefa-marketing-ops/pull/1`
 
 Implemented plugin behavior:
 

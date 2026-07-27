@@ -166,7 +166,7 @@ Use this only if we want GPT Pro to investigate the remaining strategic/platform
 ```text
 Please review the CEFA conversion-tracking repo again with a narrow focus on four unresolved architecture decisions:
 
-Repo: https://github.com/mert-atalay/conversion_tracking
+Repo: https://github.com/mert-atalay/cefa-marketing-ops
 Branch: codex/franchise-canada-tracking-plan
 
 Read first:

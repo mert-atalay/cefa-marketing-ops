@@ -41,7 +41,7 @@ Important current complication:
 
 Primary GitHub repo for the helper plugin and operational docs:
 
-- `https://github.com/mert-atalay/conversion_tracking.git`
+- `https://github.com/mert-atalay/cefa-marketing-ops.git`
 
 Local repo path:
 

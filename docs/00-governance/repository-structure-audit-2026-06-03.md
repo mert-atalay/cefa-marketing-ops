@@ -4,12 +4,16 @@ Status: `Verified` for repository tree, branch comparison, and governance-file r
 
 ## Scope
 
-This audit checks whether the CEFA `conversion_tracking` GitHub repo is structurally safe for multiple workstreams and agents.
+This audit checked whether the CEFA GitHub repository was structurally safe
+for multiple workstreams and agents. The repository was named
+`conversion_tracking` when this audit ran and was renamed
+`cefa-marketing-ops` on 2026-07-27 after its broader hub role was formalized.
 
 Checked surfaces:
 
 - Local branch: `codex/franchise-canada-tracking-plan`
-- Remote repo: `mert-atalay/conversion_tracking`
+- Remote repo at audit time: `mert-atalay/conversion_tracking`
+- Current remote repo: `mert-atalay/cefa-marketing-ops`
 - Remote branch spot-check through GitHub connector
 - Governance docs in `docs/00-governance/`
 - Workstream READMEs in `docs/10-conversion-tracking/`, `docs/20-bigquery/`, `docs/30-seo/`, `docs/40-naming-convention/`, `docs/50-paid-media/`, and `docs/60-master-data/`

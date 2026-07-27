@@ -8,7 +8,7 @@ I want you to audit our CEFA conversion-tracking setup and current plan. Please 
 
 Repository:
 
-- `https://github.com/mert-atalay/conversion_tracking`
+- `https://github.com/mert-atalay/cefa-marketing-ops`
 - Current working branch to review if available: `codex/franchise-canada-tracking-plan`
 
 Primary docs to read first:

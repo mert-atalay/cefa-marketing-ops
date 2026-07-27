@@ -15,7 +15,7 @@ Status: `Verified`
 Use sources in this order:
 
 1. Live verified systems and current API/browser/network evidence: WordPress, Gravity Forms, GTM, GA4, Google Ads, Meta, BigQuery, CRM exports, Ads Manager, Google Sheets API.
-2. Current governed repo docs in this `conversion_tracking` repo.
+2. Current governed repo docs in the `cefa-marketing-ops` repository.
 3. Local CEFA conversion-tracking knowledge base and CEFA NEXUS context when not yet migrated into this repo.
 4. Explicit CEFA Ops/source files cited by a repo doc.
 5. External platform best practices.

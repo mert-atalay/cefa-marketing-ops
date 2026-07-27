@@ -1,8 +1,19 @@
-# CEFA Conversion Tracking
+# CEFA Marketing Operations Hub
 
-Lightweight WordPress plugin for CEFA conversion tracking.
+This public repository is the governed CEFA source of truth for marketing
+measurement, conversion tracking, BigQuery and Google Cloud, Stape/sGTM, paid
+media, SEO measurement, naming and UTMs, master data, offline activation, and
+the implementation roadmap.
 
-This plugin emits clean CEFA `dataLayer` events for confirmed inquiry conversions, Phase 1A browser micro-conversions, and attribution handoff.
+It also contains the public, non-secret runtime and test code for the CEFA
+Conversion Tracking WordPress plugin and selected measurement collectors and
+warehouse QA packages.
+
+## CEFA Conversion Tracking Plugin
+
+The included WordPress plugin emits clean CEFA `dataLayer` events for confirmed
+inquiry conversions, Phase 1A browser micro-conversions, and attribution
+handoff.
 
 It does not replace Gravity Forms, CEFA School Manager, CEFA Franchise API, Field 32 UI, location sync, KinderTales, GAConnector, GTM, or platform tags.
 
@@ -43,11 +54,13 @@ It does not replace Gravity Forms, CEFA School Manager, CEFA Franchise API, Fiel
 
 ## Repo Operating Model
 
-This repo now has two separate responsibilities:
+This hub has three responsibilities:
 
 - Public, non-secret runtime code for the `CEFA Conversion Tracking`
-  WordPress plugin.
-- Governed public documentation for CEFA marketing measurement workstreams.
+  WordPress plugin and approved measurement helpers.
+- Governed public documentation for CEFA marketing operations workstreams.
+- Non-secret schemas, reference contracts, tests and QA packages that make the
+  measurement platform reproducible.
 
 Start with the [measurement platform handover](docs/00-governance/measurement-platform-handover-2026-07-27.md),
 then the [measurement and activation program register](docs/00-governance/measurement-and-activation-program-register-2026-07-23.md).

@@ -3,7 +3,7 @@
 **Last updated:** 2026-07-27
 **Owner:** CEFA marketing measurement
 **Status:** Current handover entry point
-**Repository:** `mert-atalay/conversion_tracking`
+**Repository:** `mert-atalay/cefa-marketing-ops`
 **Repository visibility:** Public
 
 ## Purpose

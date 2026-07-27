@@ -1,9 +1,11 @@
-# CEFA Marketing Measurement Repo Instructions
+# CEFA Marketing Operations Hub Instructions
 
-This repo has two responsibilities:
+This repository is the public CEFA Marketing Operations Hub. It has three
+responsibilities:
 
 1. Runtime code for the `CEFA Conversion Tracking` WordPress plugin.
-2. Governed documentation for CEFA marketing measurement workstreams.
+2. Governed documentation for CEFA marketing operations workstreams.
+3. Non-secret reference contracts, collectors, tests and warehouse QA packages.
 
 Keep those responsibilities separate.
 

@@ -1,6 +1,6 @@
 # Governance
 
-This folder defines how the CEFA marketing measurement repo is organized.
+This folder defines how the CEFA Marketing Operations Hub is organized.
 
 Start here when adding a new document, routing work to another agent, or deciding where a new source-of-truth update belongs.
 
@@ -10,6 +10,9 @@ Start here when adding a new document, routing work to another agent, or decidin
   one-document handover covering ownership, live flows, identifiers, plugins,
   BigQuery/Stape structure, naming, blockers, roadmap, and the public/private
   source-control boundary.
+- [repository-rename-2026-07-27.md](./repository-rename-2026-07-27.md): why
+  the GitHub hub is named `cefa-marketing-ops`, what changed, and which
+  component names remain unchanged.
 - [measurement-and-activation-program-register-2026-07-23.md](./measurement-and-activation-program-register-2026-07-23.md): cross-workstream status, approved tooling, blockers, build sequence, and production gates for conversion tracking, Stape sGTM, BigQuery/Dataform, and offline activation.
 - [repo-map.md](./repo-map.md): folder map, workstream boundaries, and where each agent should write.
 - [source-of-truth-rules.md](./source-of-truth-rules.md): authority order and verification rules.
