@@ -37,8 +37,12 @@
 | `SYS-BQ` | BigQuery | Reconciliation, marts, serving and activation ledger | Governed analytical layer | `Active guarded` |
 | `SYS-DF` | Dataform | SQL dependency graph and assertions | Transformation/QA | `Active guarded`; production config pending |
 | `SYS-CRUN` | Cloud Run and supporting GCP services | Extraction, webhooks, polling and dispatch | Private runtime | `Partial`; source-control gap |
+| `SYS-BI-PIPE` | BI-owned Python pipeline | KinderTales/GreenRope extraction into BI data services | BI integration runtime | `Partial`; reported internally, verification pending |
+| `SYS-SUPA-BI` | BI-owned Supabase | Consolidated Parent business data and BI serving | Parent consolidated business-data layer | `Partial`; reported internally, schema verification pending |
 | `SYS-SMTR` | Supermetrics | Connector-based reporting extracts | Supporting reporting source | `Partial` freshness |
 | `SYS-LOOKER` | Looker Studio | Reader-facing dashboards | Serving consumer | `Partial` by contract/freshness |
+| `SYS-POWERBI` | Power BI | Internal business dashboard consumer | BI reporting consumer | `Partial`; reported internally, verification pending |
+| `SYS-LOVABLE` | Lovable BI application | Internal business dashboard/application consumer | BI reporting consumer | `Partial`; reported internally, verification pending |
 | `SYS-GSC` | Google Search Console | Organic search performance | Organic source | `Partial` freshness |
 | `SYS-DFS` | DataForSEO | Keyword/SERP research | Research source | `Partial` freshness |
 | `SYS-GBP` | Google Business Profile | Local listing visibility and traffic | Local source | `Partial` crosswalk/UTMs |
@@ -94,6 +98,10 @@
 | `INT-D-005` | Websites/GTM -> Stape -> destinations | First-party server transport and deduplication | `Approved`; not built | Off | Browser loss remains; bad rollout could duplicate | Cloud/Stape blueprint |
 | `INT-D-006` | Cloud services -> monitoring/alerts | Delivery, freshness, failure and cost health | `Partial` | Partial | Silent failures or delayed diagnosis | Cloud runtime owner |
 | `INT-D-007` | Public hub -> private runtime repo | Governance to reproducible deployment source | `Blocked` | Not established | Runtime remains dependent on private local/historical artifacts | Program register |
+| `INT-D-008` | KinderTales/GreenRope -> BI Python -> Supabase | Consolidate Parent business outcomes for BI | `Partial`; reported internally, verification pending | Reported active | Unknown grain, history or lineage could distort business truth | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
+| `INT-D-009` | Supabase -> BigQuery Parent outcome contract | Deliver minimum record-level lifecycle and final-enrollment outcomes | `Pending` | Off | Marketing cannot reconcile or activate actual outcomes safely | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
+| `INT-D-010` | BigQuery -> Supabase/Power BI certified summaries | Provide campaign, spend and governed marketing context to BI | `Pending` | Off | BI and marketing may maintain conflicting reporting pipelines | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
+| `INT-D-011` | Supabase -> Power BI/Lovable | Serve consolidated internal business dashboards | `Partial`; reported internally, verification pending | Reported active | Dashboard definitions may not reconcile to marketing without a shared dictionary | [Alignment review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md) |
 
 ## SEO, Local And Campaign Operations Integrations
 

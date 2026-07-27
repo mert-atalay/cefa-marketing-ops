@@ -33,6 +33,15 @@ unreviewed IAM changes, API enablement, DNS changes, GTM publication,
 Stape production routing, CRM writes, platform conversion changes, audience
 uploads, or campaign optimization changes.
 
+**Alignment decision, 2026-07-27:** CEFA approved Supabase as the reported
+consolidated Parent business-data layer and BigQuery as the specialized
+marketing measurement, intelligence, and activation layer. The two main
+implementation paths run in parallel with independent promotion gates:
+GreenRope/Supabase Parent outcomes and offline activation in Track A, and
+Stape website measurement in Track B. Eligible guarded GreenRope CRM outcomes
+do not wait for Stape or a Supabase source switch. See the
+[final marketing/BI alignment decision](../../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
+
 ## 2. Business Result
 
 When this blueprint is complete, CEFA will be able to answer:
@@ -77,6 +86,7 @@ The read-only inventory on 2026-07-25 found:
 | Current monitor | Overall `PASS`; school `pass`; franchise `partial`; lifecycle `pending`; predictive `promoted_partial`; zero issues and four warnings |
 | Parent event foundation | Form 4 identity and canonical attribution exist; website and KinderTales paths remain active |
 | Parent CRM activation | Restricted ledger, capture, binder, poller, dispatcher, diagnostics, Google actions, and Meta test events exist; production sending remains disabled |
+| BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
 | Stape | Business plan approved and available; production server containers and first-party routing are not yet recorded |
@@ -146,6 +156,10 @@ The following current-state concerns shape this blueprint:
     belong in a CEFA-controlled private repository.
 12. No platform, campaign, budget, bid, CRM, or audience write becomes
     autonomous merely because the data platform can technically perform it.
+13. Supabase remains the consolidated Parent business-data layer; BigQuery
+    receives only minimum verified record-level outcomes and returns certified
+    marketing summaries. No source-authority switch occurs without parity,
+    one-sender control, and rollback.
 
 ## 5. Target Operating Model
 
@@ -159,6 +173,7 @@ The following current-state concerns shape this blueprint:
 | Gravity Forms | Saved submission record | Final CRM outcome |
 | School Manager/KinderTales | Parent operational inquiry and admissions delivery | Marketing attribution authority |
 | GreenRope | Approved parent CRM lifecycle plus GreenRope email/journey delivery evidence | Final KinderTales enrollment truth |
+| BI Supabase | Reported consolidated Parent business data and Power BI/Lovable serving source | Direct marketing-event collection or platform activation logic |
 | Mailchimp | Mailchimp campaign/journey delivery, subscription, and engagement evidence | CRM lifecycle, inquiry, or enrollment truth |
 | GAConnector/Synuma | Current franchise attribution compatibility and franchise business delivery | Parent tracking |
 | Cloud Run | API extraction, webhook handling, specialized processing, offline dispatch | Stable SQL transformation ownership |
@@ -189,10 +204,13 @@ flowchart TB
         SM["School Manager"]
         KT["KinderTales"]
         GR["GreenRope"]
+        SUPA["BI Supabase"]
         MC["Mailchimp"]
         SYN["GAConnector and Synuma/SiteZeus"]
         FORMS --> SM --> KT
         FORMS --> GR
+        KT -. "reported BI pipeline" .-> SUPA
+        GR -. "reported BI pipeline" .-> SUPA
         FORMS --> SYN
     end
 
@@ -216,6 +234,7 @@ flowchart TB
         OBS["Cloud Monitoring, Logging, governance and run ledger"]
         STAPE --> INGRESS
         GR --> EXTRACT
+        SUPA -. "outcome contract pending" .-> EXTRACT
         MC --> EXTRACT
         SYN --> EXTRACT
         GA4 --> EXTRACT
@@ -225,6 +244,7 @@ flowchart TB
         EXTRACT --> BQRAW
         BQRAW --> DATAFORM --> SERVE
         DATAFORM --> ACT
+        SERVE -. "certified summary contract pending" .-> SUPA
         ACT --> GADS
         ACT --> META
         OBS --> INGRESS
@@ -291,6 +311,10 @@ advertise their tracking purpose.
   the same website inquiry.
 - CRM-stage events remain a separate Cloud Run offline-activation path.
 - Do not manufacture `fbp`, `fbc`, click IDs, timestamps, or consent.
+- Carry consent/eligibility state through the event envelope and destination
+  rules. CMP procurement remains deferred; user-data matching, Customer Match,
+  audience delivery, and other consent-dependent features stay off until
+  separately approved.
 - Hash approved enhanced-match values only at the controlled server boundary.
 - Reject or quarantine events with invalid hostname, event name, ID, timestamp,
   destination, or eligibility state.
@@ -1002,6 +1026,24 @@ folder or an old container image.
 
 ## 16. Phased Implementation Roadmap
 
+### Parallel execution and independent promotion gates
+
+- **Track A, Parent outcomes:** GreenRope identity, controlled read-back,
+  per-record eligibility, guarded CRM-stage activation, Supabase inspection,
+  versioned outcome contract, and optional source switch after parity.
+- **Track B, website measurement:** Stape ownership, first-party endpoints,
+  Parent shadow routing, browser/server deduplication, property-by-property
+  promotion, and franchise isolation.
+- **Shared spine:** private runtime source, Dataform productionization,
+  monitoring, queues, dead letters, runbooks, and shared metric contracts.
+
+Track A may activate eligible secondary GreenRope CRM outcomes after its own
+identity, baseline, deduplication, platform-validation, diagnostic, and
+kill-switch gates pass. It does not wait for Track B. Track B promotes only
+after its own endpoint, parity, destination-isolation, deduplication,
+business-delivery, and rollback gates pass. A Supabase source switch is a
+separate Track A decision.
+
 ### Phase 0: Control The Existing Platform, Weeks 0-2
 
 **Outcome:** CEFA can identify, reproduce, own, and monitor every current
@@ -1029,6 +1071,8 @@ no duplicate conversions or KinderTales regression.
 - create Parent server GTM container;
 - implement first-party endpoint;
 - establish event allowlist and shared identity envelope;
+- carry consent/eligibility state and keep consent-dependent matching and
+  audience features disabled;
 - shadow GA4 events;
 - add Google website conversion route;
 - add Meta CAPI route;
@@ -1071,6 +1115,10 @@ secondary business signals.
 - create Meta reporting custom conversions after legitimate live registration;
 - retain website conversions as primary;
 - publish cost-per-stage and identity-coverage reporting.
+- inspect the BI Supabase outcome models and define the minimum record-level
+  contract without delaying otherwise eligible GreenRope reporting;
+- reconcile any proposed Supabase source against the direct GreenRope ledger
+  before a one-sender source switch.
 
 **Exit:** Eligible outcomes appear once in both platforms, current-state
 baseline uploads remain zero, and no campaign bidding changes occur.
@@ -1102,6 +1150,8 @@ re-engagement, and quality audience seeds.
 - build suppression and incomplete-journey audiences;
 - build high-quality stage seed audiences;
 - keep targeting eligibility and site context isolated;
+- keep consent-dependent audience delivery disabled until its separate
+  eligibility and governance decision;
 - measure audience delivery and business lift;
 - require approval for every production activation contract.
 
@@ -1153,6 +1203,13 @@ quality, capacity, creative, local visibility, and budget allocation.
 - anomaly detection;
 - native GBP and richer GSC/local/AEO evidence;
 - MMM readiness and experiment calendar;
+- matched-market incrementality tests with capacity, seasonality, pre-period,
+  minimum-sample, budget, and stopping rules;
+- phone-attribution discovery before any dynamic-number-insertion vendor
+  commitment;
+- value-based optimization only from Supabase/KinderTales-verified final
+  enrollment truth and an approved economic model, never from GreenRope
+  `crm_closed_won` alone;
 - Gemini/Vertex analysis only on approved safe contracts;
 - human-approved recommendation queue.
 
@@ -1169,6 +1226,8 @@ remain advisory until CEFA explicitly promotes an action.
 | Dataform | Reliable and explainable warehouse releases | Compile, assertions, source/target parity |
 | Event ledger | One traceable conversion journey | Event-ID coverage and zero duplicates |
 | CRM activation | Platform visibility into meaningful outcomes | Exact identity and accepted-ID diagnostics |
+| Supabase outcome contract | Business reality reaches marketing without a second CRM or second sender | Record grain, lineage, timestamps, proof-of-concept, parity and rollback |
+| Shared metric dictionary | Power BI and marketing reporting use the same business definitions | Jointly approved grain, source, window, owner and reconciliation rule |
 | School intelligence | Marketing and outcome truth by school | School mapping and source reconciliation |
 | Parent identity and email | Multi-child, repeat-inquiry, multi-school, and email journey visibility | Deterministic entity links, provider reconciliation, and no raw PII |
 | Audience activation | Better targeting with suppression and quality seeds | Activation-safe contract and delivery audit |

@@ -7,9 +7,11 @@
 **Architecture:** School Manager and KinderTales remain the operational Parent
 inquiry/admissions delivery system. GreenRope is the approved Parent lifecycle
 source for the current offline-conversion project. Synuma/SiteZeus remains the
-Franchise Canada and Franchise USA CRM/business-delivery system. Supabase is a
-future safe integration/serving bridge where approved, not the current
-operational source of truth. BigQuery remains the marketing intelligence,
+Franchise Canada and Franchise USA CRM/business-delivery system. The BI team
+reports that Supabase already consolidates Parent business data from
+KinderTales/GreenRope; that organizational role is accepted while its schema,
+grain, identity, history, timestamps, freshness, and lineage remain pending
+read-only verification. BigQuery remains the marketing intelligence,
 measurement, semantic, predictive, and activation-prep warehouse. Existing
 dashboard contracts in `mart_cefa_growth_dashboard` stay stable while new
 sources enter as additive, QA-labeled contracts.
@@ -28,7 +30,7 @@ DataForSEO, Gravity Forms, and CRM lifecycle facts.
 development of the existing BigQuery/Dataform/Cloud Run/Scheduler/Secret
 Manager foundation and Stape Business as the managed sGTM layer. The
 cross-workstream status, commercial references, ownership boundaries,
-acceptance gates, and ordered build board are registered in
+acceptance gates, and parallel build board are registered in
 [CEFA Measurement And Activation Program Register](../../00-governance/measurement-and-activation-program-register-2026-07-23.md).
 This is an extension of the roadmap, not permission to create a second
 warehouse, replace current conversions without parity, or place KinderTales or
@@ -48,6 +50,18 @@ targeting implementation is specified in
 [CEFA Google Cloud And Stape Measurement Platform Blueprint](./2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
 This document remains the locked strategic roadmap; the newer blueprint owns
 implementation architecture, sequencing, acceptance, and definition of done.
+
+**Marketing/BI alignment addendum, 2026-07-27:** CEFA approved the
+Supabase/BigQuery boundary, two parallel implementation tracks, independent
+CRM and Stape promotion gates, consent-capable Stape plumbing with CMP
+procurement deferred, and later gated phone-attribution, incrementality, and
+value-based work. The current guarded GreenRope CRM path may activate after
+its own identity, eligibility, baseline, deduplication, platform-validation,
+diagnostic, and kill-switch gates; it does not wait for Stape or a Supabase
+source switch. Supabase can replace that source only after a versioned
+contract, proof-of-concept record, parity, one-sender control, accepted-ID
+reconciliation, and rollback pass. See the
+[final alignment decision](../../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
 
 ---
 
@@ -75,6 +89,9 @@ conflicting truths for the same metric. The split is:
 - BigQuery owns marketing measurement and intelligence truth;
 - approved safe lifecycle facts connect these systems without making
   Supabase, Stape, or BigQuery the operational CRM.
+- Supabase is the reported consolidated Parent business-data layer; BigQuery
+  receives only the minimum verified record-level outcomes and returns
+  certified marketing summaries under a shared metric dictionary.
 
 ## What I Accept From The New Blueprint
 
@@ -150,6 +167,9 @@ business truth.
   ownership.
 - [ ] Inventory current web GTM, GA4, Google Ads, Meta, event IDs, custom
   scripts, consent inputs, and hostname/destination boundaries.
+- [ ] Carry consent/eligibility state through the event envelope and
+  destination rules. Keep user-data matching, Customer Match, audiences, and
+  other consent-dependent features disabled until separately approved.
 - [ ] Design first-party endpoints and strict Parent, Franchise Canada, and
   Franchise USA routing isolation.
 - [ ] Keep browser interaction capture and route approved events through sGTM
@@ -178,11 +198,19 @@ business truth.
 
 **Outcome:** BigQuery can measure lead quality, tours, enrollments, and capacity without becoming the CRM.
 
+- [ ] Verify the reported BI-owned KinderTales/GreenRope-to-Supabase pipeline
+  read-only before treating it as a production marketing source.
 - [ ] Ask Supabase to expose safe `analytics_export` views for lifecycle events, stage snapshots, household identity tokens, capacity snapshots, consent status, and admissions activity.
 - [ ] Ingest only safe lifecycle fields into BigQuery: lead ID, household ID, event ID, school UUID, stage, stage date, tour flags, enrollment flag, lost reason category, speed-to-lead bucket, consent state.
 - [ ] Do not ingest parent names, child names, raw emails, raw phones, child DOB, street address, free-text CRM notes, or sensitive admissions comments.
 - [ ] Build no-PII lifecycle facts that join to Form 4 and paid source evidence by `event_id`, `lead_id`, `household_id`, and `school_uuid`.
 - [ ] Add capacity snapshots by school/month and mark unknown capacity as partial, not zero.
+- [ ] Preserve the existing direct GreenRope path for guarded activation,
+  parity, diagnosis, or bounded fallback until a versioned Supabase contract
+  reconciles and one production sender is explicitly promoted.
+- [ ] Require a proof-of-concept record, direct/Supabase parity, baseline
+  protection, accepted-ID reconciliation, and named rollback owner before a
+  source-authority switch.
 
 ## Phase 5 - Core Facts And Semantic Marts
 
@@ -249,8 +277,13 @@ approval are not promotion gates.
 
 - [ ] Build weekly MMM readiness table with spend, impressions, clicks, paid leads, qualified leads, tours, enrollments, capacity, seasonality, holidays, school openings, GBP actions, and organic clicks.
 - [ ] Annotate major launches, tracking changes, creative refreshes, pauses, and website changes.
-- [ ] Design simple holdout or pre/post tests before relying on model outputs.
+- [ ] Design controlled matched-market or pre/post tests with capacity,
+  seasonality, pre-period, minimum-sample, budget-approval, and stopping rules
+  before relying on model outputs.
 - [ ] Use Meridian or another MMM path only after enough stable weekly history exists.
+- [ ] Quantify phone-originated inquiry, tour, and enrollment coverage from
+  existing evidence before considering a controlled dynamic-number-insertion
+  pilot. No vendor or universal percentage trigger is pre-approved.
 
 ## Phase 11 - Controlled Activation
 
@@ -260,6 +293,10 @@ approval are not promotion gates.
 - [ ] Use Hightouch only on approved BigQuery contracts and its own audit/planner schemas.
 - [ ] Start with Supabase reporting/score outputs before ad-platform activation.
 - [ ] Add offline conversion, suppression, seed audience, and CAPI enrichment tables only after privacy and QA review.
+- [ ] Keep CRM-stage actions count-only and secondary. Add value only from
+  Supabase/KinderTales-verified final enrollment truth and an approved
+  economics model after reconciliation, deduplication, volume, and bidding
+  gates pass; never value GreenRope `crm_closed_won` as final enrollment.
 - [ ] No automatic campaign, budget, bid, CRM, review, content, or public-site changes.
 
 ## Phase 12 - Agent-Safe Semantic Layer
@@ -272,26 +309,25 @@ approval are not promotion gates.
 - [ ] Log agent runs, data scopes used, recommendations, approval status, and executed action if any.
 - [ ] Require source citations and freshness timestamps in any executive summary or recommendation.
 
-## Immediate Priority Order
+## Immediate Parallel Priorities
 
-1. Maintain the measurement program register and protect current
-   KinderTales, Synuma, website conversion, and dashboard contracts.
-2. Complete the GreenRope identity fields and controlled parent
-   offline-conversion test.
-3. Provision Stape Business under CEFA ownership and complete the
-   multi-property routing and destination inventory.
-4. Build Stape in shadow with exact event-ID deduplication before promoting
-   any website conversion route.
-5. Productionize the existing Dataform QA foundation and Cloud monitoring
-   without replacing Cloud Run API and activation workloads.
-6. Finish governance and metric registry so every next build has a contract.
-7. Add Supabase safe lifecycle export planning and schema agreement.
-8. Add native GBP and GSC ingestion.
-9. Certify Google ad group/keyword and Meta ad set/creative detail.
-10. Build capacity-aware school growth and lead-quality marts.
-11. Upgrade predictive tables from heuristics to BQML where labels are mature.
-12. Add Hightouch/activation only after recommendation records are approved
-    and audited.
+1. Continuously protect KinderTales, Synuma, website conversion, dashboard,
+   and existing campaign contracts.
+2. **Track A:** complete GreenRope identity fields, the controlled Parent
+   read-back, per-record eligibility, and guarded CRM outcome activation.
+3. **Track A:** inspect Supabase, approve the minimum outcome contract and
+   shared metric dictionary, then reconcile before any source switch.
+4. **Track B:** verify Stape ownership/access and build Parent in shadow with
+   exact event-ID deduplication and consent-state gating.
+5. **Track B:** promote one property at a time only after its independent
+   parity, destination-isolation, business-delivery, and rollback gates pass.
+6. **Shared spine:** productionize Dataform, Cloud monitoring, queues,
+   dead-letter handling, runbooks, and private runtime source.
+7. Add native GBP/GSC, certified paid detail, capacity-aware school marts, and
+   predictive models after their source contracts pass.
+8. Add Hightouch, audiences, phone attribution, incrementality, and
+   value-based optimization only behind their separate evidence and approval
+   gates.
 
 ## Dashboard Agent Handoff
 

@@ -15,7 +15,8 @@
     "source_rules": "docs/00-governance/source-of-truth-rules.md",
     "data_taxonomy": "docs/00-governance/data-taxonomy.md",
     "integration_register": "docs/70-growth-operations/system-and-integration-register.md",
-    "gap_scenario_register": "docs/70-growth-operations/gap-risk-and-scenario-register.md"
+    "gap_scenario_register": "docs/70-growth-operations/gap-risk-and-scenario-register.md",
+    "marketing_bi_alignment_decision": "docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md"
   },
   "status_vocabulary": [
     "Verified",
@@ -169,6 +170,18 @@
       "status": "Partial"
     },
     {
+      "id": "SYS-BI-PIPE",
+      "name": "BI-owned Python pipeline",
+      "role": "KinderTales and GreenRope extraction into BI data services",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-SUPA-BI",
+      "name": "BI-owned Supabase",
+      "role": "Consolidated Parent business data and BI serving",
+      "status": "Partial"
+    },
+    {
       "id": "SYS-SMTR",
       "name": "Supermetrics",
       "role": "Supporting reporting extracts",
@@ -178,6 +191,18 @@
       "id": "SYS-LOOKER",
       "name": "Looker Studio",
       "role": "Reader-facing dashboards",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-POWERBI",
+      "name": "Power BI",
+      "role": "Internal business dashboard consumer",
+      "status": "Partial"
+    },
+    {
+      "id": "SYS-LOVABLE",
+      "name": "Lovable BI application",
+      "role": "Internal business dashboard and application consumer",
       "status": "Partial"
     },
     {
@@ -301,7 +326,11 @@
       "INT-D-004",
       "INT-D-005",
       "INT-D-006",
-      "INT-D-007"
+      "INT-D-007",
+      "INT-D-008",
+      "INT-D-009",
+      "INT-D-010",
+      "INT-D-011"
     ],
     "seo_local_campaign_ops": [
       "INT-S-001",
@@ -477,6 +506,12 @@
       "severity": "Medium",
       "status": "Pending",
       "summary": "Brand and content approval rules outside paid-ad copy are not centralized"
+    },
+    {
+      "id": "GAP-027",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "BI Supabase Parent outcome grain, identity, history, lineage and freshness are not verified for marketing use"
     }
   ],
   "scenario_routes": [
@@ -583,6 +618,10 @@
     {
       "id": "SCN-026",
       "trigger": "Campaign experiment audiences or signals contaminate each other"
+    },
+    {
+      "id": "SCN-027",
+      "trigger": "Supabase and direct business-source outcomes disagree"
     }
   ]
 }

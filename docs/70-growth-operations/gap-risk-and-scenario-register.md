@@ -42,8 +42,9 @@
 | `GAP-022` | Agency/vendor access ownership, offboarding and escalation SLAs are incomplete | `High` | `Pending` | Marketing operations owner | Current roster, access owner, backup, SLA and removal procedure |
 | `GAP-023` | Campaign experiment and postmortem history is not a governed central register | `Medium` | `Pending` | Marketing operations owner | Every material test records hypothesis, split, result and decision |
 | `GAP-024` | Budget-plan-to-platform reconciliation lacks one approved recurring cadence | `High` | `Pending` | Budget/paid owner | Monthly plan, live budget, spend and forecast reconcile with sign-off |
-| `GAP-025` | Full marketing KPI glossary and target ownership are incomplete | `Medium` | `Partial` | Marketing intelligence owner | Each KPI has definition, grain, source, window, target and owner |
+| `GAP-025` | Full marketing KPI glossary and target ownership are incomplete | `Medium` | `Partial` | BI and marketing intelligence owners | Shared dictionary gives each KPI one definition, grain, source, window, target, owner and reconciliation rule |
 | `GAP-026` | Brand/content approval rules outside paid-ad copy are not centralized | `Medium` | `Pending` | Brand/content owner | Governed voice, claims, approval and channel adaptation contract |
+| `GAP-027` | BI Supabase Parent outcome grain, identity, history, lineage and freshness are not verified for marketing use | `High` | `Pending` | BI and marketing data owners | Read-only schema/pipeline inspection, proof-of-concept record, versioned contract, parity and rollback pass |
 
 ## What-If Playbook
 
@@ -267,6 +268,21 @@ Targeting keywords may still use approved category-intent terms.
    attribution settings.
 3. Use the platform experiment/A-B framework where available.
 4. Restart only with a documented split and success metric.
+
+### `SCN-027`: Supabase and direct business-source outcomes disagree
+
+1. Do not promote a source switch and do not enable a second platform sender.
+2. Compare source record IDs, `cefa_event_id`, Form entry ID, outcome grain,
+   original timestamps, current-state versus history behavior, corrections,
+   merges, deletions, and freshness.
+3. Preserve the existing guarded source, lifecycle baseline, accepted-ID log,
+   and delivery history during diagnosis.
+4. Reconcile one proof-of-concept record and aggregate source totals.
+5. Promote only one production outcome source after the versioned contract,
+   parity threshold, monitoring, and named rollback owner pass.
+
+Do not re-upload an existing GreenRope or Supabase current-state snapshot as
+new conversions.
 
 ## Closing A Gap
 

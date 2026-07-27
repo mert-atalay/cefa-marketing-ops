@@ -16,6 +16,8 @@ clarity; it does not replace the narrower technical or platform owners.
 3. [Gap, risk and scenario register](./gap-risk-and-scenario-register.md)
 4. [Measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
 5. [Program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
+6. [Marketing and BI alignment independent-review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md)
+7. [Marketing and BI alignment final decision and email](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md)
 
 ## This Workstream Owns
 
@@ -52,6 +54,9 @@ Those remain with the narrow owner and require the approvals defined there.
   paid-media and budget documents.
 - Access recovery and production ownership for Stape/private runtime remain
   pending.
+- The BI-owned Supabase Parent outcome model, identifiers, history, freshness,
+  and pipeline behavior remain pending read-only verification and a versioned
+  interface contract.
 - Creative assets, partner offers, organic social, agency access, experiments
   and broader brand/content approvals do not yet have complete central
   registers.
