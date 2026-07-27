@@ -89,7 +89,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Business plan approved and available; production server containers and first-party routing are not yet recorded |
+| Stape | Business purchase is approved; completed procurement, CEFA-owned administrative access, production server containers, and first-party routing are not yet recorded |
 
 The following current-state concerns shape this blueprint:
 
@@ -282,6 +282,51 @@ If Stape commercial entitlement is per container, CEFA should add the required
 containers rather than mix Parent, Franchise Canada, and Franchise USA
 destinations in one high-risk routing container.
 
+### Stape control planes
+
+Stape hosting, Stape account automation, and Google Tag Manager configuration
+are separate control planes. They must not be treated as interchangeable:
+
+| Control plane | Approved role | Source-of-truth rule |
+|---|---|---|
+| Stape direct API | Container, subscription, domain, power-up, usage, analytics, monitoring-rule, and delivery-health inventory and approved automation | Canonical machine interface for CEFA operational inventory and repeatable Stape administration |
+| Stape MCP | On-demand natural-language access to a useful subset of Stape account and container operations | Operator convenience only; disabled by default and never the configuration source of truth |
+| Google Tag Manager MCP or GTM API | Server-container workspaces, clients, tags, triggers, variables, templates, versions, environments, and permissions | Canonical automation interface for the GTM configuration running inside Stape |
+| Sanitized Git manifests and exports | Reviewed desired state, test evidence, version references, and rollback instructions | Durable human- and machine-readable change record; never contains credentials |
+
+The direct Stape API is broader than the current Stape MCP surface. Use the
+API for repeatable inventory, monitoring, analytics, domain health, and
+approved configuration workflows. Use Stape MCP only for supervised
+operations where its narrower tool surface is sufficient. The MCP must not
+silently create, delete, transfer, resize, cancel, reactivate, or purchase a
+container or subscription.
+
+Stape API keys are full-account secrets unless Stape documents and CEFA
+verifies narrower scopes. Store production automation credentials in Secret
+Manager, never in GTM, Git, BigQuery, shell history, chat, or MCP configuration
+files. Prefer separate named keys for durable automation and time-bounded
+operator use when the Stape account supports multiple keys. Rotate and revoke
+them through the access runbook.
+
+All API, Stape MCP, and GTM MCP writes inherit the same preview, approval,
+read-back, evidence, and rollback requirements as manual changes. An API or
+MCP capability is not standing permission to modify a live container.
+
+Create restricted operational inventories from the Stape API:
+
+- `stape_container_inventory`;
+- `stape_domain_health`;
+- `stape_usage_daily`;
+- `stape_monitoring_rule_inventory`;
+- `stape_delivery_health_daily`.
+
+These tables contain configuration, aggregate health, and bounded diagnostics,
+not raw request payloads or user identifiers. Stape Business provides 10-day
+logs but not automatic log export to Google Cloud Storage. API polling can
+preserve governed aggregate health and selected non-PII diagnostics. If
+durable full log export becomes a hard requirement, evaluate an Enterprise
+upgrade for that isolated container rather than implying Business provides it.
+
 ### First-party endpoint decision
 
 Preferred order:
@@ -322,17 +367,24 @@ advertise their tracking purpose.
 ### Stape rollout order
 
 1. Export current web GTM baselines and destination inventory.
-2. Create the Parent server container and non-production endpoint.
-3. Route page and diagnostic events in preview/shadow.
-4. Add GA4 server routing and reconcile sessions/events.
-5. Add Parent Google Ads website conversion routing.
-6. Add Parent Meta CAPI and prove Pixel/CAPI deduplication.
-7. Run a controlled Form 4 inquiry and verify Gravity Forms, KinderTales,
+2. Create the Parent Google Tag Manager server container and record its
+   container configuration.
+3. Create the CEFA-owned Parent Stape container, purchase Business for that
+   container, and record owner, billing, recovery, region, and entitlement.
+4. Create and secure the Stape API automation key, then read back the
+   container, subscription, region, usage, domains, power-ups, and monitoring
+   state before any production routing.
+5. Create the Parent non-production endpoint after DNS/CDN conflict review.
+6. Route page and diagnostic events in preview/shadow.
+7. Add GA4 server routing and reconcile sessions/events.
+8. Add Parent Google Ads website conversion routing.
+9. Add Parent Meta CAPI and prove Pixel/CAPI deduplication.
+10. Run a controlled Form 4 inquiry and verify Gravity Forms, KinderTales,
    GA4, Google, Meta, Stape, collector, and BigQuery.
-8. Promote Parent while retaining rollback-ready browser tags.
-9. Repeat independently for Franchise Canada.
-10. Repeat independently for Franchise USA.
-11. Consider Custom Loader, Cookie Keeper, Enricher, or other Business
+11. Promote Parent while retaining rollback-ready browser tags.
+12. Repeat independently for Franchise Canada.
+13. Repeat independently for Franchise USA.
+14. Consider Custom Loader, Cookie Keeper, Enricher, or other Business
     power-ups only after the baseline is stable.
 
 ### Stape acceptance
@@ -350,6 +402,9 @@ advertise their tracking purpose.
 - no prohibited PII appears in logs or exports;
 - all three containers have owner access, version export, monitoring, and
   rollback.
+- the direct API inventory agrees with the Stape UI and approved Git manifest;
+- Stape and GTM MCPs are disabled when not in supervised use;
+- no credential appears in source, logs, BigQuery, chat, or container exports.
 
 ## 7. Google Cloud Service Decisions
 
@@ -1238,7 +1293,8 @@ remain advisory until CEFA explicitly promotes an action.
 
 The next implementation sprint requires:
 
-1. CEFA Stape Business administrative access and container entitlement.
+1. CEFA-owned Stape account, completed Parent Business purchase,
+   administrative/recovery access, and container entitlement.
 2. GTM administrative access for the three existing web properties and new
    server containers.
 3. DNS/CDN owner for same-origin or first-party endpoint implementation.
@@ -1360,3 +1416,8 @@ The total program is complete when:
 - [Stape multi-domain server GTM](https://stape.io/blog/server-side-gtm-with-multiple-domains)
 - [Stape custom-domain options](https://stape.io/helpdesk/documentation/add-custom-domain-in-stape)
 - [Stape same-origin and Cookie Keeper guidance](https://stape.io/news/a-new-way-to-set-up-a-custom-domain-in-server-gtm)
+- [Stape API documentation](https://stape.io/helpdesk/documentation/stape-api)
+- [Stape MCP Server](https://stape.io/solutions/stape-mcp-server)
+- [Stape Google Tag Manager MCP](https://stape.io/blog/mcp-server-for-google-tag-manager)
+- [Stape logs and retention](https://stape.io/helpdesk/documentation/logs-feature)
+- [Stape monitoring](https://stape.io/helpdesk/documentation/monitoring-feature)

@@ -93,7 +93,7 @@ runtime, or authority to change spend and production systems without approval.
 | Website measurement | CEFA Conversion Tracking, WPCode bridge, GAConnector, GTM | Neutral events and identity; destination mapping remains property-specific |
 | Analytics | GA4 properties and native BigQuery export | Web behavior and event evidence, not CRM truth |
 | Advertising | Google Ads and Meta | Platform delivery, spend and optimization; IDs are stable object handles |
-| Server tagging | Stape Business | Approved additive transport; production containers and shadow QA remain pending |
+| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Purchase-approved additive transport; API is the canonical operational interface, MCPs are supervised controls, and Parent production container/shadow QA remain pending |
 | Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII |
 | BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; exact schema and pipeline remain pending read-only verification |
 | Reporting | BigQuery serving views, Looker Studio, Supermetrics, Power BI, Lovable | Show source, grain and freshness; do not silently substitute stale data |
@@ -228,7 +228,8 @@ These are intentional visible gaps, not facts to infer:
 - GreenRope opportunity fields for exact Form 4 event and entry identity;
 - source-confirmed parent household/dependent identifiers;
 - CEFA-controlled private runtime source repository;
-- Stape domains, containers, shadow routing and rollback evidence;
+- completed Parent Stape Business purchase, account/API access, domain,
+  container, shadow-routing, monitoring, and rollback evidence;
 - production Dataform Git/release/workflow configuration;
 - complete franchise GAConnector replacement evidence;
 - USA Synuma delivery gaps;
