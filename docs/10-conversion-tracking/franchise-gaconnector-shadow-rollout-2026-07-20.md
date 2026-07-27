@@ -112,3 +112,30 @@ The shadow runtime remained active and correctly guarded on both properties: ver
 | USA Form 2 | 0 | 0 | 0 | No evidence yet | 0/0 |
 
 The two USA entries had State and Country present, so the known blank-State failure did not recur. A read-only Synuma API health request returned HTTP `200`, but neither entry had received `cefa_synuma_lead_id` and both were marked `missing`. This is a CRM delivery alert independent of the attribution shadow runtime, which cannot alter the Synuma payload in `attribution_only` mode. Do not approve a GAConnector cutover while this delivery issue is unresolved or while attribution volume remains this small.
+
+### 2026-07-26 - Day 6
+
+Read-only aggregate checks confirmed CEFA Conversion Tracking remained active
+as `0.6.3` on both properties with `attribution_only`, attribution `shadow`,
+ledger `shadow`, and CRM identity/payload/collector disabled.
+
+| Property / form | Entries | Canonical / ledger | Paid entries | Paid core parity | Synuma lead ID |
+|---|---:|---:|---:|---:|---:|
+| Canada Form 1 | 8 | 5 present; 1 expected direct; 2 unexpected gaps | 5 | `83.3%` | 8/8 |
+| Canada Form 2 | 1 | 1/1 | 0 | No paid sample | 1/1 |
+| USA Form 1 | 7 | 7/7 | 7 | `95.6%` | 4/7 |
+| USA Form 2 | 1 | 1/1 | 1 | `100%` | 1/1 |
+
+Aggregate canonical and ledger coverage was `14/16` eligible non-direct
+entries (`87.5%`). Paid mismatch keys were:
+
+- Canada Form 1: `fc_channel`, `lc_channel`, `fc_content`, `lc_content`, and
+  `fc_term`;
+- USA Form 1: `fc_source`, `lc_source`, `fc_channel`, and `lc_channel`;
+- USA Form 2: none.
+
+Gravity Forms notification notes were successful for all `17` entries. The
+USA Form 1 Synuma alert remains independent of the attribution shadow:
+the original two missing lead IDs remained unresolved and a third gap occurred
+on 2026-07-25. Cutover remains unapproved because canonical coverage and paid
+parity are below gate and the CRM delivery alert is unresolved.

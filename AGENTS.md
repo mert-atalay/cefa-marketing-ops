@@ -27,7 +27,14 @@ Keep those responsibilities separate.
 
 ## Agent Rules
 
-- Start at `docs/00-governance/repo-map.md` before adding new documentation.
+- Start at `docs/00-governance/measurement-platform-handover-2026-07-27.md`.
+- Use `docs/00-governance/measurement-and-activation-program-register-2026-07-23.md`
+  for current status, blockers, and sequencing.
+- Use `docs/superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md`
+  for definitive implementation architecture and
+  `docs/superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md`
+  for the locked strategic BigQuery direction.
+- Read `docs/00-governance/repo-map.md` before adding new documentation.
 - Update the relevant workstream `README.md` when adding or changing docs in that workstream.
 - If a decision affects more than one workstream, update `docs/00-governance/source-of-truth-rules.md` or add a cross-link from the relevant workstream README.
 - Keep parent `cefa.ca`, franchise Canada `franchise.cefa.ca`, and franchise USA `www.franchisecefa.com` separate unless the document is explicitly cross-property.
@@ -35,6 +42,12 @@ Keep those responsibilities separate.
 - For conversion tracking, `school_uuid` is the parent school join key unless a future verified source changes that.
 - Do not promote assumptions into verified sections. Use `Verified`, `Partial`, `Pending`, or `Open question`.
 - If a file is mainly a source index or handoff for another agent, say that directly in the file.
+- This repository is public. Never commit credentials, raw CRM/form/platform
+  payloads, PII, browser sessions, private exports, or CEFA-only production
+  runtime.
+- Private Cloud Run, Dataform, infrastructure, Stape, GTM, deployment, and
+  runbook source belongs in the planned CEFA-controlled private runtime
+  repository.
 
 ## Commit Hygiene
 

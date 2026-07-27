@@ -1,6 +1,6 @@
 # Repository Map
 
-Last updated: 2026-05-03
+Last updated: 2026-07-27
 
 ## Purpose
 
@@ -14,6 +14,9 @@ This repo is the shared GitHub home for CEFA marketing measurement implementatio
 | `includes/` | WordPress plugin PHP classes | Conversion tracking/plugin agent |
 | `assets/js/` | Browser tracking bridge | Conversion tracking/plugin agent |
 | `snippets/` | Temporary runtime snippets, especially franchise WPCode fallback | Conversion tracking/plugin agent |
+| `collector/` | Public-safe disabled-by-default collector reference | Conversion tracking/data agent |
+| `dataform/` | Public-safe Dataform QA/assertion package | BigQuery/data agent |
+| `tools/warehouse/` | Public-safe activation and validation references already approved for this public repo | BigQuery/data agent |
 | `docs/00-governance/` | Repo rules, routing, source-of-truth decisions | All agents |
 | `docs/10-conversion-tracking/` | Tracking implementation and platform measurement plans | Conversion tracking agent |
 | `docs/20-bigquery/` | Warehouse, marts, schemas, QA, offline conversion contracts | BigQuery/data agent |
@@ -24,6 +27,17 @@ This repo is the shared GitHub home for CEFA marketing measurement implementatio
 | `docs/_templates/` | Reusable templates for future docs | All agents |
 | `data/reference/` | Machine-readable reference data | Shared, with owner noted per file |
 | `dist/` | Local release ZIPs/build output | Release task only |
+
+## Public And Private Source Split
+
+This GitHub repository is public. Keep governance, naming contracts,
+non-secret plugin code, redacted plans, schemas, and aggregate evidence here.
+
+Production Cloud Run, Dataform transformations, infrastructure-as-code,
+Stape/GTM manifests, deployment scripts, private tests, rollback manifests,
+and runbooks belong in the planned CEFA-controlled private runtime repository.
+Do not copy an untracked private runtime folder into this repository merely to
+make the public tree look complete.
 
 ## Existing Historical Docs
 

@@ -1,6 +1,13 @@
 # Master Data Workstream
 
+**Last updated:** 2026-07-27
+
 This folder is for canonical and partial reference data across schools, programs, locations, CRM systems, and marketing platforms.
+
+Start with the
+[measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
+and [data taxonomy](../00-governance/data-taxonomy.md). The detailed May files
+below are dated snapshots and must be revalidated before writes.
 
 ## Current Files
 
@@ -31,6 +38,10 @@ This folder is for canonical and partial reference data across schools, programs
 - The school form programs Google Sheet has 51 school rows and needs reconciliation against the 53-row BigQuery school dimension before it becomes a canonical crosswalk.
 - Raw/restricted GreenRope opportunity audit tables, normalized opportunity tables, field dictionary, phase taxonomy/path snapshots, and daily aggregate refresh automation are still pending.
 - Rule-registry upload workflow is still pending even though the current BigQuery registry/view is seeded.
+- KinderTales household/child source identity and lifecycle export/API
+  contracts remain pending for the later omnichannel model.
+- Promoted, selected, opportunity and eventual operational school must remain
+  separate fields; do not collapse them into one label.
 
 ## Suggested Next Files
 

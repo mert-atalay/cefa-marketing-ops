@@ -1,12 +1,15 @@
 # Paid Media Workstream
 
+**Last updated:** 2026-07-27
+
 This folder is for ad-account execution context that depends on conversion tracking, naming, BigQuery, and budget guardrails.
 
-## Local Source References
+## Start Here
 
-- `/Users/matthewbison/Desktop/cefa-nexus/CEFA/.agency/context/cefa-paid-media-skill-reference-2026-04-30.md`
-- `/Users/matthewbison/Desktop/cefa-nexus/CEFA/.agency/context/cefa-meta-naming-convention-2026-04-28.md`
-- CEFA budget workbook path and guardrails from the CEFA repo `AGENTS.md`.
+- [Measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
+- [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
+- [Conversion tracking workstream](../10-conversion-tracking/README.md)
+- [Data taxonomy and question routing](../00-governance/data-taxonomy.md)
 
 ## Current Files
 
@@ -20,6 +23,12 @@ This folder is for ad-account execution context that depends on conversion track
 - Keep micro-conversions out of Google Ads bidding unless CEFA explicitly changes that decision.
 - Conversion action definitions should link back to `docs/10-conversion-tracking/`.
 - Naming should link back to `docs/40-naming-convention/`.
+- Visible parent/enrollment copy must follow the CEFA Early Years wording
+  guardrail in the naming standard.
+- Use platform IDs for live object changes and read back URLs, UTMs, status,
+  goals and targeting after implementation.
+- This public repo receives aggregate status and contracts, not raw platform
+  exports, credentials or private browser sessions.
 
 ## Suggested Next Files
 

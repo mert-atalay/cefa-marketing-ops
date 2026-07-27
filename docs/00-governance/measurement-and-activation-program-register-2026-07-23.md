@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-25
+**Register date:** 2026-07-27
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -52,7 +52,7 @@ or production gate changes.
 |---|---|---|---|
 | Parent website attribution | `Verified` | CEFA Conversion Tracking `0.6.3` and the canonical Form `4` writeback improve fields `35-46`; School Manager and KinderTales remain unchanged | Continue production monitoring |
 | Parent website conversions | `Verified` | `school_inquiry_submit` continues to feed the existing GA4, Google Ads, and Meta inquiry destinations | Preserve once-only firing during sGTM work |
-| Franchise attribution replacement | `Active guarded` | CEFA attribution and ledger run in shadow beside GAConnector on Canada Forms `1/2` and USA Forms `1/2`; no legacy field or Synuma payload cutover | Complete evidence window, resolve delivery alerts, approve field mapping and rollback |
+| Franchise attribution replacement | `Active guarded` | CEFA attribution and ledger run in shadow beside GAConnector. Through 2026-07-26 canonical/ledger coverage was `14/16` eligible non-direct entries; Canada Form `1` was `5/7`, and USA Form `1` had Synuma IDs for only `4/7` entries | Resolve USA delivery alert, improve evidence/parity, approve field mapping and rollback |
 | Parent CRM offline conversions | `Active guarded` | Restricted BigQuery, capture, binder, poller, dispatcher, diagnostics, three Google actions, and three Meta test events are built; production sending is disabled; the capture schedule remains active while the no-value GreenRope binder retry loop is paused | Deploy binder backoff/group cap, then wait for GreenRope fields, controlled identity test, eligibility decision, and production activation |
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
@@ -61,6 +61,7 @@ or production gate changes.
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
+| Public/private source control | `Blocked operational risk` | This GitHub repository is public while material private warehouse/runtime work remains local or deployed from historical artifacts | Create CEFA-controlled private runtime repository and migrate reproducible non-secret runtime without exposing credentials or PII |
 
 ## Immediate Waiting List
 
@@ -75,6 +76,7 @@ or production gate changes.
 | Stape Business workspace and administrative access verification | CEFA/vendor | The Business subscription exists; the implementation still needs confirmed CEFA-owned workspace, container, billing and recovery access | Begin sGTM build in non-disruptive shadow mode |
 | DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection | Validate endpoint, cookies, routing, and rollback |
 | Franchise shadow evidence and Synuma review | CEFA measurement owner | GAConnector must not be replaced on sparse or delivery-uncertain evidence | Approve, extend, or reject franchise cutover |
+| CEFA private cloud runtime repository | CEFA GitHub/Cloud owner | Production Cloud Run, Dataform, infrastructure, Stape manifests, deployment and runbooks must not depend on untracked local files | Connect governed private source to build/release workflows |
 | KinderTales identity/lifecycle API contract | KinderTales/School Manager owner | Stable inquiry, adult, household, child, school, program, and lifecycle IDs are needed for the later multi-child omnichannel model | Build restricted HMAC relationships without raw child PII |
 | Form 4 Mailchimp feed minimization | CEFA marketing/website owner | Current active feed maps exact child DOB, address, phone, email, and parent name and shows no configured feed opt-in condition | Back up, confirm purpose/eligibility, minimize fields, then add read-only API/webhook journey ingestion |
 
@@ -314,6 +316,7 @@ All approved source facts
 | 11 | Parent multi-entity identity model | `Approved` | Multi-child, repeat-inquiry, multi-school and opportunity relationships pass deterministic-link and counting assertions |
 | 12 | Mailchimp and GreenRope email/journey inventory | `Pending later phase` | Read-only API/webhook contracts, provider reconciliation, school mapping and low-confidence-open policy are approved |
 | 13 | WordPress/KinderTales/GreenRope handoff hardening | `Code deployed disabled; vendor inputs pending` | School Manager 1.0.22 no-send QA passed; activate only after metadata acceptance and GreenRope mapping are confirmed |
+| 14 | CEFA private runtime source consolidation | `Blocked operational risk` | Private repository contains reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source with no secrets committed |
 
 ## Change Control
 
@@ -334,6 +337,7 @@ or private payloads in this register.
 
 ## Authoritative Detail
 
+- [Measurement platform handover](./measurement-platform-handover-2026-07-27.md)
 - [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 - [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
 - [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
@@ -347,4 +351,6 @@ or private payloads in this register.
 - [Parent KinderTales identity WordPress rollout](../10-conversion-tracking/parent-kindertales-identity-wordpress-rollout-2026-07-25.md)
 - [Parent canonical writeback observation](../10-conversion-tracking/parent-paid-writeback-production-observation-2026-07-10.md)
 - [Franchise GAConnector shadow rollout](../10-conversion-tracking/franchise-gaconnector-shadow-rollout-2026-07-20.md)
+- [Live WordPress tracking plugin inventory](../10-conversion-tracking/live-wordpress-tracking-plugin-inventory-2026-07-27.md)
+- [Paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md)
 - [Full conversion-tracking assessment](../10-conversion-tracking/full-conversion-tracking-assessment-and-execution-plan-2026-07-09.md)

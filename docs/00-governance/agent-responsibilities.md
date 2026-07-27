@@ -1,6 +1,6 @@
 # Agent Responsibilities
 
-Last updated: 2026-05-03
+Last updated: 2026-07-27
 
 ## Purpose
 
@@ -12,6 +12,7 @@ This file keeps the CEFA agents from writing over each other or mixing scopes.
 |---|---|---|---|
 | Conversion tracking parent/franchise agent | `docs/10-conversion-tracking/` plus plugin runtime files | DataLayer contracts, GTM/GA4/Ads/Meta conversion mapping, event IDs, attribution bridge, CAPI/sGTM roadmap | Paid-media optimization decisions, SEO copy, naming taxonomy changes |
 | BigQuery/data agent | `docs/20-bigquery/` and `data/reference/` when appropriate | Dataset/mart contracts, SQL plans, QA checks, offline conversion exports, source-to-mart mapping | Live ad platform changes unless explicitly approved |
+| Cloud/Stape runtime owner | Future CEFA private runtime repository plus redacted public contracts | Cloud Run, Dataform production, infrastructure, Stape containers, releases, monitoring and rollback | Publishing secrets/PII or changing business delivery paths |
 | SEO agent | `docs/30-seo/` | Technical SEO, local SEO, Search Console measurement, page taxonomy, sitemap status | Paid-media campaign decisions or conversion source-of-truth changes |
 | Naming convention agent | `docs/40-naming-convention/` | NC1 naming, creative filenames, copy keys, campaign/ad/ad set naming, n8n naming guardrails | Live budget changes, conversion action definitions |
 | Paid-media agent | `docs/50-paid-media/` | Ads account structure, launch QA, optimization notes, platform action status, conversion usage in bidding | Runtime plugin code, canonical school/program IDs |
@@ -21,6 +22,8 @@ This file keeps the CEFA agents from writing over each other or mixing scopes.
 
 - If a task is about "what fires, when, and with which parameters", route it to conversion tracking.
 - If a task is about "where the data lands and how it joins", route it to BigQuery/data.
+- If a task is about "how the production service is built, deployed, monitored
+  or rolled back", route it to the private Cloud/Stape runtime owner.
 - If a task is about "how pages are indexed or measured organically", route it to SEO.
 - If a task is about "what campaigns/assets should be named", route it to naming convention.
 - If a task is about "what ads should run or optimize against", route it to paid media.

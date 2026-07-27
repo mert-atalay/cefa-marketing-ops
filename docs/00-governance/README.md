@@ -6,6 +6,10 @@ Start here when adding a new document, routing work to another agent, or decidin
 
 ## Files
 
+- [measurement-platform-handover-2026-07-27.md](./measurement-platform-handover-2026-07-27.md):
+  one-document handover covering ownership, live flows, identifiers, plugins,
+  BigQuery/Stape structure, naming, blockers, roadmap, and the public/private
+  source-control boundary.
 - [measurement-and-activation-program-register-2026-07-23.md](./measurement-and-activation-program-register-2026-07-23.md): cross-workstream status, approved tooling, blockers, build sequence, and production gates for conversion tracking, Stape sGTM, BigQuery/Dataform, and offline activation.
 - [repo-map.md](./repo-map.md): folder map, workstream boundaries, and where each agent should write.
 - [source-of-truth-rules.md](./source-of-truth-rules.md): authority order and verification rules.
@@ -18,3 +22,6 @@ Start here when adding a new document, routing work to another agent, or decidin
 ## Core Rule
 
 Use this repo as the shared reference layer, but keep facts in the narrowest correct location. Runtime plugin code, tracking plans, BigQuery contracts, SEO notes, naming rules, and paid-media execution notes should not be mixed into one file.
+
+This repository is public. The governed handover belongs here; credentials,
+PII, raw payloads, private exports, and CEFA-only cloud runtime do not.

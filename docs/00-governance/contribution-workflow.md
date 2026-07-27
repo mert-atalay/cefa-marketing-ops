@@ -1,13 +1,16 @@
 # Contribution Workflow
 
-Last updated: 2026-05-03
+Last updated: 2026-07-27
 
 ## Before Adding A File
 
 1. Read [repo-map.md](./repo-map.md).
-2. Choose the narrowest workstream folder.
-3. Check whether a workstream README already links the relevant current file.
-4. If the update affects live tracking, platform configuration, or source-of-truth data, verify the current state first.
+2. Read the [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
+   when the change crosses workstreams.
+3. Choose the narrowest workstream folder.
+4. Check whether a workstream README already links the relevant current file.
+5. If the update affects live tracking, platform configuration, or
+   source-of-truth data, verify the current state first.
 
 ## File Naming
 
@@ -43,3 +46,7 @@ Minimum sections:
 - Documentation-only changes should not include plugin runtime edits unless the task explicitly covers both.
 - Runtime plugin edits should include verification notes in the same PR/commit or an adjacent doc update.
 - Do not commit local secrets, auth files, raw logs, or full platform exports.
+- This repository is public. Do not commit PII, raw CRM/form payloads,
+  private browser sessions, or CEFA-only cloud runtime.
+- Record private-runtime changes here only as redacted contracts, release
+  references, aggregate QA, and current status.

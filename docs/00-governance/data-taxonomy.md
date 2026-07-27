@@ -1,6 +1,6 @@
 # CEFA Data Taxonomy And Source Map
 
-Last updated: 2026-05-10
+Last updated: 2026-07-27
 
 ## Purpose
 
@@ -10,12 +10,14 @@ It is an index and routing file, not a replacement for the narrower source-of-tr
 
 ## Status
 
-`Partial`
+`Active governed`
 
-- `Verified`: The source groups, key names, workstream owners, and links below are derived from the governed repo docs and runtime plugin README.
-- `Partial`: Some source freshness, platform reporting, CRM mappings, school/location reconciliation, and paid-media inventories are only verified as of the dates in their owning docs.
-- `Pending`: This file has not been backed by a machine-readable `data/reference/` taxonomy table yet.
-- `Open question`: Whether this should become a dashboard-readable rule/source registry upload alongside `cefa_core.measurement_rule_registry`.
+- `Verified`: Core source ownership, event names, Form 4 fields, identity
+  grains, school join key, data-layer roles, and plan hierarchy.
+- `Partial`: Platform inventories, some CRM/source mappings, school/program
+  crosswalks, franchise attribution parity, and delivery evidence.
+- `Pending`: Full machine-readable taxonomy generation from governance
+  contracts and production Dataform integration.
 
 ## How To Use This File
 
@@ -31,14 +33,17 @@ Do not use this file to approve live changes. Live GTM, GA4, Google Ads, Meta, W
 
 ## Authority Order
 
-Use the existing repo authority order from [source-of-truth-rules.md](./source-of-truth-rules.md):
+Use the current authority order from
+[source-of-truth-rules.md](./source-of-truth-rules.md):
 
-1. Live verified systems and current API/browser/network evidence.
-2. Runtime code and current governed repo docs.
-3. Local CEFA conversion-tracking knowledge base for unmigrated evidence.
-4. Local NEXUS context.
-5. Explicitly cited CEFA Ops/source files.
-6. External best practices.
+1. Verified live systems and read-back evidence.
+2. Runtime code and narrow current implementation contracts.
+3. [Measurement platform handover](./measurement-platform-handover-2026-07-27.md)
+   and [program register](./measurement-and-activation-program-register-2026-07-23.md).
+4. July 25 Cloud/Stape implementation blueprint.
+5. June 12 locked BigQuery strategic blueprint.
+6. Dated implementation reports, private cited evidence, then external
+   guidance.
 
 ## Primary Data Source Taxonomy
 
@@ -46,7 +51,7 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 |---|---|---|---|---|---|---|---|---|
 | Website runtime | Parent `cefa.ca` WordPress | Parent inquiry pages, Form 4 runtime, helper plugin output, School Manager context | Form 4 entry ID, `event_id`, `school_selected_id`, `program_id` | page path, school slug, school name, program name | Emits neutral parent event through helper plugin after saved submission | GA4 export, BigQuery marts, dashboard views | `Verified` for current contract | [README](../../README.md), [conversion tracking README](../10-conversion-tracking/README.md) |
 | Website runtime | Franchise Canada `franchise.cefa.ca` | Canada franchise inquiry and real-estate/site forms | Gravity Forms entry ID, entry-meta `event_id`, Synuma lead ID when returned | market, location interest, form family | Emits `franchise_inquiry_submit` and `real_estate_site_submit` through WPCode/helper path | GA4, Google Ads, Meta, future warehouse reconciliation | `Partial` pending delayed platform confirmations | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
-| Website runtime | Franchise USA `www.franchisecefa.com` | USA franchise inquiry and real-estate/site forms | Gravity Forms entry ID, entry-meta `event_id`, Synuma lead ID when returned | market, location interest, form family | Emits USA franchise helper events; Google Ads final mapping still pending | GA4, Meta USA dataset, future warehouse reconciliation | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
+| Website runtime | Franchise USA `www.franchisecefa.com` | USA franchise inquiry and real-estate/site forms | Gravity Forms entry ID, entry-meta `event_id`, Synuma lead ID when returned | market, location interest, form family | Emits USA franchise helper events; confirmed Form 1 dispatch maps to the existing Google Ads USA application action with transaction deduplication | GA4, Google Ads, Meta USA dataset, warehouse reconciliation | `Active guarded`; Synuma delivery alert | [handover](./measurement-platform-handover-2026-07-27.md), [franchise shadow rollout](../10-conversion-tracking/franchise-gaconnector-shadow-rollout-2026-07-20.md) |
 | Form/business truth | Gravity Forms parent Form 4 | Saved parent inquiry record; API-accessible Form 4 backfill | Form 4 entry ID, `32.1` school UUID, `32.2` program ID, `32.4` event ID | `32.5` school slug, `32.6` school name, `32.7` program name | Business truth behind parent final event | POC MTD serving snapshots; future governed parent inquiry marts | `Verified` field/API-backfill contract; `Partial` webhook and CRM reconciliation | [business truth gaps](../10-conversion-tracking/business-truth-and-tracking-data-gaps-2026-05-03.md) |
 | Form/business truth | Franchise Gravity Forms 1 and 2 | Franchise inquiry and site inquiry saved records | Form entry ID, helper entry-meta `event_id`, CRM lead ID when available | form family, lead intent, market/country | Business truth behind franchise helper events | Franchise lead-source mart after refresh; current mart is stale | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
 | Website metadata | CEFA School Manager | Parent school/program/day rendering and Field 32 behavior | `school_uuid`, `program_id`, School Manager IDs where known | school/program/day labels, school slug | Provides parent selected school/program context; helper plugin must not overwrite business fields | Master-data crosswalk and dim school reconciliation | `Verified` operational surface; some IDs `Partial` | [master data README](../60-master-data/README.md) |
@@ -54,14 +59,15 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 | Tracking bridge | Franchise WPCode fallback | Temporary bridge for live franchise hosts | entry-meta `event_id`; form IDs 1 and 2 | `site_context`, `market`, `country` | Emits franchise final events where full plugin deploy is blocked | GTM containers and downstream platforms | `Partial` | [conversion tracking README](../10-conversion-tracking/README.md) |
 | Attribution capture | Parent first-party attribution fields | UTM/click/referrer handoff for parent Form 4 | Form 4 fields 35-46 | `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`, `gbraid`, `wbraid`, `fbclid`, `msclkid`, first landing/referrer | Attribution metadata, not lead truth by itself | GA4, BigQuery, future offline exports | `Verified` field contract | [README](../../README.md) |
 | Attribution capture | GAConnector franchise fields | Franchise last-click/first-click attribution fields | Franchise fields 14-30 | `lc_*`, `fc_*`, `gclid`, `ga_client_id` | Preserve vendor attribution; helper should read, not overwrite | GA4/GTM/reporting when clean | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
+| Server-side tagging | Stape Business | Planned first-party server containers for Parent, Franchise Canada and Franchise USA | `cefa_event_id`, hostname/site context, destination IDs | neutral event names and governed parameters | Additive server transport with exact browser/server deduplication | GA4, Google Ads, Meta and BigQuery diagnostics | `Approved`; production routing pending | [Cloud/Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md) |
 | Tag management | Parent GTM `GTM-NZ6N7WNC` | Maps parent neutral events to GA4, Google Ads, Meta | GTM tags/triggers; destination conversion labels | destination event names | Maps `school_inquiry_submit` to platform destinations | Platform reporting and GA4 export | `Verified` current parent path | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
 | Tag management | Franchise Canada GTM `GTM-TPJGHFS` | Maps Canada franchise events | GTM version/tag IDs; destination labels | destination event names | Preserves `fr_application_submit` / `Fr Application Submit` continuity | Platform reporting | `Partial` pending delayed confirmations | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
-| Tag management | Franchise USA GTM `GTM-5LZMHBZL` | Maps USA franchise events | GTM version/tag IDs; destination labels | destination event names | GA4/Meta active; Google Ads final-submit mapping pending | Platform reporting | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
+| Tag management | Franchise USA GTM `GTM-5LZMHBZL` | Maps USA franchise events | GTM version/tag IDs; destination labels | destination event names | GA4/Meta active; confirmed Form 1 dispatch maps to the existing Google Ads USA application action with transaction deduplication | Platform reporting | `Active guarded`; CRM delivery alert remains | [handover](./measurement-platform-handover-2026-07-27.md) |
 | Analytics | GA4 parent property `267558140` / `G-T65G018LYB` | Parent web event analytics | `event_id`, `event_name`, `user_pseudo_id`, session dimensions | GA4 event/parameter names | Receives mapped `generate_lead`; not CRM truth | `analytics_267558140.events_*`, GA4 marts | `Verified` export availability in checked docs | [warehouse current state](../20-bigquery/warehouse-current-state-2026-05-03.md) |
 | Analytics | GA4 franchise Canada `259747921` / `G-6EMKPZD7RD` | Franchise Canada event analytics | GA4 event and parameter IDs | GA4 event names | Receives mapped `generate_lead`; not CRM truth | future/reported franchise surfaces | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
 | Analytics | GA4 franchise USA `519783092` / `G-YL1KQPWV0M` | Franchise USA event analytics | GA4 event and parameter IDs | GA4 event names | Receives helper-submit reporting; not CRM truth | future/reported franchise surfaces | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
 | Paid platform | Google Ads parent / `CEFA $3000` | Parent paid search/PMax execution and platform conversions | `customer_id`, `campaign_id`, `ad_group_id`, `asset_group_id`, `ad_id`, `gclid` | campaign/ad group/asset group labels; GADS1 keys | Destination conversion reporting; not business truth alone | `raw_google_ads`, Google Ads marts, Supermetrics detail | `Partial` freshness after 2026-04-30 | [Google Ads GADS1 inventory](../40-naming-convention/google-ads-naming-gads1-active-last-30-inventory-2026-05-04.md), [paid media availability](../50-paid-media/platform-data-availability-2026-05-03.md) |
-| Paid platform | Google Ads franchise / `CEFA Franchisor` | Franchise paid search/PMax execution and platform conversions | `customer_id`, `campaign_id`, `ad_group_id`, `asset_group_id`, `ad_id`, `gclid` | campaign/ad group/asset group labels; GADS1 keys | Destination conversion reporting; USA final mapping still pending | `raw_google_ads`, Supermetrics detail | `Partial` | [Google Ads GADS1 inventory](../40-naming-convention/google-ads-naming-gads1-active-last-30-inventory-2026-05-04.md) |
+| Paid platform | Google Ads franchise / `CEFA Franchisor` | Franchise paid search/PMax execution and platform conversions | `customer_id`, `campaign_id`, `ad_group_id`, `asset_group_id`, `ad_id`, `gclid` | campaign/ad group/asset group labels; GADS1 keys | Destination conversion reporting; USA Form 1 uses the confirmed existing application action | `raw_google_ads`, Supermetrics detail | `Active guarded`; current paid-object inventory remains partial | [handover](./measurement-platform-handover-2026-07-27.md), [Google Ads GADS1 inventory](../40-naming-convention/google-ads-naming-gads1-active-last-30-inventory-2026-05-04.md) |
 | Paid platform | Meta parent / CEFA Early Learning | Parent Meta campaigns, ad sets, ads, pixel/dataset conversion reporting | `account_id`, `campaign_id`, `adset_id`, `ad_id`, `fbclid` | current names, NC1/NC2 names, campaign/ad/adset keys | Destination conversion reporting; not business truth alone | `raw_meta_ads`, Meta marts, Supermetrics detail | `Verified` inventory; `Partial` reporting freshness | [Meta NC2 inventory](../40-naming-convention/meta-naming-nc2-active-last-30-inventory-2026-05-04.md) |
 | Paid platform | Meta franchise / CEFA Franchisor | Franchise Meta campaigns, ad sets, ads, shared/USA dataset paths | `account_id`, `campaign_id`, `adset_id`, `ad_id`, `fbclid` | current names, NC2 names, campaign/ad/adset keys | Destination conversion reporting; dataset strategy differs by market | `raw_meta_ads`, Meta marts, Supermetrics detail | `Partial` | [Meta NC2 inventory](../40-naming-convention/meta-naming-nc2-active-last-30-inventory-2026-05-04.md) |
 | Naming/build control | v21 paid-media naming Google Sheet | Team-facing copy, creative, build manifest, paused import outputs | `campaign_slot`, `copy_template_slot`, `copy_render_slot`, `creative_slot`, build row ID | `campaign_key`, `ad_set_key`, `ad_data_key`, `ad_build_key`, creative filename | Controls future import-ready rows; does not approve live launch | Future n8n/import/audit outputs | `Partial` POC; verified sheet repair | [v21 build control doc](../40-naming-convention/paid-media-build-control-center-v21-final-poc-2026-05-06.md) |
@@ -70,7 +76,11 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 | CRM/opportunity | GreenRope | Current-state opportunity aggregate and group mapping | GreenRope group ID, opportunity created date | opportunity phase/path labels; UTM/click markers | CRM context only; current aggregate is not final paid inquiry truth | `bridge_greenrope_group_school`, `fct_greenrope_school_funnel_daily`, dashboard CRM views | extraction count `Verified`; business interpretation `Partial` | [dashboard source layer](../20-bigquery/dashboard-source-layer-greenrope-and-rule-registry-2026-05-03.md) |
 | CRM/franchise delivery | Synuma / SiteZeus / CEFA Franchise API | Franchise lead delivery and routing | `cefa_synuma_lead_id` where returned | routing owner/market fields | Franchise business delivery evidence | future franchise reconciliation | `Partial` | [event ownership matrix](../10-conversion-tracking/event-ownership-matrix-2026-05-05.md) |
 | Business destination | KinderTales | Parent lead/delivery destination | current mapped lead/school identifiers when available | parent enrollment labels | Business destination; not replaced by plugin | future parent business-truth marts | `Pending` current refresh | [business truth gaps](../10-conversion-tracking/business-truth-and-tracking-data-gaps-2026-05-03.md) |
+| Parent CRM lifecycle | GreenRope prospective opportunity lifecycle | Tour and approved prospective outcome evidence | pending `cefa_event_id`, `cefa_form_entry_id`, opportunity ID | governed canonical lifecycle stages | Source for secondary offline CRM-stage reporting only | restricted lifecycle ledger, outbox and no-PII marts | `Active guarded`; exact identity fields blocked | [offline implementation report](../10-conversion-tracking/parent-crm-offline-conversion-implementation-report.md) |
+| Email/journey source | Mailchimp | Audience, campaign, delivery and engagement evidence | provider IDs mapped through restricted identity only | campaign, journey and governed school mapping | Later read-only omnichannel evidence | no-PII delivery/engagement facts | `Pending later phase`; Form 4 feed review required | [Cloud/Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md#email-and-lifecycle-engagement-contract) |
 | Warehouse | BigQuery project `marketing-api-488017` | Raw, staging, mart, dashboard, rule-registry surfaces | table/view keys by source; `school_uuid`; platform IDs | mart field names, rule rows | Reconciles source evidence; does not replace form/CRM truth | `analytics_267558140`, `raw_*`, `mart_*`, `cefa_core` | `Verified` current state with gaps | [warehouse current state](../20-bigquery/warehouse-current-state-2026-05-03.md) |
+| Transformation/QA | Dataform | Governed SQL dependency graph, assertions, releases and workflows | action name, assertion result, release/workflow IDs | tags, dataset/table contracts | Quality and reproducibility layer | staging, core, marts, assertions | `Active guarded`; production Git/release setup pending | [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md) |
+| Restricted identity | CEFA restricted BigQuery and Cloud Run memory | HMAC parent/household/event links, bounded identifier eligibility | `parent_key`, `household_key`, `dependent_key`, `inquiry_key`, `opportunity_key`, `cefa_event_id` | source, method, confidence, key version | Deterministic matching and activation eligibility | restricted datasets only | `Approved contract`; source coverage partial | [Cloud/Stape identity contract](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md#parent-identity-and-omnichannel-journey-contract) |
 | Reporting connector | Supermetrics | Paid platform and GA4 reporting extracts | account IDs, report dates, campaign/ad IDs where available | connector field labels | Reporting source, not live admin truth | `raw_supermetrics`, local artifacts | `Partial` | [paid media availability](../50-paid-media/platform-data-availability-2026-05-03.md) |
 | Local SEO/listings | GBP and Yelp | Parent school local-listing traffic links | GBP/Yelp location IDs when mapped; `school_slug` in UTMs | `ll1` UTM fields | Source/medium attribution into GA4/BigQuery | GA4 and source/medium marts after tagging | `Partial` | [local listing UTM rules](../40-naming-convention/local-listing-utm-rules-gbp-yelp-2026-05-03.md) |
 | Organic search | Google Search Console | Organic query/page performance | URL/page path, query, date | SEO page labels | SEO reporting only; not conversion truth | future SEO/GSC marts or reports | `Partial` snapshot | [SEO README](../30-seo/README.md) |
@@ -91,7 +101,13 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 
 | Identifier | Primary meaning | Use as join key? | Status | Do not confuse with |
 |---|---|---:|---|---|
-| `event_id` | Unique successful conversion-event identity | Yes, for event dedupe/reconciliation | `Verified` | `school_uuid`, `school_slug`, `campaign_id` |
+| `cefa_event_id` / `event_id` | Unique successful event identity; `cefa_event_id` is the canonical cross-system name | Yes, for event dedupe/reconciliation | `Verified` | `school_uuid`, `school_slug`, `campaign_id` |
+| `form_entry_id` | One saved Gravity Forms entry | Yes, for exact form reconciliation | `Verified` | event ID or CRM opportunity |
+| `parent_key` | One deterministically identified adult contact | Yes, restricted/no-PII joins | `Approved contract` | household, child or inquiry |
+| `household_key` | Source-confirmed household relationship | Yes, restricted joins only | `Approved contract`; source pending | address-based or fuzzy household inference |
+| `dependent_key` | Optional source-confirmed child identity | Yes, restricted joins only | `Approved contract`; source pending | child name or DOB hash |
+| `inquiry_key` | One legitimate saved inquiry | Yes | `Approved contract` | unique parent or household |
+| `opportunity_key` | One source CRM opportunity | Yes when source relationship is deterministic | `Approved contract` | inquiry or school |
 | `school_uuid` | Parent school identity from Field 32 / `dim_school` | Yes, primary parent school join | `Verified` | display school name, location code |
 | `school_selected_id` | Helper payload name for selected parent school UUID | Yes, maps to `school_uuid` | `Verified` | event ID |
 | `program_id` | Selected parent program identity where available | Yes, for program-level parent tracking | `Verified` for observed programs | `program_token` |
@@ -124,10 +140,13 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 | Parent `cefa.ca` | `school_inquiry_submit` | Gravity Forms Form 4 and downstream KinderTales/business delivery | `generate_lead` | Existing primary `Inquiry Submit_ollo` | `Inquiry Submit` on dataset `918227085392601` | Parent final conversion path | `Verified` |
 | Franchise Canada `franchise.cefa.ca` | `franchise_inquiry_submit` | Franchise Gravity Form 1 and Synuma/SiteZeus delivery | `generate_lead` | Existing primary `fr_application_submit` | `Fr Application Submit` / `Fr Application Submit_CAD` on shared dataset `918227085392601` | Preserve existing primary action for continuity | `Partial` pending delayed platform confirmation |
 | Franchise Canada `franchise.cefa.ca` | `real_estate_site_submit` | Franchise Gravity Form 2 and Synuma/SiteZeus delivery | GA4/reporting mapping | Secondary `fr_site_form_submit` | `Fr Site Form Submit` | Secondary/reporting unless approved | `Partial` |
-| Franchise USA `www.franchisecefa.com` | `franchise_inquiry_submit` | USA Franchise Gravity Form 1 and Synuma/SiteZeus delivery | `generate_lead` | Pending mapping to selected primary action, likely existing `Application Submit (USA)` | Standard `Lead` on USA dataset `1531247935333023` | Pending paid-media signoff | `Partial` |
+| Franchise USA `www.franchisecefa.com` | `franchise_inquiry_submit` | USA Franchise Gravity Form 1 and Synuma/SiteZeus delivery | `generate_lead` | Existing `Application Submit (USA)` on confirmed Form 1 dispatch with server transaction deduplication | Standard `Lead` on USA dataset `1531247935333023` | Existing final-submit path | `Active guarded`; CRM delivery alert remains |
 | Franchise USA `www.franchisecefa.com` | `real_estate_site_submit` | USA real-estate/site form and Synuma/SiteZeus delivery | GA4/reporting mapping | Pending or secondary | USA Meta reporting/custom conversion if approved | Reporting/secondary until approved | `Partial` |
 | Parent micro-events | `parent_inquiry_cta_click`, `find_a_school_click`, `phone_click`, `email_click`, `form_start`, `form_submit_click`, `validation_error` | No lead created by themselves | GA4/reporting only | Not primary bidding | Not primary bidding | Diagnostic only | `Verified` rule |
-| Future server-side / CAPI / MP | Future shared logical event with `event_id` | Form/CRM plus event identity | Future additive path | Future additive path | Future CAPI path | Not active until signed off | `Pending` |
+| Planned Stape browser/server route | Same governed neutral event with `cefa_event_id` | Form/CRM plus event identity | Additive GA4 route | Additive Google route | Pixel/CAPI deduplication | Shadow before promotion | `Approved`; production pending |
+| Parent CRM `tour_scheduled` | GreenRope prospective transition | Exact Form 4/GreenRope identity | Reporting | Secondary Google CRM action | `CEFA_CRM_TourScheduled` | Not used for bidding | `Active guarded`; sending disabled |
+| Parent CRM `tour_completed_candidate` | GreenRope `post tour` candidate transition | Exact Form 4/GreenRope identity | Reporting | Secondary Google CRM action | `CEFA_CRM_TourCompletedCandidate` | Not used for bidding | `Active guarded`; sending disabled |
+| Parent CRM `crm_closed_won` | GreenRope closed-won CRM evidence | Exact Form 4/GreenRope identity | Reporting | Secondary Google CRM action | `CEFA_CRM_ClosedWon` | Not used for bidding | `Active guarded`; sending disabled |
 
 ## Naming Convention Taxonomy
 
@@ -144,6 +163,7 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 | Franchise topic | Franchise copy/creative/ad keys | Franchise-specific topic/offer tokens | `franchise_topic`, `offer_type` | `Verified` in v21 POC | [v21 build control doc](../40-naming-convention/paid-media-build-control-center-v21-final-poc-2026-05-06.md) |
 | Copy angle | CW/GD/ad data keys | `Attention`, `Interest`, `Desire`, `Action`, `Trust`, `Program Fit`, `Curriculum`, `Safety`, `Convenience`, `Social Proof`, `Urgency`, `Diversification`, `Investment`, `Market Opportunity`, `Real Estate`, `Retargeting` | copy-angle slug in keys | `Verified` in v21 POC | [v21 build control doc](../40-naming-convention/paid-media-build-control-center-v21-final-poc-2026-05-06.md) |
 | Local listing UTMs `ll1` | GBP/Yelp parent listing URLs | `utm_source={platform}`, `utm_medium=local_listing`, stable campaign by link intent | `utm_id`, `utm_content` | `Partial` pending full slug/listing field confirmation | [local listing UTM rules](../40-naming-convention/local-listing-utm-rules-gbp-yelp-2026-05-03.md) |
+| Visible parent/enrollment copy | Meta, Google and related CEFA parent ads | Targeting may use category-intent words; visible copy uses `CEFA Early Years` / `CEFA Early Years School` and excludes daycare/childcare/preschool terms | copy approval/QA status | `Verified` rule | [paid-media naming and copy standard](../40-naming-convention/cefa-paid-media-naming-and-copy-standard.md) |
 
 ## UTM And Attribution Rules
 
@@ -173,15 +193,18 @@ Use the existing repo authority order from [source-of-truth-rules.md](./source-o
 
 | Gap | Status | Primary owner | Notes |
 |---|---|---|---|
-| Current parent business-truth marts after 2026-03-29 | `Pending` | Conversion tracking + BigQuery | Needed before dashboards treat current parent inquiry counts as final truth. |
-| Current franchise lead-source mart after 2026-03-29 | `Pending` | Conversion tracking + BigQuery | Needed before final franchise reporting and offline exports. |
-| Google Ads and Supermetrics detail after 2026-04-30 | `Open question` | Paid media + BigQuery | Recheck before May paid reporting. |
-| School-form programs sheet vs 53-row `dim_school` reconciliation | `Partial` | Master data | Sheet has 51 rows; BigQuery has 53 checked rows plus slug differences. |
-| `canonical_location_id` normalization | `Pending` | Master data | Present but mixed UUID-like and slug-like values. |
+| CEFA private cloud runtime repository | `Blocked` | Cloud/data engineering | Required so production runtime is not dependent on untracked local files or old images. |
+| GreenRope exact Form 4 identity fields | `Blocked external` | GreenRope/KinderTales vendor | Required for eligible parent CRM outcome activation. |
+| Stape ownership, domains and shadow implementation | `Pending` | Measurement engineering | Business plan exists; production routing is not active. |
+| Dataform production Git/releases/workflows | `Pending` | BigQuery/data | QA package exists; production transformation migration remains. |
+| USA Franchise Synuma lead-ID gaps | `Alert` | Franchise delivery owner | Only 4/7 USA Form 1 entries had Synuma IDs through 2026-07-26. |
+| Franchise GAConnector parity and cutover | `Active guarded` | Conversion tracking | Coverage and paid parity remain below gate. |
+| School/program/source crosswalk reconciliation | `Partial` | Master data | Preserve `school_uuid` and do not join on labels alone. |
 | Platform object rename approvals | `Pending` | Naming + paid media | NC2/GADS1 are planning surfaces, not live rename approval. |
 | Fresh Meta/Google import template validation | `Pending` | Naming + paid media | Required before real bulk uploads from v21 sheet. |
 | n8n phase-1 validation/export/audit workflow | `Pending` | Naming + automation | Allowed first phase only; no live activation/budget/optimization writes. |
-| Rule-registry upload workflow | `Pending` | BigQuery + governance | Table/view exists, but future controlled upload process is not built. |
+| Mailchimp Form 4 feed minimization | `Pending` | Website/marketing owner | Review purpose, eligibility and sensitive mapped fields before omnichannel expansion. |
+| KinderTales household/child identity source | `Pending later phase` | KinderTales/School Manager | Needed for deterministic multi-child journeys without raw PII in marts. |
 
 ## Owning Workstream Summary
 
