@@ -62,7 +62,7 @@ or production gate changes.
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
 | BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; quoted budgets and live capacity views are registered, and current volume is comfortably inside the approved envelope | Connect Cloud Billing export, productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
 | Dataform | `Active guarded` | Git now contains 15 assertion definitions; non-production workspace compilation produced 15 actions with zero errors, and both `foundation_qa` and `existing_qa` tagged proof runs succeeded; Cloud Run remains the production orchestrator | Connect CEFA-controlled Git, define runtime identity and dev/staging/prod releases, then run parallel parity before promotion |
-| Stape Business sGTM | `Approved` | CEFA has approved the Parent Business purchase; no completed purchase, CEFA-owned administrative access, production container, or routing cutover is recorded yet | Create the CEFA-owned account and Parent GTM/Stape containers, purchase Parent Business, secure API access, then build and shadow QA |
+| Stape Business sGTM | `Active setup` | On 2026-07-28 CEFA created Parent server GTM `GTM-T7C46VM7` and the matching Stape container in `CA East (Canada)`. Annual Business is paid and verified with `5M` requests/month, 10-day logs, 20-domain capability, and healthy billing. Parent web GTM `GTM-NZ6N7WNC` was read back with zero unpublished changes or conflicts and a baseline of 18 tags, 11 triggers and 36 variables. A separate unpublished server workspace, `CEFA \| Parent \| sGTM Shadow Build \| 2026-07-28` (`3`), contains the inherited GA4 client and zero tags, triggers or variables. Neutral shadow hostname `edge.cefa.ca` is registered in Stape but DNS is not connected; usage remains zero, routing inactive, and all optional power-ups off | Add the two DNS-only Cloudflare CNAMEs, verify TLS/health, rotate the temporarily disclosed API key, confirm account controls, then preview and QA the unpublished server workspace |
 | BI Supabase and marketing boundary | `Partial` | The BI team reports that its Python pipeline consolidates KinderTales/GreenRope Parent business data into Supabase for Power BI/Lovable; schema, grain, identity, history, timestamps, freshness and source lineage are not yet verified by marketing | Read-only meeting inspection, shared metric dictionary and one proof-of-concept outcome record |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
@@ -79,9 +79,9 @@ or production gate changes.
 | Controlled parent inquiry | CEFA measurement owner | Proves Gravity Forms, GreenRope, KinderTales, and existing conversions agree | Enable eligible prospective lifecycle processing |
 | Per-record platform eligibility decision | CEFA | Runtime currently fails closed when eligibility is unknown | Enable platform dispatch only for approved records |
 | Meta live custom-event registration | Meta, triggered by first legitimate eligible outcome | Test Events do not currently expose the event type to reporting custom-conversion creation | Create three reporting-only custom conversions |
-| Stape Parent Business purchase and administrative access | CEFA | Purchase is approved, but the completed subscription and CEFA-owned workspace, container, billing, recovery, and region are not yet verified | Create the Parent container, secure API access, inventory the baseline, and begin non-disruptive shadow build |
-| Stape API key and GTM MCP OAuth | CEFA measurement owner | The API governs repeatable Stape inventory/monitoring; GTM MCP governs server-container configuration | Store the API key outside Git, validate read-only inventory, then enable each MCP only for supervised work |
-| DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection | Validate endpoint, cookies, routing, and rollback |
+| Stape Parent administrative controls | CEFA | Parent annual Business payment and entitlement are verified. Recovery, 2FA, administrator ownership, usage auto-upgrade preference, and durable secret rotation still require confirmation | Verify the account-control checklist before shadow traffic or additional properties |
+| Stape account API key rotation and GTM MCP OAuth | CEFA measurement owner | The initial account key was disclosed during setup and is not eligible for durable use. Direct API and parked Stape MCP access passed. A supervised GTM MCP session created and read back the Parent server container; all MCPs remain disabled by default | Rotate the account key in macOS Keychain service `cefa-stape-account-api`, move the durable secret to the approved secret flow, and enable either MCP only for supervised work |
+| DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection. Parent requires DNS-only CNAME `edge` -> `ca.stape.io` and `load.edge` -> `lca.stape.io` in Cloudflare | Validate CNAME resolution, Stape domain state, TLS, `/healthy`, cookies, routing and rollback before any web-GTM routing change |
 | BI Supabase read-only schema and pipeline inspection | BI/digital transformation owner | Confirms Parent record grain, identifiers, history, timestamps, lineage, freshness, corrections and current pipeline behavior | Approve or revise the versioned Supabase-to-BigQuery outcome contract |
 | Shared Parent metric dictionary | BI and marketing intelligence owners | Prevents Power BI and marketing reporting from defining inquiry, tour, enrollment, attribution and school ownership differently | Certify the minimum feed in both directions and name metric owners |
 | Franchise shadow evidence and Synuma review | CEFA measurement owner | GAConnector must not be replaced on sparse or delivery-uncertain evidence | Approve, extend, or reject franchise cutover |
@@ -98,7 +98,7 @@ renewals.
 | Item | Approved reference | Intended use | Registration status |
 |---|---:|---|---|
 | BigQuery + Google Cloud data and activation development | `$3,377` quoted line | Complete and harden CEFA's existing marketing data and intelligence foundation using the relevant Google Cloud capability set | Approved and available; not restricted to free tiers and not subject to a separate cost-approval gate |
-| Stape Business | `$83/month`, billed `$1,000/year`, up to `5M` requests in supplied plan image | Managed sGTM hosting, multi-domain capability, 10-day logs, monitoring, first-party routing and server-side destination delivery | Parent purchase approved; completion, CEFA-owned access, container creation and implementation pending |
+| Stape Business | `$83.33/month` equivalent, billed `$1,000/year`, up to `5M` requests/month | Managed sGTM hosting, up to 20 domains, 10-day logs, five monitoring rules, first-party routing and server-side destination delivery | Parent annual Business paid and API-verified; hosting running in Canada; neutral shadow domain registered; DNS and routing remain off |
 | Separate server-side GTM quoted line | `$1,370` quoted line | Implementation and/or managed service associated with Stape/sGTM | Commercial contents must be reconciled with the `$1,000/year` Stape license to prevent duplicate billing |
 
 The approved Stape Business features are capabilities, not automatic
@@ -110,11 +110,12 @@ when they serve an approved tracking requirement and pass QA.
 
 **Decision date:** 2026-07-24
 
-- CEFA has approved buying Stape Business for the Parent rollout. Procurement
-  does not require another program decision, but the completed purchase must
-  still be recorded before the container is treated as available. Access
-  verification, first-party domains, configuration, parity, deduplication, and
-  rollback remain required.
+- CEFA has approved buying Stape Business for the Parent rollout. The Parent
+  server GTM and Stape hosting containers were created on 2026-07-28, and the
+  hosting container is running in `CA East (Canada)`. Annual Business payment
+  and entitlement were API-verified on 2026-07-28; no additional program
+  decision is required. First-party DNS, routing, parity, deduplication, and
+  rollback remain required before production use.
 - Google Cloud and BigQuery implementation is not constrained to free tiers,
   free quotas, or the smallest possible service footprint.
 - A new Google Cloud service, paid BigQuery feature, larger runtime, increased
@@ -364,8 +365,8 @@ other.
 | Track A - outcomes | Activate eligible secondary GreenRope CRM outcomes | `Active guarded` | Eligibility, baseline, deduplication, platform validation, diagnostics and kill-switch gates pass |
 | Track A - Supabase | Inspect BI Supabase and approve the versioned Parent outcome contract | `Partial`; verification pending | Record grain, identifiers, history, timestamps, lineage, freshness and proof-of-concept record pass |
 | Track A - Supabase | Reconcile and optionally promote Supabase as the consolidated outcome source | `Pending` | Direct/Supabase parity, one sender, accepted-ID reconciliation and rollback owner pass |
-| Track B - website | Buy Parent Business and verify Stape/API/GTM control planes, domains and routing architecture | `Approved`; purchase pending | CEFA ownership, recovery, region, entitlement, API inventory, routing map and baseline export |
-| Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Pending` | Browser/server parity, destination isolation, consent-state gating and business-delivery continuity pass |
+| Track B - website | Buy Parent Business and verify Stape/API/GTM control planes, domains and routing architecture | `Active setup`; Business verified, Parent control planes created, `edge.cefa.ca` awaiting DNS | CEFA ownership, recovery, API-key rotation, endpoint health, routing map and baseline export |
+| Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Foundation ready`; endpoint and routing not started | Browser/server parity, destination isolation, consent-state gating and business-delivery continuity pass |
 | Track B - website | Promote Stape conversion routing one property at a time | `Pending` | Once-only delivery, platform deduplication and rollback test pass |
 | Shared spine | Dataform productionization | `Active guarded` | Git, runtime identity, releases, workflow configs, assertions and transform parity pass |
 | Shared spine | Monitoring, queues, dead letters and runbooks | `Active guarded` | Alerts, replay, Cloud Billing export, failure ownership and rollback pass |

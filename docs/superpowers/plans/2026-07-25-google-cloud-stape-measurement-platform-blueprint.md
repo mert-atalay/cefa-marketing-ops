@@ -89,7 +89,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Business purchase is approved; completed procurement, CEFA-owned administrative access, production server containers, and first-party routing are not yet recorded |
+| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with zero usage, inactive routing, and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` was inventoried with zero unpublished changes or conflicts and a baseline of 18 tags, 11 triggers and 36 variables. Unpublished server workspace `3` contains one inherited GA4 client and no tags, triggers or variables. Neutral shadow hostname `edge.cefa.ca` is registered but awaits DNS and health verification |
 
 The following current-state concerns shape this blueprint:
 
@@ -113,8 +113,10 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- there is no recorded Stape production container, first-party endpoint, or
-  cross-platform server-delivery baseline;
+- there is no recorded Stape first-party production endpoint, active
+  server-side route, or cross-platform server-delivery baseline; the Parent
+  hosting control plane and isolated unpublished build workspace exist but
+  remain deliberately non-production;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 
@@ -1123,8 +1125,13 @@ service identity, inputs, outputs, monitor, and rollback.
 **Outcome:** Parent website measurement uses a first-party server route with
 no duplicate conversions or KinderTales regression.
 
-- create Parent server GTM container;
-- implement first-party endpoint;
+- create Parent server GTM container; completed 2026-07-28;
+- capture and freeze the live Parent web-GTM baseline; completed 2026-07-28
+  with zero unpublished changes or conflicts;
+- create an isolated unpublished server build workspace; completed 2026-07-28
+  as workspace `3`;
+- implement first-party endpoint; `edge.cefa.ca` is registered and awaits
+  DNS-only Cloudflare CNAMEs, Stape revalidation, TLS and health checks;
 - establish event allowlist and shared identity envelope;
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
