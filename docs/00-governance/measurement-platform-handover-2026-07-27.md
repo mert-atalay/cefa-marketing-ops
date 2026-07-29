@@ -265,8 +265,23 @@ Current implementation status:
 
 ## Stape Business Status
 
-CEFA has Stape Business available. Production server-side routing is not yet
-recorded as active.
+CEFA has annual Stape Business for the Parent property. Parent hosting runs in
+`CA East (Canada)` behind `edge.cefa.ca`; production browser-to-server routing
+is not active.
+
+Verified through 2026-07-29:
+
+- Parent server GTM `GTM-T7C46VM7` and first-party DNS/TLS/health;
+- CEFA account 2FA, healthy billing, auto-upgrade, durable API-key rotation,
+  and revocation of the disclosed predecessor;
+- Stape Analytics, outgoing logs, one enabled alert recipient, and an enabled
+  hourly repeated-outgoing-`5xx` alert;
+- exact health-only server trigger and native GA4 shadow tag in an unpublished
+  workspace with two changes and zero conflicts;
+- current-token browser Preview HTTP `200`, intended health tag fire, GA4 HTTP
+  `204`, and one independent Stape outgoing-log row for `GA4` status `204`;
+- unchanged Parent web GTM routing: no `server_container_url`, no unpublished
+  web changes, and no conversion-event change.
 
 Required design:
 
@@ -283,12 +298,12 @@ Required design:
 
 Current gaps:
 
-- CEFA administrative access and entitlement verification;
-- container and endpoint inventory;
-- DNS/TLS plan;
-- baseline exports and recovery ownership;
-- shadow routing and destination diagnostics;
-- production rollback runbook.
+- recovery-code custody and secondary administrator evidence;
+- versioned baseline export and production rollback runbook;
+- consent-state and hostname/event guards;
+- browser/server parity and destination-isolation reconciliation;
+- conversion-specific Google and Meta deduplication QA;
+- separate Franchise Canada and Franchise USA container/endpoint builds.
 
 ## WordPress Tracking Plugin Inventory
 

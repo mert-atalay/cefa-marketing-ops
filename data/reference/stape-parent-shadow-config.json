@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "property": "parent",
-  "observed_at_utc": "2026-07-29T22:29:21Z",
+  "observed_at_utc": "2026-07-29T23:16:07Z",
   "production_state": {
     "browser_routing": false,
     "server_workspace_published": false,
@@ -18,6 +18,26 @@
     "stape_error": "Ok",
     "health_http_status": 200,
     "health_body": "ok"
+  },
+  "account_controls": {
+    "two_factor_authentication_enabled": true,
+    "durable_api_key_verified": true,
+    "disclosed_api_key_revoked": true,
+    "billing_status": "ok",
+    "auto_upgrade_enabled": true,
+    "analytics_enabled": true,
+    "outgoing_logs_enabled": true,
+    "enabled_alert_recipient_count": 1,
+    "enabled_monitoring_rule_count": 1,
+    "monitoring_rule": {
+      "name": "CEFA | Parent | Outgoing 5xx | 1h",
+      "log_type": "Outgoing",
+      "period_hours": 1,
+      "condition": "statusCode equals 5xx",
+      "threshold": "greater than 1"
+    },
+    "recovery_code_custody_api_verifiable": false,
+    "secondary_administrator_api_verifiable": false
   },
   "live_web_gtm": {
     "account_id": "4591216764",
@@ -81,7 +101,17 @@
     "draft_preview_request_http_status": 200,
     "draft_preview_shadow_tag_fire_count": 1,
     "draft_preview_ga4_outgoing_http_status": 204,
+    "controlled_browser_preview": "pass",
+    "controlled_browser_request_http_status": 200,
+    "controlled_browser_event_name": "cefa_sgtm_shadow_health",
+    "controlled_browser_expected_tag_fired": true,
+    "controlled_browser_ga4_outgoing_http_status": 204,
+    "stape_outgoing_log_platform": "GA4",
+    "stape_outgoing_log_http_status": 204,
+    "conversion_event_sent": false,
+    "web_gtm_changed": false,
+    "server_gtm_published": false,
     "temporary_preview_header_stored": false
   },
-  "next_gate": "Rotate the disclosed Stape account API key, complete CEFA account-control review, capture baseline and rollback evidence, then approve the first controlled non-conversion browser-to-server shadow route. No production route or publication is authorized by this QA pass."
+  "next_gate": "Record recovery custody and secondary administrator evidence, export the rollback baseline, add consent-state and hostname/event guards, then run browser/server parity. No production route, conversion-event promotion, version creation, or publication is authorized by this QA pass."
 }

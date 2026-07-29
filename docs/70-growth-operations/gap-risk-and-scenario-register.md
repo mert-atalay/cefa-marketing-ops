@@ -21,7 +21,7 @@
 | `GAP-001` | CEFA private runtime repository does not exist | `High` | `Blocked` | Cloud/data engineering | Reproducible private source, access, CI, release and rollback exist |
 | `GAP-002` | GreenRope lacks confirmed exact Form 4 event and entry fields | `High` | `Blocked` | GreenRope/KinderTales vendor owner | Both fields exist, round-trip through API and match a controlled inquiry |
 | `GAP-003` | KinderTales-to-GreenRope opportunity creation path is not confirmed | `High` | `Open question` | Parent operations/vendor owner | Documented endpoint/workflow, keys, retry and deduplication behavior |
-| `GAP-004` | Stape Business production containers, domains and shadow routing are not built | `High` | `Pending` | Cloud/Stape owner | Property-isolated shadow tests and rollback pass |
+| `GAP-004` | Parent Stape foundation is verified, but production routing, parity, consent-state, rollback and franchise isolation are incomplete | `High` | `Active guarded` | Cloud/Stape owner | Parent parity/deduplication/rollback pass, then isolated Canada and USA builds pass |
 | `GAP-005` | Dataform production Git, runtime identity, release and workflow configs are incomplete | `High` | `Pending` | BigQuery/data owner | Parallel parity, assertions, schedule and rollback pass |
 | `GAP-006` | Franchise GAConnector replacement evidence remains below cutover gate | `High` | `Active guarded` | Conversion tracking owner | Coverage/parity, field mapping and rollback meet approved gate |
 | `GAP-007` | Recent USA Form 1 entries lack Synuma lead IDs | `High` | `Partial` | Franchise delivery owner | Delivery cause resolved and prospective entries reconcile |

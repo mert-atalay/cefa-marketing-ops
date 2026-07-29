@@ -89,7 +89,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with inactive routing and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` retains zero unpublished changes or conflicts, and its live GA4 Google tag has no server transport override. Unpublished server workspace `3` contains the inherited GA4 client plus only exact synthetic trigger `cefa_sgtm_shadow_health` and native server-GA4 shadow-health tag; these are two pending changes with zero conflicts, no version and no publication. On 2026-07-29 the first-party CNAMEs, Stape `Ready / Ok`, TLS and `/healthy` passed, and a PII-free GA4 collection hit returned HTTP `200` with first-party `FPID`. Draft Preview then accepted one PII-free synthetic request with HTTP `200`, fired the exact shadow tag once, and received GA4 HTTP `204`. Live browser routing remains off |
+| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting runs in `CA East (Canada)` with inactive routing and optional power-ups off. On 2026-07-29 CEFA enabled 2FA, rotated and verified the full-account API key, revoked the disclosed predecessor, enabled Analytics and outgoing logs, retained an enabled alert recipient, and created an enabled hourly repeated-outgoing-`5xx` alert. Parent web GTM `GTM-NZ6N7WNC` retains zero unpublished changes or conflicts, and its live GA4 Google tag has no server transport override. Unpublished server workspace `3` contains the inherited GA4 client plus only exact synthetic trigger `cefa_sgtm_shadow_health` and native server-GA4 shadow-health tag; these remain two pending changes with zero conflicts, no version and no publication. First-party CNAMEs, Stape `Ready / Ok`, TLS and `/healthy` passed. A current-token browser Preview request returned HTTP `200`, matched the health-only event, fired the GA4 tag, and received GA4 HTTP `204`; Stape's outgoing log independently recorded one `GA4` response with status `204`. Live browser routing remains off |
 
 The no-secret machine-readable Parent shadow checkpoint is
 [stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
@@ -380,7 +380,10 @@ advertise their tracking purpose.
    container, subscription, region, usage, domains, power-ups, and monitoring
    state before any production routing.
 5. Create the Parent non-production endpoint after DNS/CDN conflict review.
-6. Route page and diagnostic events in preview/shadow.
+6. Route only diagnostic events in preview/shadow until browser/server parity,
+   consent-state, hostname/event and rollback controls pass. The first
+   browser-originated health-only event passed on 2026-07-29; page-event
+   routing remains pending.
 7. Add GA4 server routing and reconcile sessions/events.
 8. Add Parent Google Ads website conversion routing.
 9. Add Parent Meta CAPI and prove Pixel/CAPI deduplication.
@@ -407,6 +410,8 @@ advertise their tracking purpose.
 - no prohibited PII appears in logs or exports;
 - all three containers have owner access, version export, monitoring, and
   rollback.
+- account 2FA, durable API-key rotation, outgoing logs, an alert recipient,
+  and at least one delivery-failure rule are verified before production;
 - the direct API inventory agrees with the Stape UI and approved Git manifest;
 - Stape and GTM MCPs are disabled when not in supervised use;
 - no credential appears in source, logs, BigQuery, chat, or container exports.
