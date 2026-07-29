@@ -89,7 +89,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with zero usage, inactive routing, and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` was inventoried with zero unpublished changes or conflicts and a baseline of 18 tags, 11 triggers and 36 variables. Unpublished server workspace `3` contains one inherited GA4 client and no tags, triggers or variables. Neutral shadow hostname `edge.cefa.ca` is registered but awaits DNS and health verification |
+| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with zero usage, inactive routing, and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` was inventoried with zero unpublished changes or conflicts and a baseline of 18 tags, 11 triggers and 36 variables. Unpublished server workspace `3` contains one inherited GA4 client and no tags, triggers or variables. On 2026-07-29 the first-party endpoint CNAMEs resolved correctly, Stape reported `Ready / Ok`, TLS validated and `https://edge.cefa.ca/healthy` returned HTTP `200` with `ok` |
 
 The following current-state concerns shape this blueprint:
 
@@ -1130,8 +1130,8 @@ no duplicate conversions or KinderTales regression.
   with zero unpublished changes or conflicts;
 - create an isolated unpublished server build workspace; completed 2026-07-28
   as workspace `3`;
-- implement first-party endpoint; `edge.cefa.ca` is registered and awaits
-  DNS-only Cloudflare CNAMEs, Stape revalidation, TLS and health checks;
+- implement first-party endpoint; completed 2026-07-29 with DNS-only
+  Cloudflare CNAMEs, Stape `Ready / Ok`, valid TLS and HTTP `200` health;
 - establish event allowlist and shared identity envelope;
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
