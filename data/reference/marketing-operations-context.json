@@ -123,15 +123,15 @@
     },
     {
       "id": "SYS-GTM",
-      "name": "Web GTM",
-      "role": "Property-specific browser destination routing",
-      "status": "Verified"
+      "name": "Web and server GTM",
+      "role": "Property-specific browser/server event processing and destination routing",
+      "status": "Active guarded"
     },
     {
       "id": "SYS-STAPE",
       "name": "Stape Business",
-      "role": "Planned server-side GTM transport",
-      "status": "Approved"
+      "role": "Hosted first-party server-side GTM transport and control plane",
+      "status": "Active guarded"
     },
     {
       "id": "SYS-GA4",

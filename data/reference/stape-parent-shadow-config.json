@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "property": "parent",
+  "observed_at_utc": "2026-07-29T22:16:26Z",
+  "production_state": {
+    "browser_routing": false,
+    "server_workspace_published": false,
+    "server_workspace_version_created": false,
+    "destination_conversion_changes": false,
+    "stape_optional_power_ups": false
+  },
+  "endpoint": {
+    "collection_url": "https://edge.cefa.ca",
+    "loader_url": "https://load.edge.cefa.ca",
+    "collection_cname": "ca.stape.io",
+    "loader_cname": "lca.stape.io",
+    "stape_status": "Ready",
+    "stape_error": "Ok",
+    "health_http_status": 200,
+    "health_body": "ok"
+  },
+  "live_web_gtm": {
+    "account_id": "4591216764",
+    "container_id": "250451797",
+    "public_id": "GTM-NZ6N7WNC",
+    "workspace_id": "13",
+    "workspace_name": "Default Workspace",
+    "pending_change_count": 0,
+    "conflict_count": 0,
+    "ga4_measurement_id": "G-T65G018LYB",
+    "server_container_url_configured": false
+  },
+  "server_gtm": {
+    "account_id": "4591216764",
+    "container_id": "259672853",
+    "public_id": "GTM-T7C46VM7",
+    "workspace_id": "3",
+    "workspace_name": "CEFA | Parent | sGTM Shadow Build | 2026-07-28",
+    "pending_change_count": 2,
+    "conflict_count": 0,
+    "client": {
+      "client_id": "1",
+      "name": "GA4",
+      "type": "gaaw_client",
+      "default_paths_active": true,
+      "cookie_management": "server",
+      "cookie_name": "FPID",
+      "cookie_domain": "auto",
+      "cookie_path": "/",
+      "cookie_max_age_seconds": 63072000
+    },
+    "shadow_trigger": {
+      "trigger_id": "4",
+      "name": "CEFA | Parent | Shadow Health | Event",
+      "type": "always",
+      "event_name_equals": "cefa_sgtm_shadow_health"
+    },
+    "shadow_tag": {
+      "tag_id": "5",
+      "name": "CEFA | Parent | GA4 | Shadow Health",
+      "type": "sgtmgaaw",
+      "measurement_id": "G-T65G018LYB",
+      "event_name": "{{Event Name}}",
+      "redact_visitor_ip": true,
+      "firing_trigger_id": "4"
+    }
+  },
+  "qa": {
+    "dns": "pass",
+    "tls": "pass",
+    "health": "pass",
+    "pii_free_ga4_client_request_http_status": 200,
+    "first_party_fpid_issued": true,
+    "build_idempotency": "pass",
+    "gtm_api_readback": "pass",
+    "live_web_route_absence": "pass",
+    "draft_preview": "pending_dynamic_preview_header"
+  },
+  "next_gate": "Open the server workspace Preview, obtain the temporary X-Gtm-Server-Preview header, run one PII-free cefa_sgtm_shadow_health request through edge.cefa.ca, verify client/trigger/tag/outgoing request, then remove or let the temporary preview-header configuration expire."
+}

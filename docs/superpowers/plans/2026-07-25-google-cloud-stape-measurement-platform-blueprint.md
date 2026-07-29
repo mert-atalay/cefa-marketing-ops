@@ -89,7 +89,10 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with zero usage, inactive routing, and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` was inventoried with zero unpublished changes or conflicts and a baseline of 18 tags, 11 triggers and 36 variables. Unpublished server workspace `3` contains one inherited GA4 client and no tags, triggers or variables. On 2026-07-29 the first-party endpoint CNAMEs resolved correctly, Stape reported `Ready / Ok`, TLS validated and `https://edge.cefa.ca/healthy` returned HTTP `200` with `ok` |
+| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting is running in `CA East (Canada)` with inactive routing and all optional power-ups off. Parent web GTM `GTM-NZ6N7WNC` retains zero unpublished changes or conflicts, and its live GA4 Google tag has no server transport override. Unpublished server workspace `3` contains the inherited GA4 client plus only exact synthetic trigger `cefa_sgtm_shadow_health` and native server-GA4 shadow-health tag; these are two pending changes with zero conflicts, no version and no publication. On 2026-07-29 the first-party CNAMEs, Stape `Ready / Ok`, TLS and `/healthy` passed, and a PII-free GA4 collection hit returned HTTP `200` with first-party `FPID`. Draft preview-header proof remains pending |
+
+The no-secret machine-readable Parent shadow checkpoint is
+[stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
 
 The following current-state concerns shape this blueprint:
 
@@ -113,10 +116,10 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- there is no recorded Stape first-party production endpoint, active
-  server-side route, or cross-platform server-delivery baseline; the Parent
-  hosting control plane and isolated unpublished build workspace exist but
-  remain deliberately non-production;
+- the Parent Stape first-party endpoint and synthetic client path are verified,
+  but there is no active server-side browser route or cross-platform
+  server-delivery baseline; the isolated draft trigger/tag remain deliberately
+  unpublished until preview, deduplication and rollback evidence pass;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 
@@ -1132,7 +1135,11 @@ no duplicate conversions or KinderTales regression.
   as workspace `3`;
 - implement first-party endpoint; completed 2026-07-29 with DNS-only
   Cloudflare CNAMEs, Stape `Ready / Ok`, valid TLS and HTTP `200` health;
-- establish event allowlist and shared identity envelope;
+- establish the first exact synthetic event allowlist path; completed
+  2026-07-29 with unpublished `cefa_sgtm_shadow_health` trigger and native
+  server-GA4 tag, two pending changes, zero conflicts and no production route;
+- run the temporary preview-header proof for that synthetic path;
+- establish the production event allowlist and shared identity envelope;
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
 - shadow GA4 events;
