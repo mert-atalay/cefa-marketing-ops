@@ -1,6 +1,6 @@
 # CEFA System And Integration Register
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-07-29
 **Owner:** CEFA marketing operations
 **Status:** Canonical cross-system register
 **Review cadence:** Monthly and after every material integration change
@@ -30,7 +30,7 @@
 | `SYS-CT` | CEFA Conversion Tracking | Event identity, neutral events, attribution and guarded ledger | Website measurement bridge | `Verified`/`Active guarded` by property |
 | `SYS-GAC` | GAConnector | Franchise attribution fields | Current franchise attribution owner | `Active guarded` pending cutover |
 | `SYS-GTM` | Web and server GTM containers | Property-specific event processing and destination mapping | Browser/server tag configuration; GTM API/MCP is the guarded automation interface | `Verified` web paths; Parent server `GTM-T7C46VM7` has an unpublished exact synthetic trigger plus native GA4 shadow-health tag in workspace `3`, with no version, publication or live route |
-| `SYS-STAPE` | Stape Business and direct API | Server-side GTM hosting plus account/container operations | Additive server route; direct API is the canonical machine interface and Stape MCP is supervised convenience only | `Active guarded`; Parent annual Business verified, container running in Canada, first-party endpoint and GA4 client path healthy, isolated GTM shadow build pending preview, routing off |
+| `SYS-STAPE` | Stape Business and direct API | Server-side GTM hosting plus account/container operations | Additive server route; direct API is the canonical machine interface and Stape MCP is supervised convenience only | `Active guarded`; Parent annual Business verified, container running in Canada, first-party endpoint/client and isolated draft Preview passed, routing off |
 | `SYS-GA4` | Three GA4 properties | Web behavior and event analytics | Analytics evidence | `Verified` with property-specific gaps |
 | `SYS-GADS` | Google Ads accounts | Paid delivery and optimization | Platform delivery | `Verified` live; reporting freshness partial |
 | `SYS-META` | Meta ad accounts/datasets | Paid delivery and optimization | Platform delivery | `Verified` live; reporting freshness partial |
@@ -95,7 +95,7 @@
 | `INT-D-002` | Google/Meta -> BigQuery/Supermetrics | Spend, object and conversion detail | `Partial` freshness | Live/connector schedules vary | Dashboard can show stale paid detail | [Platform availability](../50-paid-media/platform-data-availability-2026-05-03.md) |
 | `INT-D-003` | Raw BigQuery -> Dataform/core/marts | Governed transforms and assertions | `Active guarded` | Partial production path | Metrics drift or lack reproducibility | [Dataform parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md) |
 | `INT-D-004` | BigQuery serving -> Looker Studio | Reader-facing reporting | `Partial` by dashboard contract | Live selected views | Dashboard can disagree with source/grain | BigQuery/dashboard owner |
-| `INT-D-005` | Websites/web GTM -> Stape-hosted server GTM -> destinations | First-party server transport and deduplication; direct Stape API governs hosting inventory while GTM API/MCP governs the container configuration | `Active guarded`; Parent endpoint DNS/TLS/health and a PII-free GA4-client/FPID request passed. Server workspace `3` holds only the exact `cefa_sgtm_shadow_health` trigger and native GA4 shadow-health tag; live Parent web GTM has no server transport override and remains unchanged | Off | Browser loss remains; bad rollout could duplicate or cross destinations | [Cloud/Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md) |
+| `INT-D-005` | Websites/web GTM -> Stape-hosted server GTM -> destinations | First-party server transport and deduplication; direct Stape API governs hosting inventory while GTM API/MCP governs the container configuration | `Active guarded`; Parent endpoint DNS/TLS/health and GA4-client/FPID handling passed. Draft Preview accepted one PII-free `cefa_sgtm_shadow_health` request, fired the exact shadow tag once, and received GA4 HTTP `204`. Server workspace `3` remains unpublished; live Parent web GTM has no server transport override and remains unchanged | Off | Browser loss remains; bad rollout could duplicate or cross destinations | [Cloud/Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md) |
 | `INT-D-006` | Cloud services -> monitoring/alerts | Delivery, freshness, failure and cost health | `Partial` | Partial | Silent failures or delayed diagnosis | Cloud runtime owner |
 | `INT-D-007` | Public hub -> private runtime repo | Governance to reproducible deployment source | `Blocked` | Not established | Runtime remains dependent on private local/historical artifacts | Program register |
 | `INT-D-008` | KinderTales/GreenRope -> BI Python -> Supabase | Consolidate Parent business outcomes for BI | `Partial`; reported internally, verification pending | Reported active | Unknown grain, history or lineage could distort business truth | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "property": "parent",
-  "observed_at_utc": "2026-07-29T22:16:26Z",
+  "observed_at_utc": "2026-07-29T22:29:21Z",
   "production_state": {
     "browser_routing": false,
     "server_workspace_published": false,
@@ -36,6 +36,9 @@
     "public_id": "GTM-T7C46VM7",
     "workspace_id": "3",
     "workspace_name": "CEFA | Parent | sGTM Shadow Build | 2026-07-28",
+    "server_container_urls": [
+      "https://edge.cefa.ca"
+    ],
     "pending_change_count": 2,
     "conflict_count": 0,
     "client": {
@@ -74,7 +77,11 @@
     "build_idempotency": "pass",
     "gtm_api_readback": "pass",
     "live_web_route_absence": "pass",
-    "draft_preview": "pending_dynamic_preview_header"
+    "draft_preview": "pass",
+    "draft_preview_request_http_status": 200,
+    "draft_preview_shadow_tag_fire_count": 1,
+    "draft_preview_ga4_outgoing_http_status": 204,
+    "temporary_preview_header_stored": false
   },
-  "next_gate": "Open the server workspace Preview, obtain the temporary X-Gtm-Server-Preview header, run one PII-free cefa_sgtm_shadow_health request through edge.cefa.ca, verify client/trigger/tag/outgoing request, then remove or let the temporary preview-header configuration expire."
+  "next_gate": "Rotate the disclosed Stape account API key, complete CEFA account-control review, capture baseline and rollback evidence, then approve the first controlled non-conversion browser-to-server shadow route. No production route or publication is authorized by this QA pass."
 }
