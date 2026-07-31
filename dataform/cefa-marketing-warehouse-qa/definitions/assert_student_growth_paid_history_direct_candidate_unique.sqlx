@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["candidate_qa", "student_growth", "uniqueness"]
+}
+
+SELECT
+  month_date,
+  platform,
+  account_id
+FROM `marketing-api-488017.mart_cefa_growth_intelligence.input_student_growth_paid_monthly_direct_candidate`
+GROUP BY month_date, platform, account_id
+HAVING COUNT(*) > 1

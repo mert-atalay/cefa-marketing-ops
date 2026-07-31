@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["candidate_qa", "franchise", "ga4", "data_safety"]
+}
+
+SELECT
+  date,
+  site_context,
+  property_id,
+  landing_page_path
+FROM `marketing-api-488017.mart_marketing_franchise.franchise_ga4_landing_page_daily_sanitized_candidate`
+WHERE REGEXP_CONTAINS(COALESCE(landing_page_path, ''), r'[?#]')

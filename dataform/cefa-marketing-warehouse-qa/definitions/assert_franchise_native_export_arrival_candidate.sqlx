@@ -1,0 +1,8 @@
+config {
+  type: "assertion",
+  tags: ["candidate_qa", "franchise", "ga4", "freshness"]
+}
+
+SELECT *
+FROM `marketing-api-488017.mart_marketing_franchise.franchise_native_export_arrival_candidate`
+WHERE arrival_status = 'fail'

@@ -1,0 +1,8 @@
+config {
+  type: "assertion",
+  tags: ["candidate_qa", "student_growth", "freshness"]
+}
+
+SELECT *
+FROM `marketing-api-488017.mart_cefa_growth_intelligence.student_growth_paid_history_source_health_candidate`
+WHERE freshness_status = 'fail'

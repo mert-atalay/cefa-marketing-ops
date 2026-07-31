@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["candidate_qa", "franchise", "ga4", "uniqueness"]
+}
+
+SELECT
+  date,
+  site_context,
+  property_id
+FROM `marketing-api-488017.mart_marketing_franchise.franchise_ga4_property_daily_candidate`
+GROUP BY date, site_context, property_id
+HAVING COUNT(*) > 1
