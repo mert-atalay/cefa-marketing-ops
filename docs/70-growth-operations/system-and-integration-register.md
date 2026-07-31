@@ -1,6 +1,6 @@
 # CEFA System And Integration Register
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-07-31
 **Owner:** CEFA marketing operations
 **Status:** Canonical cross-system register
 **Review cadence:** Monthly and after every material integration change
@@ -102,6 +102,7 @@
 | `INT-D-009` | Supabase -> BigQuery Parent outcome contract | Deliver minimum record-level lifecycle and final-enrollment outcomes | `Pending` | Off | Marketing cannot reconcile or activate actual outcomes safely | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
 | `INT-D-010` | BigQuery -> Supabase/Power BI certified summaries | Provide campaign, spend and governed marketing context to BI | `Pending` | Off | BI and marketing may maintain conflicting reporting pipelines | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
 | `INT-D-011` | Supabase -> Power BI/Lovable | Serve consolidated internal business dashboards | `Partial`; reported internally, verification pending | Reported active | Dashboard definitions may not reconcile to marketing without a shared dictionary | [Alignment review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md) |
+| `INT-D-012` | Franchise Canada/USA GA4 -> BigQuery native export | Property-isolated event-level analytics evidence | `Active guarded`; both links verified, first datasets pending | Daily export enabled 2026-07-31 | Franchise analytics remain stale or snapshot-dependent if dataset delivery fails | [Native export activation](../20-bigquery/franchise-ga4-native-bigquery-export-activation-2026-07-31.md) |
 
 ## SEO, Local And Campaign Operations Integrations
 

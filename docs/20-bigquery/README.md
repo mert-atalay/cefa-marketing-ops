@@ -1,6 +1,6 @@
 # BigQuery And Google Cloud Measurement
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-07-31
 **Status:** Active governed workstream
 
 ## Start Here
@@ -79,6 +79,7 @@ CRM payloads remain outside those marts.
 | Capacity baseline | `Verified` | [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md) |
 | Dataform QA | `Active guarded` | 15 assertions compile and proof runs passed |
 | Dataform production | `Pending` | Git connection, runtime identity, release/workflow configs and transform parity |
+| Franchise GA4 native exports | `Active guarded` | Canada `259747921` and USA `519783092` links were created and read back on 2026-07-31; first datasets/tables remain pending Google provisioning |
 | Parent CRM lifecycle foundation | `Active guarded` | Restricted tables, capture, binder, poller, outbox, dispatcher and diagnostics built |
 | Google CRM actions | `Verified` | Three secondary actions created and validation passed |
 | Meta CRM events | `Active guarded` | Test Events passed; reporting custom conversions wait for first legitimate live event |
@@ -92,6 +93,7 @@ CRM payloads remain outside those marts.
 
 - [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md)
 - [Dataform source control and parity](./dataform-source-control-and-parity-2026-07-25.md)
+- [Franchise GA4 native BigQuery export activation](./franchise-ga4-native-bigquery-export-activation-2026-07-31.md)
 - [Warehouse current-state snapshot](./warehouse-current-state-2026-05-03.md)
 - [Dashboard source layer and rule registry](./dashboard-source-layer-greenrope-and-rule-registry-2026-05-03.md)
 

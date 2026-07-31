@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-27
+**Register date:** 2026-07-31
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -61,13 +61,14 @@ or production gate changes.
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
 | BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; quoted budgets and live capacity views are registered, and current volume is comfortably inside the approved envelope | Connect Cloud Billing export, productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
+| Franchise GA4 native exports | `Active guarded` | Daily `US` export links for Canada property `259747921` and USA property `519783092` were created and read back on 2026-07-31 with the correct property stream and no event exclusions | Verify `analytics_259747921` and `analytics_519783092`, first daily tables, hostname isolation and expected inquiry events after Google provisioning |
 | Dataform | `Active guarded` | Git now contains 15 assertion definitions; non-production workspace compilation produced 15 actions with zero errors, and both `foundation_qa` and `existing_qa` tagged proof runs succeeded; Cloud Run remains the production orchestrator | Connect CEFA-controlled Git, define runtime identity and dev/staging/prod releases, then run parallel parity before promotion |
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
 | BI Supabase and marketing boundary | `Partial` | The BI team reports that its Python pipeline consolidates KinderTales/GreenRope Parent business data into Supabase for Power BI/Lovable; schema, grain, identity, history, timestamps, freshness and source lineage are not yet verified by marketing | Read-only meeting inspection, shared metric dictionary and one proof-of-concept outcome record |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
 | Public/private source control | `Blocked operational risk` | This GitHub repository is public while material private warehouse/runtime work remains local or deployed from historical artifacts | Create CEFA-controlled private runtime repository and migrate reproducible non-secret runtime without exposing credentials or PII |
-| Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `39` systems, `40` integration IDs, `27` open-gap IDs and `27` what-if scenarios | Keep all four surfaces synchronized with narrow implementation evidence |
+| Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `39` systems, `41` integration IDs, `27` open-gap IDs and `27` what-if scenarios | Keep all four surfaces synchronized with narrow implementation evidence |
 
 ## Immediate Waiting List
 
@@ -176,6 +177,7 @@ Mailchimp campaigns/journeys + GreenRope email/customer journeys
 Franchise Canada and USA
   -> existing website/GTM/GAConnector/Synuma production flow
   -> CEFA canonical attribution shadow
+  -> property-isolated native GA4 daily exports to BigQuery
   -> later first-party sGTM path with property and destination isolation
 
 All approved source facts
@@ -336,6 +338,7 @@ other.
 | Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Pending` | Browser/server parity, destination isolation, consent-state gating and business-delivery continuity pass |
 | Track B - website | Promote Stape conversion routing one property at a time | `Pending` | Once-only delivery, platform deduplication and rollback test pass |
 | Shared spine | Dataform productionization | `Active guarded` | Git, runtime identity, releases, workflow configs, assertions and transform parity pass |
+| Shared spine | Verify franchise GA4 native export arrival and normalize it into warehouse contracts | `Active guarded`; links live, data pending | Both datasets and first daily tables appear, hostname/event isolation passes, and downstream source precedence is documented |
 | Shared spine | Monitoring, queues, dead letters and runbooks | `Active guarded` | Alerts, replay, Cloud Billing export, failure ownership and rollback pass |
 | Shared spine | CEFA private runtime source consolidation | `Blocked operational risk` | Reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source exists without secrets |
 | Existing guarded work | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
@@ -370,6 +373,7 @@ or private payloads in this register.
 - [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 - [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
 - [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
+- [Franchise GA4 native BigQuery export activation](../20-bigquery/franchise-ga4-native-bigquery-export-activation-2026-07-31.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)
 - [Parent CRM offline-conversion implementation report](../10-conversion-tracking/parent-crm-offline-conversion-implementation-report.md)
