@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0",
   "property": "parent",
-  "observed_at_utc": "2026-08-04T16:56:49Z",
+  "observed_at_utc": "2026-08-04T17:23:12Z",
   "production_state": {
     "browser_routing": true,
     "server_workspace_published": true,
     "server_workspace_version_created": true,
-    "destination_conversion_changes": false,
+    "destination_conversion_changes": true,
+    "server_destination_conversion_delivery_active": false,
     "stape_optional_power_ups": false
   },
   "endpoint": {
@@ -48,9 +49,16 @@
     "pending_change_count": 0,
     "conflict_count": 0,
     "ga4_measurement_id": "G-T65G018LYB",
-    "published_version_id": "12",
-    "published_version_name": "CEFA | Parent | GA4 via First-Party sGTM | 2026-08-04",
-    "rollback_version_id": "11",
+    "published_version_id": "14",
+    "published_version_name": "CEFA | Parent | sGTM Ads Event Contract | 2026-08-04",
+    "google_ads_dedup_version_id": "13",
+    "google_ads_browser_transaction_id_enabled": true,
+    "google_ads_browser_transaction_id_variable": "{{DLV - event_id}}",
+    "generate_lead_transaction_id_enabled": true,
+    "generate_lead_cefa_event_id_enabled": true,
+    "intermediate_rollback_version_id": "13",
+    "pre_dedup_rollback_version_id": "12",
+    "pre_sgtm_rollback_version_id": "11",
     "server_container_url_configured": true,
     "server_container_url": "https://edge.cefa.ca"
   },
@@ -67,6 +75,12 @@
     ],
     "published_version_id": "2",
     "published_version_name": "CEFA | Parent | sGTM Guarded GA4 Baseline | 2026-08-04",
+    "staged_unpublished_version_id": "3",
+    "staged_unpublished_version_name": "STAGED - CEFA | Parent | Ads and Meta Server Routes | 2026-08-04",
+    "staged_google_conversion_linker_paused": true,
+    "staged_google_ads_conversion_paused": true,
+    "staged_meta_capi_template": "stape-io/facebook-tag@6769a59cb8e5a8fc6aa0d3c45a2f7b49d39dfff5",
+    "staged_meta_capi_tag_created": false,
     "pending_change_count": 0,
     "conflict_count": 0,
     "client": {
@@ -126,11 +140,19 @@
     "live_homepage_direct_ga_request_count": 0,
     "live_homepage_stape_pageview_count": 1,
     "live_homepage_stape_pageview_http_status": 204,
+    "google_ads_browser_transaction_id_readback": "pass",
+    "generate_lead_server_identity_contract_readback": "pass",
+    "staged_server_workspace_change_count": 4,
+    "staged_server_workspace_conflict_count": 0,
+    "staged_server_version_created": true,
+    "staged_server_version_published": false,
+    "post_build_edge_health_http_status": 200,
+    "post_build_controlled_non_conversion_http_status": 200,
     "conversion_event_sent": false,
     "web_gtm_changed": true,
     "web_gtm_published": true,
     "server_gtm_published": true,
     "temporary_preview_header_stored": false
   },
-  "next_gate": "Monitor Parent GA4 parity and the next legitimate generate_lead. Keep Google Ads and Meta server conversion delivery off until transaction/event-ID deduplication, consent gating, credentials, and controlled Form 4 QA pass."
+  "next_gate": "Confirm the next legitimate generate_lead carries matching event_id, transaction_id, and cefa_event_id. Keep staged server version 3 unpublished until controlled Form 4 duplicate-counting QA passes; add the Meta dataset token outside Git before creating the paused Meta CAPI tag."
 }

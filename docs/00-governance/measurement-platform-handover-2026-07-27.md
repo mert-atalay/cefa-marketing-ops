@@ -108,9 +108,10 @@ CEFA Conversion Tracking
   -> web GTM
   -> GA4, Google Ads and Meta
 
-Future first-party Stape route
+Current first-party Stape route
+  -> GA4 through edge.cefa.ca
   -> same neutral event and same cefa_event_id
-  -> server-side destination delivery with deduplication
+  -> Google Ads and Meta server delivery only after deduplication QA
 ```
 
 Rules:
@@ -268,7 +269,8 @@ Current implementation status:
 CEFA has annual Stape Business for the Parent property. Parent hosting runs in
 `CA East (Canada)` behind `edge.cefa.ca`; production Parent GA4 routing is
 active. Google Ads and Meta conversion delivery remain on their existing
-browser paths.
+browser paths. Google Ads browser duplicate protection and the shared server
+event identity contract are now live; server destination delivery remains off.
 
 Verified through 2026-08-04:
 
@@ -286,11 +288,25 @@ Verified through 2026-08-04:
 - four-case no-preview routing proof with exactly two intended GA4 HTTP `204`
   deliveries and zero wrong-host or wrong-event deliveries;
 - published web version `12`, `CEFA | Parent | GA4 via First-Party sGTM |
-  2026-08-04`, containing only the routing parameter on Google tag `35`;
+  2026-08-04`, established the first-party GA4 route;
+- published web version `13`, `CEFA | Parent | Google Ads Event ID Dedup |
+  2026-08-04`, added the existing event ID as Transaction ID on the existing
+  Google Ads inquiry tag without changing its destination, value, trigger, or
+  enhanced-conversion setting;
+- published web version `14`, `CEFA | Parent | sGTM Ads Event Contract |
+  2026-08-04`, added `transaction_id` and `cefa_event_id` aliases to the
+  existing GA4 `generate_lead` request while retaining the same event ID,
+  value, currency, trigger, school fields, and attribution fields;
 - clean live homepage proof: one `edge.cefa.ca` GA4 request, no direct browser
   GA collection request, and one Stape `PageView` delivery with HTTP `204`;
-- no Google Ads, Meta, Gravity Forms, School Manager, KinderTales, CRM, or
-  franchise change.
+- staged but unpublished server version `3` contains a strict Parent
+  `generate_lead` route, paused native Google Conversion Linker and Google Ads
+  conversion tags, and the Stape Meta CAPI gallery template; server version
+  `2` remains production;
+- a post-build health check and controlled non-conversion request both
+  returned HTTP `200`;
+- no destination, conversion action, campaign goal, Meta tag, Gravity Forms,
+  School Manager, KinderTales, CRM, or franchise route was replaced or enabled.
 
 Required design:
 
@@ -311,8 +327,11 @@ Current gaps:
 - production rollback runbook;
 - operational consent/CMP policy and advertising-destination consent gates;
 - ongoing GA4 browser/server parity and destination-isolation monitoring;
-- conversion-specific Google and Meta deduplication QA;
-- Meta CAPI credential held outside GTM/Git;
+- controlled Google duplicate-counting QA before publishing/unpausing its
+  staged server tag;
+- Meta CAPI credential held outside Git and a paused server tag created from
+  the already-staged template;
+- controlled Meta browser/CAPI event-ID deduplication QA;
 - controlled Form `4` conversion continuity proof;
 - separate Franchise Canada and Franchise USA container/endpoint builds.
 
@@ -363,7 +382,7 @@ Strict copy rule:
 | Public/private source control | CEFA private cloud runtime repository does not yet exist | `Blocked operational risk` |
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
-| Stape | Parent GA4 is live through guarded server version `2` and routing-only web version `12`; Google Ads/Meta server conversion expansion remains gated | `Active guarded` |
+| Stape | Parent GA4 is live through guarded server version `2`; web version `14` now carries the shared Google/Meta dedup identity, while paused server destination tags are isolated in unpublished version `3` | `Active guarded` |
 | BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |

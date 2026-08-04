@@ -369,8 +369,8 @@
     {
       "id": "GAP-004",
       "severity": "High",
-      "status": "Pending",
-      "summary": "Stape production containers and shadow routing are not built"
+      "status": "Active guarded",
+      "summary": "Parent GA4 first-party routing and shared dedup identity are live; server Ads/Meta activation, natural-event parity, rollback signoff and franchise isolation remain gated"
     },
     {
       "id": "GAP-005",

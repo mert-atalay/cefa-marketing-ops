@@ -93,7 +93,7 @@ runtime, or authority to change spend and production systems without approval.
 | Website measurement | CEFA Conversion Tracking, WPCode bridge, GAConnector, GTM | Neutral events and identity; destination mapping remains property-specific |
 | Analytics | GA4 properties and native BigQuery export | Web behavior and event evidence, not CRM truth |
 | Advertising | Google Ads and Meta | Platform delivery, spend and optimization; IDs are stable object handles |
-| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Parent account, Canada hosting, first-party endpoint, 2FA, durable key, monitoring and health-only browser Preview are verified; production routing and conversion deduplication remain guarded |
+| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Parent GA4 first-party production routing is live; browser Google transaction identity and the shared server event contract are live; paused Google server tags and the Meta template are staged in unpublished version `3`; destination activation and franchise isolation remain guarded |
 | Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII |
 | BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; exact schema and pipeline remain pending read-only verification |
 | Reporting | BigQuery serving views, Looker Studio, Supermetrics, Power BI, Lovable | Show source, grain and freshness; do not silently substitute stale data |
