@@ -1,6 +1,6 @@
 # Growth Operations
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-04
 **Status:** Active governed workstream
 
 ## Purpose
@@ -18,6 +18,7 @@ clarity; it does not replace the narrower technical or platform owners.
 5. [Program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
 6. [Marketing and BI alignment independent-review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md)
 7. [Marketing and BI alignment final decision and email](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md)
+8. [Marketing Data Intelligence technical walkthrough presenter guide](./marketing-data-intelligence-technical-walkthrough-presenter-guide-2026-08-04.md)
 
 ## This Workstream Owns
 
