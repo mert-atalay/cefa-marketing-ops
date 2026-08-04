@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-31
+**Register date:** 2026-08-04
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -61,7 +61,8 @@ or production gate changes.
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
 | BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; quoted budgets and live capacity views are registered, and additive franchise GA4 plus paid-history quality candidates were deployed on 2026-07-31 without changing dashboard contracts | Connect Cloud Billing export, productionize Dataform, alert delivery, queues, lifecycle integrations, private runtime source, and runbooks |
-| Franchise GA4 native exports | `Active guarded` | Daily `US` export links for Canada property `259747921` and USA property `519783092` were created and read back on 2026-07-31; an additive arrival monitor reports both datasets `pending`, while property/form reconciliation reports Canada `48/47` pass and USA `40/35` fail | Verify `analytics_259747921` and `analytics_519783092`, then prove hostname, inquiry-event and duplicate-event isolation after Google provisioning |
+| Measurement activation operational health V1 | `Active guarded` | Aggregate-only pipeline run table and scorecard view are deployed in `cefa_ops`; fixed-key metrics, thresholds, owners/actions, three lightweight runbooks and a controlled-test matrix are source-controlled. Current read-back correctly shows inactive routes as `NOT_ACTIVE`, capture as `NOT_INSTRUMENTED`, and six actionable identity quarantines as red | Instrument each active runtime, resolve/review the six quarantine rows, execute synthetic failure/recovery tests, then wire alerts before platform delivery promotion |
+| Franchise GA4 native exports | `Active guarded` | Both native datasets are live through 2026-08-03. First observed `generate_lead` rows are complete and unique (`5/5` Canada, `1/1` USA); Canada also contains 40 staging/development-host rows that must stay outside production reporting | Add the governed hostname exclusion/classification, rerun reconciliation and duplicate QA, then promote native-export source precedence without changing current dashboard totals |
 | Dataform | `Active guarded` | The 15 existing assertions still have successful proof runs; six additive `candidate_qa` assertions now cover franchise property grain, sanitized paths, export arrival, and direct paid-history freshness/uniqueness; local compilation produced 21 actions with zero errors and direct BigQuery proof returned zero candidate failure rows | Run the six candidate assertions in the Dataform workspace, then connect CEFA Git and define dev/staging/prod release/workflow configs |
 | Measurement quality candidates | `Active guarded` | Parallel-only views preserve dashboard totals while adding safe landing paths, property-only grain, GA4/form reconciliation, native-export arrival, and a paid-history candidate current through 2026-07-30; existing serving sources remain unchanged | Native export proof, USA duplicate diagnosis, monthly paid-history materialization, alert delivery, Dataform workspace run and explicit promotion |
 | Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
@@ -339,9 +340,9 @@ other.
 | Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Pending` | Browser/server parity, destination isolation, consent-state gating and business-delivery continuity pass |
 | Track B - website | Promote Stape conversion routing one property at a time | `Pending` | Once-only delivery, platform deduplication and rollback test pass |
 | Shared spine | Dataform productionization | `Active guarded` | Git, runtime identity, releases, workflow configs, assertions and transform parity pass |
-| Shared spine | Verify franchise GA4 native export arrival and normalize it into warehouse contracts | `Active guarded`; links live, data pending | Both datasets and first daily tables appear, hostname/event isolation passes, and downstream source precedence is documented |
+| Shared spine | Verify franchise GA4 native export arrival and normalize it into warehouse contracts | `Active guarded`; both datasets and first daily tables are live, Canada nonproduction-host exclusion pending | Governed hostname/event isolation, reconciliation and downstream source precedence pass before mart promotion |
 | Shared spine | Validate additive measurement-quality candidates | `Active guarded`; parallel views and six assertions deployed, current serving unchanged | Native export and USA duplicate proof, candidate Dataform run, paid-history materialization, dashboard parity and rollback pass |
-| Shared spine | Monitoring, queues, dead letters and runbooks | `Active guarded` | Alerts, replay, Cloud Billing export, failure ownership and rollback pass |
+| Shared spine | Monitoring, queues, dead letters and runbooks | `Active guarded`; V1 scorecard and three runbooks deployed/documented | Instrument run totals, resolve current quarantine alert, test alerts/replay/runbooks, connect Cloud Billing export, and prove failure ownership/rollback |
 | Shared spine | CEFA private runtime source consolidation | `Blocked operational risk` | Reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source exists without secrets |
 | Existing guarded work | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | Later phase | Parent multi-entity identity and email/journey inventory | `Approved`/`Pending` | Deterministic relationships, provider reconciliation and no-PII contracts pass |
@@ -376,6 +377,7 @@ or private payloads in this register.
 - [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
 - [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
 - [Franchise GA4 native BigQuery export activation](../20-bigquery/franchise-ga4-native-bigquery-export-activation-2026-07-31.md)
+- [Measurement activation operational health scorecard V1](../20-bigquery/measurement-activation-operational-health-scorecard-v1-2026-08-04.md)
 - [Measurement quality candidates](../20-bigquery/measurement-quality-candidates-2026-07-31.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)

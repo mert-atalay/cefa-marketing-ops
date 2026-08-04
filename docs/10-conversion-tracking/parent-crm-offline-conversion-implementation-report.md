@@ -1,6 +1,7 @@
 # Parent CRM Offline Conversion Implementation Report
 
 **Report date:** 2026-07-23
+**Last operational update:** 2026-08-04
 **Rollout:** CEFA parent CRM offline conversions
 **Approved mode:** Immediate per-record production rollout after deterministic tests
 **Current production state:** Infrastructure and non-uploadable baseline deployed;
@@ -119,6 +120,7 @@ changed.
 | Meta CRM Test Events | Three approved custom event types | Three received, zero API messages, synthetic identity only |
 | Meta reporting conversions | Three reporting-only rules | Creation still returns Meta subcode `1760020`; no broader fallback rule created |
 | Dispatcher kill switch | Disabled execution `cefa-parent-offline-conversion-dispatch-gfmdh` | Zero inspected, validated, accepted, failed, or retried |
+| Operational health V1 | `cefa_ops.measurement_pipeline_run_v1` and `cefa_ops.vw_measurement_activation_health_v1` | Aggregate-only table/view deployed; three runbooks source-controlled; runtime instrumentation and synthetic tests pending |
 | Existing inquiry conversions | Current Google website inquiry and Meta `Inquiry Submit` | Preserve unchanged |
 
 ## Repository Implementation
@@ -328,6 +330,8 @@ Complete this table during activation:
 | Existing inquiry continuity passed | Pending | |
 | PII scan passed | Passed for schema/runtime/tests | No prohibited columns; recursive guard and 58-test suite passed |
 | Kill switch passed | Passed | Execution `cefa-parent-offline-conversion-dispatch-gfmdh`; all counters zero |
+| Operational health scorecard deployed | Passed, additive | Aggregate run table and fixed-key scorecard view deployed 2026-08-04; no source or sender changed |
+| Pipeline/data-quality/platform runbooks tested | Pending | Three V1 runbooks exist; synthetic execution evidence still required before production promotion |
 
 ## Operational Stop Rule
 
@@ -358,3 +362,4 @@ selection. Preserve the ledger and delivery history for diagnosis.
 | 2026-07-23 | Reconfirmed restricted warehouse safety after two disabled-mode poller smoke runs: 22,346 non-uploadable initial/current-state rows, 44,674 prospective observation rows, and zero lifecycle events, outbox rows, or delivery attempts |
 | 2026-07-23 | Fixed overlapping Form 4 capture so retry/match/quarantine state is preserved; deployed activation v11 |
 | 2026-07-23 | Linked the rollout to the cross-workstream measurement program register and recorded Stape Business plus BigQuery/Dataform/Cloud hardening as approved adjacent work |
+| 2026-08-04 | Deployed aggregate-only operational health V1 with fixed scorecard metrics, explicit inactive states, reconciliation including quarantine, and three lightweight incident runbooks; no sender enabled |

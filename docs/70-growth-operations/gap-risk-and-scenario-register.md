@@ -1,6 +1,6 @@
 # CEFA Gap, Risk And Scenario Register
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-04
 **Owner:** CEFA marketing operations
 **Status:** Canonical cross-workstream risk and what-if register
 **Review cadence:** Weekly for active alerts; monthly for all other items
@@ -33,7 +33,7 @@
 | `GAP-013` | NC2/GADS1 remain candidate conventions and inventories are dated | `Medium` | `Pending` | Naming/paid owner | Fresh inventory and explicit migration approval |
 | `GAP-014` | n8n validation/export/audit workflow is not operational | `Low` | `Pending` | Automation owner | Versioned dry-run output and approval gates pass |
 | `GAP-015` | Source-confirmed household/dependent identity is unavailable | `Medium` | `Pending` | KinderTales/master-data owner | Stable source IDs and multi-child tests pass |
-| `GAP-016` | Cloud monitoring, alerting, dead-letter handling and runbooks are incomplete | `High` | `Partial` | Cloud runtime owner | Tested alerts, queues, replay and on-call runbooks |
+| `GAP-016` | Cloud monitoring, alerting, dead-letter handling and runbooks are incomplete | `High` | `Active guarded`; V1 scorecard/runbooks ready | Cloud runtime owner | Instrumented run totals, tested alerts, queues, replay and executable runbooks; [V1 baseline](../20-bigquery/measurement-activation-operational-health-scorecard-v1-2026-08-04.md) |
 | `GAP-017` | Growth operations RACI and recurring operating calendar are incomplete | `Medium` | `Pending` | Marketing operations owner | Approved roles, SLAs and meeting/reporting cadence |
 | `GAP-018` | Current dashboards do not all expose consistent grain/source/freshness labels | `Medium` | `Partial` | Reporting owner | Every promoted dashboard surface declares all three |
 | `GAP-019` | Creative asset ownership, version, approval and usage-right evidence is not centralized | `Medium` | `Partial` | Creative/marketing owner | Approved asset registry maps files to campaigns and expiry/rights |

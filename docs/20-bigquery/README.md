@@ -1,6 +1,6 @@
 # BigQuery And Google Cloud Measurement
 
-**Last updated:** 2026-07-31
+**Last updated:** 2026-08-04
 **Status:** Active governed workstream
 
 ## Start Here
@@ -79,12 +79,13 @@ CRM payloads remain outside those marts.
 | Capacity baseline | `Verified` | [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md) |
 | Dataform QA | `Active guarded` | 15 assertions compile and proof runs passed |
 | Dataform production | `Pending` | Git connection, runtime identity, release/workflow configs and transform parity |
-| Franchise GA4 native exports | `Active guarded` | Canada `259747921` and USA `519783092` links were created and read back on 2026-07-31; first datasets/tables remain pending Google provisioning |
+| Franchise GA4 native exports | `Active guarded` | Canada and USA datasets are live through 2026-08-03; first lead event IDs are complete/unique, while 40 Canada staging/development-host rows require exclusion before production mart promotion |
 | Parent CRM lifecycle foundation | `Active guarded` | Restricted tables, capture, binder, poller, outbox, dispatcher and diagnostics built |
 | Google CRM actions | `Verified` | Three secondary actions created and validation passed |
 | Meta CRM events | `Active guarded` | Test Events passed; reporting custom conversions wait for first legitimate live event |
 | Stape | `Approved` | Business plan available; access, DNS, containers and shadow routing pending |
-| Cloud monitoring | `Partial` | Capacity board exists; billing export, alerts, queues/dead letters and runbooks incomplete |
+| Operational health V1 | `Active guarded` | Aggregate run-audit table and health scorecard view deployed; three lightweight runbooks and controlled-test matrix source-controlled; runtime instrumentation and synthetic runbook tests pending |
+| Cloud monitoring | `Partial` | Capacity and activation-health views exist; billing export, alerts, complete queues/dead letters and escalation wiring remain incomplete |
 | Private runtime source control | `Blocked operational risk` | CEFA private runtime repository still required |
 
 ## Current Documents
@@ -94,6 +95,7 @@ CRM payloads remain outside those marts.
 - [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md)
 - [Dataform source control and parity](./dataform-source-control-and-parity-2026-07-25.md)
 - [Franchise GA4 native BigQuery export activation](./franchise-ga4-native-bigquery-export-activation-2026-07-31.md)
+- [Measurement activation operational health scorecard V1](./measurement-activation-operational-health-scorecard-v1-2026-08-04.md)
 - [Warehouse current-state snapshot](./warehouse-current-state-2026-05-03.md)
 - [Dashboard source layer and rule registry](./dashboard-source-layer-greenrope-and-rule-registry-2026-05-03.md)
 
