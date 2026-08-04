@@ -77,13 +77,13 @@ CRM payloads remain outside those marts.
 |---|---|---|
 | Capacity approval | `Verified` | Full relevant Google Cloud scope approved |
 | Capacity baseline | `Verified` | [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md) |
-| Dataform QA | `Active guarded` | 15 assertions compile and proof runs passed |
+| Dataform QA | `Active guarded` | Committed cloud mirror compiles with zero errors and the full `18/18` assertion run passed |
 | Dataform production | `Pending` | Git connection, runtime identity, release/workflow configs and transform parity |
 | Parent CRM lifecycle foundation | `Active guarded` | Restricted tables, capture, binder, poller, outbox, dispatcher and diagnostics built |
 | Google CRM actions | `Verified` | Three secondary actions created and validation passed |
 | Meta CRM events | `Active guarded` | Test Events passed; reporting custom conversions wait for first legitimate live event |
-| Stape | `Approved` | Business plan available; access, DNS, containers and shadow routing pending |
-| Cloud monitoring | `Partial` | Capacity board exists; billing export, alerts, queues/dead letters and runbooks incomplete |
+| Stape | `Active guarded` | Parent GA4 and Meta CAPI are live; Google server copy remains paused pending once-only proof |
+| Cloud monitoring | `Partial` | Capacity board and Stape 4xx/5xx alerts exist; billing export, queues/dead letters and complete runbooks remain incomplete |
 | Private runtime source control | `Blocked operational risk` | CEFA private runtime repository still required |
 
 ## Current Documents

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1",
   "property": "parent",
-  "observed_at_utc": "2026-08-04T18:44:34Z",
+  "observed_at_utc": "2026-08-04T21:20:20Z",
   "production_state": {
     "browser_routing": true,
     "ga4_server_routing_active": true,
@@ -30,7 +30,10 @@
     "analytics_enabled": true,
     "outgoing_logs_enabled": true,
     "enabled_alert_recipient_count": 1,
-    "enabled_monitoring_rule_count": 1,
+    "enabled_monitoring_rule_count": 3,
+    "incoming_5xx_rule_enabled": true,
+    "outgoing_4xx_rule_enabled": true,
+    "outgoing_5xx_rule_enabled": true,
     "recovery_code_custody_api_verifiable": false,
     "secondary_administrator_api_verifiable": false
   },
@@ -84,7 +87,10 @@
     "meta_sgtm_test_events_received": 1,
     "meta_sgtm_test_message_count": 0,
     "meta_generated_fbp_present": false,
+    "meta_accepted_server_send_count_in_inspected_window": 3,
+    "post_activation_meta_server_send_count": 2,
     "legitimate_meta_production_event_observed_after_activation": false,
+    "legitimate_meta_production_event_evidence": "Two post-activation accepted Meta sends align with lead/conversion rows; Events Manager pair deduplication remains pending",
     "google_server_duplicate_counting_test": "pending",
     "conversion_test_used_pii": false,
     "temporary_preview_header_stored": false
@@ -92,7 +98,10 @@
   "certified_reporting": {
     "event_view": "mart_marketing.vw_parent_inquiry_certified_event",
     "daily_view": "mart_marketing.vw_parent_inquiry_school_source_certified_daily",
+    "daily_qa_view": "mart_marketing.vw_parent_inquiry_certified_qa_daily",
+    "measurement_dictionary_view": "mart_marketing.vw_parent_inquiry_measurement_model_dictionary",
     "dashboard_candidate_view": "mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate",
+    "dashboard_qa_candidate_view": "mart_cefa_growth_dashboard.dashboard_parent_inquiry_certified_qa_daily_candidate",
     "identity_contract_start_date": "2026-06-25",
     "data_through_date": "2026-08-03",
     "gravity_form_entries": 3689,
@@ -101,5 +110,5 @@
     "missing_selected_school_count": 0,
     "dashboard_contract_replaced": false
   },
-  "next_gate": "Observe one legitimate Parent Meta inquiry and confirm browser/server deduplication. Keep Google server conversion delivery paused until one controlled saved Form 4 duplicate-counting test passes."
+  "next_gate": "Confirm accepted browser/server pairs deduplicate in Meta Events Manager. Keep Google server conversion delivery paused until one controlled saved Form 4 duplicate-counting test passes."
 }

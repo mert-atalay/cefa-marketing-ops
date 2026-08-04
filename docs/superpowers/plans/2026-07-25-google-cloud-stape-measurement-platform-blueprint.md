@@ -81,15 +81,15 @@ The read-only inventory on 2026-07-25 found:
 | Cloud Run | 11 jobs and 3 services visible |
 | Cloud Scheduler | 9 schedules in `us-central1`; 5 enabled and 4 paused after the GreenRope identity binder containment |
 | Native transfers | Google Ads and Meta transfers plus three BigQuery scheduled-query backstops |
-| Dataform | API enabled; 15 assertion definitions are in Git; a non-production workspace compiles 15 actions with zero errors; both existing and foundation tagged proof runs succeeded; no release/workflow schedule exists |
+| Dataform | API enabled; Git and the committed cloud workspace contain the same 18 assertions; cloud compilation has zero errors and the full workflow passed `18/18`; no production release/workflow schedule exists |
 | Capacity board | Budget registry plus query, storage, and Stape planning-proxy views are live in `cefa_governance` and `cefa_ops` |
 | Current monitor | Overall `PASS`; school `pass`; franchise `partial`; lifecycle `pending`; predictive `promoted_partial`; zero issues and four warnings |
 | Parent event foundation | Form 4 identity and canonical attribution exist; website and KinderTales paths remain active |
 | Parent CRM activation | Restricted ledger, capture, binder, poller, dispatcher, diagnostics, Google actions, and Meta test events exist; production sending remains disabled |
-| BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
+| BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable. A restricted zero-row BigQuery outcome inbox and v1 interface contract are deployed; the authorized connector cannot see the BI operational project, so source schema, grain, mappings, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. On 2026-08-04 server GTM `GTM-T7C46VM7` published guarded version `2` and web GTM `GTM-NZ6N7WNC` published routing-only version `12`. The no-preview allow/block matrix produced exactly two intended GA4 HTTP `204` deliveries and blocked the wrong-host and wrong-event cases. A clean live homepage sent one request to `edge.cefa.ca`, no direct browser GA collection request, and one Stape `PageView` delivery with HTTP `204`. Parent GA4 is live through sGTM; Google Ads and Meta conversion delivery remain on unchanged browser paths pending destination-specific deduplication, consent, credential, and controlled-conversion QA |
+| Stape | Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. Parent server GTM `GTM-T7C46VM7` version `9` and web GTM `GTM-NZ6N7WNC` version `15` are live. GA4 routes through the guarded first-party endpoint; Meta CAPI sends the exact browser event name and shared ID; three inspected Meta requests were accepted. Google server conversion tags remain paused. Hourly incoming `5xx`, outgoing `4xx` and outgoing `5xx` alerts plus one recipient are enabled. Meta pair deduplication and one controlled Google once-only proof remain gated |
 
 The no-secret machine-readable Parent shadow checkpoint is
 [stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
@@ -116,9 +116,9 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- the Parent Stape first-party GA4 route is active and verified, while Google
-  Ads/Meta server conversion delivery, destination-specific deduplication,
-  consent gates, controlled Form `4` QA, and franchise isolation remain open;
+- the Parent Stape first-party GA4 and Meta CAPI routes are active and accepted,
+  while Meta pair deduplication, Google server conversion delivery, consent
+  gates, controlled Form `4` QA, and franchise isolation remain open;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 
@@ -1147,10 +1147,14 @@ no duplicate conversions or KinderTales regression.
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
 - route Parent GA4 through the first-party endpoint; completed 2026-08-04 with
-  web version `12`, live browser proof and Stape GA4 HTTP `204` read-back;
-- add Google website conversion route;
-- add Meta CAPI route;
-- validate browser/server deduplication;
+  web version `12`, then hardened in web version `15`, with live browser proof
+  and Stape GA4 HTTP `204` read-back;
+- add Google website conversion route; browser Transaction ID is live, server
+  copy is staged and paused pending once-only proof;
+- add Meta CAPI route; completed in server version `9`, with three inspected
+  requests accepted by Meta;
+- validate browser/server deduplication; shared ID contract passes, but Meta
+  Events Manager pair read-back and controlled Google proof remain open;
 - send a no-PII delivery audit to Google Cloud;
 - complete controlled Form 4 end-to-end QA;
 - promote Parent only after acceptance.

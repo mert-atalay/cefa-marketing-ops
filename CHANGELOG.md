@@ -9,6 +9,11 @@
 - Added a reusable no-submit browser QA tool and production record for the guarded Franchise Canada/USA GAConnector shadow rollout.
 - Added a read-only, aggregate-only WP-CLI shadow monitor for attribution parity, event-ID uniqueness, expected direct traffic, and existing delivery-note status.
 
+## 0.6.4 - 2026-08-04
+
+- Issue a fresh browser submission-attempt ID when a visitor submits another successful Parent inquiry after the previous ID has already been consumed.
+- Preserve the same ID across validation retries and leave server identity, attribution, CRM, School Manager, KinderTales, and destination-event contracts unchanged.
+
 ## 0.6.3 - 2026-07-13
 
 - Added a separately gated parent canonical writeback for Gravity Forms Form `4` fields `35-46` while broad attribution mode remains `shadow`.

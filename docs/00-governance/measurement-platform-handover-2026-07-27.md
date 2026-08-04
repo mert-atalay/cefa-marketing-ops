@@ -258,7 +258,8 @@ Current implementation status:
 
 - full relevant Google Cloud and BigQuery capacity is approved;
 - cost controls are informational and must not silently drop required data;
-- a 15-assertion Dataform QA package compiles and has passed proof runs;
+- an 18-assertion Dataform QA package is mirrored and committed in the cloud
+  workspace, compiles with zero errors, and passed a full `18/18` cloud run;
 - Cloud Run remains the current production orchestration layer;
 - production Dataform Git/release/workflow configuration remains pending;
 - Cloud Billing export, comprehensive alerts, queues, dead-letter handling,
@@ -276,8 +277,8 @@ Verified through 2026-08-04:
 - Parent server GTM `GTM-T7C46VM7` and first-party DNS/TLS/health;
 - CEFA account 2FA, healthy billing, auto-upgrade, durable API-key rotation,
   and revocation of the disclosed predecessor;
-- Stape Analytics, outgoing logs, one enabled alert recipient, and an enabled
-  hourly repeated-outgoing-`5xx` alert;
+- Stape Analytics, outgoing logs, one enabled alert recipient, and enabled
+  hourly incoming `5xx`, outgoing `4xx`, and outgoing `5xx` alerts;
 - published server version `9`, `CEFA | Parent | Meta CAPI Inquiry Submit Live
   | 2026-08-04`, with native GA4 client/tag, Client Name
   enforcement, anchored Parent-host guard, explicit event allowlist, IP
@@ -305,9 +306,11 @@ Verified through 2026-08-04:
 - direct Meta Test Events and an independent propagated sGTM transport test
   both returned one accepted event, no messages, matching event ID, and no
   generated `_fbp` value;
-- the only Facebook outgoing log row currently visible after the test build is
-  the controlled HTTP `200` test row, so one legitimate production inquiry is
-  still required for live deduplication observation;
+- three inspected Facebook outgoing requests returned HTTP `200`,
+  `events_received=1`, and no messages; two occurred after production
+  activation and align with lead/conversion rows, so they are likely
+  legitimate production inquiries, while Events Manager deduplication proof
+  remains open;
 - a post-build health check and controlled non-conversion request both
   returned HTTP `200`;
 - no conversion action, campaign goal, Gravity Forms, School Manager,
@@ -318,7 +321,10 @@ Additive certified Parent reporting is also live:
 
 - `mart_marketing.vw_parent_inquiry_certified_event`;
 - `mart_marketing.vw_parent_inquiry_school_source_certified_daily`;
-- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`.
+- `mart_marketing.vw_parent_inquiry_certified_qa_daily`;
+- `mart_marketing.vw_parent_inquiry_measurement_model_dictionary`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_certified_qa_daily_candidate`.
 
 These views count saved Form `4` entries, use Gravity's selected school and the
 CEFA first-party attribution ledger, then add GA4 session last-click only by
@@ -347,7 +353,7 @@ Current gaps:
 - operational consent/CMP policy and advertising-destination consent gates;
 - ongoing GA4 browser/server parity and destination-isolation monitoring;
 - controlled Google duplicate-counting QA before unpausing its server tag;
-- one legitimate Meta browser/server event-ID pair observed in production;
+- Meta Events Manager read-back for accepted production browser/server pairs;
 - controlled Form `4` conversion continuity proof;
 - Looker test-source and dashboard-owner QA for the additive certified report;
 - separate Franchise Canada and Franchise USA container/endpoint builds.
@@ -359,7 +365,8 @@ The current read-only inventory is maintained in
 
 Key components:
 
-- CEFA Conversion Tracking `0.6.3` on all three properties;
+- CEFA Conversion Tracking `0.6.4` on Parent and `0.6.3` on both franchise
+  properties;
 - CEFA School Manager `1.0.22` on parent;
 - Gravity Forms `2.10.5` on all three properties;
 - CEFA Franchise MCP Control on both franchise properties;
@@ -400,8 +407,8 @@ Strict copy rule:
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
 | Stape | Parent GA4 and Meta CAPI are live through server version `9`; web version `15` carries shared identity within the 25-parameter GA4 limit. Google server delivery remains paused | `Active guarded` |
-| Parent certified reporting | Additive school/source/event views reconcile Gravity truth to exact-ID GA4 context; candidate dashboard view is not connected to existing serving contracts | `Active guarded` |
-| BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
+| Parent certified reporting | Additive school/source/event, daily QA and measurement-model views reconcile Gravity truth to exact-ID GA4 context; candidate dashboard views are not connected to existing serving contracts | `Active guarded` |
+| BI Supabase | Restricted zero-row BigQuery outcome inbox and v1 field contract exist; BI source grain, identifiers, history, lineage, freshness and source mappings remain unverified | `Interface ready; source verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |
 | Monitoring | Billing export, alerts, dead letters and complete runbooks | `Partial` |
@@ -425,7 +432,8 @@ current conversion continuity throughout both tracks.
 2. Resolve per-record eligibility and activate eligible secondary CRM outcomes
    after baseline, deduplication, diagnostics, and kill-switch gates pass.
 3. Inspect BI Supabase read-only and agree the shared metric dictionary.
-4. Approve the versioned Parent outcome contract and proof-of-concept record.
+4. Map and approve the versioned Parent outcome contract and proof-of-concept
+   record against the empty restricted BigQuery inbox.
 5. Reconcile before any one-sender source-authority switch.
 
 Track A does not wait for Stape.

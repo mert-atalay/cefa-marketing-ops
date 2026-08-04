@@ -334,3 +334,121 @@ SELECT
   'candidate_additive_not_bound_to_existing_dashboard' AS dashboard_release_status
 FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_school_source_certified_daily`
 WHERE dashboard_safe = TRUE;
+
+CREATE OR REPLACE VIEW
+  `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_qa_daily`
+OPTIONS (
+  description = 'Aggregate-only daily Parent inquiry identity, GA4 delivery, school, and source reconciliation health. Contains no parent or child identifiers.'
+) AS
+SELECT
+  submitted_date AS date,
+  COUNT(*) AS gravity_form_submissions,
+  COUNTIF(event_id IS NULL OR event_id = '') AS missing_event_id_submissions,
+  COUNTIF(gravity_event_id_entry_count > 1) AS ambiguous_legacy_event_id_submissions,
+  COUNTIF(ga4_event_count > 1) AS duplicate_ga4_event_id_submissions,
+  COUNTIF(ga4_attribution_eligible) AS exact_ga4_event_id_matches,
+  COUNTIF(NOT ga4_event_present) AS ga4_unmatched_submissions,
+  COUNTIF(school_reconciliation_status = 'school_match') AS ga4_school_matches,
+  COUNTIF(school_reconciliation_status = 'school_mismatch_review') AS ga4_school_mismatches,
+  COUNTIF(school_reconciliation_status = 'ga4_school_parameter_missing') AS ga4_school_parameter_missing,
+  COUNTIF(source_agreement_status = 'paid_agreement') AS paid_source_agreements,
+  COUNTIF(source_agreement_status = 'first_party_paid_ga4_non_paid') AS first_party_paid_ga4_non_paid,
+  COUNTIF(source_agreement_status = 'ga4_paid_without_first_party_paid_evidence') AS ga4_paid_without_first_party_paid_evidence,
+  SAFE_DIVIDE(COUNTIF(ga4_attribution_eligible), COUNT(*)) AS exact_ga4_match_rate,
+  SAFE_DIVIDE(COUNTIF(ga4_event_present), COUNT(*)) AS ga4_delivery_rate,
+  MAX(ga4_data_through_date) AS ga4_data_through_date,
+  MAX(source_max_timestamp) AS source_max_timestamp,
+  CASE
+    WHEN COUNTIF(qa_status = 'fail') > 0
+      OR COUNTIF(school_reconciliation_status = 'school_mismatch_review') > 0 THEN 'fail'
+    WHEN submitted_date > MAX(ga4_data_through_date) THEN 'pending_ga4_export'
+    WHEN COUNTIF(gravity_event_id_entry_count > 1) > 0
+      OR COUNTIF(ga4_event_count > 1) > 0
+      OR COUNTIF(NOT ga4_event_present) > 0 THEN 'warning'
+    ELSE 'pass'
+  END AS qa_status,
+  'legacy browser event IDs remain supporting identity while Parent Attribution Bridge is in shadow mode; unique reserved server IDs are monitored separately in WordPress' AS identity_boundary,
+  'parent_inquiry_certified_qa_daily_v1' AS serving_contract_version,
+  TRUE AS dashboard_safe
+FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_event`
+GROUP BY submitted_date;
+
+CREATE OR REPLACE VIEW
+  `marketing-api-488017.mart_marketing.vw_parent_inquiry_measurement_model_dictionary`
+OPTIONS (
+  description = 'Governed measurement-model dictionary preventing Gravity, first-party paid evidence, GA4, Google Ads, and Meta counts from being treated as one additive metric.'
+) AS
+SELECT *
+FROM UNNEST([
+  STRUCT(
+    'gravity_saved_inquiry' AS measurement_model,
+    'Gravity Forms Form 4' AS source_system,
+    'Authoritative saved Parent inquiry count and selected-school truth.' AS business_meaning,
+    'saved_entry' AS grain,
+    'none' AS attribution_rule,
+    TRUE AS inquiry_count_authority,
+    FALSE AS additive_with_other_models,
+    'Use for total inquiries and school-specific inquiry totals.' AS reporting_rule
+  ),
+  STRUCT(
+    'cefa_first_party_paid_evidence',
+    'CEFA attribution ledger and saved click evidence',
+    'Subset of saved inquiries with verified paid evidence; not a second inquiry count.',
+    'saved_entry_subset',
+    'canonical first-party acquisition evidence',
+    FALSE,
+    FALSE,
+    'Use to classify Gravity inquiries as paid; never add to total inquiries.'
+  ),
+  STRUCT(
+    'ga4_exact_event_delivery',
+    'GA4 BigQuery export',
+    'Supporting proof that the website inquiry event reached GA4 with the same event ID.',
+    'event_delivery',
+    'exact event-ID reconciliation',
+    FALSE,
+    FALSE,
+    'Use for delivery QA and session context, not as a replacement inquiry total.'
+  ),
+  STRUCT(
+    'ga4_session_last_click',
+    'GA4 BigQuery export',
+    'GA4 session acquisition context for an exactly matched inquiry event.',
+    'matched_saved_entry',
+    'GA4 session last click',
+    FALSE,
+    FALSE,
+    'Use for GA4 acquisition analysis; it does not reproduce ad-platform attribution windows.'
+  ),
+  STRUCT(
+    'google_ads_platform_conversion',
+    'Google Ads',
+    'Google-reported conversions credited under the selected Google Ads attribution settings.',
+    'platform_attributed_conversion',
+    'Google Ads configured attribution',
+    FALSE,
+    FALSE,
+    'Report separately for optimization and platform reconciliation.'
+  ),
+  STRUCT(
+    'meta_platform_conversion',
+    'Meta Ads',
+    'Meta-reported conversions credited under the selected Meta attribution window.',
+    'platform_attributed_conversion',
+    'Meta configured click/view attribution window',
+    FALSE,
+    FALSE,
+    'Report separately for optimization and platform reconciliation.'
+  )
+]);
+
+CREATE OR REPLACE VIEW
+  `marketing-api-488017.mart_cefa_growth_dashboard.dashboard_parent_inquiry_certified_qa_daily_candidate`
+OPTIONS (
+  description = 'Additive aggregate-only QA candidate for Parent inquiry reporting. Does not alter a current dashboard serving contract.'
+) AS
+SELECT
+  *,
+  'candidate_additive_not_bound_to_existing_dashboard' AS dashboard_release_status
+FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_qa_daily`
+WHERE dashboard_safe = TRUE;

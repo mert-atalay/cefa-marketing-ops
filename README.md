@@ -95,7 +95,7 @@ handover and Cloud/Stape blueprint.
 
 ## Current Live-Domain Audit Status
 
-- Parent `cefa.ca` is live on plugin `0.6.3` with Attribution Bridge and ledger shadow modes plus the separately scoped parent canonical Form `4` writeback. CEFA School Manager still owns Form `4`, fields `32.*`, fields `35-46`, and KinderTales delivery; the tracking plugin improves only the attribution values saved in fields `35-46` before School Manager sends them to KinderTales. Confirmed `school_inquiry_submit` ownership remains unchanged across GA4, Google Ads, and Meta. Synuma/SiteZeus applies to the franchise properties, not the parent site.
+- Parent `cefa.ca` is live on plugin `0.6.4` with Attribution Bridge and ledger shadow modes plus the separately scoped parent canonical Form `4` writeback. Version `0.6.4` refreshes a consumed browser event UUID before a later successful submission while preserving validation retries. CEFA School Manager still owns Form `4`, fields `32.*`, fields `35-46`, and KinderTales delivery; the tracking plugin improves only the attribution values saved in fields `35-46` before School Manager sends them to KinderTales. Confirmed `school_inquiry_submit` ownership remains unchanged across GA4, Google Ads, and Meta. Synuma/SiteZeus applies to the franchise properties, not the parent site.
 - Parent branded Search and Oakville Eighth Line Search now use explicit inquiry-only campaign goals. Parent GA4 click events remain collected but are no longer key events.
 - Franchise Canada `franchise.cefa.ca` uses the WPCode fallback bridge and live GTM Version `54`; confirmed Form `1` and Form `2` helper paths remain active.
 - Franchise Canada application/email/phone clicks remain collected but are no longer GA4 key events.
@@ -306,7 +306,7 @@ For live franchise deployments, `snippets/franchise-wpcode-bridge.php` is the cu
 
 ## Attribution Bridge Runtime Flags
 
-Plugin `0.6.3` ships every new attribution/cutover path disabled by default.
+Plugin `0.6.4` ships every new attribution/cutover path disabled by default.
 
 When shadow or primary mode is enabled, the browser bridge posts allowlisted acquisition evidence to the same-origin, no-store `attribution-capture` endpoint. This preserves the signed HttpOnly cookie on managed hosts such as WP Engine where anonymous page caching can bypass PHP page-load cookie logic.
 

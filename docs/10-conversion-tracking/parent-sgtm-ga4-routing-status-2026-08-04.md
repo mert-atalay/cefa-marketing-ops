@@ -16,8 +16,9 @@
 | Meta inquiry | Browser `Inquiry Submit` plus server `Inquiry Submit` with the same event ID |
 | Google Ads inquiry | Existing browser tag remains live with the event ID as Transaction ID |
 | Google Ads server copy | Paused pending one controlled real Form `4` duplicate-counting proof |
+| CEFA Conversion Tracking | Parent `0.6.4`; full runtime, attribution and ledger remain shadow |
 | Gravity Forms/KinderTales | Unchanged |
-| Existing dashboards | Unchanged; the new certified view is additive and marked candidate |
+| Existing dashboards | Unchanged; all new certified serving objects are additive and marked candidate |
 
 ## 1. GA4 Lead Payload Repair
 
@@ -57,10 +58,12 @@ Meta transport proof passed twice:
 - a propagated sGTM test returned Meta HTTP `200`, `events_received=1`, the
   exact event name, matching event ID, and no generated `_fbp` value.
 
-The production Meta tag is live, but no legitimate Parent inquiry has occurred
-after activation in the currently inspected Stape window. The only Facebook
-outgoing row remains the controlled test row. Production browser/server
-deduplication therefore remains a monitoring item, not a failed test.
+Stape's 24-hour outgoing log later showed three accepted Facebook requests,
+all HTTP `200` with `events_received=1` and no messages. Two occurred after the
+production version was live and align with GA4 `generate_lead`/Google rows, so
+they are likely legitimate production inquiries. This proves server receipt
+and Meta acceptance, but it does not by itself prove that Meta merged each
+browser/server pair. Events Manager deduplication remains a required read-back.
 
 Google's server conversion copy remains paused. The browser inquiry conversion
 continues unchanged and now has stable duplicate protection. Do not unpause
@@ -73,7 +76,10 @@ The following additive BigQuery views are live:
 
 - `mart_marketing.vw_parent_inquiry_certified_event`;
 - `mart_marketing.vw_parent_inquiry_school_source_certified_daily`;
-- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`.
+- `mart_marketing.vw_parent_inquiry_certified_qa_daily`;
+- `mart_marketing.vw_parent_inquiry_measurement_model_dictionary`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_certified_qa_daily_candidate`.
 
 Contract:
 
@@ -100,8 +106,8 @@ Production read-back through 2026-08-03:
 | Missing selected schools | `0` |
 | Exact GA4 attribution-eligible rows | `3,331` (`90.3%`) |
 | Ambiguous Gravity event-ID entries | `104` |
-| Duplicate GA4 event-ID entries | `2` |
-| GA4 event not observed | `252` |
+| Duplicate GA4 event-ID entries | `14` |
+| GA4 event not observed | `271` |
 | PII-like prohibited columns | `0` |
 
 July alone reconciles to `3,025` saved inquiries. The report explicitly shows
@@ -110,13 +116,36 @@ inquiries have first-party paid evidence while GA4 labels the session as
 non-paid. These remain paid in the certified first-party view and are exposed
 as `first_party_paid_ga4_non_paid` for diagnosis.
 
-Three Dataform assertions now protect unique entry grain, school completeness,
-and event-to-daily reconciliation.
+The six-row measurement dictionary explicitly prevents saved inquiries,
+first-party paid evidence, GA4 delivery, GA4 session last-click, Google Ads
+platform conversions, and Meta platform conversions from being added together.
+The daily QA candidate keeps legacy identity ambiguity and delivery exceptions
+visible without exposing PII.
+
+## 4. Parent Event Identity Repair
+
+Production read-only evidence found that the legacy browser event ID can be
+reused when the same browser completes another successful Form `4` submission.
+At the deployment checkpoint, `109` of `3,753` active post-contract entries
+were affected by `45` duplicated legacy browser keys. The server-reserved IDs
+were present on `2,370` shadow-era entries and had zero duplicates.
+
+Parent plugin `0.6.4` now creates a new browser UUID after a previously
+successful UUID is consumed, while preserving the same UUID through validation
+retries. It does not change Form `4`, School Manager, KinderTales, attribution
+writeback, the server-reserved identity, or destination tags. A GET-only
+production check returned HTTP `200`, served the new code, and left the active
+Form `4` entry count unchanged.
+
+The Dataform cloud workspace now mirrors all `18` Git assertions. A committed
+cloud compilation produced zero errors, and a full workflow invocation passed
+`18/18`. No production Dataform schedule was created because the governed Git
+and runtime release gate is still open.
 
 ## What Remains
 
-1. Observe the next legitimate Parent inquiry in Stape and Meta, then confirm
-   browser/server deduplication in Events Manager.
+1. Confirm the accepted Parent browser/server pairs are deduplicated in Meta
+   Events Manager.
 2. Run one controlled real Form `4` Google duplicate-counting test; keep the
    server Google tag paused until it passes.
 3. Keep Meta and Google platform-reported attribution-window reporting as a
@@ -126,6 +155,9 @@ and event-to-daily reconciliation.
    dashboard owner QA; no existing dashboard contract was replaced.
 5. Continue the separate Parent CRM/offline-conversion identity work when the
    GreenRope fields and controlled identity read-back are available.
+6. Use the empty restricted Supabase outcome inbox only after BI verifies the
+   v1 record-level source mappings, timestamps, corrections, lineage and one
+   proof-of-concept record.
 
 ## Rollback
 

@@ -1,0 +1,24 @@
+contract_version,canonical_field,type,mode,source_mapping,status,purpose,guardrail
+parent_outcome_v1,source_system,STRING,REQUIRED,bi_supabase,approved,Identifies the approved consolidated outcome source,Must equal bi_supabase for this interface
+parent_outcome_v1,source_record_key_hmac,STRING,REQUIRED,pending BI source record ID mapping,pending_source_mapping,Idempotent source record identity,HMAC before BigQuery; never store a raw person or CRM identifier
+parent_outcome_v1,parent_key_hmac,STRING,NULLABLE,pending BI parent ID mapping,pending_source_mapping,Links one parent across multiple dependents and inquiries,HMAC before BigQuery; not an activation identifier by itself
+parent_outcome_v1,household_key_hmac,STRING,NULLABLE,pending BI household ID mapping,pending_source_mapping,Groups approved household relationships when available,HMAC before BigQuery; do not infer household membership
+parent_outcome_v1,dependent_key_hmac,STRING,NULLABLE,pending BI child or dependent ID mapping,pending_source_mapping,Separates multiple dependents for one parent,HMAC before BigQuery; no name DOB or child attributes
+parent_outcome_v1,inquiry_key_hmac,STRING,NULLABLE,pending BI inquiry ID mapping,pending_source_mapping,Separates repeat inquiries and multi-school journeys,HMAC before BigQuery
+parent_outcome_v1,opportunity_key_hmac,STRING,NULLABLE,pending BI opportunity ID mapping,pending_source_mapping,Preserves opportunity grain and lineage,HMAC before BigQuery
+parent_outcome_v1,enrollment_key_hmac,STRING,NULLABLE,pending BI enrollment ID mapping,pending_source_mapping,Preserves final-enrollment grain when available,HMAC before BigQuery
+parent_outcome_v1,cefa_event_id,STRING,NULLABLE,pending BI or GreenRope mapping,blocked_external_identity,Exact website event identity,Must resolve to exactly one confirmed Form 4 submission before activation
+parent_outcome_v1,cefa_form_entry_id,STRING,NULLABLE,pending BI or GreenRope mapping,blocked_external_identity,Exact Gravity Forms entry identity,Must agree with cefa_event_id when both exist
+parent_outcome_v1,school_uuid,STRING,REQUIRED,pending BI school mapping,pending_source_mapping,Original governed CEFA school identity,Must map through the governed school dimension; do not use display names as keys
+parent_outcome_v1,outcome_type,STRING,REQUIRED,pending BI lifecycle mapping,pending_source_mapping,Governed business outcome,Allowlist only: tour_scheduled tour_completed_candidate crm_closed_won final_enrollment
+parent_outcome_v1,outcome_status,STRING,REQUIRED,pending BI status mapping,pending_source_mapping,Current source disposition,Allowlist only: observed corrected voided
+parent_outcome_v1,outcome_occurred_at,TIMESTAMP,REQUIRED,pending BI source timestamp,pending_source_mapping,Original business occurrence time,Do not substitute extract or load time
+parent_outcome_v1,source_updated_at,TIMESTAMP,REQUIRED,pending BI source update timestamp,pending_source_mapping,Incremental cursor and correction ordering,Must be monotonic enough for replay or paired with a stable cursor
+parent_outcome_v1,source_observed_at,TIMESTAMP,REQUIRED,pending BI pipeline timestamp,pending_source_mapping,When the BI pipeline first observed the record,Must remain distinct from outcome_occurred_at
+parent_outcome_v1,timestamp_quality,STRING,REQUIRED,pending BI timestamp semantics,pending_source_mapping,Explains timestamp provenance,Allowlist only: source_exact webhook_observed poll_observed migrated_unknown
+parent_outcome_v1,is_correction,BOOL,REQUIRED,pending BI correction behavior,pending_source_mapping,Marks a correction without destructive history rewrite,Corrections append; they do not silently replace accepted activation history
+parent_outcome_v1,supersedes_record_key_hmac,STRING,NULLABLE,pending BI correction linkage,pending_source_mapping,Links a correction to the prior source record,HMAC with the same key version as source_record_key_hmac
+parent_outcome_v1,lineage_source_system,STRING,REQUIRED,pending BI lineage mapping,pending_source_mapping,Names the operational source behind Supabase,Expected values include kindertales greenrope or approved BI-derived
+parent_outcome_v1,lineage_record_key_hmac,STRING,NULLABLE,pending BI lineage record ID mapping,pending_source_mapping,Reconciles the consolidated record to its operational source,HMAC before BigQuery
+parent_outcome_v1,ingest_run_id,STRING,REQUIRED,CEFA BigQuery ingestion runtime,approved,Supports replay monitoring and row-count reconciliation,Operational identifier only; no source payload data
+parent_outcome_v1,loaded_at,TIMESTAMP,REQUIRED,CEFA BigQuery ingestion runtime,approved,Warehouse arrival time,Must remain distinct from all business timestamps

@@ -2,9 +2,22 @@
 
 Last updated: 2026-05-03
 
+> **Superseding verification, 2026-08-04:** This file describes an earlier,
+> inactive marketing Supabase foundation and is not the BI team's operational
+> Parent business-data project. The currently authorized Supabase connector
+> lists only inactive personal/marketing projects and cannot inspect the BI
+> operational project. Do not build or write to either visible inactive project
+> for this program. The approved current boundary is a minimum BI Supabase to
+> restricted BigQuery outcome feed, governed by
+> [cefa-parent-supabase-bq-outcome-contract-v1.csv](../../data/reference/cefa-parent-supabase-bq-outcome-contract-v1.csv).
+> Its zero-row BigQuery inbox is deployed; source mappings and production
+> ingestion remain blocked on BI read-only schema/pipeline evidence.
+
 ## Purpose
 
-This document records the new Supabase project setup for the CEFA marketing measurement and data foundation work in this repo.
+This document records the historical May setup of a proposed Supabase project
+for CEFA marketing measurement. It is retained as evidence and must not be used
+as the current BI integration runbook.
 
 This is not a live schema migration. It defines the current verified setup, the intended database role, the first build order, and the gaps that must be resolved before writing production tables.
 

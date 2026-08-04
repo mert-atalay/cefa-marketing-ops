@@ -93,9 +93,9 @@ runtime, or authority to change spend and production systems without approval.
 | Website measurement | CEFA Conversion Tracking, WPCode bridge, GAConnector, GTM | Neutral events and identity; destination mapping remains property-specific |
 | Analytics | GA4 properties and native BigQuery export | Web behavior and event evidence, not CRM truth |
 | Advertising | Google Ads and Meta | Platform delivery, spend and optimization; IDs are stable object handles |
-| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Parent GA4 first-party production routing is live; browser Google transaction identity and the shared server event contract are live; paused Google server tags and the Meta template are staged in unpublished version `3`; destination activation and franchise isolation remain guarded |
-| Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII |
-| BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; exact schema and pipeline remain pending read-only verification |
+| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Parent GA4 and Meta CAPI first-party routing are live in server version `9`; web version `15` carries shared identity, Google server tags remain paused, and Meta pair deduplication plus franchise isolation remain guarded |
+| Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII. The committed Dataform cloud mirror passed `18/18` assertions while Cloud Run remains the production orchestrator |
+| BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; a restricted zero-row BigQuery outcome inbox and v1 interface exist, while BI source schema, mappings and pipeline remain pending read-only verification |
 | Reporting | BigQuery serving views, Looker Studio, Supermetrics, Power BI, Lovable | Show source, grain and freshness; do not silently substitute stale data |
 | Email/journeys | Mailchimp and GreenRope email activity | Later omnichannel evidence; provider feeds and eligibility still need review |
 | SEO/local | Search Console, DataForSEO, GBP, Yelp, WordPress | Organic/local evidence and URL governance |
@@ -116,7 +116,7 @@ flowchart LR
     SUPA["BI Supabase business data"]
     BI["Power BI and Lovable"]
     W["Neutral web events and event identity"]
-    T["Web GTM and planned Stape sGTM"]
+    T["Web GTM and active Parent Stape sGTM"]
     D["GA4, Google Ads and Meta destinations"]
     B["BigQuery and Dataform"]
     R["Looker and governed activation"]

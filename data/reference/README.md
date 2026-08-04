@@ -42,6 +42,15 @@ This folder is for small, reviewable, machine-readable reference data used by th
   - Use: active Google Ads object crosswalk for naming review, UTM planning, conversion-tracking joins, and future Search/PMax build manifests.
   - ID contract: `object_id` is the campaign ID when `object_level=campaign`, ad group ID when `object_level=ad_group`, asset group ID when `object_level=asset_group`, and ad ID when `object_level=ad`. Child rows also carry parent campaign and ad group fields where applicable.
   - Guardrail: this is normalized reference data, not a raw Google Ads export, not a secret source, and not approval to make live Google Ads changes.
+- [cefa-parent-supabase-bq-outcome-contract-v1.csv](./cefa-parent-supabase-bq-outcome-contract-v1.csv)
+  - Status: `Approved interface; source mappings pending BI verification`
+  - Scope: minimum record-level Parent business outcomes from BI Supabase to
+    the restricted BigQuery activation boundary.
+  - Use: one stable contract for parent, household, dependent, repeat-inquiry,
+    multi-school, opportunity, enrollment, correction, lineage, and timestamp
+    semantics without copying raw parent or child data into marketing tables.
+  - Guardrail: `pending_source_mapping` and `blocked_external_identity` rows
+    must not be guessed or treated as production-ready.
 
 ## Planned Files
 
