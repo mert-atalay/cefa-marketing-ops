@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "property": "parent",
-  "observed_at_utc": "2026-07-29T23:16:07Z",
+  "observed_at_utc": "2026-08-04T16:56:49Z",
   "production_state": {
-    "browser_routing": false,
-    "server_workspace_published": false,
-    "server_workspace_version_created": false,
+    "browser_routing": true,
+    "server_workspace_published": true,
+    "server_workspace_version_created": true,
     "destination_conversion_changes": false,
     "stape_optional_power_ups": false
   },
@@ -48,18 +48,26 @@
     "pending_change_count": 0,
     "conflict_count": 0,
     "ga4_measurement_id": "G-T65G018LYB",
-    "server_container_url_configured": false
+    "published_version_id": "12",
+    "published_version_name": "CEFA | Parent | GA4 via First-Party sGTM | 2026-08-04",
+    "rollback_version_id": "11",
+    "server_container_url_configured": true,
+    "server_container_url": "https://edge.cefa.ca"
   },
   "server_gtm": {
     "account_id": "4591216764",
     "container_id": "259672853",
     "public_id": "GTM-T7C46VM7",
-    "workspace_id": "3",
-    "workspace_name": "CEFA | Parent | sGTM Shadow Build | 2026-07-28",
+    "workspace_id": "2",
+    "workspace_name": "Default Workspace",
+    "source_workspace_id": "3",
+    "source_workspace_name": "CEFA | Parent | sGTM Shadow Build | 2026-07-28",
     "server_container_urls": [
       "https://edge.cefa.ca"
     ],
-    "pending_change_count": 2,
+    "published_version_id": "2",
+    "published_version_name": "CEFA | Parent | sGTM Guarded GA4 Baseline | 2026-08-04",
+    "pending_change_count": 0,
     "conflict_count": 0,
     "client": {
       "client_id": "1",
@@ -74,9 +82,10 @@
     },
     "shadow_trigger": {
       "trigger_id": "4",
-      "name": "CEFA | Parent | Shadow Health | Event",
+      "name": "CEFA | Parent | Shadow Health | Event + Hostname",
       "type": "always",
-      "event_name_equals": "cefa_sgtm_shadow_health"
+      "event_name_equals": "cefa_sgtm_shadow_health",
+      "hostname_guard": "cefa.ca or www.cefa.ca"
     },
     "shadow_tag": {
       "tag_id": "5",
@@ -108,10 +117,20 @@
     "controlled_browser_ga4_outgoing_http_status": 204,
     "stape_outgoing_log_platform": "GA4",
     "stape_outgoing_log_http_status": 204,
+    "production_allow_block_matrix": "pass",
+    "production_expected_outgoing_count": 2,
+    "production_observed_outgoing_count": 2,
+    "production_outgoing_http_status": 204,
+    "live_homepage_navigation_http_status": 200,
+    "live_homepage_edge_ga4_request_count": 1,
+    "live_homepage_direct_ga_request_count": 0,
+    "live_homepage_stape_pageview_count": 1,
+    "live_homepage_stape_pageview_http_status": 204,
     "conversion_event_sent": false,
-    "web_gtm_changed": false,
-    "server_gtm_published": false,
+    "web_gtm_changed": true,
+    "web_gtm_published": true,
+    "server_gtm_published": true,
     "temporary_preview_header_stored": false
   },
-  "next_gate": "Record recovery custody and secondary administrator evidence, export the rollback baseline, add consent-state and hostname/event guards, then run browser/server parity. No production route, conversion-event promotion, version creation, or publication is authorized by this QA pass."
+  "next_gate": "Monitor Parent GA4 parity and the next legitimate generate_lead. Keep Google Ads and Meta server conversion delivery off until transaction/event-ID deduplication, consent gating, credentials, and controlled Form 4 QA pass."
 }

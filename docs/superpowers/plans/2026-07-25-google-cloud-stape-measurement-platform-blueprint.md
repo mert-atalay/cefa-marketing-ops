@@ -89,7 +89,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent server GTM `GTM-T7C46VM7` and matching Stape hosting were created on 2026-07-28. Annual Business is paid and API-verified; hosting runs in `CA East (Canada)` with inactive routing and optional power-ups off. On 2026-07-29 CEFA enabled 2FA, rotated and verified the full-account API key, revoked the disclosed predecessor, enabled Analytics and outgoing logs, retained an enabled alert recipient, and created an enabled hourly repeated-outgoing-`5xx` alert. Parent web GTM `GTM-NZ6N7WNC` retains zero unpublished changes or conflicts, and its live GA4 Google tag has no server transport override. Unpublished server workspace `3` contains the inherited GA4 client plus only exact synthetic trigger `cefa_sgtm_shadow_health` and native server-GA4 shadow-health tag; these remain two pending changes with zero conflicts, no version and no publication. First-party CNAMEs, Stape `Ready / Ok`, TLS and `/healthy` passed. A current-token browser Preview request returned HTTP `200`, matched the health-only event, fired the GA4 tag, and received GA4 HTTP `204`; Stape's outgoing log independently recorded one `GA4` response with status `204`. Live browser routing remains off |
+| Stape | Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. On 2026-08-04 server GTM `GTM-T7C46VM7` published guarded version `2` and web GTM `GTM-NZ6N7WNC` published routing-only version `12`. The no-preview allow/block matrix produced exactly two intended GA4 HTTP `204` deliveries and blocked the wrong-host and wrong-event cases. A clean live homepage sent one request to `edge.cefa.ca`, no direct browser GA collection request, and one Stape `PageView` delivery with HTTP `204`. Parent GA4 is live through sGTM; Google Ads and Meta conversion delivery remain on unchanged browser paths pending destination-specific deduplication, consent, credential, and controlled-conversion QA |
 
 The no-secret machine-readable Parent shadow checkpoint is
 [stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
@@ -116,10 +116,9 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- the Parent Stape first-party endpoint and synthetic client path are verified,
-  but there is no active server-side browser route or cross-platform
-  server-delivery baseline; the isolated draft trigger/tag remain deliberately
-  unpublished until preview, deduplication and rollback evidence pass;
+- the Parent Stape first-party GA4 route is active and verified, while Google
+  Ads/Meta server conversion delivery, destination-specific deduplication,
+  consent gates, controlled Form `4` QA, and franchise isolation remain open;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 
@@ -1141,13 +1140,14 @@ no duplicate conversions or KinderTales regression.
 - implement first-party endpoint; completed 2026-07-29 with DNS-only
   Cloudflare CNAMEs, Stape `Ready / Ok`, valid TLS and HTTP `200` health;
 - establish the first exact synthetic event allowlist path; completed
-  2026-07-29 with unpublished `cefa_sgtm_shadow_health` trigger and native
-  server-GA4 tag, two pending changes, zero conflicts and no production route;
-- run the temporary preview-header proof for that synthetic path;
+  2026-07-29 and promoted within guarded server version `2` on 2026-08-04;
+- run the temporary preview-header proof for that synthetic path; completed;
 - establish the production event allowlist and shared identity envelope;
+  Parent GA4 event and hostname guards completed 2026-08-04;
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
-- shadow GA4 events;
+- route Parent GA4 through the first-party endpoint; completed 2026-08-04 with
+  web version `12`, live browser proof and Stape GA4 HTTP `204` read-back;
 - add Google website conversion route;
 - add Meta CAPI route;
 - validate browser/server deduplication;

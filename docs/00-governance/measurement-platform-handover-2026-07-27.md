@@ -1,6 +1,6 @@
 # CEFA Measurement Platform Handover
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-04
 **Owner:** CEFA marketing measurement
 **Status:** Current handover entry point
 **Repository:** `mert-atalay/cefa-marketing-ops`
@@ -266,22 +266,31 @@ Current implementation status:
 ## Stape Business Status
 
 CEFA has annual Stape Business for the Parent property. Parent hosting runs in
-`CA East (Canada)` behind `edge.cefa.ca`; production browser-to-server routing
-is not active.
+`CA East (Canada)` behind `edge.cefa.ca`; production Parent GA4 routing is
+active. Google Ads and Meta conversion delivery remain on their existing
+browser paths.
 
-Verified through 2026-07-29:
+Verified through 2026-08-04:
 
 - Parent server GTM `GTM-T7C46VM7` and first-party DNS/TLS/health;
 - CEFA account 2FA, healthy billing, auto-upgrade, durable API-key rotation,
   and revocation of the disclosed predecessor;
 - Stape Analytics, outgoing logs, one enabled alert recipient, and an enabled
   hourly repeated-outgoing-`5xx` alert;
-- exact health-only server trigger and native GA4 shadow tag in an unpublished
-  workspace with two changes and zero conflicts;
+- published and reversible server version `2`, `CEFA | Parent | sGTM Guarded
+  GA4 Baseline | 2026-08-04`, with native GA4 client/tag, Client Name
+  enforcement, anchored Parent-host guard, explicit event allowlist, IP
+  redaction, first-party FPID support, and no CRM or franchise routes;
 - current-token browser Preview HTTP `200`, intended health tag fire, GA4 HTTP
   `204`, and one independent Stape outgoing-log row for `GA4` status `204`;
-- unchanged Parent web GTM routing: no `server_container_url`, no unpublished
-  web changes, and no conversion-event change.
+- four-case no-preview routing proof with exactly two intended GA4 HTTP `204`
+  deliveries and zero wrong-host or wrong-event deliveries;
+- published web version `12`, `CEFA | Parent | GA4 via First-Party sGTM |
+  2026-08-04`, containing only the routing parameter on Google tag `35`;
+- clean live homepage proof: one `edge.cefa.ca` GA4 request, no direct browser
+  GA collection request, and one Stape `PageView` delivery with HTTP `204`;
+- no Google Ads, Meta, Gravity Forms, School Manager, KinderTales, CRM, or
+  franchise change.
 
 Required design:
 
@@ -299,10 +308,12 @@ Required design:
 Current gaps:
 
 - recovery-code custody and secondary administrator evidence;
-- versioned baseline export and production rollback runbook;
-- consent-state and hostname/event guards;
-- browser/server parity and destination-isolation reconciliation;
+- production rollback runbook;
+- operational consent/CMP policy and advertising-destination consent gates;
+- ongoing GA4 browser/server parity and destination-isolation monitoring;
 - conversion-specific Google and Meta deduplication QA;
+- Meta CAPI credential held outside GTM/Git;
+- controlled Form `4` conversion continuity proof;
 - separate Franchise Canada and Franchise USA container/endpoint builds.
 
 ## WordPress Tracking Plugin Inventory
@@ -352,7 +363,7 @@ Strict copy rule:
 | Public/private source control | CEFA private cloud runtime repository does not yet exist | `Blocked operational risk` |
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
-| Stape | Access, containers, domains, shadow QA and rollback | `Approved, pending build` |
+| Stape | Parent GA4 is live through guarded server version `2` and routing-only web version `12`; Google Ads/Meta server conversion expansion remains gated | `Active guarded` |
 | BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |
