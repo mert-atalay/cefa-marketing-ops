@@ -267,10 +267,9 @@ Current implementation status:
 ## Stape Business Status
 
 CEFA has annual Stape Business for the Parent property. Parent hosting runs in
-`CA East (Canada)` behind `edge.cefa.ca`; production Parent GA4 routing is
-active. Google Ads and Meta conversion delivery remain on their existing
-browser paths. Google Ads browser duplicate protection and the shared server
-event identity contract are now live; server destination delivery remains off.
+`CA East (Canada)` behind `edge.cefa.ca`. GA4 and Meta CAPI are now live through
+the guarded Parent server container. Google Ads remains on its existing browser
+conversion path; its server copy is staged and paused.
 
 Verified through 2026-08-04:
 
@@ -279,8 +278,8 @@ Verified through 2026-08-04:
   and revocation of the disclosed predecessor;
 - Stape Analytics, outgoing logs, one enabled alert recipient, and an enabled
   hourly repeated-outgoing-`5xx` alert;
-- published and reversible server version `2`, `CEFA | Parent | sGTM Guarded
-  GA4 Baseline | 2026-08-04`, with native GA4 client/tag, Client Name
+- published server version `9`, `CEFA | Parent | Meta CAPI Inquiry Submit Live
+  | 2026-08-04`, with native GA4 client/tag, Client Name
   enforcement, anchored Parent-host guard, explicit event allowlist, IP
   redaction, first-party FPID support, and no CRM or franchise routes;
 - current-token browser Preview HTTP `200`, intended health tag fire, GA4 HTTP
@@ -293,20 +292,40 @@ Verified through 2026-08-04:
   2026-08-04`, added the existing event ID as Transaction ID on the existing
   Google Ads inquiry tag without changing its destination, value, trigger, or
   enhanced-conversion setting;
-- published web version `14`, `CEFA | Parent | sGTM Ads Event Contract |
-  2026-08-04`, added `transaction_id` and `cefa_event_id` aliases to the
-  existing GA4 `generate_lead` request while retaining the same event ID,
-  value, currency, trigger, school fields, and attribution fields;
+- published web version `15`, `CEFA | Parent | GA4 Lead Payload Guardrail |
+  2026-08-04`, retains shared identity, school, program, value, currency and
+  compact source context while reducing configured `generate_lead` parameters
+  from `41` to the GA4 limit of `25`;
 - clean live homepage proof: one `edge.cefa.ca` GA4 request, no direct browser
   GA collection request, and one Stape `PageView` delivery with HTTP `204`;
-- staged but unpublished server version `3` contains a strict Parent
-  `generate_lead` route, paused native Google Conversion Linker and Google Ads
-  conversion tags, and the Stape Meta CAPI gallery template; server version
-  `2` remains production;
+- server version `9` uses a strict Parent `generate_lead` route, live Meta CAPI
+  with the exact browser custom-event name `Inquiry Submit`, paused native
+  Google Conversion Linker and Google Ads server conversion tags, and a paused
+  Meta test tag;
+- direct Meta Test Events and an independent propagated sGTM transport test
+  both returned one accepted event, no messages, matching event ID, and no
+  generated `_fbp` value;
+- the only Facebook outgoing log row currently visible after the test build is
+  the controlled HTTP `200` test row, so one legitimate production inquiry is
+  still required for live deduplication observation;
 - a post-build health check and controlled non-conversion request both
   returned HTTP `200`;
-- no destination, conversion action, campaign goal, Meta tag, Gravity Forms,
-  School Manager, KinderTales, CRM, or franchise route was replaced or enabled.
+- no conversion action, campaign goal, Gravity Forms, School Manager,
+  KinderTales, CRM, franchise route, or existing dashboard contract was
+  replaced.
+
+Additive certified Parent reporting is also live:
+
+- `mart_marketing.vw_parent_inquiry_certified_event`;
+- `mart_marketing.vw_parent_inquiry_school_source_certified_daily`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`.
+
+These views count saved Form `4` entries, use Gravity's selected school and the
+CEFA first-party attribution ledger, then add GA4 session last-click only by
+exact event ID. Through 2026-08-03 they reconcile `3,689` source entries to
+`3,689` event rows and `3,689` daily inquiries, with zero missing schools and
+`3,331` (`90.3%`) exact GA4-eligible rows. They expose no direct PII or raw
+click IDs and do not reproduce Meta/Google platform attribution windows.
 
 Required design:
 
@@ -327,12 +346,10 @@ Current gaps:
 - production rollback runbook;
 - operational consent/CMP policy and advertising-destination consent gates;
 - ongoing GA4 browser/server parity and destination-isolation monitoring;
-- controlled Google duplicate-counting QA before publishing/unpausing its
-  staged server tag;
-- Meta CAPI credential held outside Git and a paused server tag created from
-  the already-staged template;
-- controlled Meta browser/CAPI event-ID deduplication QA;
+- controlled Google duplicate-counting QA before unpausing its server tag;
+- one legitimate Meta browser/server event-ID pair observed in production;
 - controlled Form `4` conversion continuity proof;
+- Looker test-source and dashboard-owner QA for the additive certified report;
 - separate Franchise Canada and Franchise USA container/endpoint builds.
 
 ## WordPress Tracking Plugin Inventory
@@ -382,7 +399,8 @@ Strict copy rule:
 | Public/private source control | CEFA private cloud runtime repository does not yet exist | `Blocked operational risk` |
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
-| Stape | Parent GA4 is live through guarded server version `2`; web version `14` now carries the shared Google/Meta dedup identity, while paused server destination tags are isolated in unpublished version `3` | `Active guarded` |
+| Stape | Parent GA4 and Meta CAPI are live through server version `9`; web version `15` carries shared identity within the 25-parameter GA4 limit. Google server delivery remains paused | `Active guarded` |
+| Parent certified reporting | Additive school/source/event views reconcile Gravity truth to exact-ID GA4 context; candidate dashboard view is not connected to existing serving contracts | `Active guarded` |
 | BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |
@@ -415,9 +433,9 @@ Track A does not wait for Stape.
 ### Track B: Website measurement
 
 1. Verify Stape ownership, entitlement, domains and recovery access.
-2. Build Parent Stape shadow routing with consent-state plumbing.
-3. Promote GA4, Google, and Meta routes only after parity and exact
-   deduplication.
+2. Maintain Parent GA4 and Meta routing, observe legitimate Meta deduplication,
+   and complete the controlled Google duplicate-counting gate.
+3. Promote the Google server route only after exact once-only proof.
 4. Extend Stape to Franchise Canada and USA one property at a time.
 
 Track B does not inherit production authorization from Track A.

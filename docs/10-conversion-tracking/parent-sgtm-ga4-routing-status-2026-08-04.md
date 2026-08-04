@@ -1,151 +1,140 @@
-# Parent sGTM GA4 Routing Status
+# Parent GA4, sGTM And Certified Reporting Status
 
 **Date:** 2026-08-04  
 **Scope:** Parent `cefa.ca` only  
 **Canonical program:** [Measurement and activation program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)  
 **Architecture:** [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 
-## Current State
+## Live State
 
-The Parent site now routes its existing GA4 Google tag through the guarded
-first-party Stape endpoint. Google Ads and Meta conversion delivery remain on
-their existing browser paths. The Google Ads browser inquiry tag now uses the
-existing stable event ID as its transaction ID, and the GA4 `generate_lead`
-request now carries the same ID as `event_id`, `transaction_id`, and
-`cefa_event_id` so a later server copy can deduplicate safely.
-
-| Surface | Current state |
+| Surface | Production state |
 |---|---|
-| Parent server GTM | `GTM-T7C46VM7`, container `259672853` |
-| Published server version | Version `2`, `CEFA | Parent | sGTM Guarded GA4 Baseline | 2026-08-04` |
-| First-party endpoint | `https://edge.cefa.ca`, TLS and `/healthy` pass |
-| Stape hosting | Parent Business in `CA East (Canada)`, running |
-| Parent web GTM | `GTM-NZ6N7WNC`, container `250451797` |
-| Published web version | Version `14`, `CEFA | Parent | sGTM Ads Event Contract | 2026-08-04` |
-| Live web routing | On for Parent GA4 through `https://edge.cefa.ca` |
-| Google Ads browser dedup | Version `13` added `{{DLV - event_id}}` as Transaction ID to existing inquiry tag `38` |
-| Server event contract | Version `14` added `transaction_id` and `cefa_event_id` aliases to existing GA4 `generate_lead` tag `36` |
-| Server conversion delivery | Off; server version `3` is staged but unpublished and both Google tags are paused |
-| Web rollback | Version `13` removes only the GA4 aliases; version `12` removes both 2026-08-04 dedup additions |
+| Parent web GTM | `GTM-NZ6N7WNC`, container `250451797`, version `15` |
+| Parent server GTM | `GTM-T7C46VM7`, container `259672853`, version `9` |
+| First-party endpoint | `https://edge.cefa.ca`; DNS, TLS and health pass |
+| GA4 | Live through Parent sGTM to `G-T65G018LYB` |
+| Meta inquiry | Browser `Inquiry Submit` plus server `Inquiry Submit` with the same event ID |
+| Google Ads inquiry | Existing browser tag remains live with the event ID as Transaction ID |
+| Google Ads server copy | Paused pending one controlled real Form `4` duplicate-counting proof |
+| Gravity Forms/KinderTales | Unchanged |
+| Existing dashboards | Unchanged; the new certified view is additive and marked candidate |
 
-## Published Server Guardrails
+## 1. GA4 Lead Payload Repair
 
-Server version `2` contains:
+Web version `15`, `CEFA | Parent | GA4 Lead Payload Guardrail | 2026-08-04`,
+reduced the configured `generate_lead` event parameters from `41` to the GA4
+limit of `25`. The live payload retains:
 
-- the native GA4 client with first-party server cookie support;
-- the PII-free exact health event route for `cefa_sgtm_shadow_health`;
-- native server GA4 tag `CEFA | Parent | GA4 | Allowed Website Events`;
-- `Client Name = GA4` enforcement;
-- an anchored `cefa.ca` / `www.cefa.ca` `page_location` requirement;
-- an explicit event allowlist for Parent analytics and diagnostic events;
-- IP redaction in the server GA4 tag;
-- event-data variables for `page_location`, `cefa_event_id`, and `event_id`.
+- `event_id`, `transaction_id`, and `cefa_event_id` with the same stable value;
+- Form, school, program, value, currency, and success context;
+- the compact canonical source/channel/campaign fields needed in GA4.
 
-The route excludes arbitrary events, other hostnames, franchise properties,
-CRM lifecycle events, Meta CAPI, and Google Ads conversion delivery.
+Bulky first/current-touch, raw click-ID, referrer, and redundant attribution
+fields were removed from GA4 only. They remain available in the CEFA
+first-party ledger, Gravity Forms, and BigQuery. Public-container read-back
+confirmed exactly `25` configured parameters, the first-party server URL, the
+Google Ads browser Transaction ID, and the Meta browser event ID.
 
-## Test Evidence
+## 2. Parent sGTM Completion
 
-The established preview test remains valid:
+Server version `9`, `CEFA | Parent | Meta CAPI Inquiry Submit Live |
+2026-08-04`, contains:
 
-- the synthetic health request returned HTTP `200` from the first-party
-  endpoint;
-- only the exact health route fired;
-- GA4 returned HTTP `204`;
-- Stape outgoing logs recorded the matching GA4 delivery;
-- no PII and no conversion event were used.
+- the guarded native GA4 client and allowlisted GA4 destination;
+- a strict Parent `generate_lead` trigger requiring the GA4 client,
+  `cefa.ca` hostname, and non-empty event ID;
+- live Meta CAPI delivery using the exact custom event name `Inquiry Submit`;
+- the same event ID used by the browser event for platform deduplication;
+- no generated Meta cookies and no repository-held token;
+- paused native Google Conversion Linker and Google Ads server conversion
+  tags;
+- a paused Meta transport-test tag.
 
-On 2026-08-04, version `2` was created and published, and the Stape container
-was verified as running with the intended GTM Container Configuration.
-Controlled no-preview requests then passed the four-case routing matrix:
+Meta transport proof passed twice:
 
-- the exact health event on `cefa.ca` sent once;
-- an allowlisted non-conversion event on `cefa.ca` sent once;
-- the same event on another hostname sent zero times;
-- a non-allowlisted event on `cefa.ca` sent zero times;
-- Stape recorded exactly two intended GA4 deliveries, both HTTP `204`.
+- a direct PII-free Test Events request returned `events_received=1` with no
+  messages;
+- a propagated sGTM test returned Meta HTTP `200`, `events_received=1`, the
+  exact event name, matching event ID, and no generated `_fbp` value.
 
-Web version `12` was then created and published. A clean public homepage load
-returned HTTP `200`, made one GA4 collection request to `edge.cefa.ca`, made no
-direct browser request to a Google Analytics collection hostname, and produced
-one Stape `PageView` delivery to GA4 with HTTP `204`. No form was submitted and
-no conversion event was generated during this smoke test.
+The production Meta tag is live, but no legitimate Parent inquiry has occurred
+after activation in the currently inspected Stape window. The only Facebook
+outgoing row remains the controlled test row. Production browser/server
+deduplication therefore remains a monitoring item, not a failed test.
 
-No destination, conversion action, trigger, campaign goal, Gravity Forms,
-School Manager, KinderTales, CRM, Meta, or franchise route was replaced or
-enabled by these changes.
+Google's server conversion copy remains paused. The browser inquiry conversion
+continues unchanged and now has stable duplicate protection. Do not unpause
+the server Google tag until a controlled saved Form `4` test proves that the
+browser and server copies produce one accepted conversion.
 
-## Browser Deduplication And Server Preparation
+## 3. Certified School And Source Reporting
 
-Web version `13` changed only the existing Google Ads Parent inquiry tag `38`:
+The following additive BigQuery views are live:
 
-- conversion ID `802334988` and label `cFt-CMrLufgCEIzSyv4C` are unchanged;
-- value `150` and currency `CAD` are unchanged;
-- trigger `6`, exact custom event `school_inquiry_submit`, is unchanged;
-- enhanced conversions remain disabled;
-- `{{DLV - event_id}}` is now the Google Ads Transaction ID.
+- `mart_marketing.vw_parent_inquiry_certified_event`;
+- `mart_marketing.vw_parent_inquiry_school_source_certified_daily`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`.
 
-Web version `14` changed only the existing GA4 `generate_lead` tag `36`:
+Contract:
 
-- existing `event_id={{DLV - event_id}}`, value `150`, currency `CAD`, school,
-  program, and attribution parameters are unchanged;
-- `transaction_id={{DLV - event_id}}` and
-  `cefa_event_id={{DLV - event_id}}` were added;
-- the same trigger and GA4 measurement destination remain in use.
+- one saved non-test Gravity Form `4` entry is one inquiry;
+- Gravity Forms is the selected-school authority;
+- the CEFA first-party attribution ledger is the source and paid-evidence
+  authority;
+- GA4 is joined only by exact CEFA event ID and supplies supporting session
+  last-click context;
+- ambiguous IDs, duplicate GA4 events, missing GA4 events, and source/school
+  disagreements remain visible;
+- no names, email addresses, phone numbers, child data, raw click IDs, IP
+  addresses, addresses, or raw payloads are exposed;
+- Meta and Google platform attribution windows remain separate because they
+  cannot be reconstructed from GA4.
 
-The public version `14` container was read back and contains one copy of the
-existing Google Ads conversion label, `vtp_orderId` mapped to macro `1`, and
-the three identity names mapped to that same macro. Meta browser tag `40`
-continues to use the same event ID in its `eventID` option.
+Production read-back through 2026-08-03:
 
-An isolated server workspace produced validated but unpublished version `3`,
-`STAGED - CEFA | Parent | Ads and Meta Server Routes | 2026-08-04`. It contains:
+| QA check | Result |
+|---|---:|
+| Stable-contract Form `4` entries since 2026-06-25 | `3,689` |
+| Event view rows | `3,689` |
+| Daily report submissions | `3,689` |
+| Missing selected schools | `0` |
+| Exact GA4 attribution-eligible rows | `3,331` (`90.3%`) |
+| Ambiguous Gravity event-ID entries | `104` |
+| Duplicate GA4 event-ID entries | `2` |
+| GA4 event not observed | `252` |
+| PII-like prohibited columns | `0` |
 
-- trigger `12`, requiring GA4 Client Name, exact `generate_lead`, a Parent
-  `cefa.ca` page location, and a non-empty event ID;
-- paused native server Conversion Linker tag `13`;
-- paused native server Google Ads conversion tag `14` using the existing
-  conversion ID and label;
-- Stape gallery template `Facebook Conversion API`, pinned by GTM to gallery
-  version `6769a59cb8e5a8fc6aa0d3c45a2f7b49d39dfff5`;
-- no Meta CAPI tag or token.
+July alone reconciles to `3,025` saved inquiries. The report explicitly shows
+where first-party paid evidence and GA4 disagree; since June 25, `823`
+inquiries have first-party paid evidence while GA4 labels the session as
+non-paid. These remain paid in the certified first-party view and are exposed
+as `first_party_paid_ga4_non_paid` for diagnosis.
 
-Server production remains version `2`. A post-build endpoint check returned
-HTTP `200`, and a PII-free `cefa_sgtm_shadow_health` request returned HTTP
-`200` without generating a conversion.
+Three Dataform assertions now protect unique entry grain, school completeness,
+and event-to-daily reconciliation.
 
-## Production Follow-Up
+## What Remains
 
-1. Monitor Stape incoming/outgoing logs and GA4 event/session parity during the
-   normal production flow.
-2. Confirm the next legitimate `generate_lead` reaches sGTM once with matching
-   `event_id`, `transaction_id`, and `cefa_event_id`, and still corresponds to
-   one saved Form `4` entry.
-3. Keep server version `3` unpublished until one controlled Form `4` test proves
-   the browser and server copies share the same identity and only one platform
-   conversion is counted.
-4. Add the Meta dataset token outside Git, create a paused Meta tag using the
-   staged template, and prove browser/CAPI event-ID deduplication in Test Events.
-
-## Later Destination Work
-
-- Google Ads browser transaction identity is now live. Its server tag remains
-  paused and unpublished until controlled duplicate-counting QA passes.
-- Meta browser event identity is already live and the server template/trigger
-  are staged. Meta CAPI remains off until the approved access token is stored
-  outside Git and controlled browser/CAPI deduplication passes.
-- No global default-denied Consent Mode change is approved without an
-  operational CMP. Native Google server tags will consume consent signals from
-  the web request when that layer exists.
-- Franchise Canada and Franchise USA remain outside this Parent container.
+1. Observe the next legitimate Parent inquiry in Stape and Meta, then confirm
+   browser/server deduplication in Events Manager.
+2. Run one controlled real Form `4` Google duplicate-counting test; keep the
+   server Google tag paused until it passes.
+3. Keep Meta and Google platform-reported attribution-window reporting as a
+   separate semantic layer; do not label GA4 session last-click as Meta
+   seven-day click or one-day view.
+4. Connect the candidate certified view to a Looker test data source only after
+   dashboard owner QA; no existing dashboard contract was replaced.
+5. Continue the separate Parent CRM/offline-conversion identity work when the
+   GreenRope fields and controlled identity read-back are available.
 
 ## Rollback
 
-- Publish web version `13` to remove only the server event aliases while
-  retaining Google Ads browser duplicate protection.
-- Publish web version `12` to restore the state before both browser
-  deduplication additions.
-- Publish web version `11` only to restore the pre-sGTM GA4 browser route.
-- Server version `1` is the pre-rollout server rollback point.
-- Stape container configuration, domain settings, analytics, logs, and
-  monitoring remain CEFA-owned and must not contain repository secrets.
+- Server version `8` pauses the production Meta CAPI tag while retaining the
+  guarded GA4 route.
+- Web version `14` is the immediate pre-payload-guardrail version but exceeds
+  the GA4 parameter limit; use only for emergency diagnosis.
+- Web version `13` is the last version before the additional server identity
+  aliases.
+- Server version `1` is the pre-sGTM production rollback point.
+- The certified BigQuery objects are additive views and can be disconnected
+  from candidate reporting without changing source tables or dashboards.

@@ -1,0 +1,19 @@
+config {
+  type: "assertion",
+  tags: ["parent", "certified_reporting", "reconciliation"]
+}
+
+WITH event_total AS (
+  SELECT COUNT(*) AS inquiry_count
+  FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_event`
+),
+daily_total AS (
+  SELECT SUM(gravity_form_submissions) AS inquiry_count
+  FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_school_source_certified_daily`
+)
+SELECT
+  event_total.inquiry_count AS event_inquiry_count,
+  daily_total.inquiry_count AS daily_inquiry_count
+FROM event_total
+CROSS JOIN daily_total
+WHERE event_total.inquiry_count != daily_total.inquiry_count

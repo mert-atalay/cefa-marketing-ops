@@ -1,0 +1,11 @@
+config {
+  type: "assertion",
+  tags: ["parent", "certified_reporting", "completeness"]
+}
+
+SELECT entry_id
+FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_event`
+WHERE selected_school_uuid IS NULL
+  OR selected_school_uuid = ''
+  OR selected_school_name IS NULL
+  OR selected_school_name = ''

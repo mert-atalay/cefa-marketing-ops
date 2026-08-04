@@ -6,9 +6,10 @@ This directory is the Git source for the additive Dataform QA project in:
 - region: `us-central1`
 - repository: `cefa-marketing-warehouse-qa`
 
-The first source-controlled baseline reproduces the 12 existing assertion
-views and adds three capacity/governance assertions. Compilation is safe and
-additive. Do not create a production release or workflow configuration until:
+The source-controlled baseline reproduces the 12 existing assertion views,
+adds three capacity/governance assertions, and adds three certified Parent
+inquiry assertions. The resulting 18-action package is safe and additive. Do
+not create a production release or workflow configuration until:
 
 1. the workspace compilation succeeds;
 2. all existing assertions reconcile with the current views;
