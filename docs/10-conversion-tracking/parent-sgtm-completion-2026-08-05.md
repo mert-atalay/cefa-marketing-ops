@@ -4,7 +4,7 @@
 
 **Scope:** Parent `cefa.ca` only
 
-**Status:** Production conversion routing complete; operational monitoring active
+**Status:** Production conversion routing complete; legacy Meta Gateway excluded; operational monitoring active
 
 ## Production State
 
@@ -31,6 +31,50 @@ tag now uses the same strict trigger as Meta CAPI:
 
 The temporary exact-event canary trigger was removed from the production
 container.
+
+## Meta Browser And Server Route Normalization
+
+The post-publish Meta read-back found that the parent dataset was receiving
+server copies through two independent routes:
+
+1. the legacy Meta-managed Conversions API Gateway / OpenBridge connection;
+2. the new CEFA-owned Stape sGTM Meta CAPI tag.
+
+This was visible in the correctly filtered Meta dataset statistics for
+`Inquiry Submit`. Browser and server receipts were approximately one-to-one
+before the Stape Meta route went live, while the partial 2026-08-05 UTC day
+showed `49` browser receipts and `117` server receipts. These are raw transport
+receipts, not deduplicated business inquiries, but the change proved that the
+two server transports were overlapping.
+
+At 2026-08-05 14:56 America/Vancouver, parent dataset
+`918227085392601` was excluded only from the legacy business-managed
+Conversions API connection. Meta UI read-back confirmed:
+
+- the parent dataset moved from the connected list to the excluded list;
+- the business connection changed from two connected datasets to one;
+- Franchise USA dataset `1531247935333023` remained connected;
+- Meta History recorded the parent dataset exclusion;
+- the parent pixel, browser event, custom conversion, ad accounts and Stape
+  direct CAPI configuration were not edited.
+
+After propagation, the public parent pixel config no longer contained a
+pixel-specific OpenBridge opt-in/configuration. A controlled non-conversion
+homepage test still produced one browser Meta `PageView` and one first-party
+GA4 `page_view` request through `edge.cefa.ca`, with no lead event and no
+legacy Gateway request.
+
+A synthetic Meta Test Events request then sent `Inquiry Submit` through the
+direct CAPI endpoint. Meta returned HTTP `200`, `events_received=1`, zero
+messages, and Events Manager displayed the event as `Processed`, source
+`Server`, setup method `Manual setup`. The synthetic event used test-only
+identity and did not create a Gravity Forms entry, KinderTales record or
+production conversion.
+
+The intended production topology is now one browser copy plus one Stape server
+copy with the same exact event name and Form 4 event ID. Meta performs
+deduplication from that shared event identity; there is no separate merge
+switch to enable in Events Manager.
 
 ## Controlled Acceptance Test
 
@@ -84,8 +128,9 @@ rollback mechanism.
 
 - Monitor saved Form 4 entries, GA4 `generate_lead`, Meta CAPI and Google
   server sends daily for the first 48 hours.
-- Confirm Meta browser/server merge quality in Events Manager when the UI
-  read-back is available.
+- Monitor correctly filtered Meta `Inquiry Submit` browser/server receipts for
+  the next full production day. Investigate if the server-to-browser ratio
+  remains materially above one after normal browser-blocking differences.
 - Review Google Ads conversion diagnostics and action totals after normal
   platform processing lag; investigate repeated order IDs or unexplained
   inflation immediately.
