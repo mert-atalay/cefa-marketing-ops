@@ -1,6 +1,6 @@
 # Parent GA4, sGTM And Certified Reporting Status
 
-**Date:** 2026-08-04  
+**Date:** 2026-08-04; updated 2026-08-05
 **Scope:** Parent `cefa.ca` only  
 **Canonical program:** [Measurement and activation program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)  
 **Architecture:** [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
@@ -10,12 +10,12 @@
 | Surface | Production state |
 |---|---|
 | Parent web GTM | `GTM-NZ6N7WNC`, container `250451797`, version `15` |
-| Parent server GTM | `GTM-T7C46VM7`, container `259672853`, version `9` |
+| Parent server GTM | `GTM-T7C46VM7`, container `259672853`, version `13` |
 | First-party endpoint | `https://edge.cefa.ca`; DNS, TLS and health pass |
 | GA4 | Live through Parent sGTM to `G-T65G018LYB` |
 | Meta inquiry | Browser `Inquiry Submit` plus server `Inquiry Submit` with the same event ID |
 | Google Ads inquiry | Existing browser tag remains live with the event ID as Transaction ID |
-| Google Ads server copy | Paused pending one controlled real Form `4` duplicate-counting proof |
+| Google Ads server copy | Live under the strict Parent `generate_lead`, hostname and event-ID guard |
 | CEFA Conversion Tracking | Parent `0.6.4`; full runtime, attribution and ledger remain shadow |
 | Gravity Forms/KinderTales | Unchanged |
 | Existing dashboards | Unchanged; all new certified serving objects are additive and marked candidate |
@@ -65,10 +65,18 @@ they are likely legitimate production inquiries. This proves server receipt
 and Meta acceptance, but it does not by itself prove that Meta merged each
 browser/server pair. Events Manager deduplication remains a required read-back.
 
-Google's server conversion copy remains paused. The browser inquiry conversion
-continues unchanged and now has stable duplicate protection. Do not unpause
-the server Google tag until a controlled saved Form `4` test proves that the
-browser and server copies produce one accepted conversion.
+Server version `13` now keeps GA4, Meta CAPI, the Google Conversion Linker and
+the Google Ads Inquiry Submit mirror live. A controlled saved Form `4` test
+confirmed one Gravity entry, one valid signed collector event and one Stape
+trace carrying the same event ID to GA4, Meta and Google. Google received the
+same event ID as `oid`; Meta accepted one server event with no messages. The
+browser GA4, Meta and Google tags continue to use that same Form `4` event ID.
+
+The test browser did not originate from an ad click, so it is not expected to
+create an attributed Google Ads reporting conversion. The acceptance evidence
+proves transport and shared duplicate-protection identity. Continue the Meta
+Events Manager merge read-back and Google diagnostics as operational QA. See
+[Parent sGTM completion, 2026-08-05](./parent-sgtm-completion-2026-08-05.md).
 
 ## 3. Certified School And Source Reporting
 
@@ -146,8 +154,8 @@ and runtime release gate is still open.
 
 1. Confirm the accepted Parent browser/server pairs are deduplicated in Meta
    Events Manager.
-2. Run one controlled real Form `4` Google duplicate-counting test; keep the
-   server Google tag paused until it passes.
+2. Monitor Parent GA4, Meta and Google server sends against saved Form `4`
+   entries for the first 48 hours after server version `13`.
 3. Keep Meta and Google platform-reported attribution-window reporting as a
    separate semantic layer; do not label GA4 session last-click as Meta
    seven-day click or one-day view.
@@ -161,6 +169,9 @@ and runtime release gate is still open.
 
 ## Rollback
 
+- Server version `12` restricts Google server delivery to the completed exact
+  QA event and is the immediate narrow rollback.
+- Server version `9` keeps GA4 and Meta live while pausing Google server tags.
 - Server version `8` pauses the production Meta CAPI tag while retaining the
   guarded GA4 route.
 - Web version `14` is the immediate pre-payload-guardrail version but exceeds

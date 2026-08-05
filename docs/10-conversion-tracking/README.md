@@ -13,6 +13,7 @@ This folder is the routing surface for CEFA conversion tracking across:
 - [Measurement and activation program register, 2026-07-23](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
 - [Google Cloud and Stape measurement platform blueprint, 2026-07-25](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
 - [Parent sGTM GA4 routing status, 2026-08-04](./parent-sgtm-ga4-routing-status-2026-08-04.md)
+- [Parent sGTM completion, 2026-08-05](./parent-sgtm-completion-2026-08-05.md)
 - [Parent identity and measurement completion, 2026-08-04](./parent-identity-and-measurement-completion-2026-08-04.md)
 - [Parent measurement operations runbook, 2026-08-04](./parent-measurement-operations-runbook-2026-08-04.md)
 - [Parent CRM offline-conversion implementation report, 2026-07-23](./parent-crm-offline-conversion-implementation-report.md)

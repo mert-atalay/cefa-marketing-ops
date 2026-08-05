@@ -30,6 +30,11 @@
    zero rows. It is the fail-closed landing contract for a future BI Supabase
    outcome feed and stores only governed IDs/HMAC keys, outcome semantics,
    lineage and timestamps.
+9. Parent server GTM version `13` is live. One controlled Form `4` test proved
+   exact event-ID continuity through Gravity Forms, the signed collector, GA4,
+   Meta CAPI and Google server conversion delivery. The Google server mirror
+   now uses the strict `generate_lead`, Parent-host and non-empty-event-ID
+   trigger. The exact-event canary trigger was removed.
 
 ## Acceptance Evidence
 
@@ -47,8 +52,9 @@
 
 - Meta Events Manager must prove browser/server pair deduplication; Stape and
   Meta acceptance alone do not prove the merge.
-- Google server inquiry delivery remains paused until one controlled saved
-  Form `4` test proves one accepted Google conversion.
+- Parent server conversion routing is complete. Continue the 48-hour
+  production parity watch and investigate destination errors or conversion
+  inflation without changing Form `4` or KinderTales.
 - The BI Supabase feed remains empty until BI provides read-only schema and
   pipeline evidence and maps the v1 contract.
 - Parent CRM/offline dispatch remains fail-closed until GreenRope/KinderTales
@@ -62,7 +68,9 @@
 
 - Plugin source and the pre-release package version remain available in Git;
   use the normal WordPress release process to redeploy a reviewed prior build.
+- Server GTM version `12` is the narrow Google one-event canary rollback.
+- Server GTM version `9` keeps Parent GA4 and Meta CAPI live while pausing
+  Google server tags.
 - Server GTM version `8` pauses Parent Meta CAPI while retaining guarded GA4.
-- Google server tags remain paused, so no Google rollback is required.
 - BigQuery additions are empty/additive and are not referenced by existing
   dashboard contracts or dispatch schedules.

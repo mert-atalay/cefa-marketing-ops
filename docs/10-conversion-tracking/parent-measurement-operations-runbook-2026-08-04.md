@@ -10,7 +10,8 @@
 - School Manager owns KinderTales delivery and business fields.
 - Do not submit a real test inquiry without an approved test identity and
   business-reporting exclusion.
-- Do not unpause Google server conversion tags without once-only proof.
+- Keep Google server inquiry delivery on the strict Parent `generate_lead`,
+  hostname and non-empty-event-ID trigger. Do not broaden it.
 - Do not call a Meta send deduplicated until Events Manager confirms the pair.
 - Do not expose Stape request payloads, tokens, form PII or click IDs in tickets
   or public Git.
@@ -20,10 +21,10 @@
 | Check | Expected |
 |---|---|
 | `https://edge.cefa.ca/healthy` | HTTP `200`; the endpoint root may return `404` by design |
-| Parent web/server GTM | Web `15`; server `9` |
+| Parent web/server GTM | Web `15`; server `13` |
 | GA4 outgoing | HTTP `204` |
 | Meta outgoing | HTTP `200`, `events_received=1`, no messages |
-| Google server conversion | Paused |
+| Google server conversion | Live; conversion endpoint `302` and continuity endpoint `200` are expected for the validated route |
 | Stape alerts | Incoming `5xx`, outgoing `4xx`, outgoing `5xx`; one recipient |
 | Parent plugin | `0.6.4`, full runtime, attribution/ledger shadow |
 | Certified Dataform QA | `18/18` passing |
@@ -71,6 +72,8 @@
 
 ## Rollback Points
 
+- Server GTM `12`: exact one-event Google canary and immediate narrow rollback.
+- Server GTM `9`: GA4 and Meta live; Google server tags paused.
 - Server GTM `8`: pauses production Meta CAPI and retains guarded GA4.
 - Server GTM `1`: pre-sGTM server rollback.
 - Web GTM `14`: immediate pre-parameter-guardrail diagnostic version; it exceeds
@@ -84,7 +87,8 @@
 ## Escalation Gates
 
 - Meta: Events Manager duplicate/merge evidence is required.
-- Google: one controlled saved Form `4` duplicate-counting test is required.
+- Google: monitor conversion diagnostics, repeated order IDs and unexplained
+  inflation after the 2026-08-05 server activation.
 - Supabase: BI read-only schema, mappings and a proof-of-concept record are
   required before ingestion.
 - CRM outcomes: GreenRope/KinderTales exact CEFA identity fields and read-back
