@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "as_of": "2026-07-27",
+  "as_of": "2026-08-06",
   "path_base": "repository_root",
   "repository": {
     "name": "mert-atalay/cefa-marketing-ops",
     "visibility": "public",
     "default_branch": "main",
-    "private_runtime_repository_status": "blocked"
+    "private_runtime_repository_status": "blocked",
+    "external_product_data_plane": "separate_and_not_authorized"
   },
   "canonical_docs": {
     "context_layer": "docs/00-governance/marketing-operations-context-layer.md",
@@ -16,7 +17,15 @@
     "data_taxonomy": "docs/00-governance/data-taxonomy.md",
     "integration_register": "docs/70-growth-operations/system-and-integration-register.md",
     "gap_scenario_register": "docs/70-growth-operations/gap-risk-and-scenario-register.md",
-    "marketing_bi_alignment_decision": "docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md"
+    "marketing_bi_alignment_decision": "docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md",
+    "reusable_data_contracts": "docs/20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md"
+  },
+  "future_product_readiness": {
+    "status": "approved_roadmap_extension_implementation_pending",
+    "cefa_data_plane": "cefa_only",
+    "portable_assets": "legally_approved_versioned_schemas_code_patterns_and_synthetic_fixtures",
+    "external_runtime_requirement": "separate_private_repository_cloud_project_identities_secrets_datasets_destinations_billing_and_customer_data_plane",
+    "external_benchmarking": "disabled_pending_legal_privacy_cohort_comparability_audit_and_revocation_gates"
   },
   "status_vocabulary": [
     "Verified",

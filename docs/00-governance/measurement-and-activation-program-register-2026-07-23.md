@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-27
+**Register date:** 2026-08-06
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -49,6 +49,11 @@ or production gate changes.
     BigQuery remains the marketing measurement, intelligence, and activation
     layer. The normal interface contains minimum record-level outcomes and
     certified summaries, not complete operational records or raw PII.
+11. Reusable contracts may leave CEFA only as legally approved schema and code
+    patterns. A future external product requires a separate private
+    repository, cloud project, identities, secrets, datasets, runtime,
+    destinations, billing boundary, and customer data plane. CEFA row-level
+    data and credentials are not product assets or default benchmarks.
 
 ## Executive Status
 
@@ -67,6 +72,7 @@ or production gate changes.
 | BI Supabase and marketing boundary | `Partial` | A restricted zero-row `parent_business_outcome_inbox` and machine-readable v1 contract now define the minimum Parent outcome interface without raw PII. The authorized Supabase connector sees only two inactive non-BI projects; the BI operational project's schema, grain, identity, history, timestamps, freshness, lineage and source mappings remain unavailable | BI read-only inspection, source mapping, shared metric dictionary and one proof-of-concept outcome record |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
 | Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
+| Reusable data-contract readiness | `Approved` | Existing identity, semantic, activation, predictive and agent-safe foundations will be extended with three measurement truth lenses, structured conversation facts, capacity guardrails, action-to-outcome learning, model eligibility and an external-export firewall | Version the contracts and assertions, then prove them with synthetic data in a separate empty environment; no CEFA data sharing or external runtime is authorized |
 | Public/private source control | `Blocked operational risk` | This GitHub repository is public while material private warehouse/runtime work remains local or deployed from historical artifacts | Create CEFA-controlled private runtime repository and migrate reproducible non-secret runtime without exposing credentials or PII |
 | Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `39` systems, `40` integration IDs, `27` open-gap IDs and `27` what-if scenarios | Keep all four surfaces synchronized with narrow implementation evidence |
 
@@ -186,6 +192,11 @@ All approved source facts
   -> BigQuery
   -> Dataform transformations and assertions
   -> certified reporting, intelligence, and activation contracts
+
+Versioned safe schemas and decision logic
+  -> synthetic portability test in a separate empty environment
+  -> later separately approved external runtime
+  -> never CEFA rows, credentials, destinations, or private runtime
 ```
 
 ## Stape Business Implementation Contract
@@ -374,6 +385,7 @@ other.
 | Shared spine | CEFA private runtime source consolidation | `Blocked operational risk` | Reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source exists without secrets |
 | Existing guarded work | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | Later phase | Parent multi-entity identity and email/journey inventory | `Approved`/`Pending` | Deterministic relationships, provider reconciliation and no-PII contracts pass |
+| Later phase | Reusable measurement, conversation, capacity and action-to-outcome contracts | `Approved`/`Pending` | Separate truth lenses, source/coverage assertions, synthetic portability proof and default-deny export control pass |
 | Later phase | Phone attribution discovery, controlled incrementality and value-based optimization | `Pending later phase` | Each has its own evidence, business-truth, privacy, experiment and bidding gate |
 | Governance | Marketing operations context and shared metric dictionary | `Verified`/`Partial` | Every material source, integration, metric, gap and failure-response change remains synchronized |
 
@@ -406,6 +418,7 @@ or private payloads in this register.
 - [Parent sGTM GA4 routing status, 2026-08-04](../10-conversion-tracking/parent-sgtm-ga4-routing-status-2026-08-04.md)
 - [Parent sGTM completion, 2026-08-05](../10-conversion-tracking/parent-sgtm-completion-2026-08-05.md)
 - [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
+- [Reusable data contracts and future product readiness](../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
 - [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)

@@ -1,6 +1,6 @@
 # CEFA Marketing Operations Context Layer
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-06
 **Owner:** CEFA marketing operations
 **Status:** Canonical context entry point
 **Review cadence:** Update on material change; verify quarterly
@@ -61,11 +61,17 @@ The hub covers:
 - school, program, location, campaign and platform master data;
 - KinderTales, GreenRope, Synuma/SiteZeus and Mailchimp touchpoints;
 - CRM lifecycle and secondary offline-conversion activation;
+- reusable measurement, conversation, capacity, action-to-outcome, model, and
+  portable-interface contracts for future product readiness;
 - naming conventions, UTMs, build control and guarded automation;
 - public handover, decision history, gaps, risks and runbooks.
 
 The hub does not contain raw customer data, credentials, private production
-runtime, or authority to change spend and production systems without approval.
+runtime, commercial product strategy, or authority to change spend and
+production systems without approval. Reusable architecture does not make CEFA
+row-level data, credentials, destinations, or private runtime available to a
+future external product. See the
+[reusable-contract extension](../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
 
 ## Business Domains
 
@@ -160,6 +166,7 @@ Dashed lines are not verified production contracts.
 | What happened on the website? | GA4 plus saved form/business evidence | Browser/server diagnostics | CRM aggregate alone |
 | What is organic-search performance? | Search Console | GA4 landing behavior and DataForSEO research | Paid-platform data |
 | What should a dashboard show? | Certified BigQuery serving contract | Freshness, reconciliation and rule registry | Unlabelled raw connector output |
+| What may a future external product reuse? | Legally approved versioned schema and code patterns deployed in a separate environment | Synthetic fixtures and explicit legal/security review | CEFA rows, credentials, destinations, private runtime or an unrestricted CEFA benchmark |
 | Which naming/copy rule applies? | Paid-media naming and copy standard | v21 build control and active-object inventory | Existing object name as precedent |
 
 Detailed routing remains in

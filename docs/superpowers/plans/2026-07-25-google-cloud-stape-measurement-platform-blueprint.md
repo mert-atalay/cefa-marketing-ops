@@ -42,6 +42,13 @@ Stape website measurement in Track B. Eligible guarded GreenRope CRM outcomes
 do not wait for Stape or a Supabase source switch. See the
 [final marketing/BI alignment decision](../../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
 
+**Reusable-contract alignment, 2026-08-06:** The CEFA data platform will add
+versioned truth-lens, conversation, capacity, action-to-outcome, model, and
+portable-interface contracts. This improves CEFA's own intelligence and makes
+the architecture reusable, but does not authorize CEFA data sharing or make
+this warehouse an external product runtime. See the
+[reusable-contract extension](../../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
+
 ## 2. Business Result
 
 When this blueprint is complete, CEFA will be able to answer:
@@ -835,13 +842,21 @@ Saved Form 4 identity
   -> prospective stage observation/webhook
   -> restricted BigQuery lifecycle ledger and durable outbox
   -> Cloud Tasks delivery queue
-  -> Google and Meta dispatch
+  -> Google Data Manager API and Meta Conversions API dispatch
   -> diagnostics and accepted-ID lock
 ```
 
 Use Cloud Tasks for Google/Meta offline conversion calls because each task has
 one explicit destination, requires controlled retries, and must be idempotent.
 Use Pub/Sub only when one validated event needs multiple independent consumers.
+
+For new Google offline CRM events, prefer the Google Data Manager API and
+require `validateOnly`, stable transaction identity, request IDs, platform age
+checks, delivery diagnostics, and accepted-ID reconciliation before
+production. Continue to use the Google Ads API for conversion-action settings,
+goal/campaign read-back, supported adjustments, and guarded campaign
+operations. Website conversions continue through their approved sGTM routes;
+the offline dispatcher must not send another website inquiry event.
 
 ## 11. Visibility Products
 
@@ -1289,7 +1304,17 @@ quality, capacity, creative, local visibility, and budget allocation.
   enrollment truth and an approved economic model, never from GreenRope
   `crm_closed_won` alone;
 - Gemini/Vertex analysis only on approved safe contracts;
-- human-approved recommendation queue.
+- structured conversation intelligence for chatbot, email, and later
+  approved channels, with raw text restricted and provenance/confidence in
+  safe marts;
+- three separate measurement truth lenses for business outcomes, internal
+  attribution, and platform observations;
+- product-grade feature, label, model, coverage, calibration, drift, expiry,
+  and allowed-use metadata;
+- human-approved recommendation queue extended through confirmed execution,
+  evaluation, observed outcome, and postmortem;
+- portable contract proof in a separate empty environment using synthetic
+  fixtures only.
 
 **Exit:** Models beat documented baselines, expose confidence and expiry, and
 remain advisory until CEFA explicitly promotes an action.
@@ -1310,6 +1335,11 @@ remain advisory until CEFA explicitly promotes an action.
 | Parent identity and email | Multi-child, repeat-inquiry, multi-school, and email journey visibility | Deterministic entity links, provider reconciliation, and no raw PII |
 | Audience activation | Better targeting with suppression and quality seeds | Activation-safe contract and delivery audit |
 | Predictive intelligence | Better recommendations, not automatic guesses | Backtest, confidence, drift, owner approval |
+| Measurement truth lenses | Business, CEFA attribution and platform reporting stay understandable | Separate facts, coverage fields and no cross-platform double counting |
+| Conversation intelligence | Questions and objections improve marketing and content decisions | Provider reconciliation, provenance, confidence and restricted raw text |
+| Capacity guardrail | Demand recommendations respect real operating context | Source-confirmed school/program snapshots and unknown-state assertions |
+| Action-to-outcome learning | CEFA learns which approved changes worked | Approval, execution, evaluation window, outcome and postmortem trace |
+| Reusable contracts | Architecture is portable without exporting CEFA's data plane | Versioned schema plus synthetic deployment in a separate empty environment |
 | Operations | Faster detection and recovery | SLO dashboard, alerts, runbook, rollback test |
 
 ## 18. Immediate Inputs And Approvals
@@ -1400,6 +1430,18 @@ The total program is complete when:
     join through restricted identity, and expose no raw contact or child PII.
 17. The active Form 4 Mailchimp feed has a documented purpose and minimized
     field contract before it is used for omnichannel journey activation.
+18. Certified reporting keeps deduplicated business outcomes, CEFA
+    attribution, and platform observations separate and exposes their
+    coverage and limitations.
+19. Structured conversation and capacity facts pass their source,
+    provenance, freshness, restricted-data, and unknown-state assertions.
+20. Every recommendation used as learning evidence traces through approval,
+    execution, evaluation, observed outcome, and postmortem.
+21. Feature sets and models expose version, label definition, source coverage,
+    baseline, calibration, drift, confidence, expiry, and allowed use.
+22. Reusable schemas pass in a separate empty environment using synthetic
+    fixtures, with no CEFA data, credentials, destinations, or private runtime
+    crossing the boundary.
 
 ## 21. Explicit Non-Goals
 
@@ -1419,7 +1461,11 @@ The total program is complete when:
 - making CRM-stage conversions primary immediately;
 - enabling every Google Cloud API without a defined workload;
 - deleting current datasets or compatibility objects during foundation work;
-- autonomous campaign, budget, bid, CRM, public-content, or audience changes.
+- autonomous campaign, budget, bid, CRM, public-content, or audience changes;
+- using the CEFA warehouse or row-level CEFA data as an external product data
+  plane, benchmark pool, demo dataset, or training set by default;
+- deploying a future external product into CEFA's cloud project, service
+  identities, secrets, datasets, Stape/GTM destinations, or private runtime.
 
 ## 22. Primary References
 

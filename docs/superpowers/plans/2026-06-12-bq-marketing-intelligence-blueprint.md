@@ -63,6 +63,14 @@ contract, proof-of-concept record, parity, one-sender control, accepted-ID
 reconciliation, and rollback pass. See the
 [final alignment decision](../../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
 
+**Reusable-contract addendum, 2026-08-06:** CEFA will make the warehouse
+architecture portable through versioned measurement, conversation, capacity,
+action-to-outcome, model, and interface contracts while keeping the CEFA data
+plane CEFA-only. Any future external runtime must be separately owned,
+deployed, credentialed, billed, and populated; CEFA row-level data and private
+runtime do not become product assets by default. The detailed extension is
+[CEFA Reusable Data Contracts And Future Product Readiness](../../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
+
 ---
 
 ## Final Position
@@ -309,6 +317,40 @@ approval are not promotion gates.
 - [ ] Log agent runs, data scopes used, recommendations, approval status, and executed action if any.
 - [ ] Require source citations and freshness timestamps in any executive summary or recommendation.
 
+## Phase 13 - Reusable Contracts And Future Product Readiness
+
+**Outcome:** CEFA's proven architecture can inform a future separately hosted
+product without turning the CEFA warehouse into an external product data
+plane.
+
+- [ ] Build separate facts for deduplicated business outcomes, CEFA
+  attribution, and platform-reported/accepted/matched observations; never sum
+  cross-platform conversion credit as unique business outcomes.
+- [ ] Add product-grade metric eligibility fields for identity, attribution,
+  spend, outcome, freshness, QA, sample, confidence, and known limitations.
+- [ ] Add a provider-neutral structured conversation contract for chatbot,
+  email, and later approved channels, with raw text restricted and
+  time-bounded.
+- [ ] Add a source-confirmed aggregate capacity/availability contract that
+  distinguishes licensed, staffed, enrolled, waitlisted, sellable, and
+  unknown states.
+- [ ] Extend the recommendation queue into an action-to-outcome ledger that
+  proves approval, execution, evaluation window, observed result, and
+  postmortem.
+- [ ] Version feature sets, labels, models, baselines, calibration, drift,
+  confidence, expiry, and approved/prohibited uses.
+- [ ] Keep provider adapters separate from canonical contracts and prove
+  portability in a separate empty environment using synthetic fixtures.
+- [ ] Default external benchmarking and exports to disabled; require legal,
+  privacy, cohort, comparability, audit, and revocation gates before any
+  aggregate release.
+- [ ] Keep any future product repository, cloud project, service identities,
+  secrets, runtime, datasets, destinations, billing, and customer data plane
+  separate from CEFA.
+
+Implementation detail and acceptance criteria are governed by the
+[reusable-contract extension](../../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
+
 ## Immediate Parallel Priorities
 
 1. Continuously protect KinderTales, Synuma, website conversion, dashboard,
@@ -328,6 +370,9 @@ approval are not promotion gates.
 8. Add Hightouch, audiences, phone attribution, incrementality, and
    value-based optimization only behind their separate evidence and approval
    gates.
+9. Version the truth-lens, conversation, capacity, action-to-outcome, and
+   portable-interface contracts before treating the architecture as reusable
+   outside CEFA.
 
 ## Dashboard Agent Handoff
 
@@ -362,4 +407,8 @@ The dashboard agent can safely continue consuming current `mart_cefa_growth_dash
 - Do not break KinderTales delivery.
 - Do not use platform conversions as final business CPL.
 - Do not merge parent enrollment, open house, summer camp, franchise, and other lead types into one CPL bucket.
-- Do not launch autonomous budget, CRM, creative, review, or publishing agents.
+- Do not launch autonomous budget, CRM, creative, review, or publishing agents;
+- Do not use the CEFA warehouse, row-level data, credentials, platform
+  destinations, or private runtime as a future external product data plane.
+- Do not publish cross-organization benchmarks without explicit legal,
+  privacy, comparability, minimum-cohort, audit, and revocation gates.
