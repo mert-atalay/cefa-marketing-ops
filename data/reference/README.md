@@ -51,6 +51,15 @@ This folder is for small, reviewable, machine-readable reference data used by th
     semantics without copying raw parent or child data into marketing tables.
   - Guardrail: `pending_source_mapping` and `blocked_external_identity` rows
     must not be guessed or treated as production-ready.
+- [stape-parent-shadow-config.json](./stape-parent-shadow-config.json)
+  - Status: `Production checkpoint`; the historical filename is retained for
+    stable links.
+  - Scope: no-secret Parent web/server GTM versions, first-party endpoint,
+    account controls, route state, QA, rollback and certified-reporting gate.
+  - Current state: Parent server routing is production live; paid-channel
+    reporting remains blocked pending paid-evidence contract v2.
+  - Guardrail: this checkpoint is not a Stape/GTM credential, export or
+    production-write authority.
 
 ## Planned Files
 

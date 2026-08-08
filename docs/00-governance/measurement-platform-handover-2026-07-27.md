@@ -1,6 +1,6 @@
 # CEFA Measurement Platform Handover
 
-**Last updated:** 2026-08-04
+**Last updated:** 2026-08-08
 **Owner:** CEFA marketing measurement
 **Status:** Current handover entry point
 **Repository:** `mert-atalay/cefa-marketing-ops`
@@ -26,6 +26,9 @@ It explains:
 
 This is a routing and handover document. Detailed implementation documents
 remain authoritative for their own workstreams.
+
+The current Parent execution sequence is the
+[Parent omnichannel measurement and intelligence roadmap](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md).
 
 ## Read These In Order
 
@@ -268,21 +271,21 @@ Current implementation status:
 ## Stape Business Status
 
 CEFA has annual Stape Business for the Parent property. Parent hosting runs in
-`CA East (Canada)` behind `edge.cefa.ca`. GA4 and Meta CAPI are now live through
-the guarded Parent server container. Google Ads remains on its existing browser
-conversion path; its server copy is staged and paused.
+`CA East (Canada)` behind `edge.cefa.ca`. GA4, Meta CAPI, Google Conversion
+Linker and Google Ads Inquiry Submit are production live through the guarded
+Parent server container. Browser destinations remain active with the same Form
+4 event identity.
 
-Verified through 2026-08-04:
+Verified through 2026-08-05, with warehouse status rechecked 2026-08-08:
 
 - Parent server GTM `GTM-T7C46VM7` and first-party DNS/TLS/health;
 - CEFA account 2FA, healthy billing, auto-upgrade, durable API-key rotation,
   and revocation of the disclosed predecessor;
 - Stape Analytics, outgoing logs, one enabled alert recipient, and enabled
   hourly incoming `5xx`, outgoing `4xx`, and outgoing `5xx` alerts;
-- published server version `9`, `CEFA | Parent | Meta CAPI Inquiry Submit Live
-  | 2026-08-04`, with native GA4 client/tag, Client Name
-  enforcement, anchored Parent-host guard, explicit event allowlist, IP
-  redaction, first-party FPID support, and no CRM or franchise routes;
+- published server version `13`, `CEFA | Parent | sGTM Google Inquiry Live |
+  2026-08-05`, with native GA4, Meta CAPI, Google Conversion Linker and Google
+  Ads Inquiry Submit behind the strict Parent host/event/event-ID guard;
 - current-token browser Preview HTTP `200`, intended health tag fire, GA4 HTTP
   `204`, and one independent Stape outgoing-log row for `GA4` status `204`;
 - four-case no-preview routing proof with exactly two intended GA4 HTTP `204`
@@ -299,10 +302,11 @@ Verified through 2026-08-04:
   from `41` to the GA4 limit of `25`;
 - clean live homepage proof: one `edge.cefa.ca` GA4 request, no direct browser
   GA collection request, and one Stape `PageView` delivery with HTTP `204`;
-- server version `9` uses a strict Parent `generate_lead` route, live Meta CAPI
-  with the exact browser custom-event name `Inquiry Submit`, paused native
-  Google Conversion Linker and Google Ads server conversion tags, and a paused
-  Meta test tag;
+- one controlled saved Form `4` test preserved school/program/business fields
+  and carried one shared event ID to the signed collector, GA4, Meta CAPI and
+  Google Ads server route;
+- the overlapping legacy Parent Meta Gateway route was excluded while the
+  Franchise USA dataset remained connected;
 - direct Meta Test Events and an independent propagated sGTM transport test
   both returned one accepted event, no messages, matching event ID, and no
   generated `_fbp` value;
@@ -328,10 +332,16 @@ Additive certified Parent reporting is also live:
 
 These views count saved Form `4` entries, use Gravity's selected school and the
 CEFA first-party attribution ledger, then add GA4 session last-click only by
-exact event ID. Through 2026-08-03 they reconcile `3,689` source entries to
-`3,689` event rows and `3,689` daily inquiries, with zero missing schools and
-`3,331` (`90.3%`) exact GA4-eligible rows. They expose no direct PII or raw
-click IDs and do not reproduce Meta/Google platform attribution windows.
+exact event ID. Through 2026-08-07 they contain `4,016` source entries, zero
+missing schools and `3,585` (`89.3%`) exact GA4-eligible rows. They expose no
+direct PII or raw click IDs and do not reproduce Meta/Google platform
+attribution windows.
+
+The saved-entry and selected-school counts remain useful, but the paid-source
+breakdown is blocked from promotion. In the August 1-7 window, `242` rows were
+labelled Google paid even though `180` were `google / organic`; `39` were
+labelled Meta paid while `19` lacked paid-social evidence. Paid-evidence
+contract v2, backfill and freshness watermarks are the immediate correction.
 
 Required design:
 
@@ -406,8 +416,9 @@ Strict copy rule:
 | Public/private source control | CEFA private cloud runtime repository does not yet exist | `Blocked operational risk` |
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
-| Stape | Parent GA4 and Meta CAPI are live through server version `9`; web version `15` carries shared identity within the 25-parameter GA4 limit. Google server delivery remains paused | `Active guarded` |
-| Parent certified reporting | Additive school/source/event, daily QA and measurement-model views reconcile Gravity truth to exact-ID GA4 context; candidate dashboard views are not connected to existing serving contracts | `Active guarded` |
+| Stape | Parent web version `15` and server version `13` have GA4, Meta CAPI and Google Ads live with shared Form 4 identity; destination diagnostics and recovery ownership continue | `Active guarded` |
+| Parent certified reporting | Total/school truth is usable, but paid allocation is blocked by the organic/referral-as-paid defect until contract v2, backfill and freshness gates pass | `Active guarded` |
+| Predictive and MMM | Existing forecasts, creative labels and readiness views are heuristic candidates; no registered BigQuery model exists and zero weeks are Meridian-ready | `Pending trained-model evidence` |
 | BI Supabase | Restricted zero-row BigQuery outcome inbox and v1 field contract exist; BI source grain, identifiers, history, lineage, freshness and source mappings remain unverified | `Interface ready; source verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |

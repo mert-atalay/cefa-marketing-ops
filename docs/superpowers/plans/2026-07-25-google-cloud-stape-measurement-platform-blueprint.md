@@ -8,6 +8,7 @@ marketing intelligence, CRM outcome activation, email/lifecycle engagement,
 and approved audience use
 **Strategic anchor:** [CEFA BigQuery Marketing Intelligence Blueprint](./2026-06-12-bq-marketing-intelligence-blueprint.md)
 **Program control:** [CEFA Measurement And Activation Program Register](../../00-governance/measurement-and-activation-program-register-2026-07-23.md)
+**Current Parent execution:** [Parent Omnichannel Measurement And Intelligence Roadmap](../../00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
 
 ## 1. Executive Decision
 
@@ -96,7 +97,7 @@ The read-only inventory on 2026-07-25 found:
 | BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable. A restricted zero-row BigQuery outcome inbox and v1 interface contract are deployed; the authorized connector cannot see the BI operational project, so source schema, grain, mappings, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. Parent server GTM `GTM-T7C46VM7` version `9` and web GTM `GTM-NZ6N7WNC` version `15` are live. GA4 routes through the guarded first-party endpoint; Meta CAPI sends the exact browser event name and shared ID; three inspected Meta requests were accepted. Google server conversion tags remain paused. Hourly incoming `5xx`, outgoing `4xx` and outgoing `5xx` alerts plus one recipient are enabled. Meta pair deduplication and one controlled Google once-only proof remain gated |
+| Stape | Updated through 2026-08-05: Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. Parent server GTM `GTM-T7C46VM7` version `13` and web GTM `GTM-NZ6N7WNC` version `15` are production live. GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit share the Form 4 event identity. A controlled saved Form 4 test passed transport and identity read-back; the overlapping legacy Parent Meta Gateway route was excluded. Hourly incoming `5xx`, outgoing `4xx` and outgoing `5xx` alerts plus one recipient are enabled |
 
 The no-secret machine-readable Parent shadow checkpoint is
 [stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
@@ -123,9 +124,10 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- the Parent Stape first-party GA4 and Meta CAPI routes are active and accepted,
-  while Meta pair deduplication, Google server conversion delivery, consent
-  gates, controlled Form `4` QA, and franchise isolation remain open;
+- the Parent Stape first-party GA4, Meta CAPI and Google Ads routes are active;
+  controlled Form `4` transport and shared identity passed, while ongoing
+  destination diagnostics, recovery ownership and isolated franchise builds
+  remain open;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 

@@ -1,6 +1,6 @@
 # CEFA Marketing Operations Docs
 
-Last updated: 2026-07-27
+Last updated: 2026-08-08
 
 This directory is the governed documentation layer for the CEFA Marketing
 Operations Hub. It supports parallel work across conversion tracking,
@@ -17,6 +17,7 @@ one document.
   detailed ownership, current flows, plugins, data identity, BigQuery/Stape
   architecture, gaps, and continuation steps.
 - [Measurement and activation program register](./00-governance/measurement-and-activation-program-register-2026-07-23.md): current live state, available Stape Business plan, approved non-free-tier-constrained Google Cloud scope, external dependencies, parallel build lanes, and production gates.
+- [Parent omnichannel measurement and intelligence roadmap](./00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md): current Parent execution sequence for paid-source correction, freshness, sGTM operations, exact business outcomes, offline activation, creative intelligence, forecasting, lead scoring, MMM and controlled activation.
 - [Google Cloud and Stape measurement platform blueprint](./superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md): definitive implementation architecture, business outcomes, service responsibilities, data contracts, sGTM rollout, activation stages, and definition of done.
 - [Marketing and BI alignment final decision](./70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md): approved Supabase/BigQuery boundary, parallel execution tracks, independent activation gates, consent decision, meeting outcomes, and final stakeholder email.
 - [Governance](./00-governance/README.md): repo rules, source-of-truth order, agent responsibilities, contribution workflow.

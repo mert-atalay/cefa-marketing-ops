@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "as_of": "2026-08-06",
+  "as_of": "2026-08-08",
   "path_base": "repository_root",
   "repository": {
     "name": "mert-atalay/cefa-marketing-ops",
@@ -13,6 +13,7 @@
     "context_layer": "docs/00-governance/marketing-operations-context-layer.md",
     "handover": "docs/00-governance/measurement-platform-handover-2026-07-27.md",
     "program_register": "docs/00-governance/measurement-and-activation-program-register-2026-07-23.md",
+    "parent_omnichannel_roadmap": "docs/00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md",
     "source_rules": "docs/00-governance/source-of-truth-rules.md",
     "data_taxonomy": "docs/00-governance/data-taxonomy.md",
     "integration_register": "docs/70-growth-operations/system-and-integration-register.md",
@@ -379,7 +380,7 @@
       "id": "GAP-004",
       "severity": "High",
       "status": "Active guarded",
-      "summary": "Parent GA4 first-party routing and shared dedup identity are live; server Ads/Meta activation, natural-event parity, rollback signoff and franchise isolation remain gated"
+      "summary": "Parent web version 15 and server version 13 route GA4, Meta CAPI and Google Ads with shared Form 4 identity; ongoing destination diagnostics, recovery ownership and franchise isolation remain guarded"
     },
     {
       "id": "GAP-005",
@@ -521,6 +522,25 @@
       "severity": "High",
       "status": "Pending",
       "summary": "BI Supabase Parent outcome grain, identity, history, lineage and freshness are not verified for marketing use"
+    },
+    {
+      "id": "GAP-028",
+      "severity": "High",
+      "status": "Active guarded",
+      "status_detail": "blocking_reporting_incident",
+      "summary": "Parent warehouse paid-source logic classifies Google organic and Meta referral/platform-touch rows as confirmed paid"
+    },
+    {
+      "id": "GAP-029",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Parent certified reporting needs an explicit complete-through versus partial-current-day contract"
+    },
+    {
+      "id": "GAP-030",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Predictive, creative and MMM surfaces are heuristic candidates without trained-model, backtest or promotion evidence"
     }
   ],
   "scenario_routes": [
@@ -631,6 +651,18 @@
     {
       "id": "SCN-027",
       "trigger": "Supabase and direct business-source outcomes disagree"
+    },
+    {
+      "id": "SCN-028",
+      "trigger": "Organic or referral evidence is classified as paid"
+    },
+    {
+      "id": "SCN-029",
+      "trigger": "A heuristic recommendation is presented as a trained model"
+    },
+    {
+      "id": "SCN-030",
+      "trigger": "A partial current day is presented as complete"
     }
   ]
 }

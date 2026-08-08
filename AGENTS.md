@@ -41,6 +41,10 @@ Keep those responsibilities separate.
   `docs/00-governance/measurement-platform-handover-2026-07-27.md`.
 - Use `docs/00-governance/measurement-and-activation-program-register-2026-07-23.md`
   for current status, blockers, and sequencing.
+- Use `docs/00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md`
+  for the current Parent execution sequence across source correctness,
+  freshness, sGTM operations, CRM outcomes, offline activation, creative
+  intelligence, forecasting, lead scoring and MMM.
 - Use `docs/superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md`
   for definitive implementation architecture and
   `docs/superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md`

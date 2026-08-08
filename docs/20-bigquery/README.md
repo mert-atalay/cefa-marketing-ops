@@ -1,16 +1,17 @@
 # BigQuery And Google Cloud Measurement
 
-**Last updated:** 2026-08-06
+**Last updated:** 2026-08-08
 **Status:** Active governed workstream
 
 ## Start Here
 
 1. [Measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
 2. [Measurement and activation program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
-3. [Definitive Google Cloud and Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
-4. [Locked BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
-5. [Reusable data contracts and future product readiness](./reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
-6. [Data taxonomy and source map](../00-governance/data-taxonomy.md)
+3. [Current Parent omnichannel measurement and intelligence roadmap](../00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
+4. [Definitive Google Cloud and Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+5. [Locked BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
+6. [Reusable data contracts and future product readiness](./reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
+7. [Data taxonomy and source map](../00-governance/data-taxonomy.md)
 
 The June blueprint is the strategic warehouse/intelligence anchor. The July
 blueprint is the definitive implementation architecture. The program register
@@ -90,7 +91,9 @@ CRM payloads remain outside those marts.
 | Parent CRM lifecycle foundation | `Active guarded` | Restricted tables, capture, binder, poller, outbox, dispatcher and diagnostics built |
 | Google CRM actions | `Verified` | Three secondary actions created and validation passed |
 | Meta CRM events | `Active guarded` | Test Events passed; reporting custom conversions wait for first legitimate live event |
-| Stape | `Active guarded` | Parent GA4, Meta CAPI and guarded Google Ads Inquiry Submit are live under server version `13`; the 2026-08-05 controlled Form 4 test passed shared identity and transport read-back, with first-full-day parity and platform diagnostics still under review |
+| Stape | `Active guarded` | Parent GA4, Meta CAPI and guarded Google Ads Inquiry Submit are live under server version `13`; the 2026-08-05 controlled Form 4 test passed shared identity and transport read-back, with destination parity and duplicate diagnostics retained as operational monitoring |
+| Parent paid-source reporting | `Active guarded` | Total inquiry and selected-school truth remain usable; current paid allocation is blocked until paid-evidence contract v2, backfill, freshness and reconciliation pass |
+| Predictive and creative intelligence | `Feature foundations` | Forecast, pacing, capacity, creative and MMM-readiness candidates exist, but all inspected prediction surfaces are heuristic and there are zero registered BigQuery models |
 | Reusable data-contract readiness | `Approved` | Truth-lens, conversation, capacity, action-to-outcome, model and portability requirements are registered; implementation and synthetic empty-environment proof remain pending |
 | Cloud monitoring | `Partial` | Capacity board and Stape 4xx/5xx alerts exist; billing export, queues/dead letters and complete runbooks remain incomplete |
 | Private runtime source control | `Blocked operational risk` | CEFA private runtime repository still required |

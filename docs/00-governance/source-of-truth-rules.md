@@ -1,6 +1,6 @@
 # Source Of Truth Rules
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Status:** Governing repository contract
 
 ## Authority Order
@@ -10,8 +10,9 @@ Use this order when sources conflict:
 1. Verified live systems and current read-back evidence.
 2. Runtime code and the current narrow implementation contract.
 3. [Marketing operations context layer](./marketing-operations-context-layer.md),
-   [measurement platform handover](./measurement-platform-handover-2026-07-27.md)
-   and [program register](./measurement-and-activation-program-register-2026-07-23.md)
+   [measurement platform handover](./measurement-platform-handover-2026-07-27.md),
+   [program register](./measurement-and-activation-program-register-2026-07-23.md),
+   and [Parent omnichannel roadmap](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
    for cross-workstream routing, ownership, status, blockers, and sequencing.
 4. [Marketing and BI alignment final decision](../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
 5. [Google Cloud and Stape implementation blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md).
@@ -33,6 +34,9 @@ The June and July plans are complementary:
   Dataform, Stape, identity, activation, security, and phased delivery.
 - Program register: current operational truth for what is live, approved,
   blocked, pending, or next.
+- August 8 Parent roadmap: current Parent execution sequence for source
+  correctness, freshness, business outcomes, offline activation, creative,
+  forecasting, lead scoring and MMM.
 - July 27 alignment decision: approved Supabase/BigQuery boundary, parallel
   execution tracks, independent activation gates, and meeting position.
 
@@ -66,6 +70,9 @@ approval.
 | GreenRope CRM activation and Stape promotion have independent gates | Marketing/BI alignment decision and program register |
 | Consent-state plumbing is in Stape scope; CMP procurement remains deferred | Marketing/BI alignment decision |
 | Existing dashboard contracts change only after reconciliation and approval | BigQuery strategic blueprint |
+| Google source alone does not prove paid; valid Google click IDs or governed paid evidence do | Parent omnichannel roadmap, paid-evidence contract v2 |
+| Bare Meta click/referral evidence is platform-touch unverified unless governed paid evidence exists; `fbp` alone is identifier-only | Parent omnichannel roadmap, paid-evidence contract v2 |
+| Heuristic, candidate and readiness surfaces are not trained models | Parent omnichannel roadmap and model-promotion contract |
 
 ## Business Truth Versus Reporting
 
@@ -75,6 +82,7 @@ approval.
 | Did a franchise inquiry happen? | Saved franchise form entry and Synuma delivery | Website event, GA4, Google, Meta, BigQuery |
 | Which school was selected? | Form 4 `school_uuid` / Field `32.1` | `dim_school`, event payload |
 | Which ad object delivered traffic? | Platform object ID and valid click/UTM evidence | Naming key and warehouse joins |
+| Is a saved inquiry confirmed paid? | Versioned first-party paid-evidence contract | Click IDs, governed UTMs/campaign markers, GA4 and platform attribution reported separately |
 | Did a CRM stage happen? | Prospective GreenRope transition after baseline | Lifecycle ledger and platform delivery |
 | What consolidates Parent business outcomes for BI? | BI Supabase after source lineage and record contract are verified | KinderTales/GreenRope and BI pipeline evidence |
 | What may BigQuery receive from Supabase? | Minimum verified record-level outcomes | Versioned interface, shared dictionary and source reconciliation |

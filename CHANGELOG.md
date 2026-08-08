@@ -2,7 +2,10 @@
 
 ## Unreleased
 
-- Published the Parent GA4 25-parameter lead payload guardrail and live Meta sGTM CAPI route while keeping the Google server conversion copy paused behind controlled deduplication QA.
+- Added the canonical Parent omnichannel measurement and intelligence roadmap, including concrete source-correction, freshness, business-outcome, offline-activation, creative, forecasting, lead-scoring and MMM gates.
+- Registered the Parent paid-source classification defect, blocked the current channel candidate from promotion in governance, and defined paid-evidence contract v2 without changing saved inquiry or selected-school truth.
+- Updated the canonical context and Stape checkpoint to Parent server version `13`, with GA4, Meta CAPI and Google Ads production routes sharing Form 4 identity.
+- Published the Parent GA4 25-parameter lead payload guardrail and live Meta sGTM CAPI route; the Google server conversion copy subsequently passed controlled shared-identity QA and was promoted in server version `13`.
 - Added non-PII certified Parent inquiry event and daily school/source BigQuery views, plus an additive dashboard candidate that leaves existing serving contracts unchanged.
 - Added Dataform assertions for certified entry uniqueness, selected-school completeness, and event-to-daily reconciliation.
 - Normalized known legacy Meta source/channel aliases in the read-only shadow monitor and stopped GAConnector direct placeholders from being reported as capture failures.
