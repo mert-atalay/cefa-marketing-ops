@@ -1,22 +1,32 @@
 {
   "schema_version": "1.0.0",
-  "as_of": "2026-07-27",
+  "as_of": "2026-08-08",
   "path_base": "repository_root",
   "repository": {
     "name": "mert-atalay/cefa-marketing-ops",
     "visibility": "public",
     "default_branch": "main",
-    "private_runtime_repository_status": "blocked"
+    "private_runtime_repository_status": "blocked",
+    "external_product_data_plane": "separate_and_not_authorized"
   },
   "canonical_docs": {
     "context_layer": "docs/00-governance/marketing-operations-context-layer.md",
     "handover": "docs/00-governance/measurement-platform-handover-2026-07-27.md",
     "program_register": "docs/00-governance/measurement-and-activation-program-register-2026-07-23.md",
+    "parent_omnichannel_roadmap": "docs/00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md",
     "source_rules": "docs/00-governance/source-of-truth-rules.md",
     "data_taxonomy": "docs/00-governance/data-taxonomy.md",
     "integration_register": "docs/70-growth-operations/system-and-integration-register.md",
     "gap_scenario_register": "docs/70-growth-operations/gap-risk-and-scenario-register.md",
-    "marketing_bi_alignment_decision": "docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md"
+    "marketing_bi_alignment_decision": "docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md",
+    "reusable_data_contracts": "docs/20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md"
+  },
+  "future_product_readiness": {
+    "status": "approved_roadmap_extension_implementation_pending",
+    "cefa_data_plane": "cefa_only",
+    "portable_assets": "legally_approved_versioned_schemas_code_patterns_and_synthetic_fixtures",
+    "external_runtime_requirement": "separate_private_repository_cloud_project_identities_secrets_datasets_destinations_billing_and_customer_data_plane",
+    "external_benchmarking": "disabled_pending_legal_privacy_cohort_comparability_audit_and_revocation_gates"
   },
   "status_vocabulary": [
     "Verified",
@@ -123,15 +133,15 @@
     },
     {
       "id": "SYS-GTM",
-      "name": "Web GTM",
-      "role": "Property-specific browser destination routing",
-      "status": "Verified"
+      "name": "Web and server GTM",
+      "role": "Property-specific browser/server event processing and destination routing",
+      "status": "Active guarded"
     },
     {
       "id": "SYS-STAPE",
       "name": "Stape Business",
-      "role": "Planned server-side GTM transport",
-      "status": "Approved"
+      "role": "Hosted first-party server-side GTM transport and control plane",
+      "status": "Active guarded"
     },
     {
       "id": "SYS-GA4",
@@ -369,8 +379,8 @@
     {
       "id": "GAP-004",
       "severity": "High",
-      "status": "Pending",
-      "summary": "Stape production containers and shadow routing are not built"
+      "status": "Active guarded",
+      "summary": "Parent web version 15 and server version 13 route GA4, Meta CAPI and Google Ads with shared Form 4 identity; ongoing destination diagnostics, recovery ownership and franchise isolation remain guarded"
     },
     {
       "id": "GAP-005",
@@ -512,6 +522,25 @@
       "severity": "High",
       "status": "Pending",
       "summary": "BI Supabase Parent outcome grain, identity, history, lineage and freshness are not verified for marketing use"
+    },
+    {
+      "id": "GAP-028",
+      "severity": "High",
+      "status": "Active guarded",
+      "status_detail": "blocking_reporting_incident",
+      "summary": "Parent warehouse paid-source logic classifies Google organic and Meta referral/platform-touch rows as confirmed paid"
+    },
+    {
+      "id": "GAP-029",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Parent certified reporting needs an explicit complete-through versus partial-current-day contract"
+    },
+    {
+      "id": "GAP-030",
+      "severity": "High",
+      "status": "Pending",
+      "summary": "Predictive, creative and MMM surfaces are heuristic candidates without trained-model, backtest or promotion evidence"
     }
   ],
   "scenario_routes": [
@@ -622,6 +651,18 @@
     {
       "id": "SCN-027",
       "trigger": "Supabase and direct business-source outcomes disagree"
+    },
+    {
+      "id": "SCN-028",
+      "trigger": "Organic or referral evidence is classified as paid"
+    },
+    {
+      "id": "SCN-029",
+      "trigger": "A heuristic recommendation is presented as a trained model"
+    },
+    {
+      "id": "SCN-030",
+      "trigger": "A partial current day is presented as complete"
     }
   ]
 }

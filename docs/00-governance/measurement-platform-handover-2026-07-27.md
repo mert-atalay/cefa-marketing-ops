@@ -1,6 +1,6 @@
 # CEFA Measurement Platform Handover
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Owner:** CEFA marketing measurement
 **Status:** Current handover entry point
 **Repository:** `mert-atalay/cefa-marketing-ops`
@@ -26,6 +26,9 @@ It explains:
 
 This is a routing and handover document. Detailed implementation documents
 remain authoritative for their own workstreams.
+
+The current Parent execution sequence is the
+[Parent omnichannel measurement and intelligence roadmap](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md).
 
 ## Read These In Order
 
@@ -108,9 +111,10 @@ CEFA Conversion Tracking
   -> web GTM
   -> GA4, Google Ads and Meta
 
-Future first-party Stape route
+Current first-party Stape route
+  -> GA4 through edge.cefa.ca
   -> same neutral event and same cefa_event_id
-  -> server-side destination delivery with deduplication
+  -> Google Ads and Meta server delivery only after deduplication QA
 ```
 
 Rules:
@@ -257,7 +261,8 @@ Current implementation status:
 
 - full relevant Google Cloud and BigQuery capacity is approved;
 - cost controls are informational and must not silently drop required data;
-- a 15-assertion Dataform QA package compiles and has passed proof runs;
+- an 18-assertion Dataform QA package is mirrored and committed in the cloud
+  workspace, compiles with zero errors, and passed a full `18/18` cloud run;
 - Cloud Run remains the current production orchestration layer;
 - production Dataform Git/release/workflow configuration remains pending;
 - Cloud Billing export, comprehensive alerts, queues, dead-letter handling,
@@ -265,8 +270,78 @@ Current implementation status:
 
 ## Stape Business Status
 
-CEFA has Stape Business available. Production server-side routing is not yet
-recorded as active.
+CEFA has annual Stape Business for the Parent property. Parent hosting runs in
+`CA East (Canada)` behind `edge.cefa.ca`. GA4, Meta CAPI, Google Conversion
+Linker and Google Ads Inquiry Submit are production live through the guarded
+Parent server container. Browser destinations remain active with the same Form
+4 event identity.
+
+Verified through 2026-08-05, with warehouse status rechecked 2026-08-08:
+
+- Parent server GTM `GTM-T7C46VM7` and first-party DNS/TLS/health;
+- CEFA account 2FA, healthy billing, auto-upgrade, durable API-key rotation,
+  and revocation of the disclosed predecessor;
+- Stape Analytics, outgoing logs, one enabled alert recipient, and enabled
+  hourly incoming `5xx`, outgoing `4xx`, and outgoing `5xx` alerts;
+- published server version `13`, `CEFA | Parent | sGTM Google Inquiry Live |
+  2026-08-05`, with native GA4, Meta CAPI, Google Conversion Linker and Google
+  Ads Inquiry Submit behind the strict Parent host/event/event-ID guard;
+- current-token browser Preview HTTP `200`, intended health tag fire, GA4 HTTP
+  `204`, and one independent Stape outgoing-log row for `GA4` status `204`;
+- four-case no-preview routing proof with exactly two intended GA4 HTTP `204`
+  deliveries and zero wrong-host or wrong-event deliveries;
+- published web version `12`, `CEFA | Parent | GA4 via First-Party sGTM |
+  2026-08-04`, established the first-party GA4 route;
+- published web version `13`, `CEFA | Parent | Google Ads Event ID Dedup |
+  2026-08-04`, added the existing event ID as Transaction ID on the existing
+  Google Ads inquiry tag without changing its destination, value, trigger, or
+  enhanced-conversion setting;
+- published web version `15`, `CEFA | Parent | GA4 Lead Payload Guardrail |
+  2026-08-04`, retains shared identity, school, program, value, currency and
+  compact source context while reducing configured `generate_lead` parameters
+  from `41` to the GA4 limit of `25`;
+- clean live homepage proof: one `edge.cefa.ca` GA4 request, no direct browser
+  GA collection request, and one Stape `PageView` delivery with HTTP `204`;
+- one controlled saved Form `4` test preserved school/program/business fields
+  and carried one shared event ID to the signed collector, GA4, Meta CAPI and
+  Google Ads server route;
+- the overlapping legacy Parent Meta Gateway route was excluded while the
+  Franchise USA dataset remained connected;
+- direct Meta Test Events and an independent propagated sGTM transport test
+  both returned one accepted event, no messages, matching event ID, and no
+  generated `_fbp` value;
+- three inspected Facebook outgoing requests returned HTTP `200`,
+  `events_received=1`, and no messages; two occurred after production
+  activation and align with lead/conversion rows, so they are likely
+  legitimate production inquiries, while Events Manager deduplication proof
+  remains open;
+- a post-build health check and controlled non-conversion request both
+  returned HTTP `200`;
+- no conversion action, campaign goal, Gravity Forms, School Manager,
+  KinderTales, CRM, franchise route, or existing dashboard contract was
+  replaced.
+
+Additive certified Parent reporting is also live:
+
+- `mart_marketing.vw_parent_inquiry_certified_event`;
+- `mart_marketing.vw_parent_inquiry_school_source_certified_daily`;
+- `mart_marketing.vw_parent_inquiry_certified_qa_daily`;
+- `mart_marketing.vw_parent_inquiry_measurement_model_dictionary`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_school_source_certified_daily_candidate`;
+- `mart_cefa_growth_dashboard.dashboard_parent_inquiry_certified_qa_daily_candidate`.
+
+These views count saved Form `4` entries, use Gravity's selected school and the
+CEFA first-party attribution ledger, then add GA4 session last-click only by
+exact event ID. Through 2026-08-07 they contain `4,016` source entries, zero
+missing schools and `3,585` (`89.3%`) exact GA4-eligible rows. They expose no
+direct PII or raw click IDs and do not reproduce Meta/Google platform
+attribution windows.
+
+The saved-entry and selected-school counts remain useful, but the paid-source
+breakdown is blocked from promotion. In the August 1-7 window, `242` rows were
+labelled Google paid even though `180` were `google / organic`; `39` were
+labelled Meta paid while `19` lacked paid-social evidence. Paid-evidence
+contract v2, backfill and freshness watermarks are the immediate correction.
 
 Required design:
 
@@ -283,12 +358,15 @@ Required design:
 
 Current gaps:
 
-- CEFA administrative access and entitlement verification;
-- container and endpoint inventory;
-- DNS/TLS plan;
-- baseline exports and recovery ownership;
-- shadow routing and destination diagnostics;
-- production rollback runbook.
+- recovery-code custody and secondary administrator evidence;
+- production rollback runbook;
+- operational consent/CMP policy and advertising-destination consent gates;
+- ongoing GA4 browser/server parity and destination-isolation monitoring;
+- controlled Google duplicate-counting QA before unpausing its server tag;
+- Meta Events Manager read-back for accepted production browser/server pairs;
+- controlled Form `4` conversion continuity proof;
+- Looker test-source and dashboard-owner QA for the additive certified report;
+- separate Franchise Canada and Franchise USA container/endpoint builds.
 
 ## WordPress Tracking Plugin Inventory
 
@@ -297,7 +375,8 @@ The current read-only inventory is maintained in
 
 Key components:
 
-- CEFA Conversion Tracking `0.6.3` on all three properties;
+- CEFA Conversion Tracking `0.6.4` on Parent and `0.6.3` on both franchise
+  properties;
 - CEFA School Manager `1.0.22` on parent;
 - Gravity Forms `2.10.5` on all three properties;
 - CEFA Franchise MCP Control on both franchise properties;
@@ -337,8 +416,10 @@ Strict copy rule:
 | Public/private source control | CEFA private cloud runtime repository does not yet exist | `Blocked operational risk` |
 | GreenRope identity | Two exact opportunity fields and path confirmation | `Blocked external` |
 | Parent offline activation | Controlled identity and eligibility gates | `Active guarded` |
-| Stape | Access, containers, domains, shadow QA and rollback | `Approved, pending build` |
-| BI Supabase | Parent outcome grain, identifiers, history, lineage, freshness and interface contract | `Reported internally; verification pending` |
+| Stape | Parent web version `15` and server version `13` have GA4, Meta CAPI and Google Ads live with shared Form 4 identity; destination diagnostics and recovery ownership continue | `Active guarded` |
+| Parent certified reporting | Total/school truth is usable, but paid allocation is blocked by the organic/referral-as-paid defect until contract v2, backfill and freshness gates pass | `Active guarded` |
+| Predictive and MMM | Existing forecasts, creative labels and readiness views are heuristic candidates; no registered BigQuery model exists and zero weeks are Meridian-ready | `Pending trained-model evidence` |
+| BI Supabase | Restricted zero-row BigQuery outcome inbox and v1 field contract exist; BI source grain, identifiers, history, lineage, freshness and source mappings remain unverified | `Interface ready; source verification pending` |
 | Shared metric dictionary | Inquiry, tour, enrollment, attribution and school definitions are not jointly certified | `Partial` |
 | Dataform | Production Git, runtime identity, releases and transform parity | `Active guarded` |
 | Monitoring | Billing export, alerts, dead letters and complete runbooks | `Partial` |
@@ -362,7 +443,8 @@ current conversion continuity throughout both tracks.
 2. Resolve per-record eligibility and activate eligible secondary CRM outcomes
    after baseline, deduplication, diagnostics, and kill-switch gates pass.
 3. Inspect BI Supabase read-only and agree the shared metric dictionary.
-4. Approve the versioned Parent outcome contract and proof-of-concept record.
+4. Map and approve the versioned Parent outcome contract and proof-of-concept
+   record against the empty restricted BigQuery inbox.
 5. Reconcile before any one-sender source-authority switch.
 
 Track A does not wait for Stape.
@@ -370,9 +452,9 @@ Track A does not wait for Stape.
 ### Track B: Website measurement
 
 1. Verify Stape ownership, entitlement, domains and recovery access.
-2. Build Parent Stape shadow routing with consent-state plumbing.
-3. Promote GA4, Google, and Meta routes only after parity and exact
-   deduplication.
+2. Maintain Parent GA4 and Meta routing, observe legitimate Meta deduplication,
+   and complete the controlled Google duplicate-counting gate.
+3. Promote the Google server route only after exact once-only proof.
 4. Extend Stape to Franchise Canada and USA one property at a time.
 
 Track B does not inherit production authorization from Track A.

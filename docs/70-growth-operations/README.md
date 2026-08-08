@@ -1,6 +1,6 @@
 # Growth Operations
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Status:** Active governed workstream
 
 ## Purpose
@@ -16,8 +16,9 @@ clarity; it does not replace the narrower technical or platform owners.
 3. [Gap, risk and scenario register](./gap-risk-and-scenario-register.md)
 4. [Measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
 5. [Program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
-6. [Marketing and BI alignment independent-review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md)
-7. [Marketing and BI alignment final decision and email](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md)
+6. [Parent omnichannel measurement and intelligence roadmap](../00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
+7. [Marketing and BI alignment independent-review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md)
+8. [Marketing and BI alignment final decision and email](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md)
 
 ## This Workstream Owns
 
@@ -60,6 +61,12 @@ Those remain with the narrow owner and require the approvals defined there.
 - Creative assets, partner offers, organic social, agency access, experiments
   and broader brand/content approvals do not yet have complete central
   registers.
+- Parent paid-source contract v1 currently overstates paid allocation; totals
+  and selected-school truth remain usable while contract v2 is built and
+  backfilled.
+- Current prediction-labelled warehouse surfaces are heuristic candidates;
+  model registration, training, backtesting and promotion evidence are still
+  required.
 
 ## New Document Rule
 

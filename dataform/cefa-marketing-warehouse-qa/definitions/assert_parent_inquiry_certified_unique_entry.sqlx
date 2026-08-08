@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["parent", "certified_reporting", "uniqueness"]
+}
+
+SELECT entry_id
+FROM `marketing-api-488017.mart_marketing.vw_parent_inquiry_certified_event`
+GROUP BY entry_id
+HAVING COUNT(*) > 1

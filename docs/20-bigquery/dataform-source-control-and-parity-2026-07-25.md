@@ -1,6 +1,6 @@
 # Dataform Source Control And Parity
 
-**Verified:** 2026-07-25  
+**Verified:** 2026-07-25; expanded and reverified 2026-08-04
 **Project:** `marketing-api-488017`  
 **Repository:** `cefa-marketing-warehouse-qa` in `us-central1`
 
@@ -17,10 +17,13 @@
 - Added the Dataform project under
   `dataform/cefa-marketing-warehouse-qa/`.
 - Created non-production workspace `codex-foundation-20260725`.
-- Mirrored 17 Git files into the workspace.
-- Compiled with Dataform Core `3.0.0`:
-  - compilation result `e6f8d4cd-0db5-426c-a747-c4bc4180efca`;
-  - 15 assertion actions;
+- Mirrored and committed the current 20-file Git QA package in workspace
+  `codex-foundation-20260725`.
+- Added three certified Parent inquiry assertions for entry uniqueness, school
+  completeness and event-to-daily reconciliation.
+- Compiled the expanded workspace with Dataform Core `3.0.0`:
+  - compilation result `e5eda148-31bf-40bc-b90d-b5eec544ecf6`;
+  - 18 assertion actions;
   - zero compilation errors.
 - Ran two manual tagged proof invocations:
   - `foundation_qa`:
@@ -28,8 +31,11 @@
   - `existing_qa`:
     `1785040068-d9f75a61-b8f7-4b3a-b57a-18eac21521e2`.
 - Both invocations succeeded.
-- BigQuery read-back confirms 15 assertion views and zero failures for the
-  three new capacity assertions.
+- Ran the expanded `certified_reporting` tag successfully.
+- Ran the complete cloud package successfully: `18/18` actions passed in
+  workflow invocation
+  `1785877278-a9d46eb5-0b06-4a49-bce6-1525ad47791b`.
+- Cloud workspace read-back reports zero uncommitted files.
 
 ## Safety
 
@@ -46,7 +52,7 @@
 2. Confirm the dedicated Dataform runtime service account and least-privilege
    BigQuery access.
 3. Create development, staging, and production release contracts.
-4. Add freshness, lead/spend reconciliation, lifecycle deduplication, and
-   prohibited-PII assertions incrementally.
+4. Add deeper source freshness, platform attribution-window, lifecycle
+   deduplication, and prohibited-PII assertions incrementally.
 5. Run Dataform in parallel with the Cloud Run production pipeline.
 6. Promote only after output parity and rollback evidence pass.

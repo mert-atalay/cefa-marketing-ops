@@ -12,16 +12,26 @@ function assert(condition, message) {
 const sourcePath = 'assets/js/cefa-conversion-tracking.js';
 const source = fs.readFileSync(sourcePath, 'utf8').replace(
 	/\}\)\(\);\s*$/,
-	'window.__cefaTests = { referrerIsOwnSite: referrerIsOwnSite, buildAdvertisingTouchFromUrl: buildAdvertisingTouchFromUrl, captureSignedAttribution: captureSignedAttribution, readAttributionFormToken: readAttributionFormToken, storeAttributionFormToken: storeAttributionFormToken, syncAttributionFormToken: syncAttributionFormToken };})();'
+	'window.__cefaTests = { referrerIsOwnSite: referrerIsOwnSite, buildAdvertisingTouchFromUrl: buildAdvertisingTouchFromUrl, captureSignedAttribution: captureSignedAttribution, readAttributionFormToken: readAttributionFormToken, storeAttributionFormToken: storeAttributionFormToken, syncAttributionFormToken: syncAttributionFormToken, ensureEventId: ensureEventId, markConsumed: markConsumed };})();'
 );
 const localValues = {};
 const sessionValues = {};
 const fetchCalls = [];
 const documentEvents = [];
 const captureFields = [];
+const eventIdField = { value: '' };
+let uuidCounter = 0;
 const form = {
 	querySelector(selector) {
-		return selector === 'input[name="cefa_capture_token"]' ? captureFields[0] || null : null;
+		if (selector === 'input[name="cefa_capture_token"]') {
+			return captureFields[0] || null;
+		}
+
+		if (selector.indexOf('32_4') !== -1 || selector.indexOf('32.4') !== -1) {
+			return eventIdField;
+		}
+
+		return null;
 	},
 	appendChild(field) {
 		captureFields.push(field);
@@ -71,7 +81,8 @@ const context = {
 		},
 		crypto: {
 			randomUUID() {
-				return 'test-uuid';
+				uuidCounter += 1;
+				return 'test-uuid-' + uuidCounter;
 			}
 		},
 		fetch(url, options) {
@@ -120,6 +131,14 @@ assert(documentEvents.indexOf('gform_post_render') === -1, 'Attribution-only mod
 assert(tests.referrerIsOwnSite('www.cefa.ca'), 'Parent www host was not recognized as internal.');
 assert(tests.referrerIsOwnSite('franchise.cefa.ca'), 'Approved CEFA cross-property host was not recognized as internal.');
 assert(!tests.referrerIsOwnSite('notcefa.ca'), 'Substring-like external host was incorrectly recognized as internal.');
+
+const firstEventId = tests.ensureEventId(form);
+const retryEventId = tests.ensureEventId(form);
+tests.markConsumed(firstEventId);
+const secondEventId = tests.ensureEventId(form);
+assert(firstEventId === 'test-uuid-1', 'The first browser submission attempt ID was not created.');
+assert(retryEventId === firstEventId, 'A validation retry changed the browser submission attempt ID.');
+assert(secondEventId === 'test-uuid-2', 'A consumed browser submission attempt ID was reused.');
 
 const internalTouch = tests.buildAdvertisingTouchFromUrl();
 assert(internalTouch.source === 'direct', 'Internal navigation became a referral source.');

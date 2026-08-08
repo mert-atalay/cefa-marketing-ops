@@ -8,6 +8,7 @@ marketing intelligence, CRM outcome activation, email/lifecycle engagement,
 and approved audience use
 **Strategic anchor:** [CEFA BigQuery Marketing Intelligence Blueprint](./2026-06-12-bq-marketing-intelligence-blueprint.md)
 **Program control:** [CEFA Measurement And Activation Program Register](../../00-governance/measurement-and-activation-program-register-2026-07-23.md)
+**Current Parent execution:** [Parent Omnichannel Measurement And Intelligence Roadmap](../../00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
 
 ## 1. Executive Decision
 
@@ -41,6 +42,13 @@ GreenRope/Supabase Parent outcomes and offline activation in Track A, and
 Stape website measurement in Track B. Eligible guarded GreenRope CRM outcomes
 do not wait for Stape or a Supabase source switch. See the
 [final marketing/BI alignment decision](../../70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
+
+**Reusable-contract alignment, 2026-08-06:** The CEFA data platform will add
+versioned truth-lens, conversation, capacity, action-to-outcome, model, and
+portable-interface contracts. This improves CEFA's own intelligence and makes
+the architecture reusable, but does not authorize CEFA data sharing or make
+this warehouse an external product runtime. See the
+[reusable-contract extension](../../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
 
 ## 2. Business Result
 
@@ -81,15 +89,18 @@ The read-only inventory on 2026-07-25 found:
 | Cloud Run | 11 jobs and 3 services visible |
 | Cloud Scheduler | 9 schedules in `us-central1`; 5 enabled and 4 paused after the GreenRope identity binder containment |
 | Native transfers | Google Ads and Meta transfers plus three BigQuery scheduled-query backstops |
-| Dataform | API enabled; 15 assertion definitions are in Git; a non-production workspace compiles 15 actions with zero errors; both existing and foundation tagged proof runs succeeded; no release/workflow schedule exists |
+| Dataform | API enabled; Git and the committed cloud workspace contain the same 18 assertions; cloud compilation has zero errors and the full workflow passed `18/18`; no production release/workflow schedule exists |
 | Capacity board | Budget registry plus query, storage, and Stape planning-proxy views are live in `cefa_governance` and `cefa_ops` |
 | Current monitor | Overall `PASS`; school `pass`; franchise `partial`; lifecycle `pending`; predictive `promoted_partial`; zero issues and four warnings |
 | Parent event foundation | Form 4 identity and canonical attribution exist; website and KinderTales paths remain active |
 | Parent CRM activation | Restricted ledger, capture, binder, poller, dispatcher, diagnostics, Google actions, and Meta test events exist; production sending remains disabled |
-| BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable; schema, grain, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
+| BI Supabase | Reported to consolidate KinderTales/GreenRope Parent business data for Power BI/Lovable. A restricted zero-row BigQuery outcome inbox and v1 interface contract are deployed; the authorized connector cannot see the BI operational project, so source schema, grain, mappings, identifiers, history, timestamps, freshness and lineage remain pending read-only verification |
 | Email/lifecycle engagement | Mailchimp and GreenRope have relevant API capabilities, but their contact-level email and journey evidence is not yet part of the governed Parent journey contract |
 | Franchise attribution | CEFA attribution remains in shadow beside GAConnector; no cutover approved |
-| Stape | Business plan approved and available; production server containers and first-party routing are not yet recorded |
+| Stape | Updated through 2026-08-05: Parent Stape Business runs in `CA East (Canada)` behind `edge.cefa.ca`. Parent server GTM `GTM-T7C46VM7` version `13` and web GTM `GTM-NZ6N7WNC` version `15` are production live. GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit share the Form 4 event identity. A controlled saved Form 4 test passed transport and identity read-back; the overlapping legacy Parent Meta Gateway route was excluded. Hourly incoming `5xx`, outgoing `4xx` and outgoing `5xx` alerts plus one recipient are enabled |
+
+The no-secret machine-readable Parent shadow checkpoint is
+[stape-parent-shadow-config.json](../../../data/reference/stape-parent-shadow-config.json).
 
 The following current-state concerns shape this blueprint:
 
@@ -113,8 +124,10 @@ The following current-state concerns shape this blueprint:
   audit identity;
 - the current audit identity correctly cannot list project secrets or service
   accounts, so an administrator-owned access review is still required;
-- there is no recorded Stape production container, first-party endpoint, or
-  cross-platform server-delivery baseline;
+- the Parent Stape first-party GA4, Meta CAPI and Google Ads routes are active;
+  controlled Form `4` transport and shared identity passed, while ongoing
+  destination diagnostics, recovery ownership and isolated franchise builds
+  remain open;
 - GreenRope exact opportunity identity remains the principal dependency for
   parent CRM offline activation.
 
@@ -282,6 +295,51 @@ If Stape commercial entitlement is per container, CEFA should add the required
 containers rather than mix Parent, Franchise Canada, and Franchise USA
 destinations in one high-risk routing container.
 
+### Stape control planes
+
+Stape hosting, Stape account automation, and Google Tag Manager configuration
+are separate control planes. They must not be treated as interchangeable:
+
+| Control plane | Approved role | Source-of-truth rule |
+|---|---|---|
+| Stape direct API | Container, subscription, domain, power-up, usage, analytics, monitoring-rule, and delivery-health inventory and approved automation | Canonical machine interface for CEFA operational inventory and repeatable Stape administration |
+| Stape MCP | On-demand natural-language access to a useful subset of Stape account and container operations | Operator convenience only; disabled by default and never the configuration source of truth |
+| Google Tag Manager MCP or GTM API | Server-container workspaces, clients, tags, triggers, variables, templates, versions, environments, and permissions | Canonical automation interface for the GTM configuration running inside Stape |
+| Sanitized Git manifests and exports | Reviewed desired state, test evidence, version references, and rollback instructions | Durable human- and machine-readable change record; never contains credentials |
+
+The direct Stape API is broader than the current Stape MCP surface. Use the
+API for repeatable inventory, monitoring, analytics, domain health, and
+approved configuration workflows. Use Stape MCP only for supervised
+operations where its narrower tool surface is sufficient. The MCP must not
+silently create, delete, transfer, resize, cancel, reactivate, or purchase a
+container or subscription.
+
+Stape API keys are full-account secrets unless Stape documents and CEFA
+verifies narrower scopes. Store production automation credentials in Secret
+Manager, never in GTM, Git, BigQuery, shell history, chat, or MCP configuration
+files. Prefer separate named keys for durable automation and time-bounded
+operator use when the Stape account supports multiple keys. Rotate and revoke
+them through the access runbook.
+
+All API, Stape MCP, and GTM MCP writes inherit the same preview, approval,
+read-back, evidence, and rollback requirements as manual changes. An API or
+MCP capability is not standing permission to modify a live container.
+
+Create restricted operational inventories from the Stape API:
+
+- `stape_container_inventory`;
+- `stape_domain_health`;
+- `stape_usage_daily`;
+- `stape_monitoring_rule_inventory`;
+- `stape_delivery_health_daily`.
+
+These tables contain configuration, aggregate health, and bounded diagnostics,
+not raw request payloads or user identifiers. Stape Business provides 10-day
+logs but not automatic log export to Google Cloud Storage. API polling can
+preserve governed aggregate health and selected non-PII diagnostics. If
+durable full log export becomes a hard requirement, evaluate an Enterprise
+upgrade for that isolated container rather than implying Business provides it.
+
 ### First-party endpoint decision
 
 Preferred order:
@@ -322,17 +380,27 @@ advertise their tracking purpose.
 ### Stape rollout order
 
 1. Export current web GTM baselines and destination inventory.
-2. Create the Parent server container and non-production endpoint.
-3. Route page and diagnostic events in preview/shadow.
-4. Add GA4 server routing and reconcile sessions/events.
-5. Add Parent Google Ads website conversion routing.
-6. Add Parent Meta CAPI and prove Pixel/CAPI deduplication.
-7. Run a controlled Form 4 inquiry and verify Gravity Forms, KinderTales,
+2. Create the Parent Google Tag Manager server container and record its
+   container configuration.
+3. Create the CEFA-owned Parent Stape container, purchase Business for that
+   container, and record owner, billing, recovery, region, and entitlement.
+4. Create and secure the Stape API automation key, then read back the
+   container, subscription, region, usage, domains, power-ups, and monitoring
+   state before any production routing.
+5. Create the Parent non-production endpoint after DNS/CDN conflict review.
+6. Route only diagnostic events in preview/shadow until browser/server parity,
+   consent-state, hostname/event and rollback controls pass. The first
+   browser-originated health-only event passed on 2026-07-29; page-event
+   routing remains pending.
+7. Add GA4 server routing and reconcile sessions/events.
+8. Add Parent Google Ads website conversion routing.
+9. Add Parent Meta CAPI and prove Pixel/CAPI deduplication.
+10. Run a controlled Form 4 inquiry and verify Gravity Forms, KinderTales,
    GA4, Google, Meta, Stape, collector, and BigQuery.
-8. Promote Parent while retaining rollback-ready browser tags.
-9. Repeat independently for Franchise Canada.
-10. Repeat independently for Franchise USA.
-11. Consider Custom Loader, Cookie Keeper, Enricher, or other Business
+11. Promote Parent while retaining rollback-ready browser tags.
+12. Repeat independently for Franchise Canada.
+13. Repeat independently for Franchise USA.
+14. Consider Custom Loader, Cookie Keeper, Enricher, or other Business
     power-ups only after the baseline is stable.
 
 ### Stape acceptance
@@ -350,6 +418,11 @@ advertise their tracking purpose.
 - no prohibited PII appears in logs or exports;
 - all three containers have owner access, version export, monitoring, and
   rollback.
+- account 2FA, durable API-key rotation, outgoing logs, an alert recipient,
+  and at least one delivery-failure rule are verified before production;
+- the direct API inventory agrees with the Stape UI and approved Git manifest;
+- Stape and GTM MCPs are disabled when not in supervised use;
+- no credential appears in source, logs, BigQuery, chat, or container exports.
 
 ## 7. Google Cloud Service Decisions
 
@@ -771,13 +844,21 @@ Saved Form 4 identity
   -> prospective stage observation/webhook
   -> restricted BigQuery lifecycle ledger and durable outbox
   -> Cloud Tasks delivery queue
-  -> Google and Meta dispatch
+  -> Google Data Manager API and Meta Conversions API dispatch
   -> diagnostics and accepted-ID lock
 ```
 
 Use Cloud Tasks for Google/Meta offline conversion calls because each task has
 one explicit destination, requires controlled retries, and must be idempotent.
 Use Pub/Sub only when one validated event needs multiple independent consumers.
+
+For new Google offline CRM events, prefer the Google Data Manager API and
+require `validateOnly`, stable transaction identity, request IDs, platform age
+checks, delivery diagnostics, and accepted-ID reconciliation before
+production. Continue to use the Google Ads API for conversion-action settings,
+goal/campaign read-back, supported adjustments, and guarded campaign
+operations. Website conversions continue through their approved sGTM routes;
+the offline dispatcher must not send another website inquiry event.
 
 ## 11. Visibility Products
 
@@ -1068,15 +1149,29 @@ service identity, inputs, outputs, monitor, and rollback.
 **Outcome:** Parent website measurement uses a first-party server route with
 no duplicate conversions or KinderTales regression.
 
-- create Parent server GTM container;
-- implement first-party endpoint;
-- establish event allowlist and shared identity envelope;
+- create Parent server GTM container; completed 2026-07-28;
+- capture and freeze the live Parent web-GTM baseline; completed 2026-07-28
+  with zero unpublished changes or conflicts;
+- create an isolated unpublished server build workspace; completed 2026-07-28
+  as workspace `3`;
+- implement first-party endpoint; completed 2026-07-29 with DNS-only
+  Cloudflare CNAMEs, Stape `Ready / Ok`, valid TLS and HTTP `200` health;
+- establish the first exact synthetic event allowlist path; completed
+  2026-07-29 and promoted within guarded server version `2` on 2026-08-04;
+- run the temporary preview-header proof for that synthetic path; completed;
+- establish the production event allowlist and shared identity envelope;
+  Parent GA4 event and hostname guards completed 2026-08-04;
 - carry consent/eligibility state and keep consent-dependent matching and
   audience features disabled;
-- shadow GA4 events;
-- add Google website conversion route;
-- add Meta CAPI route;
-- validate browser/server deduplication;
+- route Parent GA4 through the first-party endpoint; completed 2026-08-04 with
+  web version `12`, then hardened in web version `15`, with live browser proof
+  and Stape GA4 HTTP `204` read-back;
+- add Google website conversion route; browser Transaction ID is live, server
+  copy is staged and paused pending once-only proof;
+- add Meta CAPI route; completed in server version `9`, with three inspected
+  requests accepted by Meta;
+- validate browser/server deduplication; shared ID contract passes, but Meta
+  Events Manager pair read-back and controlled Google proof remain open;
 - send a no-PII delivery audit to Google Cloud;
 - complete controlled Form 4 end-to-end QA;
 - promote Parent only after acceptance.
@@ -1211,7 +1306,17 @@ quality, capacity, creative, local visibility, and budget allocation.
   enrollment truth and an approved economic model, never from GreenRope
   `crm_closed_won` alone;
 - Gemini/Vertex analysis only on approved safe contracts;
-- human-approved recommendation queue.
+- structured conversation intelligence for chatbot, email, and later
+  approved channels, with raw text restricted and provenance/confidence in
+  safe marts;
+- three separate measurement truth lenses for business outcomes, internal
+  attribution, and platform observations;
+- product-grade feature, label, model, coverage, calibration, drift, expiry,
+  and allowed-use metadata;
+- human-approved recommendation queue extended through confirmed execution,
+  evaluation, observed outcome, and postmortem;
+- portable contract proof in a separate empty environment using synthetic
+  fixtures only.
 
 **Exit:** Models beat documented baselines, expose confidence and expiry, and
 remain advisory until CEFA explicitly promotes an action.
@@ -1232,13 +1337,19 @@ remain advisory until CEFA explicitly promotes an action.
 | Parent identity and email | Multi-child, repeat-inquiry, multi-school, and email journey visibility | Deterministic entity links, provider reconciliation, and no raw PII |
 | Audience activation | Better targeting with suppression and quality seeds | Activation-safe contract and delivery audit |
 | Predictive intelligence | Better recommendations, not automatic guesses | Backtest, confidence, drift, owner approval |
+| Measurement truth lenses | Business, CEFA attribution and platform reporting stay understandable | Separate facts, coverage fields and no cross-platform double counting |
+| Conversation intelligence | Questions and objections improve marketing and content decisions | Provider reconciliation, provenance, confidence and restricted raw text |
+| Capacity guardrail | Demand recommendations respect real operating context | Source-confirmed school/program snapshots and unknown-state assertions |
+| Action-to-outcome learning | CEFA learns which approved changes worked | Approval, execution, evaluation window, outcome and postmortem trace |
+| Reusable contracts | Architecture is portable without exporting CEFA's data plane | Versioned schema plus synthetic deployment in a separate empty environment |
 | Operations | Faster detection and recovery | SLO dashboard, alerts, runbook, rollback test |
 
 ## 18. Immediate Inputs And Approvals
 
 The next implementation sprint requires:
 
-1. CEFA Stape Business administrative access and container entitlement.
+1. CEFA-owned Stape account, completed Parent Business purchase,
+   administrative/recovery access, and container entitlement.
 2. GTM administrative access for the three existing web properties and new
    server containers.
 3. DNS/CDN owner for same-origin or first-party endpoint implementation.
@@ -1321,6 +1432,18 @@ The total program is complete when:
     join through restricted identity, and expose no raw contact or child PII.
 17. The active Form 4 Mailchimp feed has a documented purpose and minimized
     field contract before it is used for omnichannel journey activation.
+18. Certified reporting keeps deduplicated business outcomes, CEFA
+    attribution, and platform observations separate and exposes their
+    coverage and limitations.
+19. Structured conversation and capacity facts pass their source,
+    provenance, freshness, restricted-data, and unknown-state assertions.
+20. Every recommendation used as learning evidence traces through approval,
+    execution, evaluation, observed outcome, and postmortem.
+21. Feature sets and models expose version, label definition, source coverage,
+    baseline, calibration, drift, confidence, expiry, and allowed use.
+22. Reusable schemas pass in a separate empty environment using synthetic
+    fixtures, with no CEFA data, credentials, destinations, or private runtime
+    crossing the boundary.
 
 ## 21. Explicit Non-Goals
 
@@ -1340,7 +1463,11 @@ The total program is complete when:
 - making CRM-stage conversions primary immediately;
 - enabling every Google Cloud API without a defined workload;
 - deleting current datasets or compatibility objects during foundation work;
-- autonomous campaign, budget, bid, CRM, public-content, or audience changes.
+- autonomous campaign, budget, bid, CRM, public-content, or audience changes;
+- using the CEFA warehouse or row-level CEFA data as an external product data
+  plane, benchmark pool, demo dataset, or training set by default;
+- deploying a future external product into CEFA's cloud project, service
+  identities, secrets, datasets, Stape/GTM destinations, or private runtime.
 
 ## 22. Primary References
 
@@ -1360,3 +1487,8 @@ The total program is complete when:
 - [Stape multi-domain server GTM](https://stape.io/blog/server-side-gtm-with-multiple-domains)
 - [Stape custom-domain options](https://stape.io/helpdesk/documentation/add-custom-domain-in-stape)
 - [Stape same-origin and Cookie Keeper guidance](https://stape.io/news/a-new-way-to-set-up-a-custom-domain-in-server-gtm)
+- [Stape API documentation](https://stape.io/helpdesk/documentation/stape-api)
+- [Stape MCP Server](https://stape.io/solutions/stape-mcp-server)
+- [Stape Google Tag Manager MCP](https://stape.io/blog/mcp-server-for-google-tag-manager)
+- [Stape logs and retention](https://stape.io/helpdesk/documentation/logs-feature)
+- [Stape monitoring](https://stape.io/helpdesk/documentation/monitoring-feature)

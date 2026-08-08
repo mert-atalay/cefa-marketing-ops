@@ -46,6 +46,46 @@ OPTIONS (
   description = 'Restricted Form 4 identity bridge. Contains governed IDs and HMAC fingerprints only; no raw contact or child data.'
 );
 
+-- Versioned, fail-closed landing contract for BI Supabase business outcomes.
+-- The table is intentionally empty until BI verifies source grain, mappings,
+-- lineage, original timestamps, corrections, and incremental replay behavior.
+-- All person, household, dependent, inquiry, opportunity, and enrollment keys
+-- are HMACed before this boundary. Raw names, contact details, child details,
+-- addresses, notes, and source payloads are prohibited.
+CREATE TABLE IF NOT EXISTS `marketing-api-488017.cefa_parent_activation_restricted.parent_business_outcome_inbox` (
+  contract_version STRING NOT NULL,
+  source_system STRING NOT NULL,
+  source_record_key_hmac STRING NOT NULL,
+  parent_key_hmac STRING,
+  household_key_hmac STRING,
+  dependent_key_hmac STRING,
+  inquiry_key_hmac STRING,
+  opportunity_key_hmac STRING,
+  enrollment_key_hmac STRING,
+  cefa_event_id STRING,
+  cefa_form_entry_id STRING,
+  school_uuid STRING NOT NULL,
+  outcome_type STRING NOT NULL,
+  outcome_status STRING NOT NULL,
+  outcome_occurred_at TIMESTAMP NOT NULL,
+  source_updated_at TIMESTAMP NOT NULL,
+  source_observed_at TIMESTAMP NOT NULL,
+  timestamp_quality STRING NOT NULL,
+  is_correction BOOL NOT NULL,
+  supersedes_record_key_hmac STRING,
+  lineage_source_system STRING NOT NULL,
+  lineage_record_key_hmac STRING,
+  ingest_run_id STRING NOT NULL,
+  ingest_status STRING NOT NULL,
+  quarantine_reason STRING,
+  loaded_at TIMESTAMP NOT NULL
+)
+PARTITION BY DATE(outcome_occurred_at)
+CLUSTER BY outcome_type, school_uuid, ingest_status, source_record_key_hmac
+OPTIONS (
+  description = 'Restricted empty landing contract for versioned BI Supabase Parent outcomes. No raw PII or source payloads.'
+);
+
 CREATE TABLE IF NOT EXISTS `marketing-api-488017.cefa_parent_activation_restricted.parent_crm_lifecycle_state_snapshot` (
   snapshot_at TIMESTAMP NOT NULL,
   snapshot_date DATE NOT NULL,

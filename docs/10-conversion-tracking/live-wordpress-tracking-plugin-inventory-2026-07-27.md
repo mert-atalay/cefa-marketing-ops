@@ -1,6 +1,7 @@
 # Live WordPress Tracking Plugin Inventory
 
-**Checked:** 2026-07-27
+**Checked:** 2026-07-27; measurement-critical plugin versions rechecked
+2026-08-04
 **Method:** Read-only WP-CLI over WP Engine SSH
 **Status:** Verified inventory; responsibilities remain governed by their
 owning contracts
@@ -18,7 +19,7 @@ changes, snippet edits, or feed changes.
 
 | Component | Parent | Franchise Canada | Franchise USA | Responsibility |
 |---|---:|---:|---:|---|
-| CEFA Conversion Tracking | `0.6.3` | `0.6.3` | `0.6.3` | Neutral events, identity, attribution, duplicate controls and guarded shadow capabilities |
+| CEFA Conversion Tracking | `0.6.4` | `0.6.3` | `0.6.3` | Neutral events, identity, attribution, duplicate controls and guarded shadow capabilities |
 | CEFA School Manager | `1.0.22` | Not active | Not active | Parent Form 4 school/program/day behavior and KinderTales delivery |
 | Gravity Forms | `2.10.5` | `2.10.5` | `2.10.5` | Saved form records |
 | CEFA Franchise MCP Control | Not active | `0.1.16` | `0.1.13` | Franchise Synuma delivery and operational control |
@@ -41,9 +42,11 @@ Both franchise properties were verified on:
 - payload v2 disabled;
 - collector disabled.
 
-Parent uses the same plugin version with its separately governed parent
-attribution/writeback configuration. Confirm the current parent constants
-before a release; do not copy franchise settings onto parent.
+Parent `0.6.4` uses its separately governed full-runtime parent
+attribution/writeback configuration. The narrow release refreshes a consumed
+browser event ID after a successful submission; it does not change the
+franchise shadow runtime. Do not copy franchise settings onto parent or the
+parent full-runtime profile onto either franchise property.
 
 ## Full Active Inventory
 
@@ -52,7 +55,7 @@ before a release; do not copy franchise settings onto parent.
 | Plugin | Version |
 |---|---:|
 | AltText AI | `1.10.35` |
-| CEFA Conversion Tracking | `0.6.3` |
+| CEFA Conversion Tracking | `0.6.4` |
 | CEFA MCP Abilities | `1.3.0` |
 | CEFA Markham Schema POC | `0.2.0` |
 | CEFA Owly Chatbot | `3.3.7` |

@@ -173,9 +173,10 @@ testing evidence.
   BigQuery storage, with ample approved budget and operational headroom.
 - Google Ads, Meta, Supermetrics, website, franchise, SEO, local, budget, and
   other marketing inputs are at different verified or partial stages.
-- Dataform has 15 assertion definitions that compile and passed manual proof
-  runs. Production Git, runtime identity, release, workflow, and parallel
-  promotion remain incomplete.
+- As of 2026-08-04, Dataform has 18 assertion definitions mirrored and
+  committed in the cloud workspace; compilation has zero errors and the full
+  cloud run passed `18/18`. Production Git, runtime identity, release,
+  workflow, and parallel promotion remain incomplete.
 - Cloud Run, Scheduler, Secret Manager, restricted datasets, and activation
   components exist. Monitoring, dead-letter handling, runbooks, and private
   source control remain incomplete.

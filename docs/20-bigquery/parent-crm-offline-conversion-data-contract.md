@@ -44,6 +44,33 @@ Aggregate monitoring may be materialized later in
 `cefa_form_entry_id`, when evaluated, must identify that same submission.
 Fuzzy identity matching is prohibited.
 
+## BI Supabase Outcome Interface
+
+The empty restricted table
+`parent_business_outcome_inbox` is the landing boundary for a future
+record-level BI Supabase feed. The machine-readable v1 field contract is
+[cefa-parent-supabase-bq-outcome-contract-v1.csv](../../data/reference/cefa-parent-supabase-bq-outcome-contract-v1.csv).
+
+The interface preserves distinct HMAC keys for parent, household, dependent,
+inquiry, opportunity and enrollment grain. This supports multiple children,
+repeat inquiries, multi-school journeys and corrections without copying raw
+names, email addresses, phone numbers, child attributes, addresses, notes or
+source payloads into BigQuery.
+
+The inbox is fail-closed:
+
+- it currently contains zero rows and has no dispatcher schedule;
+- `cefa_event_id` and `cefa_form_entry_id` remain required for website-to-CRM
+  activation eligibility even though the landing columns are nullable for
+  quarantine;
+- BI must map source grain, identifiers, lineage, original timestamps,
+  corrections and incremental replay before production ingestion;
+- `outcome_occurred_at` must remain distinct from source observation and
+  warehouse load time;
+- Supabase does not become a second platform sender;
+- no existing GreenRope baseline or historical current state can be uploaded as
+  a new conversion.
+
 ## Approved Stage Contract
 
 | Raw GreenRope outcome | Canonical stage | Activation |

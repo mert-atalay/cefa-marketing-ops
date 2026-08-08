@@ -1,6 +1,6 @@
 # CEFA Measurement And Activation Program Register
 
-**Register date:** 2026-07-27
+**Register date:** 2026-08-08
 **Owner:** CEFA marketing measurement
 **Status vocabulary:** `Verified`, `Active guarded`, `Approved`, `Pending`,
 `Blocked`, and `Reference only`
@@ -49,39 +49,49 @@ or production gate changes.
     BigQuery remains the marketing measurement, intelligence, and activation
     layer. The normal interface contains minimum record-level outcomes and
     certified summaries, not complete operational records or raw PII.
+11. Reusable contracts may leave CEFA only as legally approved schema and code
+    patterns. A future external product requires a separate private
+    repository, cloud project, identities, secrets, datasets, runtime,
+    destinations, billing boundary, and customer data plane. CEFA row-level
+    data and credentials are not product assets or default benchmarks.
 
 ## Executive Status
 
 | Workstream | State | Current reality | Next gate |
 |---|---|---|---|
-| Parent website attribution | `Verified` | CEFA Conversion Tracking `0.6.3` and the canonical Form `4` writeback improve fields `35-46`; School Manager and KinderTales remain unchanged | Continue production monitoring |
-| Parent website conversions | `Verified` | `school_inquiry_submit` continues to feed the existing GA4, Google Ads, and Meta inquiry destinations | Preserve once-only firing during sGTM work |
-| Franchise attribution replacement | `Active guarded` | CEFA attribution and ledger run in shadow beside GAConnector. Through 2026-07-26 canonical/ledger coverage was `14/16` eligible non-direct entries; Canada Form `1` was `5/7`, and USA Form `1` had Synuma IDs for only `4/7` entries | Resolve USA delivery alert, improve evidence/parity, approve field mapping and rollback |
+| Parent website attribution | `Verified` | CEFA Conversion Tracking `0.6.4` is live on Parent. It refreshes a consumed browser UUID after one successful submission while preserving validation retries; canonical Form `4` writeback, School Manager and KinderTales remain unchanged | Continue production monitoring |
+| Parent website conversions | `Active guarded` | `school_inquiry_submit` still feeds the existing browser destinations. GA4, Meta CAPI `Inquiry Submit` and Google Ads server `Inquiry Submit_ollo` now run through Parent sGTM with the same Form `4` event ID used by the browser tags. The 2026-08-05 controlled saved Form `4` test passed transport and identity read-back. The overlapping legacy Meta Gateway route was isolated from the parent dataset; post-change browser and direct-CAPI tests passed | Monitor the first full post-change day for Meta browser/server transport parity and review Google conversion diagnostics after platform lag |
+| Franchise attribution replacement | `Active guarded` | CEFA attribution and ledger remain in shadow beside GAConnector. The 2026-08-08 aggregate check found combined eligible canonical/ledger coverage of `40/44` (`90.9%`) and paid-core parity of `370/484` (`76.4%`). Synuma IDs were missing for `2/25` Canada and `3/21` USA entries, all `46` inspected notification notes showed success, and Canada Form `2` still had no paid sample | Resolve missing Synuma identity, increase paid parity by mismatch key, collect a Canada Form `2` paid sample, then approve or reject cutover |
 | Parent CRM offline conversions | `Active guarded` | Restricted BigQuery, capture, binder, poller, dispatcher, diagnostics, three Google actions, and three Meta test events are built; production sending is disabled; the capture schedule remains active while the no-value GreenRope binder retry loop is paused | Deploy binder backoff/group cap, then wait for GreenRope fields, controlled identity test, eligibility decision, and production activation |
 | Google CRM-stage destinations | `Verified` | Three secondary, non-biddable actions exist and all passed Data Manager `validateOnly=true` | First eligible prospective CRM outcome |
 | Meta CRM-stage destinations | `Active guarded` | All three custom server events passed Meta Test Events | First legitimate live event must enter Meta's registry before reporting custom conversions can be created |
-| BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`; quoted budgets and live capacity views are registered, and current volume is comfortably inside the approved envelope | Connect Cloud Billing export, productionize Dataform, reconciliation assertions, alerts, queues, lifecycle integrations, and runbooks |
-| Dataform | `Active guarded` | Git now contains 15 assertion definitions; non-production workspace compilation produced 15 actions with zero errors, and both `foundation_qa` and `existing_qa` tagged proof runs succeeded; Cloud Run remains the production orchestrator | Connect CEFA-controlled Git, define runtime identity and dev/staging/prod releases, then run parallel parity before promotion |
-| Stape Business sGTM | `Approved` | CEFA has the Business plan available as the managed server-side tagging layer; no production container or routing cutover is recorded yet | Verify CEFA administrative access, create the container/domain design, then build and shadow QA |
-| BI Supabase and marketing boundary | `Partial` | The BI team reports that its Python pipeline consolidates KinderTales/GreenRope Parent business data into Supabase for Power BI/Lovable; schema, grain, identity, history, timestamps, freshness and source lineage are not yet verified by marketing | Read-only meeting inspection, shared metric dictionary and one proof-of-concept outcome record |
+| BigQuery and Google Cloud foundation | `Active guarded` | CEFA may use the full relevant Google Cloud and BigQuery capability set in `marketing-api-488017`. The 2026-08-08 inventory found `32` datasets, five Cloud Run services, `14` jobs, and `12` Scheduler entries; current scale remains inside the approved envelope | Correct Parent paid classification, connect Cloud Billing export, productionize Dataform, complete alerts/replay/runbooks, and consolidate private runtime source |
+| Dataform | `Active guarded` | Git and the committed cloud workspace contain the same 18 assertions. Cloud compilation produced zero errors and the full package passed `18/18`; Cloud Run remains the production orchestrator and no Dataform production schedule was created | Connect governed Git/runtime releases, then establish dev/staging/prod workflows |
+| Stape Business sGTM | `Active guarded` | Parent Stape Business runs in `CA East (Canada)` behind healthy `edge.cefa.ca`. Web version `15` preserves shared identity within GA4's 25-parameter limit. Server version `13` keeps guarded GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit live. The exact-event canary passed and was removed. The parent dataset is excluded from the overlapping legacy Meta Gateway, while Franchise USA remains connected there. Hourly incoming `5xx`, outgoing `4xx` and outgoing `5xx` alerts plus one recipient are enabled | Maintain destination parity, duplicate-ID and Google conversion diagnostics as operational monitoring |
+| Parent certified school/source reporting | `Active guarded` | A blocking classification incident means saved-entry totals and selected-school fields remain usable, but the paid-channel candidate is not promotable. In the August 1-7 BigQuery window, `242` rows were labelled Google paid even though `180` were explicitly `google / organic`; `39` were labelled Meta paid while `19` lacked a paid-social marker. BigQuery held `439` complete-through-August-7 rows while live Form 4 had `474` through August 8 | Implement paid-evidence contract v2, backfill, add complete-through/partial-day watermarks, reconcile Form 4 to serving totals, then repeat dashboard QA |
+| Predictive, creative and MMM intelligence | `Active guarded` | Candidate contracts exist for forecasts, pacing, capacity, creative themes/fatigue and MMM readiness. The live audit found zero registered BigQuery models across all `32` datasets; demand, theme and fatigue surfaces are `heuristic_v1`, and zero of `32` weeks are Meridian-ready | Preserve candidates as heuristic, repair source inputs, add exact business outcomes and capacity, establish baselines/backtests/model registry, then train and shadow-test before promotion |
+| BI Supabase and marketing boundary | `Partial` | A restricted zero-row `parent_business_outcome_inbox` and machine-readable v1 contract now define the minimum Parent outcome interface without raw PII. The authorized Supabase connector sees only two inactive non-BI projects; the BI operational project's schema, grain, identity, history, timestamps, freshness, lineage and source mappings remain unavailable | BI read-only inspection, source mapping, shared metric dictionary and one proof-of-concept outcome record |
 | Parent omnichannel identity and email | `Approved` | The blueprint now separates adult, household, child, inquiry, opportunity, and school identity and registers Mailchimp plus GreenRope email/journey evidence as a later read-only phase | Complete core identity first, then inventory provider APIs, mappings, timestamps, and totals |
-| Unified Cloud and Stape platform | `Approved` | Definitive implementation architecture, service responsibilities, business outputs, foundation plus seven delivery phases, and acceptance board are documented | Start the private-runtime, inventory, Stape-access, endpoint, and Dataform foundation sprint |
+| Unified Cloud and Stape platform | `Active guarded` | Parent first-party routing is built and live. The remaining shared-platform work is source correctness, Dataform productionization, private-runtime recovery, observability, business-outcome integration and governed analytics | Execute the [Parent omnichannel roadmap](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md); keep franchise sGTM isolated and later |
+| Reusable data-contract readiness | `Approved` | Existing identity, semantic, activation, predictive and agent-safe foundations will be extended with three measurement truth lenses, structured conversation facts, capacity guardrails, action-to-outcome learning, model eligibility and an external-export firewall | Version the contracts and assertions, then prove them with synthetic data in a separate empty environment; no CEFA data sharing or external runtime is authorized |
 | Public/private source control | `Blocked operational risk` | This GitHub repository is public while material private warehouse/runtime work remains local or deployed from historical artifacts | Create CEFA-controlled private runtime repository and migrate reproducible non-secret runtime without exposing credentials or PII |
-| Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `39` systems, `40` integration IDs, `27` open-gap IDs and `27` what-if scenarios | Keep all four surfaces synchronized with narrow implementation evidence |
+| Marketing operations context layer | `Verified` | Canonical context, system/integration register, gap/scenario register and machine-readable manifest now cover `39` systems, `40` integration IDs, `30` open-gap IDs and `30` what-if scenarios | Keep all surfaces synchronized with narrow implementation evidence |
 
 ## Immediate Waiting List
 
 | Dependency | Owner | Why it is required | What happens after it is complete |
 |---|---|---|---|
+| Parent paid-evidence contract v2 | CEFA data/measurement owner | Current warehouse logic overstates Google and Meta paid by treating organic/referral evidence as confirmed paid | Correct private loader and semantic SQL, backfill, pass assertions, then reconsider dashboard promotion |
+| Parent certified freshness contract | CEFA data/measurement owner | Daily batch rows and live current-day Form 4 totals are both valid but must not be presented as the same complete window | Publish `complete_through`, partial-day state and T+1 SLA; add optional labelled intraday view if needed |
 | GreenRope opportunity field `cefa_event_id` | GreenRope account owner/admin or vendor | Stores the exact Form `4` event identity on the opportunity | Binder write/read-back test |
 | GreenRope opportunity field `cefa_form_entry_id` | GreenRope account owner/admin or vendor | Confirms the matched Gravity Forms entry | Controlled end-to-end identity test |
 | KinderTales-to-GreenRope opportunity path | KinderTales/GreenRope vendor | CEFA knows WordPress creates the KinderTales inquiry but must confirm whether that request also creates the GreenRope opportunity | Map both exact IDs through the existing vendor path or approve the idempotent CEFA worker |
 | Controlled parent inquiry | CEFA measurement owner | Proves Gravity Forms, GreenRope, KinderTales, and existing conversions agree | Enable eligible prospective lifecycle processing |
 | Per-record platform eligibility decision | CEFA | Runtime currently fails closed when eligibility is unknown | Enable platform dispatch only for approved records |
 | Meta live custom-event registration | Meta, triggered by first legitimate eligible outcome | Test Events do not currently expose the event type to reporting custom-conversion creation | Create three reporting-only custom conversions |
-| Stape Business workspace and administrative access verification | CEFA/vendor | The Business subscription exists; the implementation still needs confirmed CEFA-owned workspace, container, billing and recovery access | Begin sGTM build in non-disruptive shadow mode |
-| DNS path for first-party tagging endpoints | CEFA website/DNS owner | Required for first-party server-side collection | Validate endpoint, cookies, routing, and rollback |
-| BI Supabase read-only schema and pipeline inspection | BI/digital transformation owner | Confirms Parent record grain, identifiers, history, timestamps, lineage, freshness, corrections and current pipeline behavior | Approve or revise the versioned Supabase-to-BigQuery outcome contract |
+| Stape recovery and secondary administrator evidence | CEFA | 2FA, API-key rotation, billing, auto-upgrade, analytics, outgoing logs, alert recipient and three monitoring rules are verified. Recovery-code custody and secondary administrator access are not visible through the API | Record CEFA-controlled recovery custody and backup administrator without exposing secrets |
+| Parent sGTM operational closeout | CEFA measurement owner | Parent server version `13` has GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit live behind strict event guards. One controlled Form `4` test proved a saved entry and shared identity; the legacy Parent Meta Gateway overlap was removed | Maintain Meta browser/server ratio, Google transaction-ID and destination diagnostics; repeat the pattern independently for franchise properties only when prioritized |
+| BI Supabase read-only schema and pipeline inspection | BI/digital transformation owner | The CEFA-authorized connector cannot see the operational BI project. Inspection must confirm Parent record grain, identifiers, history, timestamps, lineage, freshness, corrections and current pipeline behavior | Map and approve the deployed zero-row Supabase-to-BigQuery outcome contract |
 | Shared Parent metric dictionary | BI and marketing intelligence owners | Prevents Power BI and marketing reporting from defining inquiry, tour, enrollment, attribution and school ownership differently | Certify the minimum feed in both directions and name metric owners |
 | Franchise shadow evidence and Synuma review | CEFA measurement owner | GAConnector must not be replaced on sparse or delivery-uncertain evidence | Approve, extend, or reject franchise cutover |
 | CEFA private cloud runtime repository | CEFA GitHub/Cloud owner | Production Cloud Run, Dataform, infrastructure, Stape manifests, deployment and runbooks must not depend on untracked local files | Connect governed private source to build/release workflows |
@@ -97,7 +107,7 @@ renewals.
 | Item | Approved reference | Intended use | Registration status |
 |---|---:|---|---|
 | BigQuery + Google Cloud data and activation development | `$3,377` quoted line | Complete and harden CEFA's existing marketing data and intelligence foundation using the relevant Google Cloud capability set | Approved and available; not restricted to free tiers and not subject to a separate cost-approval gate |
-| Stape Business | `$83/month`, billed `$1,000/year`, up to `5M` requests in supplied plan image | Managed sGTM hosting, multi-domain capability, 10-day logs, monitoring, first-party routing and server-side destination delivery | Business plan available; CEFA administrative access verification and implementation pending |
+| Stape Business | `$83.33/month` equivalent, billed `$1,000/year`, up to `5M` requests/month | Managed sGTM hosting, up to 20 domains, 10-day logs, five monitoring rules, first-party routing and server-side destination delivery | Parent annual Business paid and API-verified; hosting runs in Canada; Parent GA4, Meta CAPI and Google Ads server conversion routing are live under strict guards |
 | Separate server-side GTM quoted line | `$1,370` quoted line | Implementation and/or managed service associated with Stape/sGTM | Commercial contents must be reconciled with the `$1,000/year` Stape license to prevent duplicate billing |
 
 The approved Stape Business features are capabilities, not automatic
@@ -109,9 +119,12 @@ when they serve an approved tracking requirement and pass QA.
 
 **Decision date:** 2026-07-24
 
-- CEFA has the Stape Business plan. Procurement of a Stape tier is no longer a
-  blocker; access verification, first-party domains, container configuration,
-  parity, deduplication, and rollback remain required.
+- CEFA has approved buying Stape Business for the Parent rollout. The Parent
+  server GTM and Stape hosting containers were created on 2026-07-28, and the
+  hosting container is running in `CA East (Canada)`. Annual Business payment
+  and entitlement were API-verified on 2026-07-28; no additional program
+  decision is required. First-party DNS, routing, parity, deduplication, and
+  rollback remain required before production use.
 - Google Cloud and BigQuery implementation is not constrained to free tiers,
   free quotas, or the smallest possible service footprint.
 - A new Google Cloud service, paid BigQuery feature, larger runtime, increased
@@ -182,6 +195,11 @@ All approved source facts
   -> BigQuery
   -> Dataform transformations and assertions
   -> certified reporting, intelligence, and activation contracts
+
+Versioned safe schemas and decision logic
+  -> synthetic portability test in a separate empty environment
+  -> later separately approved external runtime
+  -> never CEFA rows, credentials, destinations, or private runtime
 ```
 
 ## Stape Business Implementation Contract
@@ -214,26 +232,55 @@ All approved source facts
   and destination rules must be documented before enhanced matching is
   enabled.
 
+### Control and automation contract
+
+- Use the direct Stape API as the canonical machine interface for container,
+  subscription, domain, power-up, usage, analytics, monitoring-rule, and
+  delivery-health inventory and approved automation.
+- Use Stape MCP only as a supervised operator convenience. It is write-capable,
+  must stay disabled by default, and is not the source of truth.
+- Use the GTM MCP or GTM API for workspaces, clients, tags, triggers,
+  variables, templates, environments, versions, and permissions inside the
+  Google server container. The Stape API does not replace GTM configuration.
+- Treat Stape API keys as full-account credentials until narrower scopes are
+  documented and verified. Store durable keys in Secret Manager; never put
+  them in Git, BigQuery, chat, shell history, GTM, or an inline MCP config.
+- Record sanitized desired state and read-back evidence in the private runtime
+  repository. API/MCP writes require explicit scope, preview or validation
+  where supported, read-back, change evidence, and rollback.
+- Poll the API into restricted non-PII operational tables for container
+  inventory, domain health, usage, monitoring configuration, and aggregate
+  delivery health.
+- Business includes 10-day logs but not automatic export to Google Cloud
+  Storage. Do not design durable raw-log retention around a Business feature
+  that does not exist; consider Enterprise only if full log export becomes a
+  proven requirement.
+
 ### Rollout sequence
 
 1. Inventory current web GTM tags, destination IDs, event IDs, consent inputs,
    custom scripts, WordPress attribution, and existing CAPI behavior.
-2. Provision Stape Business under CEFA ownership and export a baseline
-   configuration.
-3. Configure first-party test endpoints and server containers without
+2. Create the Parent Google Tag Manager server container and record its
+   container configuration.
+3. Create the CEFA-owned Stape account/container, purchase Parent Business,
+   and verify billing, recovery, region, entitlement, and administrators.
+4. Create the Stape API key through the secure credential flow; read back and
+   register the container, subscription, usage, domains, power-ups, and
+   monitoring baseline.
+5. Configure first-party test endpoints and server containers without
    changing production destinations.
-4. Route page and non-conversion events in debug/shadow mode.
-5. Add GA4 server routing and reconcile client/server sessions and event
+6. Route page and non-conversion events in debug/shadow mode.
+7. Add GA4 server routing and reconcile client/server sessions and event
    parameters.
-6. Add Google Ads and Meta conversion routes using the existing neutral
+8. Add Google Ads and Meta conversion routes using the existing neutral
    events and exact deduplication IDs.
-7. Run controlled Form `4`, Franchise Canada Form `1`, and Franchise USA Form
+9. Run controlled Form `4`, Franchise Canada Form `1`, and Franchise USA Form
    `1` tests. Do not create business leads merely for infrastructure QA unless
    the test can be clearly excluded.
-8. Compare browser-only, server-received, destination-received, form, CRM, and
+10. Compare browser-only, server-received, destination-received, form, CRM, and
    warehouse totals.
-9. Promote one property at a time with a documented rollback.
-10. Remove a browser destination tag only if its server replacement is proven
+11. Promote one property at a time with a documented rollback.
+12. Remove a browser destination tag only if its server replacement is proven
     and deduplicated. Do not remove the browser event/data layer itself.
 
 ### Acceptance gates
@@ -328,18 +375,23 @@ other.
 | Lane | Work package | Current state | Exit condition |
 |---|---|---|---|
 | Continuous protection | Preserve current website, KinderTales, Synuma, CRM and dashboard paths | `Verified` | No regression during any rollout |
+| Immediate correctness | Replace Parent paid-source classification with evidence contract v2 and backfill | `Active guarded`; a blocking classification incident leaves total inquiry and school truth intact, while paid allocation is not promotable | Zero organic-as-paid rows, exact total parity and approved channel delta |
+| Immediate correctness | Add Parent complete-through, partial-day and source-to-serving reconciliation | `Pending` | Complete days reconcile 100%; current day is visibly partial; prior day certifies by 07:30 PT |
 | Track A - outcomes | Create GreenRope identity fields and run the controlled Parent read-back | `Blocked` on vendor fields | Exact Form `4`/GreenRope identity; KinderTales succeeds; existing conversions fire once |
 | Track A - outcomes | Activate eligible secondary GreenRope CRM outcomes | `Active guarded` | Eligibility, baseline, deduplication, platform validation, diagnostics and kill-switch gates pass |
-| Track A - Supabase | Inspect BI Supabase and approve the versioned Parent outcome contract | `Partial`; verification pending | Record grain, identifiers, history, timestamps, lineage, freshness and proof-of-concept record pass |
+| Track A - Supabase | Inspect BI Supabase and map the deployed versioned Parent outcome contract | `Partial`; empty restricted inbox and v1 contract ready, source verification pending | Record grain, identifiers, history, timestamps, lineage, freshness and proof-of-concept record pass |
 | Track A - Supabase | Reconcile and optionally promote Supabase as the consolidated outcome source | `Pending` | Direct/Supabase parity, one sender, accepted-ID reconciliation and rollback owner pass |
-| Track B - website | Verify Stape access, domains and routing architecture | `Approved` | CEFA ownership, recovery, entitlement, routing map and baseline export |
-| Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Pending` | Browser/server parity, destination isolation, consent-state gating and business-delivery continuity pass |
-| Track B - website | Promote Stape conversion routing one property at a time | `Pending` | Once-only delivery, platform deduplication and rollback test pass |
+| Track B - website | Buy Parent Business and verify Stape/API/GTM control planes, domains and routing architecture | `Active guarded`; Business, Canada hosting, first-party endpoint, 2FA, durable API key, analytics, outgoing logs, alert recipient and three enabled error rules are verified | Recovery custody and secondary administrator evidence |
+| Track B - website | Build Parent Stape in shadow, then repeat by franchise property | `Parent complete, franchise pending`; Parent web version `15` and server version `13` are live. GA4 routing, payload limit, endpoint isolation, Meta and Google transport, shared identity and rollback points pass | Finish Parent operational read-backs, then independently build each franchise property |
+| Track B - website | Promote Stape conversion routing one property at a time | `Parent active guarded`; Parent GA4, Meta and Google server routes are live under strict triggers. Franchise properties remain separate work | Monitor once-only delivery, platform diagnostics and rollback readiness for Parent; apply the same gates separately to each franchise property |
+| Shared spine | Certified Parent school/source reporting | `Active guarded`; additive total/school counts remain useful, but current paid classification is blocked from promotion | Contract v2, backfill, freshness and reconciliation pass before Looker candidate review |
 | Shared spine | Dataform productionization | `Active guarded` | Git, runtime identity, releases, workflow configs, assertions and transform parity pass |
 | Shared spine | Monitoring, queues, dead letters and runbooks | `Active guarded` | Alerts, replay, Cloud Billing export, failure ownership and rollback pass |
 | Shared spine | CEFA private runtime source consolidation | `Blocked operational risk` | Reproducible Cloud Run, Dataform, infrastructure, Stape and runbook source exists without secrets |
 | Existing guarded work | Franchise GAConnector decision | `Active guarded` | Evidence and Synuma gates determine cutover or continued coexistence |
 | Later phase | Parent multi-entity identity and email/journey inventory | `Approved`/`Pending` | Deterministic relationships, provider reconciliation and no-PII contracts pass |
+| Later phase | Trained forecasting, lead quality, creative intelligence and MMM | `Feature foundations only`; current prediction-labelled surfaces are heuristic and no BigQuery model exists | Labels, source readiness, baselines, backtests, model registry, shadow evaluation and promotion gate pass |
+| Later phase | Reusable measurement, conversation, capacity and action-to-outcome contracts | `Approved`/`Pending` | Separate truth lenses, source/coverage assertions, synthetic portability proof and default-deny export control pass |
 | Later phase | Phone attribution discovery, controlled incrementality and value-based optimization | `Pending later phase` | Each has its own evidence, business-truth, privacy, experiment and bidding gate |
 | Governance | Marketing operations context and shared metric dictionary | `Verified`/`Partial` | Every material source, integration, metric, gap and failure-response change remains synchronized |
 
@@ -353,7 +405,8 @@ Update this register when:
 - a waiting item is completed or newly blocked;
 - a platform destination is created, promoted, paused, or selected for
   optimization;
-- a Stape domain, container, power-up, or production route changes;
+- a Stape domain, container, subscription, API key, monitoring rule, power-up,
+  MCP capability, or production route changes;
 - a Cloud Run, Dataform, Scheduler, Pub/Sub, Cloud Tasks, Secret Manager, or
   BigQuery production contract changes;
 - a system integration, known gap, risk severity or what-if response changes;
@@ -366,9 +419,13 @@ or private payloads in this register.
 
 ## Authoritative Detail
 
+- [Parent omnichannel measurement and intelligence roadmap, 2026-08-08](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
 - [Measurement platform handover](./measurement-platform-handover-2026-07-27.md)
 - [Google Cloud and Stape measurement platform blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+- [Parent sGTM GA4 routing status, 2026-08-04](../10-conversion-tracking/parent-sgtm-ga4-routing-status-2026-08-04.md)
+- [Parent sGTM completion, 2026-08-05](../10-conversion-tracking/parent-sgtm-completion-2026-08-05.md)
 - [Google Cloud and Stape capacity baseline](../20-bigquery/google-cloud-stape-capacity-baseline-2026-07-25.md)
+- [Reusable data contracts and future product readiness](../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
 - [Dataform source control and parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md)
 - [BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
 - [Parent CRM offline-conversion blueprint](../superpowers/plans/2026-07-23-parent-crm-offline-conversion-activation-blueprint.md)

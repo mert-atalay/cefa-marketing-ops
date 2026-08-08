@@ -1414,7 +1414,7 @@
 			return '';
 		}
 
-		if (!field.value) {
+		if (!field.value || hasConsumed(field.value)) {
 			field.value = uuid();
 		}
 

@@ -1,6 +1,6 @@
 # CEFA System And Integration Register
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Owner:** CEFA marketing operations
 **Status:** Canonical cross-system register
 **Review cadence:** Monthly and after every material integration change
@@ -29,12 +29,12 @@
 | `SYS-SY` | Synuma/SiteZeus | Franchise lead delivery/routing | Franchise business destination | `Partial`; USA alert |
 | `SYS-CT` | CEFA Conversion Tracking | Event identity, neutral events, attribution and guarded ledger | Website measurement bridge | `Verified`/`Active guarded` by property |
 | `SYS-GAC` | GAConnector | Franchise attribution fields | Current franchise attribution owner | `Active guarded` pending cutover |
-| `SYS-GTM` | Web GTM containers | Property-specific destination mapping | Browser tag routing | `Verified` current paths |
-| `SYS-STAPE` | Stape Business | Planned server-side GTM transport | Additive server route | `Approved`; build pending |
+| `SYS-GTM` | Web and server GTM containers | Property-specific event processing and destination mapping | Browser/server tag configuration; GTM API/MCP is the guarded automation interface | `Active guarded`; Parent web version `15` and server version `13` provide first-party GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit with shared Form 4 identity; franchise routes remain isolated and pending |
+| `SYS-STAPE` | Stape Business and direct API | Server-side GTM hosting plus account/container operations | Additive server route; direct API is the canonical machine interface and Stape MCP is supervised convenience only | `Active guarded`; Parent annual Business, Canada hosting, first-party endpoint, 2FA, durable key rotation, Analytics, outgoing logs, three error alerts, one recipient, allow/block proof, GA4 HTTP `204` and Meta HTTP `200` acceptance are verified |
 | `SYS-GA4` | Three GA4 properties | Web behavior and event analytics | Analytics evidence | `Verified` with property-specific gaps |
 | `SYS-GADS` | Google Ads accounts | Paid delivery and optimization | Platform delivery | `Verified` live; reporting freshness partial |
 | `SYS-META` | Meta ad accounts/datasets | Paid delivery and optimization | Platform delivery | `Verified` live; reporting freshness partial |
-| `SYS-BQ` | BigQuery | Reconciliation, marts, serving and activation ledger | Governed analytical layer | `Active guarded` |
+| `SYS-BQ` | BigQuery | Reconciliation, marts, serving and activation ledger | Governed analytical layer | `Active guarded`; Parent total/school counts are usable, current paid-source classification is blocked from promotion pending contract v2 |
 | `SYS-DF` | Dataform | SQL dependency graph and assertions | Transformation/QA | `Active guarded`; production config pending |
 | `SYS-CRUN` | Cloud Run and supporting GCP services | Extraction, webhooks, polling and dispatch | Private runtime | `Partial`; source-control gap |
 | `SYS-BI-PIPE` | BI-owned Python pipeline | KinderTales/GreenRope extraction into BI data services | BI integration runtime | `Partial`; reported internally, verification pending |
@@ -93,13 +93,13 @@
 |---|---|---|---|---|---|---|
 | `INT-D-001` | GA4 parent -> BigQuery export | Event-level analytics export | `Verified` | Live native export | Web analytics marts become stale | BigQuery owner |
 | `INT-D-002` | Google/Meta -> BigQuery/Supermetrics | Spend, object and conversion detail | `Partial` freshness | Live/connector schedules vary | Dashboard can show stale paid detail | [Platform availability](../50-paid-media/platform-data-availability-2026-05-03.md) |
-| `INT-D-003` | Raw BigQuery -> Dataform/core/marts | Governed transforms and assertions | `Active guarded` | Partial production path | Metrics drift or lack reproducibility | [Dataform parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md) |
-| `INT-D-004` | BigQuery serving -> Looker Studio | Reader-facing reporting | `Partial` by dashboard contract | Live selected views | Dashboard can disagree with source/grain | BigQuery/dashboard owner |
-| `INT-D-005` | Websites/GTM -> Stape -> destinations | First-party server transport and deduplication | `Approved`; not built | Off | Browser loss remains; bad rollout could duplicate | Cloud/Stape blueprint |
+| `INT-D-003` | Raw BigQuery -> Dataform/core/marts | Governed transforms and assertions | `Active guarded`; committed cloud mirror compiles and passed `18/18` assertions | Partial production path; Cloud Run still orchestrates production | Metrics drift or lack reproducibility | [Dataform parity](../20-bigquery/dataform-source-control-and-parity-2026-07-25.md) |
+| `INT-D-004` | BigQuery serving -> Looker Studio | Reader-facing reporting | `Partial` by dashboard contract; Parent paid channel candidate blocked pending contract v2 | Live selected views; Parent corrected candidate not promoted | Dashboard can disagree with source, grain, freshness or evidence tier | BigQuery/dashboard owner |
+| `INT-D-005` | Websites/web GTM -> Stape-hosted server GTM -> destinations | First-party server transport and deduplication; direct Stape API governs hosting inventory while GTM API/MCP governs the container configuration | `Active guarded`; Parent web version `15` and server version `13` route GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit through `edge.cefa.ca` with shared Form 4 identity | Parent routes live; franchise routes separate and pending | Destination duplication or blindness if event guards, shared IDs or legacy routes drift | [Parent sGTM completion](../10-conversion-tracking/parent-sgtm-completion-2026-08-05.md) |
 | `INT-D-006` | Cloud services -> monitoring/alerts | Delivery, freshness, failure and cost health | `Partial` | Partial | Silent failures or delayed diagnosis | Cloud runtime owner |
 | `INT-D-007` | Public hub -> private runtime repo | Governance to reproducible deployment source | `Blocked` | Not established | Runtime remains dependent on private local/historical artifacts | Program register |
 | `INT-D-008` | KinderTales/GreenRope -> BI Python -> Supabase | Consolidate Parent business outcomes for BI | `Partial`; reported internally, verification pending | Reported active | Unknown grain, history or lineage could distort business truth | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
-| `INT-D-009` | Supabase -> BigQuery Parent outcome contract | Deliver minimum record-level lifecycle and final-enrollment outcomes | `Pending` | Off | Marketing cannot reconcile or activate actual outcomes safely | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
+| `INT-D-009` | Supabase -> BigQuery Parent outcome contract | Deliver minimum record-level lifecycle and final-enrollment outcomes | `Partial`; v1 field contract and restricted zero-row inbox deployed, BI mappings unverified | Off; no ingestion or sender | Marketing cannot reconcile or activate actual outcomes safely | [Parent CRM data contract](../20-bigquery/parent-crm-offline-conversion-data-contract.md) |
 | `INT-D-010` | BigQuery -> Supabase/Power BI certified summaries | Provide campaign, spend and governed marketing context to BI | `Pending` | Off | BI and marketing may maintain conflicting reporting pipelines | [Alignment decision](./marketing-bi-alignment-final-decision-and-email-2026-07-27.md) |
 | `INT-D-011` | Supabase -> Power BI/Lovable | Serve consolidated internal business dashboards | `Partial`; reported internally, verification pending | Reported active | Dashboard definitions may not reconcile to marketing without a shared dictionary | [Alignment review brief](./marketing-bi-alignment-independent-review-brief-2026-07-27.md) |
 

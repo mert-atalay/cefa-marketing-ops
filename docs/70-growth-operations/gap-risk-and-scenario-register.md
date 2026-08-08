@@ -1,6 +1,6 @@
 # CEFA Gap, Risk And Scenario Register
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Owner:** CEFA marketing operations
 **Status:** Canonical cross-workstream risk and what-if register
 **Review cadence:** Weekly for active alerts; monthly for all other items
@@ -21,7 +21,7 @@
 | `GAP-001` | CEFA private runtime repository does not exist | `High` | `Blocked` | Cloud/data engineering | Reproducible private source, access, CI, release and rollback exist |
 | `GAP-002` | GreenRope lacks confirmed exact Form 4 event and entry fields | `High` | `Blocked` | GreenRope/KinderTales vendor owner | Both fields exist, round-trip through API and match a controlled inquiry |
 | `GAP-003` | KinderTales-to-GreenRope opportunity creation path is not confirmed | `High` | `Open question` | Parent operations/vendor owner | Documented endpoint/workflow, keys, retry and deduplication behavior |
-| `GAP-004` | Stape Business production containers, domains and shadow routing are not built | `High` | `Pending` | Cloud/Stape owner | Property-isolated shadow tests and rollback pass |
+| `GAP-004` | Parent GA4 production routing and shared dedup identity are live, but natural-event parity, controlled Google/Meta server deduplication, consent-state operations, rollback signoff and franchise isolation are incomplete | `High` | `Active guarded` | Cloud/Stape owner | Next legitimate Parent event and controlled destination tests pass, then isolated Canada and USA builds pass |
 | `GAP-005` | Dataform production Git, runtime identity, release and workflow configs are incomplete | `High` | `Pending` | BigQuery/data owner | Parallel parity, assertions, schedule and rollback pass |
 | `GAP-006` | Franchise GAConnector replacement evidence remains below cutover gate | `High` | `Active guarded` | Conversion tracking owner | Coverage/parity, field mapping and rollback meet approved gate |
 | `GAP-007` | Recent USA Form 1 entries lack Synuma lead IDs | `High` | `Partial` | Franchise delivery owner | Delivery cause resolved and prospective entries reconcile |
@@ -45,6 +45,9 @@
 | `GAP-025` | Full marketing KPI glossary and target ownership are incomplete | `Medium` | `Partial` | BI and marketing intelligence owners | Shared dictionary gives each KPI one definition, grain, source, window, target, owner and reconciliation rule |
 | `GAP-026` | Brand/content approval rules outside paid-ad copy are not centralized | `Medium` | `Pending` | Brand/content owner | Governed voice, claims, approval and channel adaptation contract |
 | `GAP-027` | BI Supabase Parent outcome grain, identity, history, lineage and freshness are not verified for marketing use | `High` | `Pending` | BI and marketing data owners | Read-only schema/pipeline inspection, proof-of-concept record, versioned contract, parity and rollback pass |
+| `GAP-028` | Parent warehouse paid-source logic classifies Google organic and Meta referral/platform-touch rows as confirmed paid | `High` | `Active guarded` | Marketing data owner | Paid-evidence contract v2 is deployed and backfilled; zero organic-as-paid rows; totals reconcile exactly |
+| `GAP-029` | Parent certified reporting does not expose a strong complete-through versus partial-current-day contract | `High` | `Pending` | Marketing data/reporting owner | T+1 SLA, watermarks, partial-day state, reconciliation and freshness alerts pass |
+| `GAP-030` | Predictive, creative and MMM surfaces are heuristic candidates without trained-model, backtest or promotion evidence | `High` | `Pending` | Marketing intelligence owner | Model registry, labels, source readiness, baselines, out-of-time evaluation and shadow promotion gates pass |
 
 ## What-If Playbook
 
@@ -283,6 +286,45 @@ Targeting keywords may still use approved category-intent terms.
 
 Do not re-upload an existing GreenRope or Supabase current-state snapshot as
 new conversions.
+
+### `SCN-028`: Organic or referral evidence is classified as paid
+
+1. Block the affected channel breakdown from dashboard promotion and
+   optimization decisions.
+2. Preserve saved inquiry and selected-school totals.
+3. Compare source, medium, click-ID family, governed campaign markers and the
+   classifier contract version.
+4. Reclassify through the versioned evidence hierarchy and backfill the full
+   affected window.
+5. Reconcile pre/post inquiry totals and explain only the channel-allocation
+   delta.
+
+Do not treat source `google` alone as paid. Do not treat a bare `fbclid`, `fbc`
+or Facebook/Instagram referral as confirmed paid, and do not infer any channel
+from `fbp` alone.
+
+### `SCN-029`: A heuristic recommendation is presented as a trained model
+
+1. Relabel the output `heuristic`, `candidate` or `readiness` immediately.
+2. Check whether a registered model, approved target label, training window,
+   baseline and out-of-time evaluation actually exist.
+3. Keep the output advisory and non-autonomous.
+4. Promote only after the model registry, validation, drift and rollback gates
+   pass.
+
+Do not call a forecast, score, creative theme or MMM result predictive merely
+because it is stored in an intelligence dataset.
+
+### `SCN-030`: A partial current day is presented as complete
+
+1. Compare source maximum time, last successful load and declared
+   complete-through date.
+2. Mark the current day partial or remove it from certified reporting.
+3. Reconcile the most recent complete day from Form 4 through the serving
+   contract.
+4. Alert when the prior-day SLA is missed.
+
+Do not mix live intraday and certified T+1 values without an explicit status.
 
 ## Closing A Gap
 

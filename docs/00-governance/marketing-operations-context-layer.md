@@ -1,6 +1,6 @@
 # CEFA Marketing Operations Context Layer
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Owner:** CEFA marketing operations
 **Status:** Canonical context entry point
 **Review cadence:** Update on material change; verify quarterly
@@ -30,14 +30,16 @@ implementation documents.
 3. Read the
    [program register](./measurement-and-activation-program-register-2026-07-23.md)
    for current status, blockers and next actions.
-4. Read the
+4. For Parent measurement, data, modeling or activation work, read the
+   [Parent omnichannel measurement and intelligence roadmap](./parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md).
+5. Read the
    [system and integration register](../70-growth-operations/system-and-integration-register.md)
    for source-to-destination boundaries.
-5. Read the
+6. Read the
    [gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md)
    before making a production change.
-6. Open the narrow owning workstream document before implementation.
-7. Verify live systems read-only immediately before any live write.
+7. Open the narrow owning workstream document before implementation.
+8. Verify live systems read-only immediately before any live write.
 
 The machine-readable routing companion is
 [`data/reference/marketing-operations-context.json`](../../data/reference/marketing-operations-context.json).
@@ -51,7 +53,8 @@ The hub covers:
 - Franchise USA acquisition;
 - website forms, attribution and conversion tracking;
 - Google Ads, Meta and supporting paid-media operations;
-- GA4, GTM and planned Stape server-side tagging;
+- GA4, GTM, production Parent Stape server-side tagging, and planned isolated
+  franchise server-side tagging;
 - BigQuery, Dataform, Cloud Run and reporting contracts;
 - the BI-owned Python, Supabase, Power BI and Lovable business-reporting
   context and its planned marketing interfaces;
@@ -61,11 +64,17 @@ The hub covers:
 - school, program, location, campaign and platform master data;
 - KinderTales, GreenRope, Synuma/SiteZeus and Mailchimp touchpoints;
 - CRM lifecycle and secondary offline-conversion activation;
+- reusable measurement, conversation, capacity, action-to-outcome, model, and
+  portable-interface contracts for future product readiness;
 - naming conventions, UTMs, build control and guarded automation;
 - public handover, decision history, gaps, risks and runbooks.
 
 The hub does not contain raw customer data, credentials, private production
-runtime, or authority to change spend and production systems without approval.
+runtime, commercial product strategy, or authority to change spend and
+production systems without approval. Reusable architecture does not make CEFA
+row-level data, credentials, destinations, or private runtime available to a
+future external product. See the
+[reusable-contract extension](../20-bigquery/reusable-data-contracts-and-future-product-readiness-2026-08-06.md).
 
 ## Business Domains
 
@@ -93,9 +102,9 @@ runtime, or authority to change spend and production systems without approval.
 | Website measurement | CEFA Conversion Tracking, WPCode bridge, GAConnector, GTM | Neutral events and identity; destination mapping remains property-specific |
 | Analytics | GA4 properties and native BigQuery export | Web behavior and event evidence, not CRM truth |
 | Advertising | Google Ads and Meta | Platform delivery, spend and optimization; IDs are stable object handles |
-| Server tagging | Stape Business | Approved additive transport; production containers and shadow QA remain pending |
-| Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII |
-| BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; exact schema and pipeline remain pending read-only verification |
+| Server tagging | Stape Business, direct Stape API, Stape MCP and GTM MCP | Parent web version `15` and server version `13` are production live through `edge.cefa.ca`; GA4, Meta CAPI, Google Conversion Linker and Google Ads Inquiry Submit share the Form 4 event identity. Operational destination monitoring remains guarded; franchise routes are separate and pending |
+| Data platform | BigQuery, Dataform, Cloud Run, Scheduler, Tasks, Pub/Sub, Secret Manager | Reconcile and activate governed evidence; normal marts contain no raw PII. The committed Dataform cloud mirror passed `18/18` assertions while Cloud Run remains the production orchestrator |
+| BI business-data layer | Reported BI Python pipeline, Supabase, Power BI, Lovable | Consolidated Parent business data and internal BI serving; a restricted zero-row BigQuery outcome inbox and v1 interface exist, while BI source schema, mappings and pipeline remain pending read-only verification |
 | Reporting | BigQuery serving views, Looker Studio, Supermetrics, Power BI, Lovable | Show source, grain and freshness; do not silently substitute stale data |
 | Email/journeys | Mailchimp and GreenRope email activity | Later omnichannel evidence; provider feeds and eligibility still need review |
 | SEO/local | Search Console, DataForSEO, GBP, Yelp, WordPress | Organic/local evidence and URL governance |
@@ -116,7 +125,7 @@ flowchart LR
     SUPA["BI Supabase business data"]
     BI["Power BI and Lovable"]
     W["Neutral web events and event identity"]
-    T["Web GTM and planned Stape sGTM"]
+    T["Web GTM and active Parent Stape sGTM"]
     D["GA4, Google Ads and Meta destinations"]
     B["BigQuery and Dataform"]
     R["Looker and governed activation"]
@@ -160,6 +169,7 @@ Dashed lines are not verified production contracts.
 | What happened on the website? | GA4 plus saved form/business evidence | Browser/server diagnostics | CRM aggregate alone |
 | What is organic-search performance? | Search Console | GA4 landing behavior and DataForSEO research | Paid-platform data |
 | What should a dashboard show? | Certified BigQuery serving contract | Freshness, reconciliation and rule registry | Unlabelled raw connector output |
+| What may a future external product reuse? | Legally approved versioned schema and code patterns deployed in a separate environment | Synthetic fixtures and explicit legal/security review | CEFA rows, credentials, destinations, private runtime or an unrestricted CEFA benchmark |
 | Which naming/copy rule applies? | Paid-media naming and copy standard | v21 build control and active-object inventory | Existing object name as precedent |
 
 Detailed routing remains in
@@ -228,7 +238,12 @@ These are intentional visible gaps, not facts to infer:
 - GreenRope opportunity fields for exact Form 4 event and entry identity;
 - source-confirmed parent household/dependent identifiers;
 - CEFA-controlled private runtime source repository;
-- Stape domains, containers, shadow routing and rollback evidence;
+- Parent Stape recovery custody and secondary administrator evidence, plus
+  continuing Meta/Google destination diagnostics and rollback ownership;
+- Parent paid-evidence contract v2 and correction of the current
+  organic/referral-as-paid warehouse classification defect;
+- explicit Parent complete-through, partial-day, freshness and
+  source-to-serving reconciliation contracts;
 - production Dataform Git/release/workflow configuration;
 - complete franchise GAConnector replacement evidence;
 - USA Synuma delivery gaps;
@@ -251,6 +266,9 @@ These are intentional visible gaps, not facts to infer:
   source-to-dashboard pipeline behavior;
 - a versioned Supabase-to-BigQuery Parent outcome contract and
   BigQuery-to-Supabase/Power BI certified marketing-summary contract.
+- trained-model evidence, out-of-time backtests and promotion gates for the
+  current heuristic forecast, creative, lead-quality and MMM-readiness
+  surfaces;
 
 Do not fill a blank with a plausible story. Route it to the
 [gap, risk and scenario register](../70-growth-operations/gap-risk-and-scenario-register.md).

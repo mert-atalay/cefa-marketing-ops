@@ -2,9 +2,20 @@
 
 ## Unreleased
 
+- Added the canonical Parent omnichannel measurement and intelligence roadmap, including concrete source-correction, freshness, business-outcome, offline-activation, creative, forecasting, lead-scoring and MMM gates.
+- Registered the Parent paid-source classification defect, blocked the current channel candidate from promotion in governance, and defined paid-evidence contract v2 without changing saved inquiry or selected-school truth.
+- Updated the canonical context and Stape checkpoint to Parent server version `13`, with GA4, Meta CAPI and Google Ads production routes sharing Form 4 identity.
+- Published the Parent GA4 25-parameter lead payload guardrail and live Meta sGTM CAPI route; the Google server conversion copy subsequently passed controlled shared-identity QA and was promoted in server version `13`.
+- Added non-PII certified Parent inquiry event and daily school/source BigQuery views, plus an additive dashboard candidate that leaves existing serving contracts unchanged.
+- Added Dataform assertions for certified entry uniqueness, selected-school completeness, and event-to-daily reconciliation.
 - Normalized known legacy Meta source/channel aliases in the read-only shadow monitor and stopped GAConnector direct placeholders from being reported as capture failures.
 - Added a reusable no-submit browser QA tool and production record for the guarded Franchise Canada/USA GAConnector shadow rollout.
 - Added a read-only, aggregate-only WP-CLI shadow monitor for attribution parity, event-ID uniqueness, expected direct traffic, and existing delivery-note status.
+
+## 0.6.4 - 2026-08-04
+
+- Issue a fresh browser submission-attempt ID when a visitor submits another successful Parent inquiry after the previous ID has already been consumed.
+- Preserve the same ID across validation retries and leave server identity, attribution, CRM, School Manager, KinderTales, and destination-event contracts unchanged.
 
 ## 0.6.3 - 2026-07-13
 

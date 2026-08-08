@@ -1,15 +1,17 @@
 # BigQuery And Google Cloud Measurement
 
-**Last updated:** 2026-07-27
+**Last updated:** 2026-08-08
 **Status:** Active governed workstream
 
 ## Start Here
 
 1. [Measurement platform handover](../00-governance/measurement-platform-handover-2026-07-27.md)
 2. [Measurement and activation program register](../00-governance/measurement-and-activation-program-register-2026-07-23.md)
-3. [Definitive Google Cloud and Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
-4. [Locked BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
-5. [Data taxonomy and source map](../00-governance/data-taxonomy.md)
+3. [Current Parent omnichannel measurement and intelligence roadmap](../00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md)
+4. [Definitive Google Cloud and Stape blueprint](../superpowers/plans/2026-07-25-google-cloud-stape-measurement-platform-blueprint.md)
+5. [Locked BigQuery marketing intelligence blueprint](../superpowers/plans/2026-06-12-bq-marketing-intelligence-blueprint.md)
+6. [Reusable data contracts and future product readiness](./reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
+7. [Data taxonomy and source map](../00-governance/data-taxonomy.md)
 
 The June blueprint is the strategic warehouse/intelligence anchor. The July
 blueprint is the definitive implementation architecture. The program register
@@ -30,6 +32,12 @@ owns current status, blockers, and sequencing.
   dashboards, or diagnostics.
 - Production private cloud runtime belongs in a CEFA-controlled private
   repository, not this public repository.
+- Build CEFA facts as versioned, portable contracts where useful, but keep any
+  future external product in a separate private repository, cloud project,
+  runtime, data plane, identities, secrets, destinations, and billing
+  boundary.
+- CEFA row-level data, credentials, private runtime, and platform destinations
+  are not external product assets or default benchmark inputs.
 
 ## Target Data Layers
 
@@ -44,6 +52,7 @@ owns current status, blockers, and sequencing.
 | Dashboard serving | `mart_cefa_growth_dashboard` | Certified reader contracts |
 | Activation | Approved restricted activation datasets | Audience/offline payload preparation and audit |
 | Governance/operations | `cefa_governance`, `cefa_ops`, `dataform_assertions` | Ownership, lineage, freshness, SLOs, runs and assertions |
+| Portable contracts | Versioned no-PII schemas, tests and synthetic fixtures | Reusable architecture proof; never an external runtime over CEFA rows |
 
 Do not immediately rename or rebuild existing datasets. Register their target
 roles first, preserve readers, and consolidate only after lineage and parity
@@ -77,13 +86,16 @@ CRM payloads remain outside those marts.
 |---|---|---|
 | Capacity approval | `Verified` | Full relevant Google Cloud scope approved |
 | Capacity baseline | `Verified` | [Google Cloud and Stape capacity baseline](./google-cloud-stape-capacity-baseline-2026-07-25.md) |
-| Dataform QA | `Active guarded` | 15 assertions compile and proof runs passed |
+| Dataform QA | `Active guarded` | Committed cloud mirror compiles with zero errors and the full `18/18` assertion run passed |
 | Dataform production | `Pending` | Git connection, runtime identity, release/workflow configs and transform parity |
 | Parent CRM lifecycle foundation | `Active guarded` | Restricted tables, capture, binder, poller, outbox, dispatcher and diagnostics built |
 | Google CRM actions | `Verified` | Three secondary actions created and validation passed |
 | Meta CRM events | `Active guarded` | Test Events passed; reporting custom conversions wait for first legitimate live event |
-| Stape | `Approved` | Business plan available; access, DNS, containers and shadow routing pending |
-| Cloud monitoring | `Partial` | Capacity board exists; billing export, alerts, queues/dead letters and runbooks incomplete |
+| Stape | `Active guarded` | Parent GA4, Meta CAPI and guarded Google Ads Inquiry Submit are live under server version `13`; the 2026-08-05 controlled Form 4 test passed shared identity and transport read-back, with destination parity and duplicate diagnostics retained as operational monitoring |
+| Parent paid-source reporting | `Active guarded` | Total inquiry and selected-school truth remain usable; current paid allocation is blocked until paid-evidence contract v2, backfill, freshness and reconciliation pass |
+| Predictive and creative intelligence | `Feature foundations` | Forecast, pacing, capacity, creative and MMM-readiness candidates exist, but all inspected prediction surfaces are heuristic and there are zero registered BigQuery models |
+| Reusable data-contract readiness | `Approved` | Truth-lens, conversation, capacity, action-to-outcome, model and portability requirements are registered; implementation and synthetic empty-environment proof remain pending |
+| Cloud monitoring | `Partial` | Capacity board and Stape 4xx/5xx alerts exist; billing export, queues/dead letters and complete runbooks remain incomplete |
 | Private runtime source control | `Blocked operational risk` | CEFA private runtime repository still required |
 
 ## Current Documents
@@ -94,6 +106,7 @@ CRM payloads remain outside those marts.
 - [Dataform source control and parity](./dataform-source-control-and-parity-2026-07-25.md)
 - [Warehouse current-state snapshot](./warehouse-current-state-2026-05-03.md)
 - [Dashboard source layer and rule registry](./dashboard-source-layer-greenrope-and-rule-registry-2026-05-03.md)
+- [Reusable data contracts and future product readiness](./reusable-data-contracts-and-future-product-readiness-2026-08-06.md)
 
 ### Parent CRM activation
 
@@ -154,10 +167,16 @@ is free or fashionable.
 - Every production service has an owner, runbook and rollback.
 - Prohibited PII in marketing tables/logs equals zero.
 - KinderTales and Synuma regressions caused by measurement equal zero.
+- Business outcomes, CEFA attribution and platform observations remain
+  separate and expose coverage, freshness and limitations.
+- Portable schemas pass against synthetic data in a separate empty
+  environment without CEFA rows, credentials, destinations or runtime.
 
 ## Public Repository Rule
 
 This public folder may document schemas, redacted contracts, aggregate
 evidence and non-secret QA. It must not receive private runtime copied from an
 untracked local checkout. The private-runtime creation gap is tracked in the
-program register and handover.
+program register and handover. Neutral reusable architecture may be documented
+here; commercial product material, customer data, external product runtime,
+and CEFA row-level exports may not.

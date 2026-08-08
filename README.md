@@ -68,6 +68,10 @@ then the
 [measurement platform handover](docs/00-governance/measurement-platform-handover-2026-07-27.md)
 and
 [measurement and activation program register](docs/00-governance/measurement-and-activation-program-register-2026-07-23.md).
+For the current Parent sequence across attribution correctness, sGTM
+operations, business outcomes, offline activation, creative intelligence,
+forecasting, lead scoring and MMM, read the
+[Parent omnichannel measurement and intelligence roadmap](docs/00-governance/parent-omnichannel-measurement-and-intelligence-roadmap-2026-08-08.md).
 For the approved Supabase/BigQuery boundary, parallel execution tracks, and BI
 meeting position, read the
 [marketing and BI alignment final decision](docs/70-growth-operations/marketing-bi-alignment-final-decision-and-email-2026-07-27.md).
@@ -95,7 +99,8 @@ handover and Cloud/Stape blueprint.
 
 ## Current Live-Domain Audit Status
 
-- Parent `cefa.ca` is live on plugin `0.6.3` with Attribution Bridge and ledger shadow modes plus the separately scoped parent canonical Form `4` writeback. CEFA School Manager still owns Form `4`, fields `32.*`, fields `35-46`, and KinderTales delivery; the tracking plugin improves only the attribution values saved in fields `35-46` before School Manager sends them to KinderTales. Confirmed `school_inquiry_submit` ownership remains unchanged across GA4, Google Ads, and Meta. Synuma/SiteZeus applies to the franchise properties, not the parent site.
+- Parent `cefa.ca` is live on plugin `0.6.4` with Attribution Bridge and ledger shadow modes plus the separately scoped parent canonical Form `4` writeback. Version `0.6.4` refreshes a consumed browser event UUID before a later successful submission while preserving validation retries. CEFA School Manager still owns Form `4`, fields `32.*`, fields `35-46`, and KinderTales delivery; the tracking plugin improves only the attribution values saved in fields `35-46` before School Manager sends them to KinderTales. Confirmed `school_inquiry_submit` ownership remains unchanged across GA4, Google Ads, and Meta. Synuma/SiteZeus applies to the franchise properties, not the parent site.
+- Parent web GTM version `15` and server GTM version `13` are production live through `edge.cefa.ca` for GA4, Meta CAPI and Google Ads with shared Form 4 identity. Current data work must correct paid-source contract v1 before its channel breakdown is promoted; saved inquiry and selected-school truth remain intact.
 - Parent branded Search and Oakville Eighth Line Search now use explicit inquiry-only campaign goals. Parent GA4 click events remain collected but are no longer key events.
 - Franchise Canada `franchise.cefa.ca` uses the WPCode fallback bridge and live GTM Version `54`; confirmed Form `1` and Form `2` helper paths remain active.
 - Franchise Canada application/email/phone clicks remain collected but are no longer GA4 key events.
@@ -306,7 +311,7 @@ For live franchise deployments, `snippets/franchise-wpcode-bridge.php` is the cu
 
 ## Attribution Bridge Runtime Flags
 
-Plugin `0.6.3` ships every new attribution/cutover path disabled by default.
+Plugin `0.6.4` ships every new attribution/cutover path disabled by default.
 
 When shadow or primary mode is enabled, the browser bridge posts allowlisted acquisition evidence to the same-origin, no-store `attribution-capture` endpoint. This preserves the signed HttpOnly cookie on managed hosts such as WP Engine where anonymous page caching can bypass PHP page-load cookie logic.
 
